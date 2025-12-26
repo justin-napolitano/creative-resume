@@ -1,8 +1,13 @@
 import resumeData from '@/data/resume.json';
+import copyData from '@/data/copy.json';
 
 export type ResumeData = typeof resumeData;
 
 export const resume: ResumeData = resumeData;
+
+export type CopyData = typeof copyData;
+
+export const siteCopy: CopyData = copyData;
 
 type SiteConfig = {
   siteTitle: string;
@@ -18,11 +23,10 @@ type SiteConfig = {
 export const siteConfig: SiteConfig = {
   siteTitle: `${resume.header.name} — Editorial Resume`,
   siteDescription:
-    'Systems-led data engineer translating healthcare and media operations into legible analytics for creative leaders.',
+    'Systems-led data engineer who turns healthcare and media operations into legible analytics for creative leadership.',
   siteUrl: 'https://resume.jnap.me',
-  heroThesis:
-    'Data engineer translating heart failure quality metrics and media portfolios into legible systems for creative leaders.',
-  marginNote: 'Systems-first clarity. Healthcare-grade rigor.',
+  heroThesis: siteCopy.hero.thesis,
+  marginNote: siteCopy.hero.marginNote,
   bookCallUrl: 'https://cal.com/justin-napolitano-gvu3p3/intro',
   pdfPath: '/resume.pdf',
   pullQuotes: {
