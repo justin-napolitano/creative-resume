@@ -784,6 +784,7 @@ footer a {
   border-radius: 12px;
   padding: 0.5rem 0.8rem;
   font-size: 0.85rem;
+  background: #fff;
 }
 
 .skill-badges .badge span {
