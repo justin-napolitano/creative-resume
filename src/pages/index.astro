@@ -1,6 +1,6 @@
 ---
 import '@/styles/global.css';
-import { resume, siteConfig, utilityLinks } from '@/config';
+import { experienceNotes, resume, sectionMeta, sectionNotes, siteConfig, utilityLinks } from '@/config';
 
 const header = resume.header;
 const summary = resume.summary ?? [];
@@ -10,6 +10,22 @@ const education = resume.education ?? [];
 const publications = resume.publications ?? [];
 const skillHighlights = resume.skill_highlights ?? [];
 const skillAreas = resume.skills ?? [];
+const highlightCap = 5;
+const formatYears = (years: number = 0) => (years > highlightCap ? `${highlightCap}+ yrs` : `${years} yrs`);
+const flattenedSkills = skillAreas.flatMap((area) =>
+  (area.items ?? []).map((item) => ({ ...item, area: area.area }))
+);
+const footnoteFor = (id: string) => sectionNotes[id] ?? '';
+const levelLabels: Record<number, string> = {
+  5: 'Principal',
+  4: 'Senior',
+  3: 'Mid-level',
+  2: 'Associate',
+  1: 'Foundational',
+};
+
+const sectionCode = (id: string) => sectionMeta.find((meta) => meta.id === id)?.code ?? '';
+const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?.label ?? '';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +41,7 @@ const skillAreas = resume.skills ?? [];
     <meta property="og:type" content="website" />
     <meta name="theme-color" content="#0f7c66" />
   </head>
-  <body>
+  <body data-print-masthead={`${header.name} — systems dossier`}>
     <main>
       <header class="hero">
         <div>
@@ -58,9 +74,9 @@ const skillAreas = resume.skills ?? [];
 
       {summary.length > 0 && (
         <section class="section" id="summary">
-          <span class="section__code" aria-hidden="true">PR.01</span>
+          <span class="section__code" aria-hidden="true">{sectionCode('summary')}</span>
           <div class="section__header">
-            <h2 class="section__title">Practice statement</h2>
+            <h2 class="section__title">{sectionLabel('summary')}</h2>
             <p class="section__subtitle">Bridging Epic Clarity, Vizient, and media stacks into narratives that executives, clinicians, and creative leads can act on.</p>
           </div>
           <ul class="summary-list">
@@ -71,9 +87,9 @@ const skillAreas = resume.skills ?? [];
 
       {experiences.length > 0 && (
         <section class="section" id="experience">
-          <span class="section__code" aria-hidden="true">EX.01</span>
+          <span class="section__code" aria-hidden="true">{sectionCode('experience')}</span>
           <div class="section__header">
-            <h2 class="section__title">Experience</h2>
+            <h2 class="section__title">{sectionLabel('experience')}</h2>
             <p class="section__subtitle">Recent roles leading hospital analytics, editorial data programs, and independent client systems.</p>
           </div>
           <div class="experience-grid">
@@ -96,6 +112,11 @@ const skillAreas = resume.skills ?? [];
                       {role.technologies.map((tech) => <li>{tech}</li>)}
                     </ul>
                   )}
+                  {(siteConfig.pullQuotes?.[role.title] || experienceNotes[role.title]) && (
+                    <aside class="pull-quote" aria-label="Margin note">
+                      {siteConfig.pullQuotes?.[role.title] ?? experienceNotes[role.title]}
+                    </aside>
+                  )}
                 </div>
               </article>
             ))}
@@ -104,10 +125,10 @@ const skillAreas = resume.skills ?? [];
       )}
 
       {projects.length > 0 && (
-        <section class="section" id="work">
-          <span class="section__code" aria-hidden="true">WK.02</span>
+        <section class="section section--projects section--projects--hidden" id="work" aria-hidden="true">
+          <span class="section__code" aria-hidden="true">{sectionCode('work')}</span>
           <div class="section__header">
-            <h2 class="section__title">Selected work</h2>
+            <h2 class="section__title">{sectionLabel('work')}</h2>
             <p class="section__subtitle">Compact dossiers covering the systems most referenced in partner conversations.</p>
           </div>
           <div class="projects-grid">
@@ -134,41 +155,74 @@ const skillAreas = resume.skills ?? [];
       )}
 
       {(skillHighlights.length > 0 || skillAreas.length > 0) && (
-        <section class="section" id="skills">
-          <span class="section__code" aria-hidden="true">SK.03</span>
+        <section class="section section--skills" id="skills" data-skill-view="badges">
+          <span class="section__code" aria-hidden="true">{sectionCode('skills')}</span>
           <div class="section__header">
-            <h2 class="section__title">Systems + tools</h2>
+            <h2 class="section__title">{sectionLabel('skills')}</h2>
             <p class="section__subtitle">Highlights first, then the full capabilities index for recruiters and teams that want the complete catalog.</p>
           </div>
           {skillHighlights.length > 0 && (
-            <div class="skill-highlights">
-              {skillHighlights.map((group) => (
-                <article class="skill-card">
-                  <h4>{group.area}</h4>
-                  <ul>
-                    {group.items?.map((item) => (
-                      <li>
-                        <span>{item.name}</span>
-                        <span>{item.years} yrs · lvl {item.level}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
+            <div class="skill-stage">
+              <div class="skill-stage__header">
+                <p class="skill-stage__eyebrow">Signal stacks</p>
+                <p class="skill-stage__support">The pods recruiters ask about most often—kept punchy so they read like mini case studies.</p>
+              </div>
+              <div class="skill-highlights">
+                {skillHighlights.map((group) => (
+                  <article class="skill-card skill-card--dots">
+                    <div class="skill-card__header">
+                      <h4>{group.area}</h4>
+                      <span class="skill-card__variant-label">Dot stack</span>
+                    </div>
+                    <ul>
+                      {group.items?.map((item) => (
+                        <li>
+                          <div class="skill-row">
+                            <div>
+                              <span class="skill-name">{item.name}</span>
+                              <span class="skill-level">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
+                            </div>
+                            <span class="skill-years">{formatYears(item.years ?? 0)}</span>
+                          </div>
+                          <div class="meter meter--dots" role="img" aria-label={`${item.name} — ${item.years} years`}>
+                            {Array.from({ length: highlightCap }).map((_, dotIndex) => (
+                              <span class={`dot${dotIndex < Math.round(Math.min(highlightCap, item.years ?? 0)) ? ' filled' : ''}`}></span>
+                            ))}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
             </div>
           )}
           {skillAreas.length > 0 && (
-            <div class="skill-matrix">
-              {skillAreas.map((area) => (
-                <article class="skill-area">
-                  <h5>{area.area}</h5>
-                  <ul>
-                    {area.items?.map((item) => (
-                      <li>{item.name} — {item.years} yrs</li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
+            <div class="skill-stage skill-stage--badges">
+              <div class="skill-stage__header">
+                <p class="skill-stage__eyebrow">Full badge index</p>
+                <p class="skill-stage__support">Every tool, format, and deployment surface with level + years so hiring teams can skim depth across the catalog.</p>
+              </div>
+              <div class="skill-badges">
+                {flattenedSkills.map((item) => (
+                  <div class="badge">
+                    <div class="skill-row">
+                      <div>
+                        <span class="skill-name">{item.name}</span>
+                        <span class="skill-level skill-level--block">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
+                      </div>
+                      <div class="skill-years-group">
+                        <span class="skill-years">{formatYears(item.years ?? 0)}</span>
+                        <div class="meter meter--dots" role="img" aria-label={`${item.name} — ${item.years} years`}>
+                          {Array.from({ length: highlightCap }).map((_, dotIndex) => (
+                            <span class={`dot${dotIndex < Math.round(Math.min(highlightCap, item.years ?? 0)) ? ' filled' : ''}`}></span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </section>
@@ -176,15 +230,15 @@ const skillAreas = resume.skills ?? [];
 
       {education.length > 0 && (
         <section class="section" id="education">
-          <span class="section__code" aria-hidden="true">ED.04</span>
+          <span class="section__code" aria-hidden="true">{sectionCode('education')}</span>
           <div class="section__header">
-            <h2 class="section__title">Education</h2>
+            <h2 class="section__title">{sectionLabel('education')}</h2>
           </div>
           <ul class="education-list">
             {education.map((entry) => (
               <li class="education-item">
                 <h4>{entry.degree}</h4>
-                <div class="meta">{entry.institution} • {entry.location}</div>
+                <div class="meta">{entry.institution}</div>
                 <div class="meta">{entry.graduation_date}</div>
                 {entry.notes && <p>{entry.notes}</p>}
               </li>
@@ -195,9 +249,9 @@ const skillAreas = resume.skills ?? [];
 
       {publications.length > 0 && (
         <section class="section" id="publications">
-          <span class="section__code" aria-hidden="true">PB.05</span>
+          <span class="section__code" aria-hidden="true">{sectionCode('publications')}</span>
           <div class="section__header">
-            <h2 class="section__title">Publication</h2>
+            <h2 class="section__title">{sectionLabel('publications')}</h2>
           </div>
           <ul class="publications-list">
             {publications.map((pub) => (
@@ -220,5 +274,24 @@ const skillAreas = resume.skills ?? [];
         <a href={siteConfig.bookCallUrl} target="_blank" rel="noopener noreferrer">Book a call</a>
       </footer>
     </main>
+    <script is:inline>
+      (() => {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const hero = document.querySelector('.hero');
+        if (!prefersReducedMotion && hero) {
+          hero.addEventListener('pointermove', (event) => {
+            const rect = hero.getBoundingClientRect();
+            const x = ((event.clientX - rect.left) / rect.width).toFixed(3);
+            const y = ((event.clientY - rect.top) / rect.height).toFixed(3);
+            hero.style.setProperty('--pointer-x', x);
+            hero.style.setProperty('--pointer-y', y);
+          });
+          hero.addEventListener('pointerleave', () => {
+            hero.style.removeProperty('--pointer-x');
+            hero.style.removeProperty('--pointer-y');
+          });
+        }
+      })();
+    </script>
   </body>
 </html>
