@@ -4,7 +4,18 @@ export type ResumeData = typeof resumeData;
 
 export const resume: ResumeData = resumeData;
 
-export const siteConfig = {
+type SiteConfig = {
+  siteTitle: string;
+  siteDescription: string;
+  siteUrl: string;
+  heroThesis: string;
+  marginNote: string;
+  bookCallUrl: string;
+  pdfPath: string;
+  pullQuotes: Record<string, string>;
+};
+
+export const siteConfig: SiteConfig = {
   siteTitle: `${resume.header.name} — Editorial Resume`,
   siteDescription:
     'Systems-led data engineer translating healthcare and media operations into legible analytics for creative leaders.',
@@ -14,6 +25,36 @@ export const siteConfig = {
   marginNote: 'Systems-first clarity. Healthcare-grade rigor.',
   bookCallUrl: 'https://cal.com/justin-napolitano-gvu3p3/intro',
   pdfPath: '/resume.pdf',
+  pullQuotes: {
+    'Data Engineer': 'Epic Clarity → Vizient → CFO briefings, harmonized inside 24h.',
+    'Data & Analytics Engineer': 'LLM + CDP stack stitched across Rolling Stone, Billboard, WWD.',
+  },
+};
+
+export const sectionMeta = [
+  { id: 'summary', code: 'PR.01', label: 'Practice statement' },
+  { id: 'experience', code: 'EX.01', label: 'Experience' },
+  { id: 'work', code: 'WK.02', label: 'Selected work' },
+  { id: 'skills', code: 'SK.03', label: 'Systems + tools' },
+  { id: 'education', code: 'ED.04', label: 'Education' },
+  { id: 'publications', code: 'PB.05', label: 'Publication' },
+] as const;
+
+export const sectionNotes: Record<string, string> = {
+  summary: '',
+  experience: '',
+  work: '',
+  skills: '',
+  education: '',
+  publications: '',
+};
+
+export const experienceNotes: Record<string, string> = {
+  'Data Engineer': 'Azure Data Factory + Synapse landed Epic Clarity extracts into one CFO-ready source within 24 hours.',
+  'Business Analyst II': 'SQL + Power BI pipelines kept readmission and heart failure metrics aligned across clinical teams.',
+  'Data & Analytics Engineer': 'LLM + CDP stack stitched across Rolling Stone, Billboard, WWD for exec-ready insights.',
+  'Independent Data Consultant': 'Implemented CDPs and GCP migrations targeting 2M+ high-value prospects.',
+  'Research Assistant': 'Open MySQL human-rights database shared with the International Criminal Court.',
 };
 
 export const utilityLinks = [
