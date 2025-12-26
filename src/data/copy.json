@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "thesis": "Data engineer turning Epic Clarity, Vizient, and media ops into decision kits execs and creative leads can act on.",
+    "marginNote": "Systems-first. Healthcare-grade follow-through."
+  },
+  "sections": {
+    "summary": {
+      "subtitle": "How I translate Epic Clarity, Vizient, and media stacks into plans execs, clinicians, and creative leads can move on immediately."
+    },
+    "experience": {
+      "subtitle": "Recent tours leading hospital analytics, editorial data programs, and independent platform builds."
+    },
+    "work": {
+      "subtitle": "Reference dossiers for the systems partners bring up most often."
+    },
+    "skills": {
+      "subtitle": "Highlights up top, then the badge index for teams that need the complete catalog.",
+      "flagship": {
+        "eyebrow": "Flagship stacks",
+        "support": "Quick dossiers for the pods recruiters ping me about most; paced so they read like mini engagement recaps."
+      },
+      "badges": {
+        "eyebrow": "Complete badge index",
+        "support": "Every tool, surface, and deployment lane with level + tenure so teams can compare depth at a glance."
+      }
+    }
+  }
+}

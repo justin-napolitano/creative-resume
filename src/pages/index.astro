@@ -1,6 +1,6 @@
 ---
 import '@/styles/global.css';
-import { experienceNotes, resume, sectionMeta, sectionNotes, siteConfig, utilityLinks } from '@/config';
+import { experienceNotes, resume, sectionMeta, sectionNotes, siteConfig, siteCopy, utilityLinks } from '@/config';
 
 const header = resume.header;
 const summary = resume.summary ?? [];
@@ -77,7 +77,7 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
           <span class="section__code" aria-hidden="true">{sectionCode('summary')}</span>
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('summary')}</h2>
-            <p class="section__subtitle">Bridging Epic Clarity, Vizient, and media stacks into narratives that executives, clinicians, and creative leads can act on.</p>
+            <p class="section__subtitle">{siteCopy.sections.summary.subtitle}</p>
           </div>
           <ul class="summary-list">
             {summary.map((item) => <li>{item}</li>)}
@@ -90,7 +90,7 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
           <span class="section__code" aria-hidden="true">{sectionCode('experience')}</span>
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('experience')}</h2>
-            <p class="section__subtitle">Recent roles leading hospital analytics, editorial data programs, and independent client systems.</p>
+            <p class="section__subtitle">{siteCopy.sections.experience.subtitle}</p>
           </div>
           <div class="experience-grid">
             {experiences.map((role) => (
@@ -129,7 +129,7 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
           <span class="section__code" aria-hidden="true">{sectionCode('work')}</span>
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('work')}</h2>
-            <p class="section__subtitle">Compact dossiers covering the systems most referenced in partner conversations.</p>
+            <p class="section__subtitle">{siteCopy.sections.work.subtitle}</p>
           </div>
           <div class="projects-grid">
             {projects.map((project) => (
@@ -159,13 +159,13 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
           <span class="section__code" aria-hidden="true">{sectionCode('skills')}</span>
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('skills')}</h2>
-            <p class="section__subtitle">Highlights first, then the full capabilities index for recruiters and teams that want the complete catalog.</p>
+            <p class="section__subtitle">{siteCopy.sections.skills.subtitle}</p>
           </div>
           {skillHighlights.length > 0 && (
             <div class="skill-stage">
               <div class="skill-stage__header">
-                <p class="skill-stage__eyebrow">Signal stacks</p>
-                <p class="skill-stage__support">The pods recruiters ask about most often—kept punchy so they read like mini case studies.</p>
+                <p class="skill-stage__eyebrow">{siteCopy.sections.skills.flagship.eyebrow}</p>
+                <p class="skill-stage__support">{siteCopy.sections.skills.flagship.support}</p>
               </div>
               <div class="skill-highlights">
                 {skillHighlights.map((group) => (
@@ -200,8 +200,8 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
           {skillAreas.length > 0 && (
             <div class="skill-stage skill-stage--badges">
               <div class="skill-stage__header">
-                <p class="skill-stage__eyebrow">Full badge index</p>
-                <p class="skill-stage__support">Every tool, format, and deployment surface with level + years so hiring teams can skim depth across the catalog.</p>
+                <p class="skill-stage__eyebrow">{siteCopy.sections.skills.badges.eyebrow}</p>
+                <p class="skill-stage__support">{siteCopy.sections.skills.badges.support}</p>
               </div>
               <div class="skill-badges">
                 {flattenedSkills.map((item) => (
