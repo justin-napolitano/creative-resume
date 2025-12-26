@@ -1,0 +1,23 @@
+{
+  "name": "creative-resume",
+  "version": "0.1.0",
+  "description": "Editorial dossier resume for resume.jnap.me built with Astro",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "pdf": "node scripts/export-pdf.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.16.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "playwright": "^1.49.1",
+    "typescript": "^5.7.2",
+    "@astrojs/check": "^0.8.2"
+  }
+}

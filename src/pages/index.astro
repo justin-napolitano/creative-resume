@@ -1,0 +1,224 @@
+---
+import '@/styles/global.css';
+import { resume, siteConfig, utilityLinks } from '@/config';
+
+const header = resume.header;
+const summary = resume.summary ?? [];
+const experiences = resume.experience ?? [];
+const projects = resume.projects ?? [];
+const education = resume.education ?? [];
+const publications = resume.publications ?? [];
+const skillHighlights = resume.skill_highlights ?? [];
+const skillAreas = resume.skills ?? [];
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{siteConfig.siteTitle}</title>
+    <meta name="description" content={siteConfig.siteDescription} />
+    <link rel="canonical" href={siteConfig.siteUrl} />
+    <meta property="og:title" content={siteConfig.siteTitle} />
+    <meta property="og:description" content={siteConfig.siteDescription} />
+    <meta property="og:url" content={siteConfig.siteUrl} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#0f7c66" />
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <div>
+          <p class="hero__eyebrow">{header.location}</p>
+          <h1>{header.name}</h1>
+          <p class="hero__thesis">{siteConfig.heroThesis}</p>
+          <div class="hero__cta" aria-label="Primary actions">
+            <a class="cta primary" href={siteConfig.bookCallUrl} target="_blank" rel="noopener noreferrer">Book a call</a>
+            <a class="cta secondary" href={siteConfig.pdfPath} download>Download PDF</a>
+          </div>
+        </div>
+        <div class="hero__details" aria-label="Contact and reference links">
+          <dl class="utility-block">
+            <dt>Role</dt>
+            <dd>Data & Analytics Engineer</dd>
+          </dl>
+          <dl class="utility-block">
+            <dt>Focus</dt>
+            <dd>Healthcare quality, media systems, editorial-grade BI</dd>
+          </dl>
+          {utilityLinks.map((link) => (
+            <dl class="utility-block">
+              <dt>{link.label}</dt>
+              <dd><a href={link.href}>{link.value}</a></dd>
+            </dl>
+          ))}
+        </div>
+        <div class="hero__note" role="note">{siteConfig.marginNote}</div>
+      </header>
+
+      {summary.length > 0 && (
+        <section class="section" id="summary">
+          <span class="section__code" aria-hidden="true">PR.01</span>
+          <div class="section__header">
+            <h2 class="section__title">Practice statement</h2>
+            <p class="section__subtitle">Bridging Epic Clarity, Vizient, and media stacks into narratives that executives, clinicians, and creative leads can act on.</p>
+          </div>
+          <ul class="summary-list">
+            {summary.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+      )}
+
+      {experiences.length > 0 && (
+        <section class="section" id="experience">
+          <span class="section__code" aria-hidden="true">EX.01</span>
+          <div class="section__header">
+            <h2 class="section__title">Experience</h2>
+            <p class="section__subtitle">Recent roles leading hospital analytics, editorial data programs, and independent client systems.</p>
+          </div>
+          <div class="experience-grid">
+            {experiences.map((role) => (
+              <article class="experience-item">
+                <div class="experience-dates">
+                  <div>{role.start}</div>
+                  <div>{role.end}</div>
+                </div>
+                <div class="experience-body">
+                  <h3>{role.title}</h3>
+                  <div class="meta">{role.company} • {role.location}</div>
+                  {role.bullets?.length > 0 && (
+                    <ul>
+                      {role.bullets.map((bullet) => <li>{bullet}</li>)}
+                    </ul>
+                  )}
+                  {role.technologies?.length > 0 && (
+                    <ul class="chip-row">
+                      {role.technologies.map((tech) => <li>{tech}</li>)}
+                    </ul>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {projects.length > 0 && (
+        <section class="section" id="work">
+          <span class="section__code" aria-hidden="true">WK.02</span>
+          <div class="section__header">
+            <h2 class="section__title">Selected work</h2>
+            <p class="section__subtitle">Compact dossiers covering the systems most referenced in partner conversations.</p>
+          </div>
+          <div class="projects-grid">
+            {projects.map((project) => (
+              <article class="project-card">
+                <div>
+                  <h3>{project.name}</h3>
+                  {project.context && <p class="context">{project.context}</p>}
+                </div>
+                {project.bullets?.length > 0 && (
+                  <ul>
+                    {project.bullets.map((bullet) => <li>{bullet}</li>)}
+                  </ul>
+                )}
+                {project.technologies?.length > 0 && (
+                  <ul class="chip-row">
+                    {project.technologies.map((tech) => <li>{tech}</li>)}
+                  </ul>
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {(skillHighlights.length > 0 || skillAreas.length > 0) && (
+        <section class="section" id="skills">
+          <span class="section__code" aria-hidden="true">SK.03</span>
+          <div class="section__header">
+            <h2 class="section__title">Systems + tools</h2>
+            <p class="section__subtitle">Highlights first, then the full capabilities index for recruiters and teams that want the complete catalog.</p>
+          </div>
+          {skillHighlights.length > 0 && (
+            <div class="skill-highlights">
+              {skillHighlights.map((group) => (
+                <article class="skill-card">
+                  <h4>{group.area}</h4>
+                  <ul>
+                    {group.items?.map((item) => (
+                      <li>
+                        <span>{item.name}</span>
+                        <span>{item.years} yrs · lvl {item.level}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          )}
+          {skillAreas.length > 0 && (
+            <div class="skill-matrix">
+              {skillAreas.map((area) => (
+                <article class="skill-area">
+                  <h5>{area.area}</h5>
+                  <ul>
+                    {area.items?.map((item) => (
+                      <li>{item.name} — {item.years} yrs</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+
+      {education.length > 0 && (
+        <section class="section" id="education">
+          <span class="section__code" aria-hidden="true">ED.04</span>
+          <div class="section__header">
+            <h2 class="section__title">Education</h2>
+          </div>
+          <ul class="education-list">
+            {education.map((entry) => (
+              <li class="education-item">
+                <h4>{entry.degree}</h4>
+                <div class="meta">{entry.institution} • {entry.location}</div>
+                <div class="meta">{entry.graduation_date}</div>
+                {entry.notes && <p>{entry.notes}</p>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {publications.length > 0 && (
+        <section class="section" id="publications">
+          <span class="section__code" aria-hidden="true">PB.05</span>
+          <div class="section__header">
+            <h2 class="section__title">Publication</h2>
+          </div>
+          <ul class="publications-list">
+            {publications.map((pub) => (
+              <li class="publication">
+                <h4>{pub.title}</h4>
+                <div class="meta">{pub.venue} • {pub.year}</div>
+                {pub.url && (
+                  <a href={pub.url} target="_blank" rel="noopener noreferrer">Read the paper</a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <footer>
+        {header.location && <span>{header.location}</span>}
+        <span>© {new Date().getFullYear()} {header.name}</span>
+        {header.email && <a href={`mailto:${header.email}`}>{header.email}</a>}
+        <a href={siteConfig.bookCallUrl} target="_blank" rel="noopener noreferrer">Book a call</a>
+      </footer>
+    </main>
+  </body>
+</html>

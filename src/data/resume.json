@@ -1,0 +1,641 @@
+{
+  "header": {
+    "name": "Justin Napolitano",
+    "location": "Orlando, Florida",
+    "email": "justin@jnapolitano.com",
+    "phone": "689-340-0675",
+    "github": "github.com/justin-napolitano",
+    "github_url": "https://github.com/justin-napolitano",
+    "linkedin": "linkedin.com/in/justin-napolitano",
+    "linkedin_url": "https://www.linkedin.com/in/justin-napolitano"
+  },
+  "summary": [
+    "Business and clinical data analyst specializing in healthcare analytics, Epic Clarity SQL, and performance improvement.",
+    "Experienced with heart failure quality metrics, readmissions, and enterprise BI tooling including Power BI and GCP-based stacks.",
+    "Bridges technical and non-technical stakeholders to deliver data products that improve outcomes and reduce costs."
+  ],
+  "education": [
+    {
+      "degree": "BA, Political Science",
+      "institution": "University of Central Florida",
+      "location": "Orlando, Florida",
+      "graduation_date": "August 2017",
+      "notes": ""
+    },
+    {
+      "degree": "Statistics Specialization",
+      "institution": "University of Central Florida",
+      "location": "Orlando, Florida",
+      "graduation_date": "August 2018",
+      "notes": ""
+    },
+    {
+      "degree": "Python 3 Specialization",
+      "institution": "University of Michigan",
+      "location": "Online",
+      "graduation_date": "January 2020",
+      "notes": "Coursera specialization focused on Python 3 programming and applied data analysis."
+    }
+  ],
+  "skills": [
+    {
+      "area": "Lakehouses",
+      "id": "lakehouses",
+      "items": [
+        {
+          "name": "BigQuery",
+          "level": 5,
+          "years": 3,
+          "tags": [
+            "SQL",
+            "columnar storage",
+            "GCP"
+          ]
+        },
+        {
+          "name": "Snowflake",
+          "level": 4,
+          "years": 2,
+          "tags": [
+            "cloud data warehouse"
+          ]
+        },
+        {
+          "name": "Treasure Data CDP",
+          "level": 4,
+          "years": 2,
+          "tags": [
+            "customer data platform",
+            "segmentation"
+          ]
+        },
+        {
+          "name": "dbt",
+          "level": 3,
+          "years": 1.5,
+          "tags": [
+            "data modeling",
+            "ELT"
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Cloud Compute",
+      "id": "cloud-compute",
+      "items": [
+        {
+          "name": "GCP",
+          "level": 5,
+          "years": 4,
+          "tags": [
+            "BigQuery",
+            "Cloud Functions",
+            "GCS"
+          ]
+        },
+        {
+          "name": "Azure",
+          "level": 3,
+          "years": 1,
+          "tags": [
+            "data services"
+          ]
+        },
+        {
+          "name": "AWS",
+          "level": 2,
+          "years": 0.5,
+          "tags": [
+            "S3",
+            "Lambda"
+          ]
+        },
+        {
+          "name": "Cloud Functions",
+          "level": 3,
+          "years": 2,
+          "tags": [
+            "serverless",
+            "event-driven"
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Data Science Platforms",
+      "id": "data-science-platforms",
+      "items": [
+        {
+          "name": "SQL",
+          "level": 5,
+          "years": 7,
+          "tags": [
+            "PostgreSQL",
+            "MySQL",
+            "analytical SQL"
+          ]
+        },
+        {
+          "name": "Python",
+          "level": 5,
+          "years": 7,
+          "tags": [
+            "data engineering",
+            "machine learning",
+            "automation"
+          ]
+        },
+        {
+          "name": "Julia",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "numerical computing"
+          ]
+        },
+        {
+          "name": "Jupyter",
+          "level": 5,
+          "years": 6,
+          "tags": [
+            "prototyping",
+            "analysis notebooks"
+          ]
+        },
+        {
+          "name": "SAS",
+          "level": 3,
+          "years": 2,
+          "tags": [
+            "statistical analysis"
+          ]
+        },
+        {
+          "name": "SPSS",
+          "level": 3,
+          "years": 2,
+          "tags": [
+            "social science statistics"
+          ]
+        },
+        {
+          "name": "R",
+          "level": 3,
+          "years": 2,
+          "tags": [
+            "statistical modeling"
+          ]
+        }
+      ]
+    },
+    {
+      "area": "BI and Data Viz",
+      "id": "bi-and-data-viz",
+      "items": [
+        {
+          "name": "Excel",
+          "level": 5,
+          "years": 10,
+          "tags": [
+            "Power Query",
+            "dashboarding"
+          ]
+        },
+        {
+          "name": "Matplotlib",
+          "level": 5,
+          "years": 6,
+          "tags": [
+            "data visualization"
+          ]
+        },
+        {
+          "name": "Leaflet",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "geospatial visualization"
+          ]
+        },
+        {
+          "name": "Seaborn",
+          "level": 4,
+          "years": 4,
+          "tags": [
+            "statistical plotting"
+          ]
+        },
+        {
+          "name": "Looker",
+          "level": 3,
+          "years": 1,
+          "tags": [
+            "embedded analytics"
+          ]
+        },
+        {
+          "name": "Plotly",
+          "level": 3,
+          "years": 2,
+          "tags": [
+            "interactive dashboards"
+          ]
+        },
+        {
+          "name": "Power BI",
+          "level": 4,
+          "years": 2,
+          "tags": [
+            "DAX",
+            "enterprise BI"
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Graph Analysis",
+      "id": "graph-analysis",
+      "items": [
+        {
+          "name": "NetworkX",
+          "level": 5,
+          "years": 5,
+          "tags": [
+            "graph algorithms",
+            "network analysis"
+          ]
+        },
+        {
+          "name": "Neo4j",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "graph databases",
+            "Cypher"
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Algorithms and Statistics",
+      "id": "algorithms-and-statistics",
+      "items": [
+        {
+          "name": "Seasonal Forecasting",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "time series",
+            "demand forecasting"
+          ]
+        },
+        {
+          "name": "(Non-) Parametric Testing",
+          "level": 4,
+          "years": 4,
+          "tags": [
+            "A/B testing",
+            "hypothesis testing"
+          ]
+        },
+        {
+          "name": "Topic Modeling",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "NLP",
+            "LDA"
+          ]
+        }
+      ]
+    },
+    {
+      "area": "AI Development",
+      "id": "ai-development",
+      "items": [
+        {
+          "name": "Retrieval-Augmented Generation",
+          "level": 3,
+          "years": 1,
+          "tags": [
+            "RAG",
+            "LLM applications"
+          ]
+        },
+        {
+          "name": "Agentic Model Design",
+          "level": 3,
+          "years": 1,
+          "tags": [
+            "multi-agent systems",
+            "planning"
+          ]
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": "data-engineer-adventhealth",
+      "title": "Data Engineer",
+      "company": "AdventHealth",
+      "location": "Orlando, Florida",
+      "start": "Aug 2025",
+      "end": "Present",
+      "bullets": [
+        "Stand up Azure Data Factory + Synapse pipelines that land Epic Clarity extracts into governed models for quality and operations teams.",
+        "Build Power BI and Looker Studio dashboards that surface heart failure and readmission metrics for service line leaders within 24 hours of discharge.",
+        "Harden dbt and SQL transformations that reconcile EDW, Vizient, and bedside documentation into one source of truth for CFO and CMO briefs.",
+        "Partner with nursing, cardiology, and digital to automate alerts, reducing manual spreadsheet updates by 60% across the network."
+      ],
+      "technologies": [
+        "Azure Data Factory",
+        "Synapse",
+        "Power BI",
+        "Looker Studio",
+        "dbt",
+        "Epic Clarity",
+        "SQL"
+      ]
+    },
+    {
+      "id": "business-analyst-ii-adventhealth",
+      "title": "Business Analyst II",
+      "company": "AdventHealth",
+      "location": "Orlando, Florida",
+      "start": "Jan 2025",
+      "end": "Aug 2025",
+      "bullets": [
+        "Partnered with clinical and operations teams to define data requirements for performance and quality improvement initiatives.",
+        "Designed SQL-based reporting pipelines and Power BI dashboards for inpatient care and readmissions metrics.",
+        "Supported data validation and reconciliation efforts across Epic Clarity and EDW environments.",
+        "Contributed to cross-functional analytic projects focused on cost reduction, patient outcomes, and digital health integration."
+      ],
+      "technologies": [
+        "Epic Clarity",
+        "SQL",
+        "Power BI",
+        "Enterprise Data Warehouse",
+        "Healthcare quality metrics"
+      ]
+    },
+    {
+      "id": "data-analytics-engineer-penske",
+      "title": "Data & Analytics Engineer",
+      "company": "Penske Media Corporation",
+      "location": "Los Angeles, California",
+      "start": "Apr 2022",
+      "end": "Apr 2024",
+      "bullets": [
+        "Led evaluation of six AI and data vendors, assessing integration, latency, and scalability to guide $5M in platform investment decisions.",
+        "Fine-tuned large language models using Python, improving generative quality by 10% based on editorial scoring loops.",
+        "Built twelve Python- and SQL-based reporting pipelines in GCP, integrating with Looker to deliver topic insights across thirty media brands.",
+        "Increased subscription conversion rates by 5% through KPI reporting in GCP that powered targeted marketing runs.",
+        "Modeled first-party user behavior in Treasure Data CDP using 150+ signals to support retention and exec briefings across Rolling Stone, Billboard, and more."
+      ],
+      "technologies": [
+        "Python",
+        "SQL",
+        "GCP",
+        "Looker",
+        "Treasure Data CDP",
+        "Large language models",
+        "AI vendor evaluation",
+        "Subscription analytics",
+        "Customer segmentation"
+      ]
+    },
+    {
+      "id": "independent-data-consultant-btjn",
+      "title": "Independent Data Consultant",
+      "company": "BTJN",
+      "location": "Houston, Texas",
+      "start": "Jan 2020",
+      "end": "Apr 2022",
+      "bullets": [
+        "Implemented two customer data platforms to improve audience segmentation and campaign targeting for 2M+ high-value prospects.",
+        "Migrated three legacy systems to GCP, doubling data processing speeds and streamlining analytics workflows.",
+        "Automated email marketing pipelines that converted 10% of 5,000 cold leads into qualified clients."
+      ],
+      "technologies": [
+        "GCP",
+        "Customer data platforms",
+        "Marketing automation",
+        "ETL and system migration"
+      ]
+    },
+    {
+      "id": "research-assistant-ucf",
+      "title": "Research Assistant",
+      "company": "University of Central Florida",
+      "location": "Orlando, Florida",
+      "start": "Jan 2018",
+      "end": "Aug 2019",
+      "bullets": [
+        "Designed a rubric for coding international human rights violations using statutes from major global treaties.",
+        "Led a five-person research team to develop an open-source MySQL database documenting systemic abuses across global conflict zones.",
+        "Co-authored an analysis on gender-based violence published by De Gruyter and presented at the International Criminal Court in The Hague."
+      ],
+      "technologies": [
+        "MySQL",
+        "Research design",
+        "Data coding",
+        "Human rights analytics"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "heart-failure-quality-metrics-dashboard",
+      "name": "Heart Failure Quality Metrics Dashboard",
+      "context": "AdventHealth \u2013 Epic Clarity / Power BI",
+      "technologies": [
+        "Epic Clarity",
+        "SQL",
+        "Power BI",
+        "Heart failure quality measures"
+      ],
+      "bullets": [
+        "Designed and implemented a reporting suite for heart failure populations, covering I/O compliance, GDMT discharge, EF capture, and readmission metrics.",
+        "Developed a reusable data dictionary and benchmarking logic to support Power BI dashboards and documentation.",
+        "Standardized ICD-10-based cohort definitions and EF extraction logic across multiple reporting workflows."
+      ]
+    },
+    {
+      "id": "o-e-mortality-analysis",
+      "name": "Observed-to-Expected Mortality Analysis",
+      "context": "AdventHealth \u2013 Vizient data",
+      "technologies": [
+        "Vizient clinical data",
+        "SQL",
+        "Risk-adjusted metrics"
+      ],
+      "bullets": [
+        "Built an observed-to-expected (O/E) mortality analysis pipeline using Vizient data to identify performance gaps by service line and DRG.",
+        "Collaborated with clinical leaders to translate O/E insights into targeted quality improvement initiatives."
+      ]
+    },
+    {
+      "id": "ai-supply-chain-agent-exploration",
+      "name": "AI Agent for Hospital Supply Chain",
+      "context": "Independent exploration",
+      "technologies": [
+        "LLMs",
+        "RAG",
+        "Healthcare supply chain"
+      ],
+      "bullets": [
+        "Explored design of an AI agent to assist hospital supply chain and procurement teams with forecasting, vendor evaluation, and contract analysis.",
+        "Drafted a conceptual architecture for data ingestion, retrieval-augmented generation, and workflow integration."
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "id": "turkish-kurdish-analysis-database",
+      "title": "Turkish Kurdish Analysis Database",
+      "venue": "Peace Economics, Peace Science and Public Policy",
+      "volume": "25",
+      "issue": "4",
+      "pages": "36",
+      "year": "2019",
+      "authors": [
+        "Demet Mousseau",
+        "Justin Napolitano",
+        "Alex Olson"
+      ],
+      "doi": "10.1515/peps-2019-0036",
+      "url": "https://doi.org/10.1515/peps-2019-0036"
+    }
+  ],
+  "skill_highlights": [
+    {
+      "area": "Warehousing & Modeling",
+      "id": "skill-highlight-warehousing",
+      "items": [
+        {
+          "name": "Snowflake",
+          "level": 4,
+          "years": 2,
+          "tags": [
+            "cloud data warehouse"
+          ]
+        },
+        {
+          "name": "BigQuery",
+          "level": 5,
+          "years": 3,
+          "tags": [
+            "SQL",
+            "columnar storage",
+            "GCP"
+          ]
+        },
+        {
+          "name": "dbt",
+          "level": 3,
+          "years": 1.5,
+          "tags": [
+            "data modeling",
+            "ELT"
+          ]
+        },
+        {
+          "name": "SQL",
+          "level": 5,
+          "years": 7,
+          "tags": [
+            "PostgreSQL",
+            "MySQL",
+            "ETL"
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Cloud & Deployment",
+      "id": "skill-highlight-cloud",
+      "items": [
+        {
+          "name": "Azure",
+          "level": 4,
+          "years": 2,
+          "tags": [
+            "Data Factory",
+            "Synapse"
+          ]
+        },
+        {
+          "name": "GCP",
+          "level": 5,
+          "years": 4,
+          "tags": [
+            "BigQuery",
+            "Cloud Functions",
+            "GCS"
+          ]
+        },
+        {
+          "name": "Docker",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "Compose",
+            "self-hosted apps"
+          ]
+        },
+        {
+          "name": "Cloud Functions",
+          "level": 3,
+          "years": 2,
+          "tags": [
+            "Cloud Functions",
+            "serverless queues"
+          ]
+        }
+      ]
+    },
+    {
+      "area": "BI & Activation",
+      "id": "skill-highlight-bi",
+      "items": [
+        {
+          "name": "Power BI",
+          "level": 4,
+          "years": 2,
+          "tags": [
+            "DAX",
+            "enterprise BI"
+          ]
+        },
+        {
+          "name": "Looker",
+          "level": 3,
+          "years": 1,
+          "tags": [
+            "embedded analytics"
+          ]
+        },
+        {
+          "name": "Treasure Data CDP",
+          "level": 4,
+          "years": 2,
+          "tags": [
+            "audience activation",
+            "segmentation"
+          ]
+        },
+        {
+          "name": "APIs & Web Apps",
+          "level": 3,
+          "years": 2,
+          "tags": [
+            "Next.js",
+            "internal portals"
+          ]
+        }
+      ]
+    }
+  ]
+}
