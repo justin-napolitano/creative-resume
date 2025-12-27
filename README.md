@@ -5,7 +5,7 @@ Astro single-page resume that reframes the `resume-site/` content into an editor
 ## Stack
 - [Astro 5](https://astro.build) static output (Vercel friendly)
 - TypeScript + module aliasing for cleaner imports
-- Playwright-powered PDF export to keep `/public/resume.pdf` synced with the live layout
+- PDF kept in sync by downloading the latest build from the LaTeX repo
 - Single CSS system in `src/styles/global.css` with embedded print + motion rules
 - Systems section has layout + view toggles (grid vs. column stack for highlights; accordion/table/badges/tabs/timeline for the catalog).
 
@@ -21,6 +21,7 @@ npm run preview    # serve the build (used for PDF export)
 
 ## Content + configuration
 - All resume facts live in `src/data/resume.json` (copied directly from the provided `resume-site/`). Do not edit them inline in the markup.
+- Hero/section copy lives in `src/data/copy.json` so the prose can be tuned without touching templates.
 - CTA + site metadata live in `src/config.ts`. Update `bookCallUrl` there if the scheduling link changes.
 - The hero "Download PDF" button serves `public/resume.pdf`. Regenerate it whenever the site changes (see below) so Vercel ships the current print.
 
@@ -28,7 +29,7 @@ npm run preview    # serve the build (used for PDF export)
 ```bash
 make pdf
 ```
-That command runs `npm run build`, launches `astro preview`, and uses Playwright to print the hosted page into `public/resume.pdf`. Commit the regenerated PDF alongside any layout/content change. If you haven’t installed the Playwright browsers yet, run `npx playwright install` once before `make pdf`.
+This runs `npm run pdf`, which simply downloads the latest LaTeX-built PDF from `https://github.com/justin-napolitano/data-strategist-resume` (override via `RESUME_PDF_URL`) and saves it to `public/resume.pdf`. The legacy HTML/Playwright export still exists behind `npm run pdf:html` if you ever want to capture the web layout instead.
 
 ## Deploying to Vercel
 1. Push to GitHub and import the repo in Vercel.

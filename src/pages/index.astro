@@ -56,11 +56,11 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
         <div class="hero__details" aria-label="Contact and reference links">
           <dl class="utility-block">
             <dt>Role</dt>
-            <dd>Data & Analytics Engineer</dd>
+            <dd>{siteCopy.hero.role}</dd>
           </dl>
           <dl class="utility-block">
             <dt>Focus</dt>
-            <dd>Healthcare quality, media systems, editorial-grade BI</dd>
+            <dd>{siteCopy.hero.focus}</dd>
           </dl>
           {utilityLinks.map((link) => (
             <dl class="utility-block">
