@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "pdf": "node scripts/export-pdf.mjs"
+    "pdf": "node scripts/fetch-pdf.mjs",
+    "pdf:html": "node scripts/export-pdf.mjs"
   },
   "dependencies": {
     "astro": "^5.16.5"
