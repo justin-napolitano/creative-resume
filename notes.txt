@@ -1,0 +1,4 @@
+1. order by senioirity and expierience
+2. remove ampersand. add a plus instead
+3. gradient on the skills section 
+4. remove the stylizied j. make fonts consistent
