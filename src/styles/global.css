@@ -785,10 +785,31 @@ footer a {
   padding: 0.5rem 0.8rem;
   font-size: 0.85rem;
   background: #fff;
+  --badge-tone: var(--badge-tone, var(--ink));
+  color: var(--badge-tone);
+  transition: color 0.2s ease;
 }
 
 .skill-badges .badge span {
   font-size: 0.74rem;
-  color: var(--ink-mute);
+  color: inherit;
   letter-spacing: 0.05em;
+}
+
+.skill-badges .skill-row > div:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.skill-badges .skill-name {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.skill-badges .badge .skill-level,
+.skill-badges .badge .skill-years,
+.skill-badges .badge .skill-level--block {
+  opacity: 0.7;
 }

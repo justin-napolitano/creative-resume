@@ -45,7 +45,7 @@
         {
           "name": "BigQuery",
           "level": 5,
-          "years": 3,
+          "years": 5,
           "tags": [
             "SQL",
             "columnar storage",
@@ -61,7 +61,7 @@
           ]
         },
         {
-          "name": "Treasure Data CDP",
+          "name": "Customer Data Platforms",
           "level": 4,
           "years": 2,
           "tags": [
@@ -112,7 +112,7 @@
           ]
         },
         {
-          "name": "Cloud Functions",
+          "name": "Microservices",
           "level": 3,
           "years": 2,
           "tags": [
@@ -229,11 +229,11 @@
         {
           "name": "Looker",
           "level": 3,
-          "years": 1,
+          "years": 2,
           "tags": [
             "embedded analytics"
           ]
-        },
+       },
         {
           "name": "Plotly",
           "level": 3,
@@ -282,7 +282,7 @@
       "id": "algorithms-and-statistics",
       "items": [
         {
-          "name": "Seasonal Forecasting",
+          "name": "Seasonal Forecasts",
           "level": 4,
           "years": 3,
           "tags": [
@@ -291,7 +291,7 @@
           ]
         },
         {
-          "name": "(Non-) Parametric Testing",
+          "name": "Parametric Testing",
           "level": 4,
           "years": 4,
           "tags": [
@@ -315,7 +315,7 @@
       "id": "ai-development",
       "items": [
         {
-          "name": "Retrieval-Augmented Generation",
+          "name": "RAG Systems",
           "level": 3,
           "years": 1,
           "tags": [
@@ -324,7 +324,7 @@
           ]
         },
         {
-          "name": "Agentic Model Design",
+          "name": "Agentic Models",
           "level": 3,
           "years": 1,
           "tags": [
@@ -511,7 +511,7 @@
   ],
   "skill_highlights": [
     {
-      "area": "Warehousing & Modeling",
+      "area": "Warehouse Modeling",
       "id": "skill-highlight-warehousing",
       "items": [
         {
@@ -525,7 +525,7 @@
         {
           "name": "BigQuery",
           "level": 5,
-          "years": 3,
+          "years": 5,
           "tags": [
             "SQL",
             "columnar storage",
@@ -579,18 +579,18 @@
         {
           "name": "Docker",
           "level": 4,
-          "years": 3,
+          "years": 5,
           "tags": [
             "Compose",
             "self-hosted apps"
           ]
         },
         {
-          "name": "Cloud Functions",
+          "name": "Microservices",
           "level": 3,
           "years": 2,
           "tags": [
-            "Cloud Functions",
+            "service orchestration",
             "serverless queues"
           ]
         }
@@ -612,13 +612,13 @@
         {
           "name": "Looker",
           "level": 3,
-          "years": 1,
+          "years": 2,
           "tags": [
             "embedded analytics"
           ]
         },
         {
-          "name": "Treasure Data CDP",
+          "name": "Customer Data Platforms",
           "level": 4,
           "years": 2,
           "tags": [
@@ -629,7 +629,7 @@
         {
           "name": "APIs & Web Apps",
           "level": 3,
-          "years": 2,
+          "years": 5.5,
           "tags": [
             "Next.js",
             "internal portals"

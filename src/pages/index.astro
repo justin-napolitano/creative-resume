@@ -8,12 +8,37 @@ const experiences = resume.experience ?? [];
 const projects = resume.projects ?? [];
 const education = resume.education ?? [];
 const publications = resume.publications ?? [];
-const skillHighlights = resume.skill_highlights ?? [];
-const skillAreas = resume.skills ?? [];
+type SkillItem = { name?: string; level?: number; years?: number };
+const normalize = (value?: number) => (typeof value === 'number' && !Number.isNaN(value) ? value : Number(value ?? 0));
+const sortBySeniority = <T extends SkillItem>(items: T[] = []) =>
+  [...items].sort((a, b) => {
+    const levelDiff = normalize(b.level) - normalize(a.level);
+    if (levelDiff !== 0) return levelDiff;
+    const yearDiff = normalize(b.years) - normalize(a.years);
+    if (yearDiff !== 0) return yearDiff;
+    return (a.name ?? '').localeCompare(b.name ?? '');
+  });
+const badgeToneFor = (index: number) => {
+  const baseLightness = 18;
+  const lightnessStep = 3.5;
+  const maxLightness = 68;
+  const lightness = Math.min(baseLightness + index * lightnessStep, maxLightness);
+  return `hsl(170deg 16% ${lightness}%)`;
+};
+const skillHighlights = (resume.skill_highlights ?? []).map((group) => ({
+  ...group,
+  items: sortBySeniority(group.items ?? []),
+}));
+const skillAreas = (resume.skills ?? []).map((area) => ({
+  ...area,
+  items: sortBySeniority(area.items ?? []),
+}));
 const highlightCap = 5;
 const formatYears = (years: number = 0) => (years > highlightCap ? `${highlightCap}+ yrs` : `${years} yrs`);
-const flattenedSkills = skillAreas.flatMap((area) =>
-  (area.items ?? []).map((item) => ({ ...item, area: area.area }))
+const flattenedSkills = sortBySeniority(
+  skillAreas.flatMap((area) =>
+    (area.items ?? []).map((item) => ({ ...item, area: area.area }))
+  )
 );
 const footnoteFor = (id: string) => sectionNotes[id] ?? '';
 const levelLabels: Record<number, string> = {
@@ -172,7 +197,6 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                   <article class="skill-card skill-card--dots">
                     <div class="skill-card__header">
                       <h4>{group.area}</h4>
-                      <span class="skill-card__variant-label">Dot stack</span>
                     </div>
                     <ul>
                       {group.items?.map((item) => (
@@ -180,14 +204,16 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                           <div class="skill-row">
                             <div>
                               <span class="skill-name">{item.name}</span>
-                              <span class="skill-level">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
+                              <span class="skill-level skill-level--block">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
                             </div>
-                            <span class="skill-years">{formatYears(item.years ?? 0)}</span>
-                          </div>
-                          <div class="meter meter--dots" role="img" aria-label={`${item.name} — ${item.years} years`}>
-                            {Array.from({ length: highlightCap }).map((_, dotIndex) => (
-                              <span class={`dot${dotIndex < Math.round(Math.min(highlightCap, item.years ?? 0)) ? ' filled' : ''}`}></span>
-                            ))}
+                            <div class="skill-years-group">
+                              <span class="skill-years">{formatYears(item.years ?? 0)}</span>
+                              <div class="meter meter--dots" role="img" aria-label={`${item.name} — ${item.years} years`}>
+                                {Array.from({ length: highlightCap }).map((_, dotIndex) => (
+                                  <span class={`dot${dotIndex < Math.round(Math.min(highlightCap, item.years ?? 0)) ? ' filled' : ''}`}></span>
+                                ))}
+                              </div>
+                            </div>
                           </div>
                         </li>
                       ))}
@@ -204,8 +230,8 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                 <p class="skill-stage__support">{siteCopy.sections.skills.badges.support}</p>
               </div>
               <div class="skill-badges">
-                {flattenedSkills.map((item) => (
-                  <div class="badge">
+                {flattenedSkills.map((item, index) => (
+                  <div class="badge" style={`--badge-tone:${badgeToneFor(index)}`}>
                     <div class="skill-row">
                       <div>
                         <span class="skill-name">{item.name}</span>
