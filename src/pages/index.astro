@@ -25,7 +25,8 @@ const projects = resume.projects ?? [];
 const education = resume.education ?? [];
 const publications = resume.publications ?? [];
 const highlightCap = 5;
-type SkillItem = { name?: string; level?: number; years?: number };
+type SkillItem = { name?: string; level?: number; years?: number; display?: boolean };
+const shouldDisplay = (item?: SkillItem) => (item?.display ?? true);
 const normalize = (value?: number) => (typeof value === 'number' && !Number.isNaN(value) ? value : Number(value ?? 0));
 const tenureValue = (value?: number) => Math.min(normalize(value), highlightCap);
 const sortBySeniority = <T extends SkillItem>(items: T[] = []) =>
@@ -43,11 +44,11 @@ const badgeToneFor = (index: number) => {
 };
 const skillHighlights = (resume.skill_highlights ?? []).map((group) => ({
   ...group,
-  items: sortBySeniority(group.items ?? []),
+  items: sortBySeniority((group.items ?? []).filter(shouldDisplay)),
 }));
 const skillAreas = (resume.skills ?? []).map((area) => ({
   ...area,
-  items: sortBySeniority(area.items ?? []),
+  items: sortBySeniority((area.items ?? []).filter(shouldDisplay)),
 }));
 const formatYears = (years: number = 0) => (years > highlightCap ? `${highlightCap}+ yrs` : `${years} yrs`);
 const flattenedSkills = sortBySeniority(
@@ -248,7 +249,7 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
           )}
           {skillAreas.length > 0 && (
             <div class="skill-stage skill-stage--badges">
-              <div class="skill-stage__header">
+              <div class="skill-stage__header skill-stage__header--inline">
                 <p class="skill-stage__eyebrow">{siteCopy.sections.skills.badges.eyebrow}</p>
                 <p class="skill-stage__support">{siteCopy.sections.skills.badges.support}</p>
               </div>

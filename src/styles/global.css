@@ -786,6 +786,13 @@ footer a {
   flex-direction: column;
   gap: 0.4rem;
 }
+.skill-stage__header--inline {
+  margin-top: 0.5rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+}
 .skill-stage__eyebrow {
   margin: 0;
   text-transform: uppercase;
@@ -793,10 +800,17 @@ footer a {
   font-size: 0.68rem;
   color: var(--ink-mute);
 }
+.skill-stage__header--inline .skill-stage__eyebrow {
+  letter-spacing: 0.2em;
+}
 .skill-stage__support {
   margin: 0;
   color: var(--ink-soft);
   max-width: 56ch;
+}
+.skill-stage__header--inline .skill-stage__support {
+  font-size: 0.85rem;
+  color: var(--ink);
 }
 .skill-stage--badges {
   margin-top: 2.75rem;
