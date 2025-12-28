@@ -3,17 +3,58 @@ import '@/styles/global.css';
 import { experienceNotes, resume, sectionMeta, sectionNotes, siteConfig, siteCopy, utilityLinks } from '@/config';
 
 const header = resume.header;
-const summary = resume.summary ?? [];
+type PracticePillar = { id?: string; label?: string; note?: string; icon?: string };
+const summary = (resume.summary ?? []) as PracticePillar[];
+const iconForPillar = (icon?: string) => {
+  const iconMap: Record<string, string> = {
+    stack:
+      '<svg viewBox="0 0 32 32" focusable="false"><rect x="6" y="6" width="20" height="4" rx="2" fill="currentColor" /><rect x="6" y="14" width="20" height="4" rx="2" fill="currentColor" /><rect x="6" y="22" width="20" height="4" rx="2" fill="currentColor" /></svg>',
+    pulse:
+      '<svg viewBox="0 0 32 32" focusable="false"><polyline points="4 18 10 18 13 10 18 24 22 15 28 15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /></svg>',
+    handoff:
+      '<svg viewBox="0 0 32 32" focusable="false"><path d="M6 11h10l-3-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /><path d="M26 21H16l3 3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /><circle cx="8" cy="23" r="2" fill="none" stroke="currentColor" stroke-width="2" /><circle cx="24" cy="9" r="2" fill="none" stroke="currentColor" stroke-width="2" /></svg>',
+    default:
+      '<svg viewBox="0 0 32 32" focusable="false"><circle cx="16" cy="16" r="6" fill="none" stroke="currentColor" stroke-width="2" /></svg>',
+  };
+
+  const key = icon && iconMap[icon] ? icon : 'default';
+  return iconMap[key];
+};
 const experiences = resume.experience ?? [];
 const projects = resume.projects ?? [];
 const education = resume.education ?? [];
 const publications = resume.publications ?? [];
-const skillHighlights = resume.skill_highlights ?? [];
-const skillAreas = resume.skills ?? [];
 const highlightCap = 5;
+type SkillItem = { name?: string; level?: number; years?: number; display?: boolean };
+const shouldDisplay = (item?: SkillItem) => (item?.display ?? true);
+const normalize = (value?: number) => (typeof value === 'number' && !Number.isNaN(value) ? value : Number(value ?? 0));
+const tenureValue = (value?: number) => Math.min(normalize(value), highlightCap);
+const sortBySeniority = <T extends SkillItem>(items: T[] = []) =>
+  [...items].sort((a, b) => {
+    const yearDiff = tenureValue(b.years) - tenureValue(a.years);
+    if (yearDiff !== 0) return yearDiff;
+    return (a.name ?? '').localeCompare(b.name ?? '', undefined, { sensitivity: 'base' });
+  });
+const badgeToneFor = (index: number) => {
+  const baseLightness = 18;
+  const lightnessStep = 3.5;
+  const maxLightness = 68;
+  const lightness = Math.min(baseLightness + index * lightnessStep, maxLightness);
+  return `hsl(170deg 16% ${lightness}%)`;
+};
+const skillHighlights = (resume.skill_highlights ?? []).map((group) => ({
+  ...group,
+  items: sortBySeniority((group.items ?? []).filter(shouldDisplay)),
+}));
+const skillAreas = (resume.skills ?? []).map((area) => ({
+  ...area,
+  items: sortBySeniority((area.items ?? []).filter(shouldDisplay)),
+}));
 const formatYears = (years: number = 0) => (years > highlightCap ? `${highlightCap}+ yrs` : `${years} yrs`);
-const flattenedSkills = skillAreas.flatMap((area) =>
-  (area.items ?? []).map((item) => ({ ...item, area: area.area }))
+const flattenedSkills = sortBySeniority(
+  skillAreas.flatMap((area) =>
+    (area.items ?? []).map((item) => ({ ...item, area: area.area }))
+  )
 );
 const footnoteFor = (id: string) => sectionNotes[id] ?? '';
 const levelLabels: Record<number, string> = {
@@ -80,7 +121,15 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
             <p class="section__subtitle">{siteCopy.sections.summary.subtitle}</p>
           </div>
           <ul class="summary-list">
-            {summary.map((item) => <li>{item}</li>)}
+            {summary.map((pillar) => (
+              <li class="summary-pill">
+                <span class="summary-pill__icon" aria-hidden="true" set:html={iconForPillar(pillar.icon)}></span>
+                <div class="summary-pill__body">
+                  <span class="summary-pill__label">{pillar.label}</span>
+                  {pillar.note && <span class="summary-pill__note">{pillar.note}</span>}
+                </div>
+              </li>
+            ))}
           </ul>
         </section>
       )}
@@ -172,7 +221,6 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                   <article class="skill-card skill-card--dots">
                     <div class="skill-card__header">
                       <h4>{group.area}</h4>
-                      <span class="skill-card__variant-label">Dot stack</span>
                     </div>
                     <ul>
                       {group.items?.map((item) => (
@@ -180,14 +228,16 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                           <div class="skill-row">
                             <div>
                               <span class="skill-name">{item.name}</span>
-                              <span class="skill-level">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
+                              <span class="skill-level skill-level--block">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
                             </div>
-                            <span class="skill-years">{formatYears(item.years ?? 0)}</span>
-                          </div>
-                          <div class="meter meter--dots" role="img" aria-label={`${item.name} — ${item.years} years`}>
-                            {Array.from({ length: highlightCap }).map((_, dotIndex) => (
-                              <span class={`dot${dotIndex < Math.round(Math.min(highlightCap, item.years ?? 0)) ? ' filled' : ''}`}></span>
-                            ))}
+                            <div class="skill-years-group">
+                              <span class="skill-years">{formatYears(item.years ?? 0)}</span>
+                              <div class="meter meter--dots" role="img" aria-label={`${item.name} — ${item.years} years`}>
+                                {Array.from({ length: highlightCap }).map((_, dotIndex) => (
+                                  <span class={`dot${dotIndex < Math.round(Math.min(highlightCap, item.years ?? 0)) ? ' filled' : ''}`}></span>
+                                ))}
+                              </div>
+                            </div>
                           </div>
                         </li>
                       ))}
@@ -199,13 +249,13 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
           )}
           {skillAreas.length > 0 && (
             <div class="skill-stage skill-stage--badges">
-              <div class="skill-stage__header">
+              <div class="skill-stage__header skill-stage__header--inline">
                 <p class="skill-stage__eyebrow">{siteCopy.sections.skills.badges.eyebrow}</p>
                 <p class="skill-stage__support">{siteCopy.sections.skills.badges.support}</p>
               </div>
               <div class="skill-badges">
-                {flattenedSkills.map((item) => (
-                  <div class="badge">
+                {flattenedSkills.map((item, index) => (
+                  <div class="badge" style={`--badge-tone:${badgeToneFor(index)}`}>
                     <div class="skill-row">
                       <div>
                         <span class="skill-name">{item.name}</span>

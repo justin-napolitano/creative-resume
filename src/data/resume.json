@@ -10,9 +10,24 @@
     "linkedin_url": "https://www.linkedin.com/in/justin-napolitano"
   },
   "summary": [
-    "Business and clinical data analyst specializing in healthcare analytics, Epic Clarity SQL, and performance improvement.",
-    "Experienced with heart failure quality metrics, readmissions, and enterprise BI tooling including Power BI and GCP-based stacks.",
-    "Bridges technical and non-technical stakeholders to deliver data products that improve outcomes and reduce costs."
+    {
+      "id": "warehousing",
+      "label": "Warehousing",
+      "note": "Epic Clarity SQL, Vizient, dbt",
+      "icon": "stack"
+    },
+    {
+      "id": "activation",
+      "label": "Activation",
+      "note": "Dashboards, alerts, exec handoffs",
+      "icon": "handoff"
+    },
+    {
+      "id": "insights",
+      "label": "Insights",
+      "note": "Heart failure metrics, BI in GCP",
+      "icon": "pulse"
+    }
   ],
   "education": [
     {
@@ -45,7 +60,7 @@
         {
           "name": "BigQuery",
           "level": 5,
-          "years": 3,
+          "years": 5,
           "tags": [
             "SQL",
             "columnar storage",
@@ -61,21 +76,45 @@
           ]
         },
         {
-          "name": "Treasure Data CDP",
-          "level": 4,
-          "years": 2,
-          "tags": [
-            "customer data platform",
-            "segmentation"
-          ]
-        },
-        {
           "name": "dbt",
           "level": 3,
           "years": 1.5,
           "tags": [
             "data modeling",
             "ELT"
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Activation Systems",
+      "id": "activation-systems",
+      "items": [
+        {
+          "name": "CDP Modeling",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "segmentation",
+            "identity resolution"
+          ]
+        },
+        {
+          "name": "Audience Pipelines",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "journey triggers",
+            "CRM activation"
+          ]
+        },
+        {
+          "name": "Segment & Fivetran",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "data ingestion",
+            "automation"
           ]
         }
       ]
@@ -112,12 +151,23 @@
           ]
         },
         {
-          "name": "Cloud Functions",
+          "name": "Microservices",
           "level": 3,
           "years": 2,
           "tags": [
             "serverless",
             "event-driven"
+          ]
+        },
+        {
+          "name": "Runtime Platforms",
+          "level": 4,
+          "years": 4,
+          "tags": [
+            "Compute Engine",
+            "Cloud Run",
+            "load balancing",
+            "reverse proxy"
           ]
         }
       ]
@@ -147,11 +197,12 @@
           ]
         },
         {
-          "name": "Julia",
-          "level": 4,
-          "years": 3,
+          "name": "Pandas",
+          "level": 5,
+          "years": 7,
           "tags": [
-            "numerical computing"
+            "dataframes",
+            "transformations"
           ]
         },
         {
@@ -164,9 +215,55 @@
           ]
         },
         {
+          "name": "Apache Airflow",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "orchestration",
+            "scheduling"
+          ]
+        },
+        {
+          "name": "Terraform",
+          "level": 3,
+          "years": 2,
+          "tags": [
+            "infrastructure as code",
+            "cloud provisioning"
+          ]
+        },
+        {
+          "name": "GitHub Actions",
+          "level": 3,
+          "years": 3,
+          "tags": [
+            "CI/CD",
+            "automation"
+          ]
+        },
+        {
+          "name": "Great Expectations",
+          "level": 3,
+          "years": 2,
+          "tags": [
+            "data quality",
+            "validation"
+          ]
+        },
+        {
+          "name": "Julia",
+          "level": 4,
+          "years": 3,
+          "display": false,
+          "tags": [
+            "numerical computing"
+          ]
+        },
+        {
           "name": "SAS",
           "level": 3,
           "years": 2,
+          "display": false,
           "tags": [
             "statistical analysis"
           ]
@@ -175,6 +272,7 @@
           "name": "SPSS",
           "level": 3,
           "years": 2,
+          "display": false,
           "tags": [
             "social science statistics"
           ]
@@ -183,6 +281,7 @@
           "name": "R",
           "level": 3,
           "years": 2,
+          "display": false,
           "tags": [
             "statistical modeling"
           ]
@@ -203,43 +302,22 @@
           ]
         },
         {
-          "name": "Matplotlib",
-          "level": 5,
+          "name": "Data Viz Suite",
+          "level": 4,
           "years": 6,
           "tags": [
-            "data visualization"
-          ]
-        },
-        {
-          "name": "Leaflet",
-          "level": 4,
-          "years": 3,
-          "tags": [
-            "geospatial visualization"
-          ]
-        },
-        {
-          "name": "Seaborn",
-          "level": 4,
-          "years": 4,
-          "tags": [
-            "statistical plotting"
+            "Matplotlib",
+            "Seaborn",
+            "Plotly",
+            "Leaflet"
           ]
         },
         {
           "name": "Looker",
           "level": 3,
-          "years": 1,
-          "tags": [
-            "embedded analytics"
-          ]
-        },
-        {
-          "name": "Plotly",
-          "level": 3,
           "years": 2,
           "tags": [
-            "interactive dashboards"
+            "embedded analytics"
           ]
         },
         {
@@ -282,7 +360,7 @@
       "id": "algorithms-and-statistics",
       "items": [
         {
-          "name": "Seasonal Forecasting",
+          "name": "Seasonal Forecasts",
           "level": 4,
           "years": 3,
           "tags": [
@@ -291,7 +369,7 @@
           ]
         },
         {
-          "name": "(Non-) Parametric Testing",
+          "name": "Parametric Testing",
           "level": 4,
           "years": 4,
           "tags": [
@@ -307,6 +385,15 @@
             "NLP",
             "LDA"
           ]
+        },
+        {
+          "name": "Causal Inference",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "experimentation",
+            "uplift modeling"
+          ]
         }
       ]
     },
@@ -315,7 +402,7 @@
       "id": "ai-development",
       "items": [
         {
-          "name": "Retrieval-Augmented Generation",
+          "name": "RAG Systems",
           "level": 3,
           "years": 1,
           "tags": [
@@ -324,12 +411,21 @@
           ]
         },
         {
-          "name": "Agentic Model Design",
+          "name": "Agentic Models",
           "level": 3,
           "years": 1,
           "tags": [
             "multi-agent systems",
             "planning"
+          ]
+        },
+        {
+          "name": "LLM Ops",
+          "level": 3,
+          "years": 1.5,
+          "tags": [
+            "prompt orchestration",
+            "monitoring"
           ]
         }
       ]
@@ -511,7 +607,7 @@
   ],
   "skill_highlights": [
     {
-      "area": "Warehousing & Modeling",
+      "area": "Warehouse Modeling",
       "id": "skill-highlight-warehousing",
       "items": [
         {
@@ -525,7 +621,7 @@
         {
           "name": "BigQuery",
           "level": 5,
-          "years": 3,
+          "years": 5,
           "tags": [
             "SQL",
             "columnar storage",
@@ -579,19 +675,20 @@
         {
           "name": "Docker",
           "level": 4,
-          "years": 3,
+          "years": 5,
           "tags": [
             "Compose",
             "self-hosted apps"
           ]
         },
         {
-          "name": "Cloud Functions",
-          "level": 3,
-          "years": 2,
+          "name": "Runtime Platforms",
+          "level": 4,
+          "years": 4,
           "tags": [
-            "Cloud Functions",
-            "serverless queues"
+            "Compute Engine",
+            "Cloud Run",
+            "load balancing"
           ]
         }
       ]
@@ -601,38 +698,39 @@
       "id": "skill-highlight-bi",
       "items": [
         {
-          "name": "Power BI",
+          "name": "CDP Modeling",
           "level": 4,
-          "years": 2,
+          "years": 3,
           "tags": [
-            "DAX",
-            "enterprise BI"
+            "segmentation",
+            "identity resolution"
           ]
         },
         {
-          "name": "Looker",
-          "level": 3,
-          "years": 1,
-          "tags": [
-            "embedded analytics"
-          ]
-        },
-        {
-          "name": "Treasure Data CDP",
+          "name": "Audience Pipelines",
           "level": 4,
-          "years": 2,
+          "years": 3,
           "tags": [
-            "audience activation",
-            "segmentation"
+            "journey triggers",
+            "CRM activation"
           ]
         },
         {
           "name": "APIs & Web Apps",
           "level": 3,
-          "years": 2,
+          "years": 5.5,
           "tags": [
             "Next.js",
             "internal portals"
+          ]
+        },
+        {
+          "name": "BI Platforms",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "Looker",
+            "Power BI"
           ]
         }
       ]

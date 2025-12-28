@@ -36,7 +36,7 @@ export const siteConfig: SiteConfig = {
 };
 
 export const sectionMeta = [
-  { id: 'summary', code: 'PR.01', label: 'Practice statement' },
+  { id: 'summary', code: 'PR.01', label: 'Capabilities' },
   { id: 'experience', code: 'EX.01', label: 'Experience' },
   { id: 'work', code: 'WK.02', label: 'Selected work' },
   { id: 'skills', code: 'SK.03', label: 'Systems + tools' },

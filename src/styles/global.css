@@ -263,17 +263,55 @@ section:first-of-type {
 
 .summary-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
-.summary-list li {
-  padding-right: 1rem;
-  border-left: 2px solid var(--ink);
-  padding-left: 1rem;
+.summary-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.summary-pill__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--rail);
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary-pill__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.summary-pill__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.summary-pill__label {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+}
+
+.summary-pill__note {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
 }
 
 .experience-grid {
@@ -748,6 +786,13 @@ footer a {
   flex-direction: column;
   gap: 0.4rem;
 }
+.skill-stage__header--inline {
+  margin-top: 0.5rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+}
 .skill-stage__eyebrow {
   margin: 0;
   text-transform: uppercase;
@@ -755,10 +800,17 @@ footer a {
   font-size: 0.68rem;
   color: var(--ink-mute);
 }
+.skill-stage__header--inline .skill-stage__eyebrow {
+  letter-spacing: 0.2em;
+}
 .skill-stage__support {
   margin: 0;
   color: var(--ink-soft);
   max-width: 56ch;
+}
+.skill-stage__header--inline .skill-stage__support {
+  font-size: 0.85rem;
+  color: var(--ink);
 }
 .skill-stage--badges {
   margin-top: 2.75rem;
@@ -785,10 +837,31 @@ footer a {
   padding: 0.5rem 0.8rem;
   font-size: 0.85rem;
   background: #fff;
+  --badge-tone: var(--badge-tone, var(--ink));
+  color: var(--badge-tone);
+  transition: color 0.2s ease;
 }
 
 .skill-badges .badge span {
   font-size: 0.74rem;
-  color: var(--ink-mute);
+  color: inherit;
   letter-spacing: 0.05em;
+}
+
+.skill-badges .skill-row > div:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.skill-badges .skill-name {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.skill-badges .badge .skill-level,
+.skill-badges .badge .skill-years,
+.skill-badges .badge .skill-level--block {
+  opacity: 0.7;
 }
