@@ -10,9 +10,24 @@
     "linkedin_url": "https://www.linkedin.com/in/justin-napolitano"
   },
   "summary": [
-    "Business and clinical data analyst specializing in healthcare analytics, Epic Clarity SQL, and performance improvement.",
-    "Experienced with heart failure quality metrics, readmissions, and enterprise BI tooling including Power BI and GCP-based stacks.",
-    "Bridges technical and non-technical stakeholders to deliver data products that improve outcomes and reduce costs."
+    {
+      "id": "warehousing",
+      "label": "Warehousing",
+      "note": "Epic Clarity SQL, Vizient, dbt",
+      "icon": "stack"
+    },
+    {
+      "id": "activation",
+      "label": "Activation",
+      "note": "Dashboards, alerts, exec handoffs",
+      "icon": "handoff"
+    },
+    {
+      "id": "insights",
+      "label": "Insights",
+      "note": "Heart failure metrics, BI in GCP",
+      "icon": "pulse"
+    }
   ],
   "education": [
     {
