@@ -1,0 +1,557 @@
+[
+  {
+    "experienceId": "data-engineer-adventhealth",
+    "title": "Data Engineer",
+    "company": "AdventHealth",
+    "skills": [
+      {
+        "name": "Epic Clarity intake",
+        "summary": "Land Clarity extracts into governed Azure zones.",
+        "tags": [
+          "Epic",
+          "Ingestion"
+        ]
+      },
+      {
+        "name": "Synapse orchestration",
+        "summary": "Manage ELT staging through Synapse pipelines.",
+        "tags": [
+          "Synapse",
+          "ELT"
+        ]
+      },
+      {
+        "name": "Power BI care dashboards",
+        "summary": "Ship inpatient readmission scorecards in Power BI.",
+        "tags": [
+          "Power BI",
+          "Care metrics"
+        ]
+      },
+      {
+        "name": "Looker Studio automation",
+        "summary": "Publish exec-ready Looker Studio narratives for service leaders.",
+        "tags": [
+          "Looker Studio",
+          "Automation"
+        ]
+      },
+      {
+        "name": "Heart failure metrics",
+        "summary": "Model HF indicators refreshed within 24 hours of discharge.",
+        "tags": [
+          "HF",
+          "Quality"
+        ]
+      },
+      {
+        "name": "Vizient benchmarking",
+        "summary": "Blend Vizient feeds to monitor variance and cost pressure.",
+        "tags": [
+          "Vizient",
+          "Benchmarking"
+        ]
+      },
+      {
+        "name": "ELT governance",
+        "summary": "Harden ELT frameworks across EDW and Vizient sources.",
+        "tags": [
+          "ELT",
+          "Governance"
+        ]
+      },
+      {
+        "name": "SQL transformation ops",
+        "summary": "Optimize SQL layers powering CFO/CMO briefings.",
+        "tags": [
+          "SQL",
+          "Optimization"
+        ]
+      },
+      {
+        "name": "Alert automation",
+        "summary": "Trigger readmission alerts off pipeline events.",
+        "tags": [
+          "Automation",
+          "Alerts"
+        ]
+      },
+      {
+        "name": "Cardiology analytics",
+        "summary": "Partner with cardiology to deliver service-line dashboards.",
+        "tags": [
+          "Cardiology",
+          "Analytics"
+        ]
+      },
+      {
+        "name": "Nursing data partnership",
+        "summary": "Co-develop nursing runbooks and data products.",
+        "tags": [
+          "Nursing",
+          "Collab"
+        ]
+      },
+      {
+        "name": "Discharge latency monitoring",
+        "summary": "Track discharge turnaround across the network.",
+        "tags": [
+          "Operations",
+          "Latency"
+        ]
+      },
+      {
+        "name": "Azure landing zones",
+        "summary": "Manage landing zones for clinical feed intake.",
+        "tags": [
+          "Azure",
+          "Landing"
+        ]
+      }
+    ]
+  },
+  {
+    "experienceId": "business-analyst-ii-adventhealth",
+    "title": "Business Analyst II",
+    "company": "AdventHealth",
+    "skills": [
+      {
+        "name": "Clinical intake workshops",
+        "summary": "Facilitate requirements interviews with clinical ops teams.",
+        "tags": [
+          "Workshops",
+          "Requirements"
+        ]
+      },
+      {
+        "name": "Inpatient KPI dashboards",
+        "summary": "Publish KPI suites in Power BI for inpatient leadership.",
+        "tags": [
+          "Power BI",
+          "KPI"
+        ]
+      },
+      {
+        "name": "Readmission SQL models",
+        "summary": "Author SQL pipelines for readmission tracking.",
+        "tags": [
+          "SQL",
+          "Readmissions"
+        ]
+      },
+      {
+        "name": "Epic–EDW reconciliation",
+        "summary": "Balance Epic Clarity sources with enterprise warehouse values.",
+        "tags": [
+          "Epic",
+          "EDW"
+        ]
+      },
+      {
+        "name": "Quality metric validation",
+        "summary": "Own validation loops for CMS and Vizient metrics.",
+        "tags": [
+          "Quality",
+          "Validation"
+        ]
+      },
+      {
+        "name": "Stakeholder facilitation",
+        "summary": "Translate between operators and analytics pods.",
+        "tags": [
+          "Facilitation",
+          "Ops"
+        ]
+      },
+      {
+        "name": "Cost reduction analytics",
+        "summary": "Model savings scenarios for exec sponsors.",
+        "tags": [
+          "Cost",
+          "Analytics"
+        ]
+      },
+      {
+        "name": "Digital health integration",
+        "summary": "Support data interfaces for digital pilots.",
+        "tags": [
+          "Digital",
+          "Integration"
+        ]
+      },
+      {
+        "name": "Data auditing runs",
+        "summary": "Lead audits ensuring pipeline accuracy.",
+        "tags": [
+          "Audit",
+          "Pipelines"
+        ]
+      },
+      {
+        "name": "KPI documentation",
+        "summary": "Maintain metric dictionaries and definitions.",
+        "tags": [
+          "Documentation",
+          "KPI"
+        ]
+      },
+      {
+        "name": "Service line briefs",
+        "summary": "Prepare narrative updates for service-line chiefs.",
+        "tags": [
+          "Briefings",
+          "Narrative"
+        ]
+      },
+      {
+        "name": "Handoff scripting",
+        "summary": "Streamline analyst-to-ops handoffs.",
+        "tags": [
+          "Handoff",
+          "Process"
+        ]
+      },
+      {
+        "name": "Performance storytelling",
+        "summary": "Craft exec-ready messaging around performance shifts.",
+        "tags": [
+          "Storytelling",
+          "Exec"
+        ]
+      }
+    ]
+  },
+  {
+    "experienceId": "data-analytics-engineer-penske",
+    "title": "Data + Analytics Engineer",
+    "company": "Penske Media Corporation",
+    "skills": [
+      {
+        "name": "AI vendor evaluation",
+        "summary": "Score AI vendors on integration, latency, and cost.",
+        "tags": [
+          "AI",
+          "Procurement"
+        ]
+      },
+      {
+        "name": "LLM fine-tuning",
+        "summary": "Tune LLMs with editorial scoring loops.",
+        "tags": [
+          "LLM",
+          "Tuning"
+        ]
+      },
+      {
+        "name": "Python GCP pipelines",
+        "summary": "Ship Python/SQL workloads in GCP for media brands.",
+        "tags": [
+          "Python",
+          "GCP"
+        ]
+      },
+      {
+        "name": "Looker newsroom insights",
+        "summary": "Deliver Looker dashboards to editorial teams.",
+        "tags": [
+          "Looker",
+          "Editorial"
+        ]
+      },
+      {
+        "name": "Subscription KPI reporting",
+        "summary": "Drive conversion-focused KPI suites.",
+        "tags": [
+          "Subscription",
+          "KPIs"
+        ]
+      },
+      {
+        "name": "Treasure Data modeling",
+        "summary": "Model user behavior in Treasure Data CDP.",
+        "tags": [
+          "CDP",
+          "Modeling"
+        ]
+      },
+      {
+        "name": "Topic clustering analytics",
+        "summary": "Build topic insights across 30 media brands.",
+        "tags": [
+          "Topics",
+          "Analytics"
+        ]
+      },
+      {
+        "name": "Signal engineering",
+        "summary": "Engineer 150+ signals for CDP activation.",
+        "tags": [
+          "Signals",
+          "Activation"
+        ]
+      },
+      {
+        "name": "Editorial scoring loops",
+        "summary": "Close the loop between editors and ML outputs.",
+        "tags": [
+          "Editorial",
+          "ML"
+        ]
+      },
+      {
+        "name": "Cross-brand KPI governance",
+        "summary": "Standardize KPIs across portfolio brands.",
+        "tags": [
+          "Governance",
+          "KPIs"
+        ]
+      },
+      {
+        "name": "GCP cost optimization",
+        "summary": "Trim run costs on GCP pipelines.",
+        "tags": [
+          "GCP",
+          "Cost"
+        ]
+      },
+      {
+        "name": "Segmented marketing enablement",
+        "summary": "Enable targeted marketing through CDP outputs.",
+        "tags": [
+          "Marketing",
+          "Segmentation"
+        ]
+      },
+      {
+        "name": "Executive briefing kits",
+        "summary": "Package insights for exec-level briefings.",
+        "tags": [
+          "Exec",
+          "Briefings"
+        ]
+      }
+    ]
+  },
+  {
+    "experienceId": "independent-data-consultant-btjn",
+    "title": "Independent Data Consultant",
+    "company": "BTJN",
+    "skills": [
+      {
+        "name": "CDP implementation",
+        "summary": "Stand up customer data platforms for segmentation.",
+        "tags": [
+          "CDP",
+          "Implementation"
+        ]
+      },
+      {
+        "name": "GCP migrations",
+        "summary": "Move legacy systems into GCP for speed gains.",
+        "tags": [
+          "GCP",
+          "Migration"
+        ]
+      },
+      {
+        "name": "Audience segmentation models",
+        "summary": "Model 2M+ prospects for targeting.",
+        "tags": [
+          "Segmentation",
+          "Modeling"
+        ]
+      },
+      {
+        "name": "Marketing automation design",
+        "summary": "Automate campaigns that convert cold leads.",
+        "tags": [
+          "Automation",
+          "Marketing"
+        ]
+      },
+      {
+        "name": "ETL modernization",
+        "summary": "Upgrade ETL stacks supporting campaigns.",
+        "tags": [
+          "ETL",
+          "Modernization"
+        ]
+      },
+      {
+        "name": "Data contract remediation",
+        "summary": "Fix data contracts across vendors.",
+        "tags": [
+          "Data contracts",
+          "Governance"
+        ]
+      },
+      {
+        "name": "Campaign performance analytics",
+        "summary": "Report on campaign lift and pipeline health.",
+        "tags": [
+          "Campaigns",
+          "Analytics"
+        ]
+      },
+      {
+        "name": "CRM enrichment",
+        "summary": "Enrich CRMs with behavioral data.",
+        "tags": [
+          "CRM",
+          "Enrichment"
+        ]
+      },
+      {
+        "name": "Prospect scoring",
+        "summary": "Score leads feeding marketing automation.",
+        "tags": [
+          "Scoring",
+          "Prospects"
+        ]
+      },
+      {
+        "name": "Workflow documentation",
+        "summary": "Document new data + campaign workflows.",
+        "tags": [
+          "Documentation",
+          "Workflow"
+        ]
+      },
+      {
+        "name": "Stakeholder enablement",
+        "summary": "Train marketing and sales teams on new kits.",
+        "tags": [
+          "Enablement",
+          "Stakeholders"
+        ]
+      },
+      {
+        "name": "Legacy data cleanup",
+        "summary": "Cleanse old systems before migration.",
+        "tags": [
+          "Cleanup",
+          "Legacy"
+        ]
+      },
+      {
+        "name": "Email conversion reporting",
+        "summary": "Report email conversion and cohort outcomes.",
+        "tags": [
+          "Email",
+          "Conversion"
+        ]
+      }
+    ]
+  },
+  {
+    "experienceId": "research-assistant-ucf",
+    "title": "Research Assistant",
+    "company": "University of Central Florida",
+    "skills": [
+      {
+        "name": "Human rights taxonomy",
+        "summary": "Define coding schema for global violations.",
+        "tags": [
+          "Taxonomy",
+          "Human rights"
+        ]
+      },
+      {
+        "name": "MySQL open database",
+        "summary": "Build open MySQL repos for conflict tracking.",
+        "tags": [
+          "MySQL",
+          "Open data"
+        ]
+      },
+      {
+        "name": "Data collection protocol",
+        "summary": "Design collection playbooks for researchers.",
+        "tags": [
+          "Protocol",
+          "Collection"
+        ]
+      },
+      {
+        "name": "Conflict trend analysis",
+        "summary": "Analyze systemic abuse trends.",
+        "tags": [
+          "Conflict",
+          "Analysis"
+        ]
+      },
+      {
+        "name": "Scholarly writing",
+        "summary": "Co-author peer-reviewed publications.",
+        "tags": [
+          "Writing",
+          "Academic"
+        ]
+      },
+      {
+        "name": "Gender violence research",
+        "summary": "Investigate gender-based violence cases.",
+        "tags": [
+          "Gender",
+          "Research"
+        ]
+      },
+      {
+        "name": "ICC briefing prep",
+        "summary": "Prepare briefs for ICC presentations.",
+        "tags": [
+          "ICC",
+          "Briefings"
+        ]
+      },
+      {
+        "name": "Research team leadership",
+        "summary": "Lead a five-person research cohort.",
+        "tags": [
+          "Leadership",
+          "Research"
+        ]
+      },
+      {
+        "name": "Statute coding",
+        "summary": "Code statutes from global treaties.",
+        "tags": [
+          "Coding",
+          "Statutes"
+        ]
+      },
+      {
+        "name": "Data quality assurance",
+        "summary": "Enforce QA on field submissions.",
+        "tags": [
+          "Quality",
+          "QA"
+        ]
+      },
+      {
+        "name": "Interview synthesis",
+        "summary": "Synthesize field interviews into datasets.",
+        "tags": [
+          "Interviews",
+          "Synthesis"
+        ]
+      },
+      {
+        "name": "Publication coordination",
+        "summary": "Coordinate with publishers and reviewers.",
+        "tags": [
+          "Coordination",
+          "Publication"
+        ]
+      },
+      {
+        "name": "Presentation design",
+        "summary": "Craft academic presentations for The Hague.",
+        "tags": [
+          "Presentation",
+          "Design"
+        ]
+      }
+    ]
+  }
+]

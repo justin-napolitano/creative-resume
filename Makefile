@@ -1,4 +1,4 @@
-.PHONY: install dev build preview clean pdf
+.PHONY: install dev build preview clean pdf skills skills-full
 
 install:
 	npm install
@@ -17,3 +17,10 @@ clean:
 
 pdf: build
 	npm run pdf
+
+skills:
+	npm run skill:graph
+
+skills-full:
+	OPENAI_API_KEY=$${OPENAI_API_KEY} npm run experience:skills
+	OPENAI_API_KEY=$${OPENAI_API_KEY} npm run skill:graph

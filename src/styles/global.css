@@ -472,7 +472,23 @@ section:first-of-type {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.78rem;
+  color: var(--ink);
 }
+
+.skill-badges .skill-name {
+  color: var(--accent);
+}
+
+.skill-area-label {
+  display: block;
+  font-size: clamp(0.48rem, 0.4rem + 0.25vw, 0.6rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-top: 0.05rem;
+  white-space: nowrap;
+}
+
 
 .skill-level {
   font-size: 0.75rem;
@@ -842,9 +858,7 @@ footer a {
   padding: 0.5rem 0.8rem;
   font-size: 0.85rem;
   background: #fff;
-  --badge-tone: var(--badge-tone, var(--ink));
-  color: var(--badge-tone);
-  transition: color 0.2s ease;
+  color: var(--ink);
 }
 
 .skill-badges .badge span {
@@ -853,12 +867,22 @@ footer a {
   letter-spacing: 0.05em;
 }
 
+.skill-badges .badge .skill-name {
+  color: var(--accent);
+}
+
 .skill-badges .badge.badge--mobile-hidden {
   display: inline-flex;
 }
 
 @media (max-width: 720px) {
   .skill-badges .badge.badge--mobile-hidden {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .skill-badges .badge:nth-child(n + 45) {
     display: none;
   }
 }

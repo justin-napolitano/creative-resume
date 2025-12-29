@@ -1,5 +1,7 @@
 import resumeData from '@/data/resume.json';
 import copyData from '@/data/copy.json';
+import experienceSkillsData from '@/data/experience-skills.json';
+import skillGraphData from '@/../public/skill-graph.json';
 
 export type ResumeData = typeof resumeData;
 
@@ -8,6 +10,14 @@ export const resume: ResumeData = resumeData;
 export type CopyData = typeof copyData;
 
 export const siteCopy: CopyData = copyData;
+
+export type SkillGraphData = typeof skillGraphData;
+
+export const skillGraph: SkillGraphData = skillGraphData;
+
+export type ExperienceSkillsData = typeof experienceSkillsData;
+
+export const experienceSkills: ExperienceSkillsData = experienceSkillsData;
 
 type SiteConfig = {
   siteTitle: string;

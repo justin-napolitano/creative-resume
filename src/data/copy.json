@@ -1,7 +1,7 @@
 {
   "hero": {
     "role": "Data + Analytics Engineer",
-    "focus": "Healthcare quality, media systems, editorial-grade BI",
+    "focus": "Full-stack data ops from ingestion to insights",
     "thesis": "Data engineer turning Epic Clarity, Vizient, and media ops into decision kits execs and creative leads can act on.",
     "marginNote": "Systems-first. Healthcare-grade follow-through."
   },
@@ -23,7 +23,7 @@
       },
       "badges": {
         "eyebrow": "Complete badge index",
-        "support": "Systems kit across warehousing + activation + orchestration so partners clock depth immediately."
+        "support": "Full stack kit across warehousing + activation + orchestration for teams ready to move fast."
       }
     }
   }

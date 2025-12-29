@@ -2,7 +2,7 @@
   "header": {
     "name": "Justin Napolitano",
     "location": "Orlando, Florida",
-    "email": "justin@jnapolitano.com",
+    "email": "justin@jnap.me",
     "phone": "689-340-0675",
     "github": "github.com/justin-napolitano",
     "github_url": "https://github.com/justin-napolitano",
@@ -13,7 +13,7 @@
     {
       "id": "warehousing",
       "label": "Warehousing",
-      "note": "Epic Clarity SQL, Vizient, dbt",
+      "note": "Epic Clarity SQL, Vizient, ELT frameworks",
       "icon": "stack"
     },
     {
@@ -56,6 +56,7 @@
     {
       "area": "Lakehouses",
       "id": "lakehouses",
+      "stack": "warehousing",
       "items": [
         {
           "name": "BigQuery",
@@ -69,16 +70,16 @@
         },
         {
           "name": "Snowflake",
-          "level": 4,
-          "years": 2,
+          "level": 5,
+          "years": 5,
           "tags": [
             "cloud data warehouse"
           ]
         },
         {
-          "name": "dbt",
-          "level": 3,
-          "years": 1.5,
+          "name": "ELT Frameworks",
+          "level": 5,
+          "years": 5,
           "tags": [
             "data modeling",
             "ELT"
@@ -89,11 +90,12 @@
     {
       "area": "Activation Systems",
       "id": "activation-systems",
+      "stack": "insights",
       "items": [
         {
           "name": "CDP Modeling",
-          "level": 4,
-          "years": 3,
+          "level": 5,
+          "years": 5,
           "tags": [
             "segmentation",
             "identity resolution"
@@ -101,8 +103,8 @@
         },
         {
           "name": "Audience Pipelines",
-          "level": 4,
-          "years": 3,
+          "level": 5,
+          "years": 5,
           "tags": [
             "journey triggers",
             "CRM activation"
@@ -110,8 +112,8 @@
         },
         {
           "name": "Segment + Fivetran",
-          "level": 4,
-          "years": 3,
+          "level": 5,
+          "years": 5,
           "tags": [
             "data ingestion",
             "automation"
@@ -122,52 +124,52 @@
     {
       "area": "Cloud Compute",
       "id": "cloud-compute",
+      "stack": "deployment",
       "items": [
         {
-          "name": "GCP",
+          "name": "Cloud Services",
           "level": 5,
-          "years": 4,
+          "years": 5,
           "tags": [
-            "BigQuery",
-            "Cloud Functions",
-            "GCS"
+            "GCP",
+            "Azure",
+            "multi-cloud ops"
           ]
         },
         {
-          "name": "Azure",
-          "level": 3,
-          "years": 1,
+          "name": "Docker",
+          "level": 5,
+          "years": 5,
           "tags": [
-            "data services"
+            "Compose",
+            "containerization"
           ]
         },
         {
-          "name": "AWS",
-          "level": 2,
-          "years": 0.5,
+          "name": "Serverless Platforms",
+          "level": 5,
+          "years": 5,
           "tags": [
-            "S3",
-            "Lambda"
-          ]
-        },
-        {
-          "name": "Microservices",
-          "level": 3,
-          "years": 2,
-          "tags": [
-            "serverless",
-            "event-driven"
-          ]
-        },
-        {
-          "name": "Runtime Platforms",
-          "level": 4,
-          "years": 4,
-          "tags": [
-            "Compute Engine",
             "Cloud Run",
-            "load balancing",
-            "reverse proxy"
+            "Cloud Functions"
+          ]
+        },
+        {
+          "name": "CI/CD Systems",
+          "level": 5,
+          "years": 5,
+          "tags": [
+            "GitHub Actions",
+            "pipeline automation"
+          ]
+        },
+        {
+          "name": "Infrastructure as Code",
+          "level": 5,
+          "years": 5,
+          "tags": [
+            "Terraform",
+            "runbooks"
           ]
         }
       ]
@@ -175,11 +177,12 @@
     {
       "area": "Data Science Platforms",
       "id": "data-science-platforms",
+      "stack": "warehousing",
       "items": [
         {
           "name": "SQL",
           "level": 5,
-          "years": 7,
+          "years": 5,
           "tags": [
             "PostgreSQL",
             "MySQL",
@@ -189,7 +192,7 @@
         {
           "name": "Python",
           "level": 5,
-          "years": 7,
+          "years": 5,
           "tags": [
             "data engineering",
             "machine learning",
@@ -291,6 +294,7 @@
     {
       "area": "BI and Data Viz",
       "id": "bi-and-data-viz",
+      "stack": "insights",
       "items": [
         {
           "name": "Excel",
@@ -334,6 +338,7 @@
     {
       "area": "Graph Analysis",
       "id": "graph-analysis",
+      "stack": "insights",
       "items": [
         {
           "name": "NetworkX",
@@ -356,8 +361,9 @@
       ]
     },
     {
-      "area": "Algorithms and Statistics",
+      "area": "Algorithms & Stats",
       "id": "algorithms-and-statistics",
+      "stack": "insights",
       "items": [
         {
           "name": "Seasonal Forecasts",
@@ -400,6 +406,7 @@
     {
       "area": "AI Development",
       "id": "ai-development",
+      "stack": "insights",
       "items": [
         {
           "name": "RAG Systems",
@@ -422,7 +429,7 @@
         {
           "name": "LLM Ops",
           "level": 3,
-          "years": 1.5,
+          "years": 5,
           "tags": [
             "prompt orchestration",
             "monitoring"
@@ -439,10 +446,11 @@
       "location": "Orlando, Florida",
       "start": "Aug 2025",
       "end": "Present",
+      "stack": "warehousing",
       "bullets": [
         "Stand up Azure Data Factory + Synapse pipelines that land Epic Clarity extracts into governed models for quality and operations teams.",
         "Build Power BI and Looker Studio dashboards that surface heart failure and readmission metrics for service line leaders within 24 hours of discharge.",
-        "Harden dbt and SQL transformations that reconcile EDW, Vizient, and bedside documentation into one source of truth for CFO and CMO briefs.",
+        "Harden ELT frameworks and SQL transformations that reconcile EDW, Vizient, and bedside documentation into one source of truth for CFO and CMO briefs.",
         "Partner with nursing, cardiology, and digital to automate alerts, reducing manual spreadsheet updates by 60% across the network."
       ],
       "technologies": [
@@ -450,10 +458,11 @@
         "Synapse",
         "Power BI",
         "Looker Studio",
-        "dbt",
+        "ELT frameworks",
         "Epic Clarity",
         "SQL"
-      ]
+      ],
+      "stack": "warehousing"
     },
     {
       "id": "business-analyst-ii-adventhealth",
@@ -462,6 +471,7 @@
       "location": "Orlando, Florida",
       "start": "Jan 2025",
       "end": "Aug 2025",
+      "stack": "warehousing",
       "bullets": [
         "Partnered with clinical and operations teams to define data requirements for performance and quality improvement initiatives.",
         "Designed SQL-based reporting pipelines and Power BI dashboards for inpatient care and readmissions metrics.",
@@ -474,7 +484,8 @@
         "Power BI",
         "Enterprise Data Warehouse",
         "Healthcare quality metrics"
-      ]
+      ],
+      "stack": "warehousing"
     },
     {
       "id": "data-analytics-engineer-penske",
@@ -483,6 +494,7 @@
       "location": "Los Angeles, California",
       "start": "Apr 2022",
       "end": "Apr 2024",
+      "stack": "insights",
       "bullets": [
         "Led evaluation of six AI and data vendors, assessing integration, latency, and scalability to guide $5M in platform investment decisions.",
         "Fine-tuned large language models using Python, improving generative quality by 10% based on editorial scoring loops.",
@@ -500,7 +512,8 @@
         "AI vendor evaluation",
         "Subscription analytics",
         "Customer segmentation"
-      ]
+      ],
+      "stack": "insights"
     },
     {
       "id": "independent-data-consultant-btjn",
@@ -509,6 +522,7 @@
       "location": "Houston, Texas",
       "start": "Jan 2020",
       "end": "Apr 2022",
+      "stack": "deployment",
       "bullets": [
         "Implemented two customer data platforms to improve audience segmentation and campaign targeting for 2M+ high-value prospects.",
         "Migrated three legacy systems to GCP, doubling data processing speeds and streamlining analytics workflows.",
@@ -519,7 +533,8 @@
         "Customer data platforms",
         "Marketing automation",
         "ETL and system migration"
-      ]
+      ],
+      "stack": "deployment"
     },
     {
       "id": "research-assistant-ucf",
@@ -528,6 +543,7 @@
       "location": "Orlando, Florida",
       "start": "Jan 2018",
       "end": "Aug 2019",
+      "stack": "insights",
       "bullets": [
         "Designed a rubric for coding international human rights violations using statutes from major global treaties.",
         "Led a five-person research team to develop an open-source MySQL database documenting systemic abuses across global conflict zones.",
@@ -538,14 +554,15 @@
         "Research design",
         "Data coding",
         "Human rights analytics"
-      ]
+      ],
+      "stack": "insights"
     }
   ],
   "projects": [
     {
       "id": "heart-failure-quality-metrics-dashboard",
       "name": "Heart Failure Quality Metrics Dashboard",
-      "context": "AdventHealth \u2013 Epic Clarity / Power BI",
+      "context": "AdventHealth – Epic Clarity / Power BI",
       "technologies": [
         "Epic Clarity",
         "SQL",
@@ -561,7 +578,7 @@
     {
       "id": "o-e-mortality-analysis",
       "name": "Observed-to-Expected Mortality Analysis",
-      "context": "AdventHealth \u2013 Vizient data",
+      "context": "AdventHealth – Vizient data",
       "technologies": [
         "Vizient clinical data",
         "SQL",
@@ -622,8 +639,8 @@
         },
         {
           "name": "Snowflake",
-          "level": 4,
-          "years": 2,
+          "level": 5,
+          "years": 5,
           "tags": [
             "cloud data warehouse"
           ]
@@ -631,7 +648,7 @@
         {
           "name": "Python",
           "level": 5,
-          "years": 7,
+          "years": 5,
           "tags": [
             "data engineering",
             "automation"
@@ -640,7 +657,7 @@
         {
           "name": "SQL",
           "level": 5,
-          "years": 7,
+          "years": 5,
           "tags": [
             "PostgreSQL",
             "MySQL",
@@ -648,9 +665,9 @@
           ]
         },
         {
-          "name": "dbt",
-          "level": 3,
-          "years": 1.5,
+          "name": "ELT Frameworks",
+          "level": 5,
+          "years": 5,
           "tags": [
             "data modeling",
             "ELT"
@@ -663,27 +680,18 @@
       "id": "skill-highlight-cloud",
       "items": [
         {
-          "name": "Azure",
-          "level": 4,
-          "years": 2,
-          "tags": [
-            "Data Factory",
-            "Synapse"
-          ]
-        },
-        {
-          "name": "GCP",
+          "name": "Cloud Services",
           "level": 5,
-          "years": 4,
+          "years": 5,
           "tags": [
-            "BigQuery",
-            "Cloud Functions",
-            "GCS"
+            "GCP",
+            "Azure",
+            "multi-cloud ops"
           ]
         },
         {
           "name": "Docker",
-          "level": 4,
+          "level": 5,
           "years": 5,
           "tags": [
             "Compose",
@@ -691,22 +699,30 @@
           ]
         },
         {
-          "name": "Runtime Platforms",
-          "level": 4,
-          "years": 4,
+          "name": "Serverless Platforms",
+          "level": 5,
+          "years": 5,
           "tags": [
-            "Compute Engine",
             "Cloud Run",
-            "load balancing"
+            "Cloud Functions"
           ]
         },
         {
-          "name": "Microservices",
-          "level": 3,
-          "years": 2,
+          "name": "CI/CD Systems",
+          "level": 5,
+          "years": 5,
           "tags": [
-            "service orchestration",
-            "serverless queues"
+            "GitHub Actions",
+            "automation"
+          ]
+        },
+        {
+          "name": "Infrastructure as Code",
+          "level": 5,
+          "years": 5,
+          "tags": [
+            "Terraform",
+            "runbooks"
           ]
         }
       ]
@@ -717,8 +733,8 @@
       "items": [
         {
           "name": "CDP Modeling",
-          "level": 4,
-          "years": 3,
+          "level": 5,
+          "years": 5,
           "tags": [
             "segmentation",
             "identity resolution"
@@ -726,8 +742,8 @@
         },
         {
           "name": "Audience Pipelines",
-          "level": 4,
-          "years": 3,
+          "level": 5,
+          "years": 5,
           "tags": [
             "journey triggers",
             "CRM activation"
@@ -735,8 +751,8 @@
         },
         {
           "name": "APIs + Web Apps",
-          "level": 3,
-          "years": 5.5,
+          "level": 5,
+          "years": 5,
           "tags": [
             "Next.js",
             "internal portals"
@@ -744,8 +760,8 @@
         },
         {
           "name": "BI Platforms",
-          "level": 4,
-          "years": 3,
+          "level": 5,
+          "years": 5,
           "tags": [
             "Looker",
             "Power BI"
@@ -753,8 +769,8 @@
         },
         {
           "name": "Segment + Fivetran",
-          "level": 4,
-          "years": 3,
+          "level": 5,
+          "years": 5,
           "tags": [
             "data ingestion",
             "automation"

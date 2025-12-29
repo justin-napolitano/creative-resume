@@ -1,6 +1,16 @@
 ---
 import '@/styles/global.css';
-import { experienceNotes, resume, sectionMeta, sectionNotes, siteConfig, siteCopy, utilityLinks } from '@/config';
+import {
+  experienceNotes,
+  experienceSkills,
+  resume,
+  sectionMeta,
+  sectionNotes,
+  siteConfig,
+  siteCopy,
+  skillGraph,
+  utilityLinks,
+} from '@/config';
 
 const header = resume.header;
 type PracticePillar = { id?: string; label?: string; note?: string; icon?: string };
@@ -21,6 +31,37 @@ const iconForPillar = (icon?: string) => {
   return iconMap[key];
 };
 const experiences = resume.experience ?? [];
+type ExperienceEntry = (typeof experiences)[number];
+const experienceSkillMap = new Map((experienceSkills ?? []).map((entry) => [entry.experienceId, entry.skills ?? []]));
+
+const maxExperienceChips = 13;
+const chipsForExperience = (role: ExperienceEntry) => {
+  const generated = experienceSkillMap.get(role.id) ?? [];
+  const baseNames = generated.map((skill) => skill.name).filter(Boolean);
+  const chips: string[] = [];
+  baseNames.forEach((name) => {
+    if (name && !chips.includes(name)) chips.push(name);
+  });
+  const fallback = role.technologies ?? [];
+  fallback.forEach((tech) => {
+    if (!tech || chips.length >= maxExperienceChips) return;
+    if (!chips.includes(tech)) chips.push(tech);
+  });
+  if (chips.length === 0) {
+    return fallback.slice(0, maxExperienceChips);
+  }
+  if (chips.length < maxExperienceChips) {
+    const source = baseNames.length > 0 ? baseNames : fallback;
+    let idx = 0;
+    while (source.length > 0 && chips.length < maxExperienceChips) {
+      const next = source[idx % source.length];
+      if (next) chips.push(next);
+      idx += 1;
+      if (idx > 200) break;
+    }
+  }
+  return chips.slice(0, maxExperienceChips);
+};
 const formatDate = (date?: string) => {
   if (!date) return '';
   const parts = date.split(' ');
@@ -35,10 +76,44 @@ const education = resume.education ?? [];
 const publications = resume.publications ?? [];
 const highlightCap = 5;
 type SkillItem = { name?: string; level?: number; years?: number; display?: boolean };
-const shouldDisplay = (item?: SkillItem) => (item?.display ?? true);
+type GraphSkill = (typeof skillGraph.skills)[number];
+type GraphCluster = (typeof skillGraph.clusters)[number];
+
+const badgeCharLimit = 'SEGMENT + FIVETRAN'.length;
+const skillBadgeAliases: Record<string, string> = {
+  'Infrastructure as Code': 'Infra + Code',
+  'Serverless Platforms': 'Serverless Ops',
+  'Algorithms and Statistics': 'Algorithms & Stats',
+  'Algorithms & Stats': 'Algorithms & Stats',
+  'Data Science Platforms': 'Data Sci Platforms',
+};
+
+const shortenWord = (word: string = '') => (word.length <= 4 ? word : `${word.slice(0, 4)}.`);
+const fallbackInitials = (words: string[]) =>
+  words
+    .map((word) => (word ? `${word[0].toUpperCase()}.` : ''))
+    .join(' ')
+    .trim();
+
+const friendlySkillLabel = (name: string = '') => {
+  if (!name) return name;
+  if (skillBadgeAliases[name]) return skillBadgeAliases[name];
+  if (name.length <= badgeCharLimit) return name;
+  const words = name.split(/\s+/);
+  const shortened = words.map(shortenWord).join(' ');
+  if (shortened.length <= badgeCharLimit) return shortened;
+  const initials = fallbackInitials(words);
+  if (initials.length > 0 && initials.length <= badgeCharLimit) return initials;
+  return `${name.slice(0, badgeCharLimit - 1)}…`;
+};
+
+const labelForSkill = (skill: GraphSkill | SkillItem) => {
+  const base = (skill as any).badgeLabel ?? skill.name ?? '';
+  return friendlySkillLabel(base);
+};
 const normalize = (value?: number) => (typeof value === 'number' && !Number.isNaN(value) ? value : Number(value ?? 0));
 const tenureValue = (value?: number) => Math.min(normalize(value), highlightCap);
-const sortBySeniority = <T extends SkillItem>(items: T[] = []) =>
+const sortBySeniority = <T extends { name?: string; years?: number }>(items: T[] = []) =>
   [...items].sort((a, b) => {
     const yearDiff = tenureValue(b.years) - tenureValue(a.years);
     if (yearDiff !== 0) return yearDiff;
@@ -51,21 +126,48 @@ const badgeToneFor = (index: number) => {
   const lightness = Math.min(baseLightness + index * lightnessStep, maxLightness);
   return `hsl(170deg 16% ${lightness}%)`;
 };
-const baseHighlights = (resume.skill_highlights ?? []).map((group) => ({
-  ...group,
-  items: sortBySeniority((group.items ?? []).filter(shouldDisplay)),
-}));
+const graphSkills: GraphSkill[] = (skillGraph?.skills ?? []) as GraphSkill[];
+const graphClusters: GraphCluster[] = (skillGraph?.clusters ?? []) as GraphCluster[];
+const stackOrder = summary.map((pillar) => pillar.id ?? '');
+
+const skillsByStack = new Map<string, GraphSkill[]>();
+stackOrder.forEach((id) => skillsByStack.set(id, []));
+graphSkills.forEach((skill) => {
+  const stackId = skill.stack ?? 'insights';
+  if (!skillsByStack.has(stackId)) skillsByStack.set(stackId, []);
+  skillsByStack.get(stackId)?.push(skill);
+});
+
 const capabilityStacks = summary
-  .map((pillar, index) => ({ pillar, stack: baseHighlights[index] }))
-  .filter((entry) => entry.stack);
-const skillAreas = (resume.skills ?? []).map((area) => ({
-  ...area,
-  items: sortBySeniority((area.items ?? []).filter(shouldDisplay)),
-}));
+  .map((pillar) => {
+    const items = sortBySeniority([...(skillsByStack.get(pillar.id ?? '') ?? [])]).slice(0, highlightCap);
+    return { pillar, items };
+  })
+  .filter((entry) => entry.items.length > 0);
+
+const clusterSortKey = (cluster: { stack?: string; label?: string }) => {
+  const stackIdx = stackOrder.indexOf(cluster.stack ?? '');
+  return `${stackIdx === -1 ? 999 : stackIdx}-${cluster.label ?? ''}`;
+};
+
+const skillAreas = graphClusters
+  .map((cluster) => {
+    const items = sortBySeniority(graphSkills.filter((skill) => skill.cluster === cluster.id));
+    return {
+      id: cluster.key ?? `cluster-${cluster.id}`,
+      stack: cluster.stack,
+      stackLabel: cluster.stackLabel,
+      label: cluster.label ?? cluster.key ?? `Cluster ${cluster.id + 1}`,
+      items,
+    };
+  })
+  .filter((area) => area.items.length > 0)
+  .sort((a, b) => (clusterSortKey(a) < clusterSortKey(b) ? -1 : clusterSortKey(a) > clusterSortKey(b) ? 1 : 0));
+
 const formatYears = (years: number = 0) => (years > highlightCap ? `${highlightCap}+ yrs` : `${years} yrs`);
 const flattenedSkills = sortBySeniority(
   skillAreas.flatMap((area) =>
-    (area.items ?? []).map((item) => ({ ...item, area: area.area }))
+    area.items.map((item) => ({ ...item, area: area.label, stack: area.stack, category: area.id }))
   )
 );
 const topSkillLimit = 10;
@@ -87,6 +189,8 @@ const levelLabels: Record<number, string> = {
   2: 'Associate',
   1: 'Foundational',
 };
+
+const areaLabels = new Map(skillAreas.map((area) => [area.id, area.label] as const));
 
 const sectionCode = (id: string) => sectionMeta.find((meta) => meta.id === id)?.code ?? '';
 const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?.label ?? '';
@@ -144,19 +248,19 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
             <p class="section__subtitle">{siteCopy.sections.summary.subtitle}</p>
           </div>
           <div class="capability-grid">
-            {capabilityStacks.map(({ pillar, stack }) => (
+            {capabilityStacks.map(({ pillar, items }) => (
               <article class="capability-card">
                 <div class="capability-card__head">
                   <span class="capability-card__icon" aria-hidden="true" set:html={iconForPillar(pillar.icon)}></span>
                   <p class="capability-card__label">{pillar.label}</p>
                 </div>
                 <ul>
-                  {stack.items?.map((item) => (
+                  {items.map((item) => (
                     <li>
                       <div class="skill-row">
                         <div>
-                          <span class="skill-name">{item.name}</span>
-                          <span class="skill-level">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
+                          <span class="skill-name">{labelForSkill(item)}</span>
+                          {/* Level hidden for tighter layout */}
                         </div>
                         <span class="skill-years">{formatYears(item.years ?? 0)}</span>
                       </div>
@@ -196,11 +300,15 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                       {role.bullets.map((bullet) => <li>{bullet}</li>)}
                     </ul>
                   )}
-                  {role.technologies?.length > 0 && (
-                    <ul class="chip-row">
-                      {role.technologies.map((tech) => <li>{tech}</li>)}
-                    </ul>
-                  )}
+                  {(() => {
+                    const chips = chipsForExperience(role);
+                    if (!chips || chips.length === 0) return null;
+                    return (
+                      <ul class="chip-row">
+                        {chips.map((chip) => <li>{chip}</li>)}
+                      </ul>
+                    );
+                  })()}
                   {(siteConfig.pullQuotes?.[role.title] || experienceNotes[role.title]) && (
                     <aside class="pull-quote" aria-label="Margin note">
                       {siteConfig.pullQuotes?.[role.title] ?? experienceNotes[role.title]}
@@ -298,12 +406,14 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
               {flattenedSkills.map((item, index) => {
                 const isTop = topSkillNames.has(item.name ?? '');
                 const badgeClass = `badge${isTop ? '' : ' badge--mobile-hidden'}`;
+                const categoryLabel = areaLabels.get(item.category ?? '') ?? '';
                 return (
                   <div class={badgeClass} style={`--badge-tone:${badgeToneFor(index)}`}>
                     <div class="skill-row">
                       <div>
-                        <span class="skill-name">{item.name}</span>
-                        <span class="skill-level skill-level--block">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
+                        {categoryLabel && <span class="skill-area-label">{categoryLabel}</span>}
+                        <span class="skill-name">{labelForSkill(item)}</span>
+                        {/* Level hidden for tighter layout */}
                       </div>
                       <div class="skill-years-group">
                         <span class="skill-years">{formatYears(item.years ?? 0)}</span>

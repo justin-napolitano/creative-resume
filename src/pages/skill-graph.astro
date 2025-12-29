@@ -135,7 +135,24 @@ try {
         cursor: pointer;
         transition: background 0.2s ease, border 0.2s ease;
       }
-      .cluster-chip span {
+      .cluster-chip__text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+        text-align: left;
+      }
+      .cluster-chip__text strong {
+        font-size: 0.6rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(15, 16, 15, 0.6);
+      }
+      .cluster-chip__text span {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .cluster-chip > span {
         width: 12px;
         height: 12px;
         border-radius: 50%;
@@ -378,9 +395,10 @@ try {
           circle.dataset.cluster = skill.cluster;
           circle.dataset.level = skill.level ?? '';
           circle.dataset.years = skill.years ?? '';
+          circle.dataset.stack = skill.stackLabel || '';
           circle.addEventListener('mouseenter', () => {
             tooltip.style.opacity = '1';
-            tooltip.textContent = `${skill.name} • ${skill.area}`;
+            tooltip.textContent = `${skill.name} • ${skill.stackLabel || skill.area}`;
           });
           circle.addEventListener('mousemove', (event) => {
             tooltip.style.top = `${event.clientY + 16}px`;
@@ -411,7 +429,14 @@ try {
           const item = document.createElement('button');
           item.className = 'cluster-chip';
           item.dataset.cluster = cluster.id;
-          item.innerHTML = `<span style="background:${color}"></span>${cluster.label || `Cluster ${cluster.id + 1}`} <em>(${skills.filter((skill) => skill.cluster === cluster.id).length})</em>`;
+          const memberCount = skills.filter((skill) => skill.cluster === cluster.id).length;
+          item.innerHTML = `
+            <span style="background:${color}"></span>
+            <div class="cluster-chip__text">
+              <strong>${cluster.stackLabel || 'General'}</strong>
+              <span>${cluster.label || `Cluster ${cluster.id + 1}`}</span>
+            </div>
+            <em>(${memberCount})</em>`;
           item.addEventListener('click', () => highlightCluster(cluster.id));
           clusterList.appendChild(item);
         });
@@ -443,7 +468,7 @@ try {
             detailEl.innerHTML = `
               <div class="detail-cluster">
                 <h3>${cluster.label || `Cluster ${cluster.id + 1}`}</h3>
-                <p>${members.length} skills</p>
+                <p>${cluster.stackLabel || 'General'} • ${members.length} skills</p>
                 <ul>${members
                   .slice(0, 6)
                   .map((skill) => `<li>${skill.name}</li>`)
@@ -457,7 +482,7 @@ try {
           detailEl.innerHTML = `
             <div class="detail-skill">
               <h3>${skill.name}</h3>
-              <p>${skill.area}</p>
+              <p>${skill.stackLabel || 'General'} • ${skill.area}</p>
               <dl>
                 <div><dt>Level</dt><dd>${skill.level ?? '—'}</dd></div>
                 <div><dt>Years</dt><dd>${skill.years ?? '—'}</dd></div>

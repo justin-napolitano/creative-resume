@@ -1,0 +1,274 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-3tlibkpd> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Skill Graph</title><style>body{font-family:Space Grotesk,system-ui,-apple-system,BlinkMacSystemFont;background:#f7f4ef;margin:0;padding:2rem;color:#0f100f}h1[data-astro-cid-3tlibkpd]{margin-top:0}.graph-layout[data-astro-cid-3tlibkpd]{display:grid;grid-template-columns:minmax(0,3fr) minmax(260px,1fr);gap:1.5rem;align-items:start}.graph-shell[data-astro-cid-3tlibkpd]{margin-top:2rem;border:1px solid rgba(15,16,15,.1);border-radius:16px;background:#fff;padding:1rem}.graph-toolbar[data-astro-cid-3tlibkpd]{display:flex;justify-content:flex-end;gap:.5rem;margin-bottom:.5rem}.graph-toolbar[data-astro-cid-3tlibkpd] button[data-astro-cid-3tlibkpd]{background:#0f7c66;color:#fff;border:none;border-radius:8px;padding:.35rem .85rem;font-size:.85rem;cursor:pointer}.graph-toolbar[data-astro-cid-3tlibkpd] button[data-astro-cid-3tlibkpd]:last-child{background:transparent;border:1px solid rgba(15,16,15,.2);color:#0f100f}#skillGraph[data-astro-cid-3tlibkpd]{width:100%;height:600px;border-radius:12px;background:radial-gradient(circle at 35% 25%,rgba(15,124,102,.08),transparent 55%),#faf7f0;position:relative}.cluster-label[data-astro-cid-3tlibkpd]{font-size:.85rem;fill:#0f100f99;text-transform:uppercase;letter-spacing:.12em;pointer-events:none}.legend[data-astro-cid-3tlibkpd]{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.legend-item[data-astro-cid-3tlibkpd]{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;text-transform:uppercase;letter-spacing:.12em}.legend-swatch[data-astro-cid-3tlibkpd]{width:18px;height:6px;border-radius:999px}.empty-state[data-astro-cid-3tlibkpd]{margin-top:2rem;padding:1.5rem;border:1px dashed rgba(15,16,15,.3);border-radius:12px;background:#fff}.instructions[data-astro-cid-3tlibkpd]{margin-top:.5rem;font-size:.95rem;color:#0f100fb3}.graph-side[data-astro-cid-3tlibkpd]{margin-top:2rem;background:#fff;border-radius:16px;border:1px solid rgba(15,16,15,.1);padding:1rem 1.2rem}.graph-side[data-astro-cid-3tlibkpd] h2[data-astro-cid-3tlibkpd]{margin-top:0;margin-bottom:.3rem}.cluster-list[data-astro-cid-3tlibkpd]{display:flex;flex-direction:column;gap:.4rem;margin:1rem 0}.cluster-chip[data-astro-cid-3tlibkpd]{display:flex;align-items:center;gap:.35rem;border:1px solid rgba(15,16,15,.15);border-radius:999px;padding:.25rem .75rem;background:#fafbfd;font-size:.85rem;cursor:pointer;transition:background .2s ease,border .2s ease}.cluster-chip[data-astro-cid-3tlibkpd] span[data-astro-cid-3tlibkpd]{width:12px;height:12px;border-radius:50%;display:inline-flex}.cluster-chip[data-astro-cid-3tlibkpd] em[data-astro-cid-3tlibkpd]{font-style:normal;color:#0f100f8c}.cluster-chip[data-astro-cid-3tlibkpd].is-active{border-color:#0f7c66;background:#0f7c661f}.skill-detail[data-astro-cid-3tlibkpd]{border-top:1px solid rgba(15,16,15,.1);padding-top:.75rem;font-size:.9rem}.detail-skill[data-astro-cid-3tlibkpd] h3[data-astro-cid-3tlibkpd]{margin-bottom:.2rem}.detail-skill[data-astro-cid-3tlibkpd] dl[data-astro-cid-3tlibkpd]{display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;margin:.5rem 0 0}.detail-skill[data-astro-cid-3tlibkpd] dt[data-astro-cid-3tlibkpd]{font-weight:600}.detail-skill[data-astro-cid-3tlibkpd] dd[data-astro-cid-3tlibkpd]{margin:0}.tooltip[data-astro-cid-3tlibkpd]{position:fixed;pointer-events:none;background:#0f100feb;color:#fff;padding:.45rem .7rem;border-radius:6px;font-size:.85rem;letter-spacing:.03em;z-index:50;box-shadow:0 6px 20px #0f100f4d;opacity:0;transition:opacity .12s ease}@media(max-width:900px){.graph-layout[data-astro-cid-3tlibkpd]{grid-template-columns:1fr}}
+</style></head> <body data-astro-cid-3tlibkpd> <h1 data-astro-cid-3tlibkpd>Skill Graph</h1> <p class="instructions" data-astro-cid-3tlibkpd> Scatter plot clusters skills using 2D PCA. Hover or click a skill to inspect it, or focus a cluster from the rail. </p> <div class="graph-layout" data-astro-cid-3tlibkpd> <div class="graph-shell" data-astro-cid-3tlibkpd> <div class="graph-toolbar" data-astro-cid-3tlibkpd> <button id="resetView" data-astro-cid-3tlibkpd>Reset view</button> <button id="downloadGraph" data-astro-cid-3tlibkpd>Download PNG</button> </div> <svg id="skillGraph" role="img" aria-label="Skill clusters" data-graph="{&#34;generatedAt&#34;:&#34;2025-12-29T05:43:14.805Z&#34;,&#34;model&#34;:&#34;text-embedding-3-small&#34;,&#34;clusterCount&#34;:6,&#34;skills&#34;:[{&#34;id&#34;:&#34;lakehouses:BigQuery&#34;,&#34;area&#34;:&#34;Lakehouses&#34;,&#34;name&#34;:&#34;BigQuery&#34;,&#34;level&#34;:5,&#34;years&#34;:5,&#34;tags&#34;:[&#34;SQL&#34;,&#34;columnar storage&#34;,&#34;GCP&#34;],&#34;text&#34;:&#34;BigQuery. Area: Lakehouses. Tags: SQL, columnar storage, GCP. Level: 5. Years: 5&#34;,&#34;cluster&#34;:1,&#34;coord&#34;:{&#34;x&#34;:0.22080471324321696,&#34;y&#34;:0.23425712286852887}},{&#34;id&#34;:&#34;lakehouses:Snowflake&#34;,&#34;area&#34;:&#34;Lakehouses&#34;,&#34;name&#34;:&#34;Snowflake&#34;,&#34;level&#34;:4,&#34;years&#34;:2,&#34;tags&#34;:[&#34;cloud data warehouse&#34;],&#34;text&#34;:&#34;Snowflake. Area: Lakehouses. Tags: cloud data warehouse. Level: 4. Years: 2&#34;,&#34;cluster&#34;:3,&#34;coord&#34;:{&#34;x&#34;:0.12916769113136328,&#34;y&#34;:0.18134901589138322}},{&#34;id&#34;:&#34;lakehouses:dbt&#34;,&#34;area&#34;:&#34;Lakehouses&#34;,&#34;name&#34;:&#34;dbt&#34;,&#34;level&#34;:3,&#34;years&#34;:1.5,&#34;tags&#34;:[&#34;data modeling&#34;,&#34;ELT&#34;],&#34;text&#34;:&#34;dbt. Area: Lakehouses. Tags: data modeling, ELT. Level: 3. Years: 1.5&#34;,&#34;cluster&#34;:2,&#34;coord&#34;:{&#34;x&#34;:-0.06328935356815048,&#34;y&#34;:0.06738018914217275}},{&#34;id&#34;:&#34;activation-systems:CDP Modeling&#34;,&#34;area&#34;:&#34;Activation Systems&#34;,&#34;name&#34;:&#34;CDP Modeling&#34;,&#34;level&#34;:4,&#34;years&#34;:3,&#34;tags&#34;:[&#34;segmentation&#34;,&#34;identity resolution&#34;],&#34;text&#34;:&#34;CDP Modeling. Area: Activation Systems. Tags: segmentation, identity resolution. Level: 4. Years: 3&#34;,&#34;cluster&#34;:4,&#34;coord&#34;:{&#34;x&#34;:-0.21706080687873763,&#34;y&#34;:-0.3188957352285628}},{&#34;id&#34;:&#34;activation-systems:Audience Pipelines&#34;,&#34;area&#34;:&#34;Activation Systems&#34;,&#34;name&#34;:&#34;Audience Pipelines&#34;,&#34;level&#34;:4,&#34;years&#34;:3,&#34;tags&#34;:[&#34;journey triggers&#34;,&#34;CRM activation&#34;],&#34;text&#34;:&#34;Audience Pipelines. Area: Activation Systems. Tags: journey triggers, CRM activation. Level: 4. Years: 3&#34;,&#34;cluster&#34;:4,&#34;coord&#34;:{&#34;x&#34;:-0.10837398819082958,&#34;y&#34;:-0.29730736255506174}},{&#34;id&#34;:&#34;activation-systems:Segment + Fivetran&#34;,&#34;area&#34;:&#34;Activation Systems&#34;,&#34;name&#34;:&#34;Segment + Fivetran&#34;,&#34;level&#34;:4,&#34;years&#34;:3,&#34;tags&#34;:[&#34;data ingestion&#34;,&#34;automation&#34;],&#34;text&#34;:&#34;Segment + Fivetran. Area: Activation Systems. Tags: data ingestion, automation. Level: 4. Years: 3&#34;,&#34;cluster&#34;:0,&#34;coord&#34;:{&#34;x&#34;:-0.0166833930930705,&#34;y&#34;:-0.08631767911914125}},{&#34;id&#34;:&#34;cloud-compute:GCP&#34;,&#34;area&#34;:&#34;Cloud Compute&#34;,&#34;name&#34;:&#34;GCP&#34;,&#34;level&#34;:5,&#34;years&#34;:4,&#34;tags&#34;:[&#34;BigQuery&#34;,&#34;Cloud Functions&#34;,&#34;GCS&#34;],&#34;text&#34;:&#34;GCP. Area: Cloud Compute. Tags: BigQuery, Cloud Functions, GCS. Level: 5. Years: 4&#34;,&#34;cluster&#34;:1,&#34;coord&#34;:{&#34;x&#34;:0.38015145848976556,&#34;y&#34;:0.0548872183689934}},{&#34;id&#34;:&#34;cloud-compute:Azure&#34;,&#34;area&#34;:&#34;Cloud Compute&#34;,&#34;name&#34;:&#34;Azure&#34;,&#34;level&#34;:3,&#34;years&#34;:1,&#34;tags&#34;:[&#34;data services&#34;],&#34;text&#34;:&#34;Azure. Area: Cloud Compute. Tags: data services. Level: 3. Years: 1&#34;,&#34;cluster&#34;:3,&#34;coord&#34;:{&#34;x&#34;:0.40310188310653083,&#34;y&#34;:0.030437385637918722}},{&#34;id&#34;:&#34;cloud-compute:AWS&#34;,&#34;area&#34;:&#34;Cloud Compute&#34;,&#34;name&#34;:&#34;AWS&#34;,&#34;level&#34;:2,&#34;years&#34;:0.5,&#34;tags&#34;:[&#34;S3&#34;,&#34;Lambda&#34;],&#34;text&#34;:&#34;AWS. Area: Cloud Compute. Tags: S3, Lambda. Level: 2. Years: 0.5&#34;,&#34;cluster&#34;:3,&#34;coord&#34;:{&#34;x&#34;:0.4721342283987189,&#34;y&#34;:-0.04128062959038875}},{&#34;id&#34;:&#34;cloud-compute:Microservices&#34;,&#34;area&#34;:&#34;Cloud Compute&#34;,&#34;name&#34;:&#34;Microservices&#34;,&#34;level&#34;:3,&#34;years&#34;:2,&#34;tags&#34;:[&#34;serverless&#34;,&#34;event-driven&#34;],&#34;text&#34;:&#34;Microservices. Area: Cloud Compute. Tags: serverless, event-driven. Level: 3. Years: 2&#34;,&#34;cluster&#34;:3,&#34;coord&#34;:{&#34;x&#34;:0.42843513588131354,&#34;y&#34;:-0.1439363035059274}},{&#34;id&#34;:&#34;cloud-compute:Runtime Platforms&#34;,&#34;area&#34;:&#34;Cloud Compute&#34;,&#34;name&#34;:&#34;Runtime Platforms&#34;,&#34;level&#34;:4,&#34;years&#34;:4,&#34;tags&#34;:[&#34;Compute Engine&#34;,&#34;Cloud Run&#34;,&#34;load balancing&#34;,&#34;reverse proxy&#34;],&#34;text&#34;:&#34;Runtime Platforms. Area: Cloud Compute. Tags: Compute Engine, Cloud Run, load balancing, reverse proxy. Level: 4. Years: 4&#34;,&#34;cluster&#34;:1,&#34;coord&#34;:{&#34;x&#34;:0.4266442324328042,&#34;y&#34;:-0.11122066854594462}},{&#34;id&#34;:&#34;data-science-platforms:SQL&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;,&#34;name&#34;:&#34;SQL&#34;,&#34;level&#34;:5,&#34;years&#34;:7,&#34;tags&#34;:[&#34;PostgreSQL&#34;,&#34;MySQL&#34;,&#34;analytical SQL&#34;],&#34;text&#34;:&#34;SQL. Area: Data Science Platforms. Tags: PostgreSQL, MySQL, analytical SQL. Level: 5. Years: 7&#34;,&#34;cluster&#34;:2,&#34;coord&#34;:{&#34;x&#34;:-0.01752889091283085,&#34;y&#34;:0.24906824186320228}},{&#34;id&#34;:&#34;data-science-platforms:Python&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;,&#34;name&#34;:&#34;Python&#34;,&#34;level&#34;:5,&#34;years&#34;:7,&#34;tags&#34;:[&#34;data engineering&#34;,&#34;machine learning&#34;,&#34;automation&#34;],&#34;text&#34;:&#34;Python. Area: Data Science Platforms. Tags: data engineering, machine learning, automation. Level: 5. Years: 7&#34;,&#34;cluster&#34;:2,&#34;coord&#34;:{&#34;x&#34;:0.023447831068436665,&#34;y&#34;:0.13607541470613557}},{&#34;id&#34;:&#34;data-science-platforms:Pandas&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;,&#34;name&#34;:&#34;Pandas&#34;,&#34;level&#34;:5,&#34;years&#34;:7,&#34;tags&#34;:[&#34;dataframes&#34;,&#34;transformations&#34;],&#34;text&#34;:&#34;Pandas. Area: Data Science Platforms. Tags: dataframes, transformations. Level: 5. Years: 7&#34;,&#34;cluster&#34;:2,&#34;coord&#34;:{&#34;x&#34;:-0.07495457952508225,&#34;y&#34;:0.28035387505253356}},{&#34;id&#34;:&#34;data-science-platforms:Jupyter&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;,&#34;name&#34;:&#34;Jupyter&#34;,&#34;level&#34;:5,&#34;years&#34;:6,&#34;tags&#34;:[&#34;prototyping&#34;,&#34;analysis notebooks&#34;],&#34;text&#34;:&#34;Jupyter. Area: Data Science Platforms. Tags: prototyping, analysis notebooks. Level: 5. Years: 6&#34;,&#34;cluster&#34;:2,&#34;coord&#34;:{&#34;x&#34;:-0.11149215752543185,&#34;y&#34;:0.20804467754386405}},{&#34;id&#34;:&#34;data-science-platforms:Apache Airflow&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;,&#34;name&#34;:&#34;Apache Airflow&#34;,&#34;level&#34;:4,&#34;years&#34;:3,&#34;tags&#34;:[&#34;orchestration&#34;,&#34;scheduling&#34;],&#34;text&#34;:&#34;Apache Airflow. Area: Data Science Platforms. Tags: orchestration, scheduling. Level: 4. Years: 3&#34;,&#34;cluster&#34;:2,&#34;coord&#34;:{&#34;x&#34;:0.14961229148556654,&#34;y&#34;:-0.013024403610412837}},{&#34;id&#34;:&#34;data-science-platforms:Terraform&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;,&#34;name&#34;:&#34;Terraform&#34;,&#34;level&#34;:3,&#34;years&#34;:2,&#34;tags&#34;:[&#34;infrastructure as code&#34;,&#34;cloud provisioning&#34;],&#34;text&#34;:&#34;Terraform. Area: Data Science Platforms. Tags: infrastructure as code, cloud provisioning. Level: 3. Years: 2&#34;,&#34;cluster&#34;:3,&#34;coord&#34;:{&#34;x&#34;:0.2962007218608944,&#34;y&#34;:-0.028642652789697853}},{&#34;id&#34;:&#34;data-science-platforms:GitHub Actions&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;,&#34;name&#34;:&#34;GitHub Actions&#34;,&#34;level&#34;:3,&#34;years&#34;:3,&#34;tags&#34;:[&#34;CI/CD&#34;,&#34;automation&#34;],&#34;text&#34;:&#34;GitHub Actions. Area: Data Science Platforms. Tags: CI/CD, automation. Level: 3. Years: 3&#34;,&#34;cluster&#34;:0,&#34;coord&#34;:{&#34;x&#34;:0.19946793584526734,&#34;y&#34;:-0.004872112979086707}},{&#34;id&#34;:&#34;data-science-platforms:Great Expectations&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;,&#34;name&#34;:&#34;Great Expectations&#34;,&#34;level&#34;:3,&#34;years&#34;:2,&#34;tags&#34;:[&#34;data quality&#34;,&#34;validation&#34;],&#34;text&#34;:&#34;Great Expectations. Area: Data Science Platforms. Tags: data quality, validation. Level: 3. Years: 2&#34;,&#34;cluster&#34;:2,&#34;coord&#34;:{&#34;x&#34;:-0.04135690904404629,&#34;y&#34;:0.11888997085205402}},{&#34;id&#34;:&#34;bi-and-data-viz:Excel&#34;,&#34;area&#34;:&#34;BI and Data Viz&#34;,&#34;name&#34;:&#34;Excel&#34;,&#34;level&#34;:5,&#34;years&#34;:10,&#34;tags&#34;:[&#34;Power Query&#34;,&#34;dashboarding&#34;],&#34;text&#34;:&#34;Excel. Area: BI and Data Viz. Tags: Power Query, dashboarding. Level: 5. Years: 10&#34;,&#34;cluster&#34;:2,&#34;coord&#34;:{&#34;x&#34;:-0.1811551308800555,&#34;y&#34;:0.4147763839299152}},{&#34;id&#34;:&#34;bi-and-data-viz:Data Viz Suite&#34;,&#34;area&#34;:&#34;BI and Data Viz&#34;,&#34;name&#34;:&#34;Data Viz Suite&#34;,&#34;level&#34;:4,&#34;years&#34;:6,&#34;tags&#34;:[&#34;Matplotlib&#34;,&#34;Seaborn&#34;,&#34;Plotly&#34;,&#34;Leaflet&#34;],&#34;text&#34;:&#34;Data Viz Suite. Area: BI and Data Viz. Tags: Matplotlib, Seaborn, Plotly, Leaflet. Level: 4. Years: 6&#34;,&#34;cluster&#34;:2,&#34;coord&#34;:{&#34;x&#34;:-0.23644329676076015,&#34;y&#34;:0.39281368672389294}},{&#34;id&#34;:&#34;bi-and-data-viz:Looker&#34;,&#34;area&#34;:&#34;BI and Data Viz&#34;,&#34;name&#34;:&#34;Looker&#34;,&#34;level&#34;:3,&#34;years&#34;:2,&#34;tags&#34;:[&#34;embedded analytics&#34;],&#34;text&#34;:&#34;Looker. Area: BI and Data Viz. Tags: embedded analytics. Level: 3. Years: 2&#34;,&#34;cluster&#34;:0,&#34;coord&#34;:{&#34;x&#34;:-0.17354089463603728,&#34;y&#34;:0.2323395442503532}},{&#34;id&#34;:&#34;bi-and-data-viz:Power BI&#34;,&#34;area&#34;:&#34;BI and Data Viz&#34;,&#34;name&#34;:&#34;Power BI&#34;,&#34;level&#34;:4,&#34;years&#34;:2,&#34;tags&#34;:[&#34;DAX&#34;,&#34;enterprise BI&#34;],&#34;text&#34;:&#34;Power BI. Area: BI and Data Viz. Tags: DAX, enterprise BI. Level: 4. Years: 2&#34;,&#34;cluster&#34;:2,&#34;coord&#34;:{&#34;x&#34;:-0.1844128023498893,&#34;y&#34;:0.3617489075881211}},{&#34;id&#34;:&#34;graph-analysis:NetworkX&#34;,&#34;area&#34;:&#34;Graph Analysis&#34;,&#34;name&#34;:&#34;NetworkX&#34;,&#34;level&#34;:5,&#34;years&#34;:5,&#34;tags&#34;:[&#34;graph algorithms&#34;,&#34;network analysis&#34;],&#34;text&#34;:&#34;NetworkX. Area: Graph Analysis. Tags: graph algorithms, network analysis. Level: 5. Years: 5&#34;,&#34;cluster&#34;:5,&#34;coord&#34;:{&#34;x&#34;:-0.3281396389562633,&#34;y&#34;:-0.061822801060381335}},{&#34;id&#34;:&#34;graph-analysis:Neo4j&#34;,&#34;area&#34;:&#34;Graph Analysis&#34;,&#34;name&#34;:&#34;Neo4j&#34;,&#34;level&#34;:4,&#34;years&#34;:3,&#34;tags&#34;:[&#34;graph databases&#34;,&#34;Cypher&#34;],&#34;text&#34;:&#34;Neo4j. Area: Graph Analysis. Tags: graph databases, Cypher. Level: 4. Years: 3&#34;,&#34;cluster&#34;:4,&#34;coord&#34;:{&#34;x&#34;:-0.2645315516910124,&#34;y&#34;:-0.012892639590148516}},{&#34;id&#34;:&#34;algorithms-and-statistics:Seasonal Forecasts&#34;,&#34;area&#34;:&#34;Algorithms and Statistics&#34;,&#34;name&#34;:&#34;Seasonal Forecasts&#34;,&#34;level&#34;:4,&#34;years&#34;:3,&#34;tags&#34;:[&#34;time series&#34;,&#34;demand forecasting&#34;],&#34;text&#34;:&#34;Seasonal Forecasts. Area: Algorithms and Statistics. Tags: time series, demand forecasting. Level: 4. Years: 3&#34;,&#34;cluster&#34;:5,&#34;coord&#34;:{&#34;x&#34;:-0.19910736015053757,&#34;y&#34;:-0.05460133945362668}},{&#34;id&#34;:&#34;algorithms-and-statistics:Parametric Testing&#34;,&#34;area&#34;:&#34;Algorithms and Statistics&#34;,&#34;name&#34;:&#34;Parametric Testing&#34;,&#34;level&#34;:4,&#34;years&#34;:4,&#34;tags&#34;:[&#34;A/B testing&#34;,&#34;hypothesis testing&#34;],&#34;text&#34;:&#34;Parametric Testing. Area: Algorithms and Statistics. Tags: A/B testing, hypothesis testing. Level: 4. Years: 4&#34;,&#34;cluster&#34;:5,&#34;coord&#34;:{&#34;x&#34;:-0.24368040682440412,&#34;y&#34;:-0.14620048399920724}},{&#34;id&#34;:&#34;algorithms-and-statistics:Topic Modeling&#34;,&#34;area&#34;:&#34;Algorithms and Statistics&#34;,&#34;name&#34;:&#34;Topic Modeling&#34;,&#34;level&#34;:4,&#34;years&#34;:3,&#34;tags&#34;:[&#34;NLP&#34;,&#34;LDA&#34;],&#34;text&#34;:&#34;Topic Modeling. Area: Algorithms and Statistics. Tags: NLP, LDA. Level: 4. Years: 3&#34;,&#34;cluster&#34;:5,&#34;coord&#34;:{&#34;x&#34;:-0.26657574243137416,&#34;y&#34;:-0.24507982813484155}},{&#34;id&#34;:&#34;algorithms-and-statistics:Causal Inference&#34;,&#34;area&#34;:&#34;Algorithms and Statistics&#34;,&#34;name&#34;:&#34;Causal Inference&#34;,&#34;level&#34;:4,&#34;years&#34;:3,&#34;tags&#34;:[&#34;experimentation&#34;,&#34;uplift modeling&#34;],&#34;text&#34;:&#34;Causal Inference. Area: Algorithms and Statistics. Tags: experimentation, uplift modeling. Level: 4. Years: 3&#34;,&#34;cluster&#34;:5,&#34;coord&#34;:{&#34;x&#34;:-0.291636395504151,&#34;y&#34;:-0.23330742372885754}},{&#34;id&#34;:&#34;ai-development:RAG Systems&#34;,&#34;area&#34;:&#34;AI Development&#34;,&#34;name&#34;:&#34;RAG Systems&#34;,&#34;level&#34;:3,&#34;years&#34;:1,&#34;tags&#34;:[&#34;RAG&#34;,&#34;LLM applications&#34;],&#34;text&#34;:&#34;RAG Systems. Area: AI Development. Tags: RAG, LLM applications. Level: 3. Years: 1&#34;,&#34;cluster&#34;:0,&#34;coord&#34;:{&#34;x&#34;:-0.03253776542394125,&#34;y&#34;:-0.3160034449914135}},{&#34;id&#34;:&#34;ai-development:Agentic Models&#34;,&#34;area&#34;:&#34;AI Development&#34;,&#34;name&#34;:&#34;Agentic Models&#34;,&#34;level&#34;:3,&#34;years&#34;:1,&#34;tags&#34;:[&#34;multi-agent systems&#34;,&#34;planning&#34;],&#34;text&#34;:&#34;Agentic Models. Area: AI Development. Tags: multi-agent systems, planning. Level: 3. Years: 1&#34;,&#34;cluster&#34;:4,&#34;coord&#34;:{&#34;x&#34;:-0.13583542597707943,&#34;y&#34;:-0.48578031204708366}},{&#34;id&#34;:&#34;ai-development:LLM Ops&#34;,&#34;area&#34;:&#34;AI Development&#34;,&#34;name&#34;:&#34;LLM Ops&#34;,&#34;level&#34;:3,&#34;years&#34;:1.5,&#34;tags&#34;:[&#34;prompt orchestration&#34;,&#34;monitoring&#34;],&#34;text&#34;:&#34;LLM Ops. Area: AI Development. Tags: prompt orchestration, monitoring. Level: 3. Years: 1.5&#34;,&#34;cluster&#34;:3,&#34;coord&#34;:{&#34;x&#34;:0.05916836737980765,&#34;y&#34;:-0.3612358134892867}}],&#34;clusters&#34;:[{&#34;id&#34;:1,&#34;label&#34;:&#34;bigquery gcp&#34;,&#34;members&#34;:[{&#34;id&#34;:&#34;lakehouses:BigQuery&#34;,&#34;name&#34;:&#34;BigQuery&#34;,&#34;area&#34;:&#34;Lakehouses&#34;},{&#34;id&#34;:&#34;cloud-compute:GCP&#34;,&#34;name&#34;:&#34;GCP&#34;,&#34;area&#34;:&#34;Cloud Compute&#34;},{&#34;id&#34;:&#34;cloud-compute:Runtime Platforms&#34;,&#34;name&#34;:&#34;Runtime Platforms&#34;,&#34;area&#34;:&#34;Cloud Compute&#34;}],&#34;centroidSample&#34;:[0.0016739194333333332,0.02693806933333333,0.06853364666666667,0.004913110000000001,0.008952523166666667,-0.027164517666666665,-0.025884383666666667,-0.0077798375]},{&#34;id&#34;:3,&#34;label&#34;:&#34;Warehouse ops&#34;,&#34;members&#34;:[{&#34;id&#34;:&#34;lakehouses:Snowflake&#34;,&#34;name&#34;:&#34;Snowflake&#34;,&#34;area&#34;:&#34;Lakehouses&#34;},{&#34;id&#34;:&#34;cloud-compute:Azure&#34;,&#34;name&#34;:&#34;Azure&#34;,&#34;area&#34;:&#34;Cloud Compute&#34;},{&#34;id&#34;:&#34;cloud-compute:AWS&#34;,&#34;name&#34;:&#34;AWS&#34;,&#34;area&#34;:&#34;Cloud Compute&#34;},{&#34;id&#34;:&#34;cloud-compute:Microservices&#34;,&#34;name&#34;:&#34;Microservices&#34;,&#34;area&#34;:&#34;Cloud Compute&#34;},{&#34;id&#34;:&#34;data-science-platforms:Terraform&#34;,&#34;name&#34;:&#34;Terraform&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;},{&#34;id&#34;:&#34;ai-development:LLM Ops&#34;,&#34;name&#34;:&#34;LLM Ops&#34;,&#34;area&#34;:&#34;AI Development&#34;}],&#34;centroidSample&#34;:[-0.008875295516666668,-0.008516999883333333,0.07044898566666667,-0.007213878025000001,0.03375415761666666,-0.0157161949,-0.014489294833333334,0.015605778833333334]},{&#34;id&#34;:2,&#34;label&#34;:&#34;Data modeling&#34;,&#34;members&#34;:[{&#34;id&#34;:&#34;lakehouses:dbt&#34;,&#34;name&#34;:&#34;dbt&#34;,&#34;area&#34;:&#34;Lakehouses&#34;},{&#34;id&#34;:&#34;data-science-platforms:SQL&#34;,&#34;name&#34;:&#34;SQL&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;},{&#34;id&#34;:&#34;data-science-platforms:Python&#34;,&#34;name&#34;:&#34;Python&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;},{&#34;id&#34;:&#34;data-science-platforms:Pandas&#34;,&#34;name&#34;:&#34;Pandas&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;},{&#34;id&#34;:&#34;data-science-platforms:Jupyter&#34;,&#34;name&#34;:&#34;Jupyter&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;},{&#34;id&#34;:&#34;data-science-platforms:Apache Airflow&#34;,&#34;name&#34;:&#34;Apache Airflow&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;},{&#34;id&#34;:&#34;data-science-platforms:Great Expectations&#34;,&#34;name&#34;:&#34;Great Expectations&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;},{&#34;id&#34;:&#34;bi-and-data-viz:Excel&#34;,&#34;name&#34;:&#34;Excel&#34;,&#34;area&#34;:&#34;BI and Data Viz&#34;},{&#34;id&#34;:&#34;bi-and-data-viz:Data Viz Suite&#34;,&#34;name&#34;:&#34;Data Viz Suite&#34;,&#34;area&#34;:&#34;BI and Data Viz&#34;},{&#34;id&#34;:&#34;bi-and-data-viz:Power BI&#34;,&#34;name&#34;:&#34;Power BI&#34;,&#34;area&#34;:&#34;BI and Data Viz&#34;}],&#34;centroidSample&#34;:[-0.0279095012,0.00011900335099999959,0.0637670223,-0.007875963914,0.003012213000000001,-0.00954049234,-0.0202781145,0.016841876399999997]},{&#34;id&#34;:4,&#34;label&#34;:&#34;cdp modeling&#34;,&#34;members&#34;:[{&#34;id&#34;:&#34;activation-systems:CDP Modeling&#34;,&#34;name&#34;:&#34;CDP Modeling&#34;,&#34;area&#34;:&#34;Activation Systems&#34;},{&#34;id&#34;:&#34;activation-systems:Audience Pipelines&#34;,&#34;name&#34;:&#34;Audience Pipelines&#34;,&#34;area&#34;:&#34;Activation Systems&#34;},{&#34;id&#34;:&#34;graph-analysis:Neo4j&#34;,&#34;name&#34;:&#34;Neo4j&#34;,&#34;area&#34;:&#34;Graph Analysis&#34;},{&#34;id&#34;:&#34;ai-development:Agentic Models&#34;,&#34;name&#34;:&#34;Agentic Models&#34;,&#34;area&#34;:&#34;AI Development&#34;}],&#34;centroidSample&#34;:[-0.01192686125,0.029088653,0.046258453000000005,0.0061525052575,-0.017851563675,-0.0103248956175,0.010389835249999998,0.02169680975]},{&#34;id&#34;:0,&#34;label&#34;:&#34;AI / RAG&#34;,&#34;members&#34;:[{&#34;id&#34;:&#34;activation-systems:Segment + Fivetran&#34;,&#34;name&#34;:&#34;Segment + Fivetran&#34;,&#34;area&#34;:&#34;Activation Systems&#34;},{&#34;id&#34;:&#34;data-science-platforms:GitHub Actions&#34;,&#34;name&#34;:&#34;GitHub Actions&#34;,&#34;area&#34;:&#34;Data Science Platforms&#34;},{&#34;id&#34;:&#34;bi-and-data-viz:Looker&#34;,&#34;name&#34;:&#34;Looker&#34;,&#34;area&#34;:&#34;BI and Data Viz&#34;},{&#34;id&#34;:&#34;ai-development:RAG Systems&#34;,&#34;name&#34;:&#34;RAG Systems&#34;,&#34;area&#34;:&#34;AI Development&#34;}],&#34;centroidSample&#34;:[-0.02335774475,0.013464453967500001,0.05375758075,-0.01407995775,0.0032253940850000004,-0.031518322325,-0.008025946499999999,0.01447702325]},{&#34;id&#34;:5,&#34;label&#34;:&#34;Testing&#34;,&#34;members&#34;:[{&#34;id&#34;:&#34;graph-analysis:NetworkX&#34;,&#34;name&#34;:&#34;NetworkX&#34;,&#34;area&#34;:&#34;Graph Analysis&#34;},{&#34;id&#34;:&#34;algorithms-and-statistics:Seasonal Forecasts&#34;,&#34;name&#34;:&#34;Seasonal Forecasts&#34;,&#34;area&#34;:&#34;Algorithms and Statistics&#34;},{&#34;id&#34;:&#34;algorithms-and-statistics:Parametric Testing&#34;,&#34;name&#34;:&#34;Parametric Testing&#34;,&#34;area&#34;:&#34;Algorithms and Statistics&#34;},{&#34;id&#34;:&#34;algorithms-and-statistics:Topic Modeling&#34;,&#34;name&#34;:&#34;Topic Modeling&#34;,&#34;area&#34;:&#34;Algorithms and Statistics&#34;},{&#34;id&#34;:&#34;algorithms-and-statistics:Causal Inference&#34;,&#34;name&#34;:&#34;Causal Inference&#34;,&#34;area&#34;:&#34;Algorithms and Statistics&#34;}],&#34;centroidSample&#34;:[-0.0240353853808,-0.01428761254,0.031023988999999995,-0.009976209400000002,-0.0114885606,-0.014951393440000002,-0.01769866442,0.013762467580000002]}],&#34;dimensions&#34;:[&#34;pc1&#34;,&#34;pc2&#34;],&#34;ranges&#34;:{&#34;x&#34;:{&#34;min&#34;:-0.3281396389562633,&#34;max&#34;:0.4721342283987189},&#34;y&#34;:{&#34;min&#34;:-0.48578031204708366,&#34;max&#34;:0.4147763839299152}}}" data-astro-cid-3tlibkpd></svg> <div class="legend" id="skillLegend" data-astro-cid-3tlibkpd></div> </div> <aside class="graph-side" data-astro-cid-3tlibkpd> <h2 data-astro-cid-3tlibkpd>Cluster rail</h2> <p data-astro-cid-3tlibkpd>Select a cluster or click any dot to pin details.</p> <div class="cluster-list" id="clusterList" data-astro-cid-3tlibkpd></div> <div class="skill-detail" id="skillDetail" data-astro-cid-3tlibkpd> <strong data-astro-cid-3tlibkpd>Tip:</strong> click a skill to see tags, tenure, and level.
+</div> </aside> </div> <script type="module">
+        const svg = document.querySelector('#skillGraph');
+        const legendEl = document.querySelector('#skillLegend');
+        const clusterList = document.querySelector('#clusterList');
+        const detailEl = document.querySelector('#skillDetail');
+        const downloadBtn = document.querySelector('#downloadGraph');
+        const resetBtn = document.querySelector('#resetView');
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        document.body.appendChild(tooltip);
+        const graph = JSON.parse(svg.dataset.graph);
+        const colors = [
+          '#0f7c66',
+          '#f17c0f',
+          '#5072f2',
+          '#dd4868',
+          '#8b5cf6',
+          '#0081a7',
+        ];
+
+        const { skills, clusters, ranges } = graph;
+        const xs = skills.map((skill) => skill.coord.x);
+        const ys = skills.map((skill) => skill.coord.y);
+        const minX = ranges?.x?.min ?? Math.min(...xs);
+        const maxX = ranges?.x?.max ?? Math.max(...xs);
+        const minY = ranges?.y?.min ?? Math.min(...ys);
+        const maxY = ranges?.y?.max ?? Math.max(...ys);
+        const padX = (maxX - minX) * 0.1 || 1;
+        const padY = (maxY - minY) * 0.1 || 1;
+
+        const scaleX = (value) => ((value - minX + padX) / (maxX - minX + padX * 2)) * svg.clientWidth;
+        const scaleY = (value) => svg.clientHeight - ((value - minY + padY) / (maxY - minY + padY * 2)) * svg.clientHeight;
+
+        const clusterColors = new Map();
+        clusters.forEach((cluster) => {
+          clusterColors.set(cluster.id, colors[cluster.id % colors.length]);
+        });
+
+        const originX = scaleX(0);
+        const originY = scaleY(0);
+        const axisHorizontal = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        axisHorizontal.setAttribute('x1', '0');
+        axisHorizontal.setAttribute('x2', svg.clientWidth);
+        axisHorizontal.setAttribute('y1', originY);
+        axisHorizontal.setAttribute('y2', originY);
+        axisHorizontal.setAttribute('stroke', 'rgba(15,16,15,0.15)');
+        axisHorizontal.setAttribute('stroke-width', '1');
+        axisHorizontal.setAttribute('stroke-dasharray', '6 6');
+        svg.appendChild(axisHorizontal);
+
+        const axisVertical = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        axisVertical.setAttribute('y1', '0');
+        axisVertical.setAttribute('y2', svg.clientHeight);
+        axisVertical.setAttribute('x1', originX);
+        axisVertical.setAttribute('x2', originX);
+        axisVertical.setAttribute('stroke', 'rgba(15,16,15,0.15)');
+        axisVertical.setAttribute('stroke-width', '1');
+        axisVertical.setAttribute('stroke-dasharray', '6 6');
+        svg.appendChild(axisVertical);
+
+        const axisLabels = [
+          { text: 'Systems ↔ Activation', x: svg.clientWidth - 12, y: originY - 8, anchor: 'end' },
+          { text: 'Research ↔ Delivery', x: originX + 8, y: 22, anchor: 'start', rotate: '-90' },
+        ];
+        axisLabels.forEach((label, idx) => {
+          const axisText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          axisText.setAttribute('x', label.x);
+          axisText.setAttribute('y', label.y);
+          axisText.setAttribute('text-anchor', label.anchor);
+          axisText.setAttribute('fill', 'rgba(15,16,15,0.6)');
+          axisText.setAttribute('font-size', '12');
+          if (label.rotate) axisText.setAttribute('transform', `rotate(${label.rotate} ${label.x} ${label.y})`);
+          axisText.textContent = label.text;
+          svg.appendChild(axisText);
+        });
+
+        function computeHull(points) {
+          if (points.length < 3) return null;
+          const sorted = [...points].sort((a, b) => (a.x === b.x ? a.y - b.y : a.x - b.x));
+          const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+          const lower = [];
+          sorted.forEach((point) => {
+            while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], point) <= 0) {
+              lower.pop();
+            }
+            lower.push(point);
+          });
+          const upper = [];
+          sorted
+            .slice()
+            .reverse()
+            .forEach((point) => {
+              while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], point) <= 0) {
+                upper.pop();
+              }
+              upper.push(point);
+            });
+          upper.pop();
+          lower.pop();
+          return lower.concat(upper);
+        }
+
+        const hullPaths = [];
+        const labelNodes = [];
+        clusters.forEach((cluster) => {
+          const points = skills.filter((skill) => skill.cluster === cluster.id).map((skill) => skill.coord);
+          const hull = computeHull(points);
+          if (!hull || hull.length < 3) return;
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          const d = hull
+            .map((point, idx) => `${idx === 0 ? 'M' : 'L'} ${scaleX(point.x)} ${scaleY(point.y)}`)
+            .join(' ');
+          path.setAttribute('d', `${d} Z`);
+          const color = clusterColors.get(cluster.id);
+          path.setAttribute('fill', color);
+          path.setAttribute('fill-opacity', '0.08');
+          path.setAttribute('stroke', color);
+          path.setAttribute('stroke-opacity', '0.45');
+          path.setAttribute('stroke-width', '1.6');
+          svg.appendChild(path);
+          hullPaths[cluster.id] = path;
+
+          const centroid = hull.reduce(
+            (acc, point) => ({ x: acc.x + point.x, y: acc.y + point.y }),
+            { x: 0, y: 0 }
+          );
+          centroid.x /= hull.length;
+          centroid.y /= hull.length;
+          const labelNode = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          labelNode.textContent = cluster.label || `Cluster ${cluster.id + 1}`;
+          labelNode.setAttribute('x', scaleX(centroid.x));
+          labelNode.setAttribute('y', scaleY(centroid.y));
+          labelNode.setAttribute('text-anchor', 'middle');
+          labelNode.classList.add('cluster-label');
+          svg.appendChild(labelNode);
+          labelNodes[cluster.id] = labelNode;
+        });
+
+        const circleNodes = [];
+        skills.forEach((skill) => {
+          const color = colors[skill.cluster % colors.length];
+          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          circle.setAttribute('cx', scaleX(skill.coord.x));
+          circle.setAttribute('cy', scaleY(skill.coord.y));
+          const radius = 6 + (skill.level ?? 3) * 0.7;
+          circle.setAttribute('r', radius);
+          circle.setAttribute('fill', color);
+          circle.setAttribute('stroke', '#fff');
+          circle.setAttribute('stroke-width', '1.5');
+          circle.setAttribute('opacity', '0.92');
+          circle.dataset.name = skill.name;
+          circle.dataset.area = skill.area;
+          circle.dataset.cluster = skill.cluster;
+          circle.dataset.level = skill.level ?? '';
+          circle.dataset.years = skill.years ?? '';
+          circle.addEventListener('mouseenter', () => {
+            tooltip.style.opacity = '1';
+            tooltip.textContent = `${skill.name} • ${skill.area}`;
+          });
+          circle.addEventListener('mousemove', (event) => {
+            tooltip.style.top = `${event.clientY + 16}px`;
+            tooltip.style.left = `${event.clientX + 16}px`;
+          });
+          circle.addEventListener('mouseleave', () => {
+            tooltip.style.opacity = '0';
+          });
+          circle.addEventListener('click', () => {
+            setActiveSkill(skill);
+          });
+          svg.appendChild(circle);
+          circleNodes.push(circle);
+        });
+
+        clusters.forEach((cluster) => {
+          const color = colors[cluster.id % colors.length];
+          const legendItem = document.createElement('div');
+          legendItem.className = 'legend-item';
+          const swatch = document.createElement('span');
+          swatch.className = 'legend-swatch';
+          swatch.style.background = color;
+          const label = document.createElement('span');
+          label.textContent = cluster.label || `Cluster ${cluster.id + 1}`;
+          legendItem.appendChild(swatch);
+          legendItem.appendChild(label);
+          legendEl.appendChild(legendItem);
+          const item = document.createElement('button');
+          item.className = 'cluster-chip';
+          item.dataset.cluster = cluster.id;
+          item.innerHTML = `<span style="background:${color}"></span>${cluster.label || `Cluster ${cluster.id + 1}`} <em>(${skills.filter((skill) => skill.cluster === cluster.id).length})</em>`;
+          item.addEventListener('click', () => highlightCluster(cluster.id));
+          clusterList.appendChild(item);
+        });
+
+        function highlightCluster(clusterId) {
+          circleNodes.forEach((circle) => {
+            circle.style.opacity = clusterId === undefined || `${clusterId}` === ''
+              ? '0.92'
+              : circle.dataset.cluster == clusterId
+              ? '1'
+              : '0.2';
+          });
+          hullPaths.forEach((path, idx) => {
+            if (!path) return;
+            path.style.opacity = clusterId === undefined ? '1' : idx === clusterId ? '1' : '0.2';
+          });
+          labelNodes.forEach((node, idx) => {
+            if (!node) return;
+            node.style.opacity = clusterId === undefined ? '1' : idx === clusterId ? '1' : '0.2';
+          });
+          document.querySelectorAll('.cluster-chip').forEach((chip) => {
+            chip.classList.toggle('is-active', clusterId !== undefined && chip.dataset.cluster == clusterId);
+          });
+          if (clusterId === undefined) {
+            detailEl.innerHTML = '<strong>Tip:</strong> click a skill to see tags, tenure, and level.';
+          } else {
+            const cluster = clusters.find((item) => item.id === clusterId);
+            const members = skills.filter((skill) => skill.cluster === clusterId);
+            detailEl.innerHTML = `
+              <div class="detail-cluster">
+                <h3>${cluster.label || `Cluster ${cluster.id + 1}`}</h3>
+                <p>${members.length} skills</p>
+                <ul>${members
+                  .slice(0, 6)
+                  .map((skill) => `<li>${skill.name}</li>`)
+                  .join('')}</ul>
+              </div>
+            `;
+          }
+        }
+
+        function setActiveSkill(skill) {
+          detailEl.innerHTML = `
+            <div class="detail-skill">
+              <h3>${skill.name}</h3>
+              <p>${skill.area}</p>
+              <dl>
+                <div><dt>Level</dt><dd>${skill.level ?? '—'}</dd></div>
+                <div><dt>Years</dt><dd>${skill.years ?? '—'}</dd></div>
+                <div><dt>Tags</dt><dd>${(skill.tags ?? []).join(', ') || '—'}</dd></div>
+              </dl>
+            </div>
+          `;
+          highlightCluster(skill.cluster);
+        }
+
+        downloadBtn?.addEventListener('click', () => {
+          const serializer = new XMLSerializer();
+          const svgString = serializer.serializeToString(svg);
+          const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const image = new Image();
+          image.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = svg.clientWidth * 2;
+            canvas.height = svg.clientHeight * 2;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#faf7f0';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+            URL.revokeObjectURL(url);
+            const a = document.createElement('a');
+            a.href = canvas.toDataURL('image/png');
+            a.download = 'skill-graph.png';
+            a.click();
+          };
+          image.src = url;
+        });
+
+        resetBtn?.addEventListener('click', () => {
+          highlightCluster(undefined);
+        });
+      </script> </body> </html>
