@@ -31,17 +31,17 @@ export const siteConfig: SiteConfig = {
   pdfPath: '/resume.pdf',
   pullQuotes: {
     'Data Engineer': 'Epic Clarity → Vizient → CFO briefings, harmonized inside 24h.',
-    'Data & Analytics Engineer': 'LLM + CDP stack stitched across Rolling Stone, Billboard, WWD.',
+    'Data + Analytics Engineer': 'LLM + CDP stack stitched across Rolling Stone, Billboard, WWD.',
   },
 };
 
 export const sectionMeta = [
-  { id: 'summary', code: 'PR.01', label: 'Capabilities' },
-  { id: 'experience', code: 'EX.01', label: 'Experience' },
-  { id: 'work', code: 'WK.02', label: 'Selected work' },
-  { id: 'skills', code: 'SK.03', label: 'Systems + tools' },
-  { id: 'education', code: 'ED.04', label: 'Education' },
-  { id: 'publications', code: 'PB.05', label: 'Publication' },
+  { id: 'summary', code: 'CA.01', label: 'Capabilities' },
+  { id: 'experience', code: 'EX.02', label: 'Experience' },
+  { id: 'education', code: 'ED.03', label: 'Education' },
+  { id: 'publications', code: 'PU.04', label: 'Publication' },
+  { id: 'skills', code: 'ST.05', label: 'Systems + Tools' },
+  { id: 'work', code: 'SW.03', label: 'Selected work' },
 ] as const;
 
 export const sectionNotes: Record<string, string> = {
@@ -56,7 +56,7 @@ export const sectionNotes: Record<string, string> = {
 export const experienceNotes: Record<string, string> = {
   'Data Engineer': 'Azure Data Factory + Synapse landed Epic Clarity extracts into one CFO-ready source within 24 hours.',
   'Business Analyst II': 'SQL + Power BI pipelines kept readmission and heart failure metrics aligned across clinical teams.',
-  'Data & Analytics Engineer': 'LLM + CDP stack stitched across Rolling Stone, Billboard, WWD for exec-ready insights.',
+  'Data + Analytics Engineer': 'LLM + CDP stack stitched across Rolling Stone, Billboard, WWD for exec-ready insights.',
   'Independent Data Consultant': 'Implemented CDPs and GCP migrations targeting 2M+ high-value prospects.',
   'Research Assistant': 'Open MySQL human-rights database shared with the International Criminal Court.',
 };

@@ -17,9 +17,9 @@
       "icon": "stack"
     },
     {
-      "id": "activation",
-      "label": "Activation",
-      "note": "Dashboards, alerts, exec handoffs",
+      "id": "deployment",
+      "label": "Deployment",
+      "note": "Cloud runbooks, runtime ops, exec handoffs",
       "icon": "handoff"
     },
     {
@@ -49,7 +49,7 @@
       "institution": "University of Michigan",
       "location": "Online",
       "graduation_date": "January 2020",
-      "notes": "Coursera specialization focused on Python 3 programming and applied data analysis."
+      "notes": ""
     }
   ],
   "skills": [
@@ -109,7 +109,7 @@
           ]
         },
         {
-          "name": "Segment & Fivetran",
+          "name": "Segment + Fivetran",
           "level": 4,
           "years": 3,
           "tags": [
@@ -478,7 +478,7 @@
     },
     {
       "id": "data-analytics-engineer-penske",
-      "title": "Data & Analytics Engineer",
+      "title": "Data + Analytics Engineer",
       "company": "Penske Media Corporation",
       "location": "Los Angeles, California",
       "start": "Apr 2022",
@@ -611,14 +611,6 @@
       "id": "skill-highlight-warehousing",
       "items": [
         {
-          "name": "Snowflake",
-          "level": 4,
-          "years": 2,
-          "tags": [
-            "cloud data warehouse"
-          ]
-        },
-        {
           "name": "BigQuery",
           "level": 5,
           "years": 5,
@@ -629,12 +621,20 @@
           ]
         },
         {
-          "name": "dbt",
-          "level": 3,
-          "years": 1.5,
+          "name": "Snowflake",
+          "level": 4,
+          "years": 2,
           "tags": [
-            "data modeling",
-            "ELT"
+            "cloud data warehouse"
+          ]
+        },
+        {
+          "name": "Python",
+          "level": 5,
+          "years": 7,
+          "tags": [
+            "data engineering",
+            "automation"
           ]
         },
         {
@@ -646,11 +646,20 @@
             "MySQL",
             "ETL"
           ]
+        },
+        {
+          "name": "dbt",
+          "level": 3,
+          "years": 1.5,
+          "tags": [
+            "data modeling",
+            "ELT"
+          ]
         }
       ]
     },
     {
-      "area": "Cloud & Deployment",
+      "area": "Cloud + Deployment",
       "id": "skill-highlight-cloud",
       "items": [
         {
@@ -690,11 +699,20 @@
             "Cloud Run",
             "load balancing"
           ]
+        },
+        {
+          "name": "Microservices",
+          "level": 3,
+          "years": 2,
+          "tags": [
+            "service orchestration",
+            "serverless queues"
+          ]
         }
       ]
     },
     {
-      "area": "BI & Activation",
+      "area": "BI + Activation",
       "id": "skill-highlight-bi",
       "items": [
         {
@@ -716,7 +734,7 @@
           ]
         },
         {
-          "name": "APIs & Web Apps",
+          "name": "APIs + Web Apps",
           "level": 3,
           "years": 5.5,
           "tags": [
@@ -731,6 +749,15 @@
           "tags": [
             "Looker",
             "Power BI"
+          ]
+        },
+        {
+          "name": "Segment + Fivetran",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "data ingestion",
+            "automation"
           ]
         }
       ]

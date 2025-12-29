@@ -15,6 +15,7 @@ npm install        # or make install
 npm run dev        # start Astro locally on http://localhost:4321
 npm run build      # production build into ./dist
 npm run preview    # serve the build (used for PDF export)
+npm run skill:graph -- --clusters=6   # generate skill clusters via OpenAI embeddings
 ```
 
 `make` wrappers are included for parity (`make dev`, `make build`, `make pdf`, etc.).
@@ -49,3 +50,12 @@ This runs `npm run pdf`, which simply downloads the latest LaTeX-built PDF from 
 - ✅ Download PDF points to `/resume.pdf` (regenerate via `make pdf`).
 - ✅ Experience, projects, skills, education, and publication match `resume-site/` content.
 - ✅ Layout responds across mobile/desktop + print.
+
+## Skill graph pipeline
+Set `OPENAI_API_KEY` (the script calls OpenAI's embeddings API) and run:
+
+```bash
+npm run skill:graph -- --clusters=6
+```
+
+The script reads `src/data/resume.json`, filters to the displayed skills, generates embeddings via `text-embedding-3-small`, clusters them with a lightweight k-means implementation, and writes `public/skill-graph.json` with cluster labels, membership, and 2D PCA coordinates. Pass `--hidden=true` to include suppressed skills, `--model=text-embedding-3-large` for higher fidelity vectors, or `--output=some/path.json` to change the destination. After generating the file, visit `/skill-graph` (static map) or `/skill-graph-test` (interactive canvas playground) in the local dev server.
