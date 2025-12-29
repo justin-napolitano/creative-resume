@@ -40,36 +40,26 @@ const taxonomy = [
   },
 ];
 
-const BADGE_CHAR_LIMIT = 'SEGMENT + FIVETRAN'.length;
+const BADGE_CHAR_LIMIT = 22;
 const skillBadgeOverrides = {
-  'Infrastructure as Code': 'Infra + Code',
-  'Serverless Platforms': 'Serverless Ops',
+  'Infrastructure as Code': 'Infrastructure as Code',
+  'Serverless Platforms': 'Serverless Platforms',
   'Algorithms and Statistics': 'Algorithms & Stats',
   'Algorithms & Stats': 'Algorithms & Stats',
-  'Data Science Platforms': 'Data Sci Platforms',
 };
-
-const shortenWord = (word = '') => {
-  if (word.length <= 4) return word;
-  return `${word.slice(0, 4)}.`;
-};
-
-const fallbackInitials = (words = []) =>
-  words
-    .map((word) => (word ? `${word[0].toUpperCase()}.` : ''))
-    .join(' ')
-    .trim();
 
 const friendlySkillLabel = (name = '') => {
   if (!name) return name;
   if (skillBadgeOverrides[name]) return skillBadgeOverrides[name];
   if (name.length <= BADGE_CHAR_LIMIT) return name;
   const words = name.split(/\s+/);
-  let shortened = words.map(shortenWord).join(' ');
-  if (shortened.length <= BADGE_CHAR_LIMIT) return shortened;
-  const initials = fallbackInitials(words);
-  if (initials.length > 0 && initials.length <= BADGE_CHAR_LIMIT) return initials;
-  return name.slice(0, BADGE_CHAR_LIMIT - 1) + '…';
+  const trimmed = [...words];
+  while (trimmed.length > 1 && trimmed.join(' ').length > BADGE_CHAR_LIMIT) {
+    trimmed.pop();
+  }
+  let phrase = trimmed.join(' ');
+  if (phrase.length <= BADGE_CHAR_LIMIT && phrase.length > 0) return phrase;
+  return `${name.slice(0, BADGE_CHAR_LIMIT - 1)}…`;
 };
 
 const includeHidden = params.hidden === 'true';
