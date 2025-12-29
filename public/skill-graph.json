@@ -89,16 +89,16 @@
       }
     },
     {
-      "id": "activation-systems:Segment & Fivetran",
+      "id": "activation-systems:Segment + Fivetran",
       "area": "Activation Systems",
-      "name": "Segment & Fivetran",
+      "name": "Segment + Fivetran",
       "level": 4,
       "years": 3,
       "tags": [
         "data ingestion",
         "automation"
       ],
-      "text": "Segment & Fivetran. Area: Activation Systems. Tags: data ingestion, automation. Level: 4. Years: 3",
+      "text": "Segment + Fivetran. Area: Activation Systems. Tags: data ingestion, automation. Level: 4. Years: 3",
       "cluster": 0,
       "coord": {
         "x": -0.0166833930930705,
@@ -738,8 +738,8 @@
       "label": "AI / RAG",
       "members": [
         {
-          "id": "activation-systems:Segment & Fivetran",
-          "name": "Segment & Fivetran",
+          "id": "activation-systems:Segment + Fivetran",
+          "name": "Segment + Fivetran",
           "area": "Activation Systems"
         },
         {

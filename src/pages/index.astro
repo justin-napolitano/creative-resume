@@ -21,6 +21,15 @@ const iconForPillar = (icon?: string) => {
   return iconMap[key];
 };
 const experiences = resume.experience ?? [];
+const formatDate = (date?: string) => {
+  if (!date) return '';
+  const parts = date.split(' ');
+  if (parts.length === 2) {
+    const [month, year] = parts;
+    return `${month.slice(0, 3).toUpperCase()} ${year}`;
+  }
+  return date;
+};
 const projects = resume.projects ?? [];
 const education = resume.education ?? [];
 const publications = resume.publications ?? [];
@@ -240,16 +249,20 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('education')}</h2>
           </div>
-          <ul class="education-list">
+          <div class="experience-grid">
             {education.map((entry) => (
-              <li class="education-item">
-                <h4>{entry.degree}</h4>
-                <div class="meta">{entry.institution}</div>
-                <div class="meta">{entry.graduation_date}</div>
-                {entry.notes && <p>{entry.notes}</p>}
-              </li>
+              <article class="experience-item">
+                <div class="experience-dates">
+                  <div>{formatDate(entry.graduation_date)}</div>
+                </div>
+                <div class="experience-body">
+                  <h3>{entry.degree}</h3>
+                  <div class="meta">{entry.institution}</div>
+                  {entry.notes && <p>{entry.notes}</p>}
+                </div>
+              </article>
             ))}
-          </ul>
+          </div>
         </section>
       )}
 
@@ -274,10 +287,10 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
       )}
 
       {flattenedSkills.length > 0 && (
-        <section class="section section--skills" id="skills" data-skill-view="badges">
+        <section class="section section--skills section--skills--tail" id="skills" data-skill-view="badges">
           <span class="section__code" aria-hidden="true">{sectionCode('skills')}</span>
           <div class="section__header">
-            <h2 class="section__title">{siteCopy.sections.skills.badges.eyebrow}</h2>
+            <h2 class="section__title">{sectionLabel('skills')}</h2>
             <p class="section__subtitle">{siteCopy.sections.skills.badges.support}</p>
           </div>
           <div class="skill-stage skill-stage--badges">

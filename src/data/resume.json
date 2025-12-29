@@ -49,7 +49,7 @@
       "institution": "University of Michigan",
       "location": "Online",
       "graduation_date": "January 2020",
-      "notes": "Coursera specialization focused on Python 3 programming and applied data analysis."
+      "notes": ""
     }
   ],
   "skills": [
@@ -109,7 +109,7 @@
           ]
         },
         {
-          "name": "Segment & Fivetran",
+          "name": "Segment + Fivetran",
           "level": 4,
           "years": 3,
           "tags": [
@@ -478,7 +478,7 @@
     },
     {
       "id": "data-analytics-engineer-penske",
-      "title": "Data & Analytics Engineer",
+      "title": "Data + Analytics Engineer",
       "company": "Penske Media Corporation",
       "location": "Los Angeles, California",
       "start": "Apr 2022",
@@ -659,7 +659,7 @@
       ]
     },
     {
-      "area": "Cloud & Deployment",
+      "area": "Cloud + Deployment",
       "id": "skill-highlight-cloud",
       "items": [
         {
@@ -712,7 +712,7 @@
       ]
     },
     {
-      "area": "BI & Activation",
+      "area": "BI + Activation",
       "id": "skill-highlight-bi",
       "items": [
         {
@@ -734,7 +734,7 @@
           ]
         },
         {
-          "name": "APIs & Web Apps",
+          "name": "APIs + Web Apps",
           "level": 3,
           "years": 5.5,
           "tags": [
@@ -752,7 +752,7 @@
           ]
         },
         {
-          "name": "Segment & Fivetran",
+          "name": "Segment + Fivetran",
           "level": 4,
           "years": 3,
           "tags": [
