@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-12-29T22:56:34.620Z",
+  "generatedAt": "2025-12-29T23:43:49.373Z",
   "model": "text-embedding-3-small",
   "clusterCount": 8,
   "skills": [
@@ -24,8 +24,8 @@
       "text": "BigQuery. Area: Lakehouses. Stack: Warehousing. Tags: SQL, columnar storage, GCP. Level: 5. Years: 5",
       "cluster": 0,
       "coord": {
-        "x": 0.20337675363831717,
-        "y": 0.075449910445602
+        "x": 0.2041647479504784,
+        "y": 0.07473369827160371
       }
     },
     {
@@ -47,8 +47,8 @@
       "text": "Snowflake. Area: Lakehouses. Stack: Warehousing. Tags: cloud data warehouse. Level: 5. Years: 5",
       "cluster": 0,
       "coord": {
-        "x": 0.22422521637932524,
-        "y": 0.12185610305542814
+        "x": 0.220790888459637,
+        "y": 0.12785535077102814
       }
     },
     {
@@ -71,8 +71,8 @@
       "text": "ELT Frameworks. Area: Lakehouses. Stack: Warehousing. Tags: data modeling, ELT. Level: 5. Years: 5",
       "cluster": 0,
       "coord": {
-        "x": 0.16628125973105018,
-        "y": 0.08950232896568869
+        "x": 0.16518169695227994,
+        "y": 0.09191050410725404
       }
     },
     {
@@ -95,8 +95,8 @@
       "text": "CDP Modeling. Area: Activation Systems. Stack: Insights. Tags: segmentation, identity resolution. Level: 5. Years: 5",
       "cluster": 1,
       "coord": {
-        "x": -0.11962015822819214,
-        "y": -0.15740725672800598
+        "x": -0.11990352579960235,
+        "y": -0.15596230868928487
       }
     },
     {
@@ -119,8 +119,8 @@
       "text": "Audience Pipelines. Area: Activation Systems. Stack: Insights. Tags: journey triggers, CRM activation. Level: 5. Years: 5",
       "cluster": 1,
       "coord": {
-        "x": -0.08506370860845244,
-        "y": -0.18072294822654958
+        "x": -0.08531433025486451,
+        "y": -0.17882390465916412
       }
     },
     {
@@ -143,8 +143,8 @@
       "text": "Segment + Fivetran. Area: Activation Systems. Stack: Insights. Tags: data ingestion, automation. Level: 5. Years: 5",
       "cluster": 1,
       "coord": {
-        "x": 0.009052989763543951,
-        "y": -0.01820786392594697
+        "x": 0.010098087866375312,
+        "y": -0.018787150198717652
       }
     },
     {
@@ -168,8 +168,8 @@
       "text": "Cloud Services. Area: Cloud Compute. Stack: Deployment. Tags: GCP, Azure, multi-cloud ops. Level: 5. Years: 5",
       "cluster": 2,
       "coord": {
-        "x": 0.3574048911019557,
-        "y": -0.35171996415756346
+        "x": 0.3550779273379725,
+        "y": -0.3527494404185359
       }
     },
     {
@@ -192,8 +192,8 @@
       "text": "Docker. Area: Cloud Compute. Stack: Deployment. Tags: Compose, containerization. Level: 5. Years: 5",
       "cluster": 2,
       "coord": {
-        "x": 0.3463539776177635,
-        "y": -0.3334868505298289
+        "x": 0.3435956820836473,
+        "y": -0.33475191874980104
       }
     },
     {
@@ -216,8 +216,8 @@
       "text": "Serverless Platforms. Area: Cloud Compute. Stack: Deployment. Tags: Cloud Run, Cloud Functions. Level: 5. Years: 5",
       "cluster": 2,
       "coord": {
-        "x": 0.3661721702239777,
-        "y": -0.34665559927051304
+        "x": 0.36293630485347267,
+        "y": -0.3463615006476284
       }
     },
     {
@@ -240,8 +240,8 @@
       "text": "CI/CD Systems. Area: Cloud Compute. Stack: Deployment. Tags: GitHub Actions, pipeline automation. Level: 5. Years: 5",
       "cluster": 2,
       "coord": {
-        "x": 0.32018132826837525,
-        "y": -0.35854831067111714
+        "x": 0.31983255490560863,
+        "y": -0.36276596882428047
       }
     },
     {
@@ -264,8 +264,8 @@
       "text": "Infrastructure as Code. Area: Cloud Compute. Stack: Deployment. Tags: Terraform, runbooks. Level: 5. Years: 5",
       "cluster": 2,
       "coord": {
-        "x": 0.31028344894821336,
-        "y": -0.36880165509484114
+        "x": 0.308932416670409,
+        "y": -0.372233835426546
       }
     },
     {
@@ -288,8 +288,8 @@
       "text": "CDP implementation. Area: Cloud Compute. Stack: Deployment. Tags: CDP, Implementation. Level: 4. Years: 3",
       "cluster": 2,
       "coord": {
-        "x": 0.2984864344015265,
-        "y": -0.32581845035098905
+        "x": 0.29747516407328417,
+        "y": -0.3275059685021903
       }
     },
     {
@@ -312,8 +312,8 @@
       "text": "GCP migrations. Area: Cloud Compute. Stack: Deployment. Tags: GCP, Migration. Level: 4. Years: 3",
       "cluster": 2,
       "coord": {
-        "x": 0.28614692928650287,
-        "y": -0.39686754902545524
+        "x": 0.283641605885796,
+        "y": -0.3971272045868707
       }
     },
     {
@@ -336,8 +336,8 @@
       "text": "Audience segmentation models. Area: Cloud Compute. Stack: Deployment. Tags: Segmentation, Modeling. Level: 4. Years: 3",
       "cluster": 2,
       "coord": {
-        "x": 0.07314184077171261,
-        "y": -0.27563080436775006
+        "x": 0.07157788289777382,
+        "y": -0.2753061262768634
       }
     },
     {
@@ -360,8 +360,8 @@
       "text": "Marketing automation design. Area: Cloud Compute. Stack: Deployment. Tags: Automation, Marketing. Level: 4. Years: 3",
       "cluster": 2,
       "coord": {
-        "x": 0.156653568836702,
-        "y": -0.3478510759229225
+        "x": 0.15527695932164262,
+        "y": -0.3481066287802004
       }
     },
     {
@@ -384,8 +384,8 @@
       "text": "ETL modernization. Area: Cloud Compute. Stack: Deployment. Tags: ETL, Modernization. Level: 4. Years: 3",
       "cluster": 2,
       "coord": {
-        "x": 0.29880381143298895,
-        "y": -0.16795107208471405
+        "x": 0.2992777581153211,
+        "y": -0.1705992331173647
       }
     },
     {
@@ -408,8 +408,8 @@
       "text": "Data contract remediation. Area: Cloud Compute. Stack: Deployment. Tags: Data contracts, Governance. Level: 4. Years: 3",
       "cluster": 2,
       "coord": {
-        "x": 0.2943413417934292,
-        "y": -0.2260292820956784
+        "x": 0.2941261589130587,
+        "y": -0.22904246243054072
       }
     },
     {
@@ -432,8 +432,8 @@
       "text": "Campaign performance analytics. Area: Cloud Compute. Stack: Deployment. Tags: Campaigns, Analytics. Level: 4. Years: 3",
       "cluster": 2,
       "coord": {
-        "x": 0.10131600508220542,
-        "y": -0.2841718079599534
+        "x": 0.1005084490494945,
+        "y": -0.2843634211305803
       }
     },
     {
@@ -456,8 +456,8 @@
       "text": "CRM enrichment. Area: Cloud Compute. Stack: Deployment. Tags: CRM, Enrichment. Level: 4. Years: 3",
       "cluster": 2,
       "coord": {
-        "x": 0.15182293718727846,
-        "y": -0.27702176291800107
+        "x": 0.15900081040989045,
+        "y": -0.281591012611753
       }
     },
     {
@@ -480,8 +480,8 @@
       "text": "Prospect scoring. Area: Cloud Compute. Stack: Deployment. Tags: Scoring, Prospects. Level: 4. Years: 3",
       "cluster": 2,
       "coord": {
-        "x": 0.09910916270239224,
-        "y": -0.2233585424227591
+        "x": 0.0993796677544648,
+        "y": -0.2252775618038137
       }
     },
     {
@@ -504,8 +504,8 @@
       "text": "Workflow documentation. Area: Cloud Compute. Stack: Deployment. Tags: Documentation, Workflow. Level: 4. Years: 3",
       "cluster": 2,
       "coord": {
-        "x": 0.3389085907271398,
-        "y": -0.2973574045779374
+        "x": 0.3357428040965836,
+        "y": -0.29699909983495326
       }
     },
     {
@@ -528,8 +528,8 @@
       "text": "Stakeholder enablement. Area: Cloud Compute. Stack: Deployment. Tags: Enablement, Stakeholders. Level: 4. Years: 3",
       "cluster": 2,
       "coord": {
-        "x": 0.22993878303604176,
-        "y": -0.3226268439604016
+        "x": 0.22794491175331474,
+        "y": -0.32214864170042484
       }
     },
     {
@@ -552,8 +552,8 @@
       "text": "Legacy data cleanup. Area: Cloud Compute. Stack: Deployment. Tags: Cleanup, Legacy. Level: 4. Years: 3",
       "cluster": 2,
       "coord": {
-        "x": 0.3191075347906284,
-        "y": -0.20117703799364398
+        "x": 0.31761471054201557,
+        "y": -0.20197587751205393
       }
     },
     {
@@ -576,8 +576,8 @@
       "text": "Email conversion reporting. Area: Cloud Compute. Stack: Deployment. Tags: Email, Conversion. Level: 4. Years: 3",
       "cluster": 2,
       "coord": {
-        "x": 0.19087883529619323,
-        "y": -0.33373665073915354
+        "x": 0.1891804272609813,
+        "y": -0.3343442414045472
       }
     },
     {
@@ -601,8 +601,8 @@
       "text": "SQL. Area: Data Science Platforms. Stack: Warehousing. Tags: PostgreSQL, MySQL, analytical SQL. Level: 5. Years: 5",
       "cluster": 3,
       "coord": {
-        "x": 0.10251923186030941,
-        "y": 0.28498423933249456
+        "x": 0.10547234900237985,
+        "y": 0.2828199849483104
       }
     },
     {
@@ -626,8 +626,8 @@
       "text": "Python. Area: Data Science Platforms. Stack: Warehousing. Tags: data engineering, machine learning, automation. Level: 5. Years: 5",
       "cluster": 3,
       "coord": {
-        "x": 0.16866545004789338,
-        "y": 0.2641645116105827
+        "x": 0.16870619763457445,
+        "y": 0.26550035051144855
       }
     },
     {
@@ -650,8 +650,8 @@
       "text": "Pandas. Area: Data Science Platforms. Stack: Warehousing. Tags: dataframes, transformations. Level: 5. Years: 7",
       "cluster": 3,
       "coord": {
-        "x": 0.1778062290525091,
-        "y": 0.2854346012678021
+        "x": 0.1755294113757718,
+        "y": 0.2896697915291406
       }
     },
     {
@@ -674,8 +674,8 @@
       "text": "Jupyter. Area: Data Science Platforms. Stack: Warehousing. Tags: prototyping, analysis notebooks. Level: 5. Years: 6",
       "cluster": 3,
       "coord": {
-        "x": 0.1135681752349443,
-        "y": 0.2218049088091742
+        "x": 0.11342102691781558,
+        "y": 0.2209186287876211
       }
     },
     {
@@ -698,8 +698,8 @@
       "text": "Apache Airflow. Area: Data Science Platforms. Stack: Warehousing. Tags: orchestration, scheduling. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.2505169743757263,
-        "y": 0.13225800290761533
+        "x": 0.2500878855082421,
+        "y": 0.13346184795815838
       }
     },
     {
@@ -722,8 +722,8 @@
       "text": "Terraform. Area: Data Science Platforms. Stack: Warehousing. Tags: infrastructure as code, cloud provisioning. Level: 3. Years: 2",
       "cluster": 3,
       "coord": {
-        "x": 0.3288804322600481,
-        "y": 0.01175142204018201
+        "x": 0.32847054699074874,
+        "y": 0.010700027981910495
       }
     },
     {
@@ -746,8 +746,8 @@
       "text": "GitHub Actions. Area: Data Science Platforms. Stack: Warehousing. Tags: CI/CD, automation. Level: 3. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.25442550882137327,
-        "y": 0.10135809564974116
+        "x": 0.2554076325283112,
+        "y": 0.09985721844224946
       }
     },
     {
@@ -770,8 +770,8 @@
       "text": "Great Expectations. Area: Data Science Platforms. Stack: Warehousing. Tags: data quality, validation. Level: 3. Years: 2",
       "cluster": 3,
       "coord": {
-        "x": 0.13942352082476483,
-        "y": 0.2565535565330611
+        "x": 0.14239304586978957,
+        "y": 0.25409531807257135
       }
     },
     {
@@ -794,8 +794,8 @@
       "text": "Epic Clarity intake. Area: Data Science Platforms. Stack: Warehousing. Tags: Epic, Ingestion. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.07616909008519421,
-        "y": 0.13410579534032896
+        "x": 0.07700620392249519,
+        "y": 0.13564079463325715
       }
     },
     {
@@ -818,8 +818,8 @@
       "text": "Synapse orchestration. Area: Data Science Platforms. Stack: Warehousing. Tags: Synapse, ELT. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.14310455884697185,
-        "y": 0.1628433563715969
+        "x": 0.14405459770060366,
+        "y": 0.1633970576776839
       }
     },
     {
@@ -842,8 +842,8 @@
       "text": "Power BI care dashboards. Area: Data Science Platforms. Stack: Warehousing. Tags: Power BI, Care metrics. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.10403095929228777,
-        "y": 0.2877629624958561
+        "x": 0.10813761131110207,
+        "y": 0.2821226279264882
       }
     },
     {
@@ -866,8 +866,8 @@
       "text": "Looker Studio automation. Area: Data Science Platforms. Stack: Warehousing. Tags: Looker Studio, Automation. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.0730211714025185,
-        "y": 0.18008659596991128
+        "x": 0.07480191914953943,
+        "y": 0.18036823417675346
       }
     },
     {
@@ -890,8 +890,8 @@
       "text": "Heart failure metrics. Area: Data Science Platforms. Stack: Warehousing. Tags: HF, Quality. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.0674119641209984,
-        "y": 0.26616266195773425
+        "x": 0.0670765390070296,
+        "y": 0.2696083753118476
       }
     },
     {
@@ -914,8 +914,8 @@
       "text": "Vizient benchmarking. Area: Data Science Platforms. Stack: Warehousing. Tags: Vizient, Benchmarking. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.09156323185881685,
-        "y": 0.29662679276931175
+        "x": 0.09845214958659873,
+        "y": 0.28776792672015616
       }
     },
     {
@@ -938,8 +938,8 @@
       "text": "ELT governance. Area: Data Science Platforms. Stack: Warehousing. Tags: ELT, Governance. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.15399816084650234,
-        "y": 0.1813521632399934
+        "x": 0.1556013569319276,
+        "y": 0.18098788146328526
       }
     },
     {
@@ -962,8 +962,8 @@
       "text": "SQL transformation ops. Area: Data Science Platforms. Stack: Warehousing. Tags: SQL, Optimization. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.09853407664245617,
-        "y": 0.25915761807142845
+        "x": 0.10068569674026379,
+        "y": 0.258957316266326
       }
     },
     {
@@ -986,8 +986,8 @@
       "text": "Alert automation. Area: Data Science Platforms. Stack: Warehousing. Tags: Automation, Alerts. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.13069253927896285,
-        "y": 0.12356444090975498
+        "x": 0.1291211401553913,
+        "y": 0.12660259454011288
       }
     },
     {
@@ -1010,8 +1010,8 @@
       "text": "Cardiology analytics. Area: Data Science Platforms. Stack: Warehousing. Tags: Cardiology, Analytics. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.031776313020890595,
-        "y": 0.306952767562285
+        "x": 0.03282076174173345,
+        "y": 0.3077683088681525
       }
     },
     {
@@ -1034,8 +1034,8 @@
       "text": "Nursing data partnership. Area: Data Science Platforms. Stack: Warehousing. Tags: Nursing, Collab. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.13523000462511492,
-        "y": 0.27308664252676296
+        "x": 0.13579534692944897,
+        "y": 0.27461452982919543
       }
     },
     {
@@ -1058,8 +1058,8 @@
       "text": "Discharge latency monitoring. Area: Data Science Platforms. Stack: Warehousing. Tags: Operations, Latency. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.19267458649239574,
-        "y": 0.1204959107505098
+        "x": 0.19314471026898478,
+        "y": 0.12162625598230113
       }
     },
     {
@@ -1082,8 +1082,8 @@
       "text": "Azure landing zones. Area: Data Science Platforms. Stack: Warehousing. Tags: Azure, Landing. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.19810027003146968,
-        "y": 0.021435723099850493
+        "x": 0.19831885990749792,
+        "y": 0.021153109124870253
       }
     },
     {
@@ -1106,8 +1106,8 @@
       "text": "Clinical intake workshops. Area: Data Science Platforms. Stack: Warehousing. Tags: Workshops, Requirements. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.10424357834227399,
-        "y": 0.21853771199441477
+        "x": 0.10567005906336176,
+        "y": 0.21812386194455968
       }
     },
     {
@@ -1130,8 +1130,8 @@
       "text": "Inpatient KPI dashboards. Area: Data Science Platforms. Stack: Warehousing. Tags: Power BI, KPI. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.07718195945271668,
-        "y": 0.308299255616823
+        "x": 0.07999429857923829,
+        "y": 0.30595535629929227
       }
     },
     {
@@ -1154,8 +1154,8 @@
       "text": "Readmission SQL models. Area: Data Science Platforms. Stack: Warehousing. Tags: SQL, Readmissions. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.028750012250102378,
-        "y": 0.1925198585417213
+        "x": 0.03161663037304776,
+        "y": 0.19128929805201694
       }
     },
     {
@@ -1178,8 +1178,8 @@
       "text": "Epic–EDW reconciliation. Area: Data Science Platforms. Stack: Warehousing. Tags: Epic, EDW. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.13272735200638666,
-        "y": 0.21492541000455373
+        "x": 0.1353276246069864,
+        "y": 0.2129978797096685
       }
     },
     {
@@ -1202,8 +1202,8 @@
       "text": "Quality metric validation. Area: Data Science Platforms. Stack: Warehousing. Tags: Quality, Validation. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.0918232242323942,
-        "y": 0.23781345431766543
+        "x": 0.09232728439493806,
+        "y": 0.23983572813076032
       }
     },
     {
@@ -1226,8 +1226,8 @@
       "text": "Stakeholder facilitation. Area: Data Science Platforms. Stack: Warehousing. Tags: Facilitation, Ops. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.1655135434861625,
-        "y": 0.17283782076988
+        "x": 0.1652446438224885,
+        "y": 0.17434306585878023
       }
     },
     {
@@ -1250,8 +1250,8 @@
       "text": "Cost reduction analytics. Area: Data Science Platforms. Stack: Warehousing. Tags: Cost, Analytics. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.10894298287466828,
-        "y": 0.2262871544824173
+        "x": 0.10927111311953752,
+        "y": 0.2287386258520101
       }
     },
     {
@@ -1274,8 +1274,8 @@
       "text": "Digital health integration. Area: Data Science Platforms. Stack: Warehousing. Tags: Digital, Integration. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.1287756623661069,
-        "y": 0.24039179967775823
+        "x": 0.12940327160336895,
+        "y": 0.2418979166355458
       }
     },
     {
@@ -1298,8 +1298,8 @@
       "text": "Data auditing runs. Area: Data Science Platforms. Stack: Warehousing. Tags: Audit, Pipelines. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.16278854942075943,
-        "y": 0.20911278979870976
+        "x": 0.16460653523451527,
+        "y": 0.208110097806945
       }
     },
     {
@@ -1322,8 +1322,8 @@
       "text": "KPI documentation. Area: Data Science Platforms. Stack: Warehousing. Tags: Documentation, KPI. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.11275571462107174,
-        "y": 0.26688304896787857
+        "x": 0.1134694186227864,
+        "y": 0.2683107006814855
       }
     },
     {
@@ -1346,8 +1346,8 @@
       "text": "Service line briefs. Area: Data Science Platforms. Stack: Warehousing. Tags: Briefings, Narrative. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.09331495027957513,
-        "y": 0.17579894612372027
+        "x": 0.09621879888213607,
+        "y": 0.17316584776059393
       }
     },
     {
@@ -1370,8 +1370,8 @@
       "text": "Handoff scripting. Area: Data Science Platforms. Stack: Warehousing. Tags: Handoff, Process. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.19303750534076536,
-        "y": 0.09543797203126504
+        "x": 0.19324478913527618,
+        "y": 0.09619966978402027
       }
     },
     {
@@ -1394,16 +1394,16 @@
       "text": "Performance storytelling. Area: Data Science Platforms. Stack: Warehousing. Tags: Storytelling, Exec. Level: 4. Years: 3",
       "cluster": 3,
       "coord": {
-        "x": 0.08023644579353605,
-        "y": 0.24459400080077293
+        "x": 0.0810379927080252,
+        "y": 0.24564476168576002
       }
     },
     {
       "id": "bi-and-data-viz:Excel",
-      "area": "BI and Data Viz",
+      "area": "Data Visualization",
       "areaId": "bi-and-data-viz",
       "category": "bi-and-data-viz",
-      "categoryLabel": "BI and Data Viz",
+      "categoryLabel": "Data Visualization",
       "stack": "insights",
       "stackLabel": "Insights",
       "clusterId": 4,
@@ -1415,24 +1415,24 @@
         "Power Query",
         "dashboarding"
       ],
-      "text": "Excel. Area: BI and Data Viz. Stack: Insights. Tags: Power Query, dashboarding. Level: 5. Years: 10",
+      "text": "Excel. Area: Data Visualization. Stack: Insights. Tags: Power Query, dashboarding. Level: 5. Years: 10",
       "cluster": 4,
       "coord": {
-        "x": -0.11771827999338129,
-        "y": 0.20747966260604633
+        "x": -0.11285761597213266,
+        "y": 0.1920646791829734
       }
     },
     {
-      "id": "bi-and-data-viz:Data Viz Suite",
-      "area": "BI and Data Viz",
+      "id": "bi-and-data-viz:Data Visualization",
+      "area": "Data Visualization",
       "areaId": "bi-and-data-viz",
       "category": "bi-and-data-viz",
-      "categoryLabel": "BI and Data Viz",
+      "categoryLabel": "Data Visualization",
       "stack": "insights",
       "stackLabel": "Insights",
       "clusterId": 4,
-      "name": "Data Viz Suite",
-      "badgeLabel": "Data Viz Suite",
+      "name": "Data Visualization",
+      "badgeLabel": "Data Visualization",
       "level": 4,
       "years": 6,
       "tags": [
@@ -1441,19 +1441,19 @@
         "Plotly",
         "Leaflet"
       ],
-      "text": "Data Viz Suite. Area: BI and Data Viz. Stack: Insights. Tags: Matplotlib, Seaborn, Plotly, Leaflet. Level: 4. Years: 6",
+      "text": "Data Visualization. Area: Data Visualization. Stack: Insights. Tags: Matplotlib, Seaborn, Plotly, Leaflet. Level: 4. Years: 6",
       "cluster": 4,
       "coord": {
-        "x": -0.1242230302738857,
-        "y": 0.20924679055109907
+        "x": -0.14379059548357004,
+        "y": 0.17578368281032106
       }
     },
     {
       "id": "bi-and-data-viz:Looker",
-      "area": "BI and Data Viz",
+      "area": "Data Visualization",
       "areaId": "bi-and-data-viz",
       "category": "bi-and-data-viz",
-      "categoryLabel": "BI and Data Viz",
+      "categoryLabel": "Data Visualization",
       "stack": "insights",
       "stackLabel": "Insights",
       "clusterId": 4,
@@ -1464,19 +1464,19 @@
       "tags": [
         "embedded analytics"
       ],
-      "text": "Looker. Area: BI and Data Viz. Stack: Insights. Tags: embedded analytics. Level: 3. Years: 2",
+      "text": "Looker. Area: Data Visualization. Stack: Insights. Tags: embedded analytics. Level: 3. Years: 2",
       "cluster": 4,
       "coord": {
-        "x": -0.19209863739223595,
-        "y": 0.17968319605036287
+        "x": -0.1778892786820343,
+        "y": 0.17445470877010136
       }
     },
     {
       "id": "bi-and-data-viz:Power BI",
-      "area": "BI and Data Viz",
+      "area": "Data Visualization",
       "areaId": "bi-and-data-viz",
       "category": "bi-and-data-viz",
-      "categoryLabel": "BI and Data Viz",
+      "categoryLabel": "Data Visualization",
       "stack": "insights",
       "stackLabel": "Insights",
       "clusterId": 4,
@@ -1488,11 +1488,11 @@
         "DAX",
         "enterprise BI"
       ],
-      "text": "Power BI. Area: BI and Data Viz. Stack: Insights. Tags: DAX, enterprise BI. Level: 4. Years: 2",
+      "text": "Power BI. Area: Data Visualization. Stack: Insights. Tags: DAX, enterprise BI. Level: 4. Years: 2",
       "cluster": 4,
       "coord": {
-        "x": -0.09014474734524874,
-        "y": 0.20311841323561416
+        "x": -0.08553382857122908,
+        "y": 0.1948546032672756
       }
     },
     {
@@ -1515,8 +1515,8 @@
       "text": "NetworkX. Area: Graph Analysis. Stack: Insights. Tags: graph algorithms, network analysis. Level: 5. Years: 5",
       "cluster": 5,
       "coord": {
-        "x": -0.2680392006087247,
-        "y": -0.004036871108804833
+        "x": -0.2732551510429227,
+        "y": 0.0045145092148565925
       }
     },
     {
@@ -1539,8 +1539,8 @@
       "text": "Neo4j. Area: Graph Analysis. Stack: Insights. Tags: graph databases, Cypher. Level: 4. Years: 3",
       "cluster": 5,
       "coord": {
-        "x": -0.26766414792184157,
-        "y": 0.013297115642768682
+        "x": -0.27052330933580876,
+        "y": 0.019340379116650888
       }
     },
     {
@@ -1563,8 +1563,8 @@
       "text": "Seasonal Forecasts. Area: Algorithms & Stats. Stack: Insights. Tags: time series, demand forecasting. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.1893158664780682,
-        "y": 0.028539031461651963
+        "x": -0.19274832355739885,
+        "y": 0.03501252114993173
       }
     },
     {
@@ -1587,8 +1587,8 @@
       "text": "Parametric Testing. Area: Algorithms & Stats. Stack: Insights. Tags: A/B testing, hypothesis testing. Level: 4. Years: 4",
       "cluster": 6,
       "coord": {
-        "x": -0.2712049937353068,
-        "y": -0.02780338178290091
+        "x": -0.27169193305858835,
+        "y": -0.02521724975666026
       }
     },
     {
@@ -1611,8 +1611,8 @@
       "text": "Topic Modeling. Area: Algorithms & Stats. Stack: Insights. Tags: NLP, LDA. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.30050519158121464,
-        "y": -0.03844449444068993
+        "x": -0.30403226366713965,
+        "y": -0.030757421650838255
       }
     },
     {
@@ -1635,8 +1635,8 @@
       "text": "Causal Inference. Area: Algorithms & Stats. Stack: Insights. Tags: experimentation, uplift modeling. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.30880308297304315,
-        "y": -0.012289776971419936
+        "x": -0.3102607671942515,
+        "y": -0.007539921307457708
       }
     },
     {
@@ -1659,8 +1659,8 @@
       "text": "AI vendor evaluation. Area: Algorithms & Stats. Stack: Insights. Tags: AI, Procurement. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.2960460873271121,
-        "y": -0.03525314588795272
+        "x": -0.2932071382369049,
+        "y": -0.03767066165866443
       }
     },
     {
@@ -1683,8 +1683,8 @@
       "text": "LLM fine-tuning. Area: Algorithms & Stats. Stack: Insights. Tags: LLM, Tuning. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.28970620028405764,
-        "y": -0.060864847963245094
+        "x": -0.29005566108151626,
+        "y": -0.05718993739555317
       }
     },
     {
@@ -1707,8 +1707,8 @@
       "text": "Python GCP pipelines. Area: Algorithms & Stats. Stack: Insights. Tags: Python, GCP. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.06138047014403743,
-        "y": -0.0503197690006656
+        "x": -0.06353894312471696,
+        "y": -0.047171651975290274
       }
     },
     {
@@ -1731,8 +1731,8 @@
       "text": "Looker newsroom insights. Area: Algorithms & Stats. Stack: Insights. Tags: Looker, Editorial. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.29323144062412826,
-        "y": 0.10456297831858456
+        "x": -0.29299524594101783,
+        "y": 0.1078147591793673
       }
     },
     {
@@ -1755,8 +1755,8 @@
       "text": "Subscription KPI reporting. Area: Algorithms & Stats. Stack: Insights. Tags: Subscription, KPIs. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.21687010817278643,
-        "y": 0.04935483621880711
+        "x": -0.21641775970172378,
+        "y": 0.051396957830735494
       }
     },
     {
@@ -1779,8 +1779,8 @@
       "text": "Treasure Data modeling. Area: Algorithms & Stats. Stack: Insights. Tags: CDP, Modeling. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.13371042896188354,
-        "y": 0.07165952707613514
+        "x": -0.13396014042517787,
+        "y": 0.07461056320428665
       }
     },
     {
@@ -1803,8 +1803,8 @@
       "text": "Topic clustering analytics. Area: Algorithms & Stats. Stack: Insights. Tags: Topics, Analytics. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.3068624257427406,
-        "y": -0.0028548911581321897
+        "x": -0.3097101470036825,
+        "y": 0.003945377196381751
       }
     },
     {
@@ -1827,8 +1827,8 @@
       "text": "Signal engineering. Area: Algorithms & Stats. Stack: Insights. Tags: Signals, Activation. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.3207486154455701,
-        "y": -0.010831823087732494
+        "x": -0.3229275790099905,
+        "y": -0.00453647495375845
       }
     },
     {
@@ -1851,8 +1851,8 @@
       "text": "Editorial scoring loops. Area: Algorithms & Stats. Stack: Insights. Tags: Editorial, ML. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.3225033030336395,
-        "y": 0.000696259654054319
+        "x": -0.32230007158506746,
+        "y": 0.0034845633008502327
       }
     },
     {
@@ -1875,8 +1875,8 @@
       "text": "Cross-brand KPI governance. Area: Algorithms & Stats. Stack: Insights. Tags: Governance, KPIs. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.22830844406081674,
-        "y": 0.03926510114016331
+        "x": -0.22710115812342213,
+        "y": 0.040658018658368836
       }
     },
     {
@@ -1899,8 +1899,8 @@
       "text": "GCP cost optimization. Area: Algorithms & Stats. Stack: Insights. Tags: GCP, Cost. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.09642824709965289,
-        "y": -0.16505083992613406
+        "x": -0.09879983934436173,
+        "y": -0.16033678548346939
       }
     },
     {
@@ -1923,8 +1923,8 @@
       "text": "Segmented marketing enablement. Area: Algorithms & Stats. Stack: Insights. Tags: Marketing, Segmentation. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.2530076193640468,
-        "y": -0.07310631407441691
+        "x": -0.25359091550741913,
+        "y": -0.07008585441217989
       }
     },
     {
@@ -1947,8 +1947,8 @@
       "text": "Executive briefing kits. Area: Algorithms & Stats. Stack: Insights. Tags: Exec, Briefings. Level: 4. Years: 3",
       "cluster": 6,
       "coord": {
-        "x": -0.299131569795448,
-        "y": -0.0221484177386456
+        "x": -0.29859003765600867,
+        "y": -0.021682055061195225
       }
     },
     {
@@ -1971,8 +1971,8 @@
       "text": "RAG Systems. Area: AI Development. Stack: Insights. Tags: RAG, LLM applications. Level: 3. Years: 1",
       "cluster": 7,
       "coord": {
-        "x": -0.22051711736947163,
-        "y": -0.09804616050631348
+        "x": -0.2187451981820836,
+        "y": -0.09974114285844783
       }
     },
     {
@@ -1995,8 +1995,8 @@
       "text": "Agentic Models. Area: AI Development. Stack: Insights. Tags: multi-agent systems, planning. Level: 3. Years: 1",
       "cluster": 7,
       "coord": {
-        "x": -0.2860847617277756,
-        "y": -0.23252182258487328
+        "x": -0.28842988445915396,
+        "y": -0.2286880904253816
       }
     },
     {
@@ -2019,8 +2019,8 @@
       "text": "LLM Ops. Area: AI Development. Stack: Insights. Tags: prompt orchestration, monitoring. Level: 3. Years: 5",
       "cluster": 7,
       "coord": {
-        "x": -0.19176383833854352,
-        "y": -0.1606259823450936
+        "x": -0.1911494923754463,
+        "y": -0.16030598264914808
       }
     },
     {
@@ -2043,8 +2043,8 @@
       "text": "Human rights taxonomy. Area: AI Development. Stack: Insights. Tags: Taxonomy, Human rights. Level: 4. Years: 3",
       "cluster": 7,
       "coord": {
-        "x": -0.2616057752621556,
-        "y": -0.1527067654244295
+        "x": -0.2626459809376417,
+        "y": -0.1499383756465026
       }
     },
     {
@@ -2067,8 +2067,8 @@
       "text": "MySQL open database. Area: AI Development. Stack: Insights. Tags: MySQL, Open data. Level: 4. Years: 3",
       "cluster": 7,
       "coord": {
-        "x": -0.2180867910935929,
-        "y": -0.009949778332424627
+        "x": -0.2157667342301212,
+        "y": -0.012628581514317458
       }
     },
     {
@@ -2091,8 +2091,8 @@
       "text": "Data collection protocol. Area: AI Development. Stack: Insights. Tags: Protocol, Collection. Level: 4. Years: 3",
       "cluster": 7,
       "coord": {
-        "x": -0.23662509479479085,
-        "y": -0.0918539012432665
+        "x": -0.2373683023088557,
+        "y": -0.08958133892673523
       }
     },
     {
@@ -2115,8 +2115,8 @@
       "text": "Conflict trend analysis. Area: AI Development. Stack: Insights. Tags: Conflict, Analysis. Level: 4. Years: 3",
       "cluster": 7,
       "coord": {
-        "x": -0.27198627191101615,
-        "y": -0.1986180114775519
+        "x": -0.2737139030475161,
+        "y": -0.19582728785738404
       }
     },
     {
@@ -2139,8 +2139,8 @@
       "text": "Scholarly writing. Area: AI Development. Stack: Insights. Tags: Writing, Academic. Level: 4. Years: 3",
       "cluster": 7,
       "coord": {
-        "x": -0.319739961678449,
-        "y": -0.07668087037176598
+        "x": -0.31819988921757664,
+        "y": -0.07715709002391405
       }
     },
     {
@@ -2163,8 +2163,8 @@
       "text": "Gender violence research. Area: AI Development. Stack: Insights. Tags: Gender, Research. Level: 4. Years: 3",
       "cluster": 7,
       "coord": {
-        "x": -0.2626389663364995,
-        "y": -0.12183303227000518
+        "x": -0.26219723879972906,
+        "y": -0.12198838702748242
       }
     },
     {
@@ -2187,8 +2187,8 @@
       "text": "ICC briefing prep. Area: AI Development. Stack: Insights. Tags: ICC, Briefings. Level: 4. Years: 3",
       "cluster": 7,
       "coord": {
-        "x": -0.30064109799661304,
-        "y": -0.19708174145985938
+        "x": -0.2975999754849746,
+        "y": -0.20191122804825287
       }
     },
     {
@@ -2211,8 +2211,8 @@
       "text": "Research team leadership. Area: AI Development. Stack: Insights. Tags: Leadership, Research. Level: 4. Years: 3",
       "cluster": 7,
       "coord": {
-        "x": -0.3136944638153316,
-        "y": -0.10170310174855172
+        "x": -0.31322526650663823,
+        "y": -0.10096389780466763
       }
     },
     {
@@ -2235,8 +2235,8 @@
       "text": "Statute coding. Area: AI Development. Stack: Insights. Tags: Coding, Statutes. Level: 4. Years: 3",
       "cluster": 7,
       "coord": {
-        "x": -0.24817711581642118,
-        "y": -0.16645930766772296
+        "x": -0.24882620310031728,
+        "y": -0.16500494372017105
       }
     },
     {
@@ -2259,8 +2259,8 @@
       "text": "Data quality assurance. Area: AI Development. Stack: Insights. Tags: Quality, QA. Level: 4. Years: 3",
       "cluster": 7,
       "coord": {
-        "x": -0.19908927980677088,
-        "y": 0.01371597661715395
+        "x": -0.19639155103612793,
+        "y": 0.011403290288187104
       }
     },
     {
@@ -2283,8 +2283,8 @@
       "text": "Interview synthesis. Area: AI Development. Stack: Insights. Tags: Interviews, Synthesis. Level: 4. Years: 3",
       "cluster": 7,
       "coord": {
-        "x": -0.3591338478929303,
-        "y": -0.13949336018051106
+        "x": -0.36496036535988086,
+        "y": -0.13814589599163368
       }
     },
     {
@@ -2307,8 +2307,8 @@
       "text": "Publication coordination. Area: AI Development. Stack: Insights. Tags: Coordination, Publication. Level: 4. Years: 3",
       "cluster": 7,
       "coord": {
-        "x": -0.2192598281827368,
-        "y": -0.20712507732100977
+        "x": -0.21833242230125166,
+        "y": -0.20690911695499248
       }
     },
     {
@@ -2331,8 +2331,8 @@
       "text": "Presentation design. Area: AI Development. Stack: Insights. Tags: Presentation, Design. Level: 4. Years: 3",
       "cluster": 7,
       "coord": {
-        "x": -0.29281152328731747,
-        "y": -0.12995700428487306
+        "x": -0.2947470997715923,
+        "y": -0.12828627686323676
       }
     }
   ],
@@ -2363,14 +2363,14 @@
         }
       ],
       "centroidSample": [
-        -0.0148231642,
-        0.005287157666666666,
-        0.060645516666666656,
-        0.007859125666666666,
-        0.01566460366666667,
-        -0.016571358333333334,
-        -0.020851607666666664,
-        -0.011940841333333334
+        -0.014571593700000001,
+        0.005231276333333332,
+        0.06080096999999999,
+        0.0077917149999999985,
+        0.015796071333333335,
+        -0.016538853333333336,
+        -0.020917751666666668,
+        -0.012024713666666666
       ]
     },
     {
@@ -2399,14 +2399,14 @@
         }
       ],
       "centroidSample": [
-        -0.006934865399999999,
-        0.022510382666666665,
-        0.027516343333333332,
-        -0.005758705833333332,
-        -0.010325566666666666,
-        -0.013489933833333334,
-        0.002540161223333333,
-        0.038839559333333336
+        -0.0069517830000000004,
+        0.022558363999999997,
+        0.027528159999999996,
+        -0.005797731866666667,
+        -0.010284495666666667,
+        -0.0134999997,
+        0.0025385019,
+        0.03886267866666667
       ]
     },
     {
@@ -2510,14 +2510,14 @@
         }
       ],
       "centroidSample": [
-        0.0030065579222222213,
-        0.010865804498333333,
-        0.06541880305555557,
-        -0.004010555753333333,
-        0.008866160361111113,
-        -0.026538184144444445,
-        -0.0186216529,
-        0.016503498343888885
+        0.0030716153388888876,
+        0.010768241592777776,
+        0.06547823333333333,
+        -0.003956501731111112,
+        0.00886335186388889,
+        -0.02650185766666667,
+        -0.01858070374444444,
+        0.01653779594777778
       ]
     },
     {
@@ -2701,55 +2701,55 @@
         }
       ],
       "centroidSample": [
-        -0.014706665818823536,
-        -0.004636263292764706,
-        0.05994940476470587,
-        -0.006694261761764707,
-        0.01951024115882352,
-        -0.012154505492941179,
-        -0.022594306909411766,
-        0.01403034686235294
+        -0.014700371646411761,
+        -0.004572289969,
+        0.05999297029411763,
+        -0.006724839213529413,
+        0.019523218241176473,
+        -0.012161324204705884,
+        -0.022682086103823537,
+        0.013980061873529409
       ]
     },
     {
       "id": 4,
       "key": "bi-and-data-viz",
-      "label": "BI and Data Viz",
+      "label": "Data Visualization",
       "category": "bi-and-data-viz",
-      "categoryLabel": "BI and Data Viz",
+      "categoryLabel": "Data Visualization",
       "stack": "insights",
       "stackLabel": "Insights",
       "members": [
         {
           "id": "bi-and-data-viz:Excel",
           "name": "Excel",
-          "area": "BI and Data Viz"
+          "area": "Data Visualization"
         },
         {
-          "id": "bi-and-data-viz:Data Viz Suite",
-          "name": "Data Viz Suite",
-          "area": "BI and Data Viz"
+          "id": "bi-and-data-viz:Data Visualization",
+          "name": "Data Visualization",
+          "area": "Data Visualization"
         },
         {
           "id": "bi-and-data-viz:Looker",
           "name": "Looker",
-          "area": "BI and Data Viz"
+          "area": "Data Visualization"
         },
         {
           "id": "bi-and-data-viz:Power BI",
           "name": "Power BI",
-          "area": "BI and Data Viz"
+          "area": "Data Visualization"
         }
       ],
       "centroidSample": [
-        -0.036047944,
-        0.0049542661250000005,
-        0.05447368,
-        -0.00467958975,
-        -0.011396138325,
-        -0.01343387475,
-        -0.023711886,
-        0.0015695790000000006
+        -0.03548983,
+        -0.0034669738250000005,
+        0.052120505750000004,
+        -0.0010803146250000003,
+        -0.00742711754875,
+        -0.0088501496,
+        -0.0291743395,
+        0.0082009405
       ]
     },
     {
@@ -2773,14 +2773,14 @@
         }
       ],
       "centroidSample": [
-        -0.038350524999999996,
-        -0.0090245165,
-        0.031094023250000002,
-        -0.026684017999999997,
-        -0.00625222145,
-        -0.0059204895,
-        -0.012610976999999999,
-        -0.0032991256999999998
+        -0.0383274905,
+        -0.009040888,
+        0.031114919199999997,
+        -0.0266498604,
+        -0.00627604035,
+        -0.0059106843,
+        -0.0125984785,
+        -0.0032773143500000003
       ]
     },
     {
@@ -2879,14 +2879,14 @@
         }
       ],
       "centroidSample": [
-        -0.016075167500000005,
-        -0.011653977306705882,
-        0.045335280852941175,
-        -0.015625964341176475,
-        -0.0021005161470588236,
-        -0.008596097078235295,
-        -0.02159641217647059,
-        0.014232081623529411
+        -0.016075466723529414,
+        -0.01166345793,
+        0.04534258494117647,
+        -0.01564236246470588,
+        -0.0021004935647058833,
+        -0.008588789127058825,
+        -0.02159326788235294,
+        0.014248994129411765
       ]
     },
     {
@@ -2980,14 +2980,14 @@
         }
       ],
       "centroidSample": [
-        0.0013569974499999997,
-        -0.0103882389,
-        0.05806408743749999,
-        0.0011991301749999996,
-        -0.0028850726,
-        -0.02802013923125,
-        0.0009459391562500002,
-        -0.00016537209437500065
+        0.001378748825000001,
+        -0.010360541216250001,
+        0.057971772937500006,
+        0.00113082703125,
+        -0.00268912545375,
+        -0.02809103475625,
+        0.00099588491875,
+        -0.00023224117562500022
       ]
     }
   ],
@@ -2997,12 +2997,12 @@
   ],
   "ranges": {
     "x": {
-      "min": -0.3591338478929303,
-      "max": 0.3661721702239777
+      "min": -0.36496036535988086,
+      "max": 0.36293630485347267
     },
     "y": {
-      "min": -0.39686754902545524,
-      "max": 0.308299255616823
+      "min": -0.3971272045868707,
+      "max": 0.3077683088681525
     }
   }
 }

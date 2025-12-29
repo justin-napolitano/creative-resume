@@ -87,7 +87,8 @@ type SkillItem = { name?: string; level?: number; years?: number; display?: bool
 type GraphSkill = (typeof skillGraph.skills)[number];
 type GraphCluster = (typeof skillGraph.clusters)[number];
 
-const badgeCharLimit = 22;
+const badgeCharLimitDesktop = 22;
+const badgeCharLimitMobile = 18;
 const skillBadgeAliases: Record<string, string> = {
   'Infrastructure as Code': 'Infrastructure as Code',
   'Serverless Platforms': 'Serverless Platforms',
@@ -95,23 +96,23 @@ const skillBadgeAliases: Record<string, string> = {
   'Algorithms & Stats': 'Algorithms & Stats',
 };
 
-const friendlySkillLabel = (name: string = '') => {
+const friendlySkillLabel = (name: string = '', limit = badgeCharLimitDesktop) => {
   if (!name) return name;
   if (skillBadgeAliases[name]) return skillBadgeAliases[name];
-  if (name.length <= badgeCharLimit) return name;
+  if (name.length <= limit) return name;
   const words = name.split(/\s+/);
   const trimmed = [...words];
-  while (trimmed.length > 1 && trimmed.join(' ').length > badgeCharLimit) {
+  while (trimmed.length > 1 && trimmed.join(' ').length > limit) {
     trimmed.pop();
   }
   const phrase = trimmed.join(' ');
-  if (phrase.length > 0 && phrase.length <= badgeCharLimit) return phrase;
-  return `${name.slice(0, badgeCharLimit - 1)}…`;
+  if (phrase.length > 0 && phrase.length <= limit) return phrase;
+  return `${name.slice(0, limit - 1)}…`;
 };
 
 const labelForSkill = (skill: GraphSkill | SkillItem) => {
   const base = (skill as any).badgeLabel ?? skill.name ?? '';
-  return friendlySkillLabel(base);
+  return friendlySkillLabel(base, badgeCharLimitDesktop);
 };
 const normalize = (value?: number) => (typeof value === 'number' && !Number.isNaN(value) ? value : Number(value ?? 0));
 const tenureValue = (value?: number) => Math.min(normalize(value), highlightCap);
@@ -142,7 +143,8 @@ graphSkills.forEach((skill) => {
 
 const capabilityStacks = summary
   .map((pillar) => {
-    const items = sortBySeniority([...(skillsByStack.get(pillar.id ?? '') ?? [])]).slice(0, highlightCap);
+    const rawItems = sortBySeniority([...(skillsByStack.get(pillar.id ?? '') ?? [])]);
+    const items = rawItems.slice(0, highlightCap);
     return { pillar, items };
   })
   .filter((entry) => entry.items.length > 0);
@@ -180,7 +182,7 @@ const topSkillNames = new Set(
       score: (skill.years ?? 0) * 1.2 + (skill.level ?? 0) * 0.8,
     }))
     .sort((a, b) => b.score - a.score)
-    .slice(0, topSkillLimit)
+    .slice(0, topSkillLimit + 14)
     .map((entry) => entry.name)
 );
 const footnoteFor = (id: string) => sectionNotes[id] ?? '';
@@ -305,17 +307,11 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                   {(() => {
                     const baseChips = computeExperienceChips(role);
                     const desktopChips = trimToRows(baseChips, 4, 2);
-                    const mobileChips = trimToRows(baseChips, 2, 2);
                     return (
                       <>
                         {desktopChips.length > 0 && (
                           <ul class="chip-row chip-row--desktop">
                             {desktopChips.map((chip) => <li>{chip}</li>)}
-                          </ul>
-                        )}
-                        {mobileChips.length > 0 && (
-                          <ul class="chip-row chip-row--mobile">
-                            {mobileChips.map((chip) => <li>{chip}</li>)}
                           </ul>
                         )}
                       </>
