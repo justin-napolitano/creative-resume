@@ -37,6 +37,39 @@ const highlightCap = 5;
 type SkillItem = { name?: string; level?: number; years?: number; display?: boolean };
 type GraphSkill = (typeof skillGraph.skills)[number];
 type GraphCluster = (typeof skillGraph.clusters)[number];
+
+const badgeCharLimit = 'SEGMENT + FIVETRAN'.length;
+const skillBadgeAliases: Record<string, string> = {
+  'Infrastructure as Code': 'Infra + Code',
+  'Serverless Platforms': 'Serverless Ops',
+  'Algorithms and Statistics': 'Algorithms & Stats',
+  'Algorithms & Stats': 'Algorithms & Stats',
+  'Data Science Platforms': 'Data Sci Platforms',
+};
+
+const shortenWord = (word: string = '') => (word.length <= 4 ? word : `${word.slice(0, 4)}.`);
+const fallbackInitials = (words: string[]) =>
+  words
+    .map((word) => (word ? `${word[0].toUpperCase()}.` : ''))
+    .join(' ')
+    .trim();
+
+const friendlySkillLabel = (name: string = '') => {
+  if (!name) return name;
+  if (skillBadgeAliases[name]) return skillBadgeAliases[name];
+  if (name.length <= badgeCharLimit) return name;
+  const words = name.split(/\s+/);
+  const shortened = words.map(shortenWord).join(' ');
+  if (shortened.length <= badgeCharLimit) return shortened;
+  const initials = fallbackInitials(words);
+  if (initials.length > 0 && initials.length <= badgeCharLimit) return initials;
+  return `${name.slice(0, badgeCharLimit - 1)}…`;
+};
+
+const labelForSkill = (skill: GraphSkill | SkillItem) => {
+  const base = (skill as any).badgeLabel ?? skill.name ?? '';
+  return friendlySkillLabel(base);
+};
 const normalize = (value?: number) => (typeof value === 'number' && !Number.isNaN(value) ? value : Number(value ?? 0));
 const tenureValue = (value?: number) => Math.min(normalize(value), highlightCap);
 const sortBySeniority = <T extends { name?: string; years?: number }>(items: T[] = []) =>
@@ -185,7 +218,7 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                     <li>
                       <div class="skill-row">
                         <div>
-                          <span class="skill-name">{item.name}</span>
+                          <span class="skill-name">{labelForSkill(item)}</span>
                           {/* Level hidden for tighter layout */}
                         </div>
                         <span class="skill-years">{formatYears(item.years ?? 0)}</span>
@@ -334,7 +367,7 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                     <div class="skill-row">
                       <div>
                         {categoryLabel && <span class="skill-area-label">{categoryLabel}</span>}
-                        <span class="skill-name">{item.name}</span>
+                        <span class="skill-name">{labelForSkill(item)}</span>
                         {/* Level hidden for tighter layout */}
                       </div>
                       <div class="skill-years-group">

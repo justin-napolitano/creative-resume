@@ -481,11 +481,12 @@ section:first-of-type {
 
 .skill-area-label {
   display: block;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+  font-size: clamp(0.48rem, 0.4rem + 0.25vw, 0.6rem);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink);
-  margin-top: 0.1rem;
+  margin-top: 0.05rem;
+  white-space: nowrap;
 }
 
 

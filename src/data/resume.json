@@ -182,7 +182,7 @@
         {
           "name": "SQL",
           "level": 5,
-        "years": 5,
+          "years": 5,
           "tags": [
             "PostgreSQL",
             "MySQL",
@@ -192,7 +192,7 @@
         {
           "name": "Python",
           "level": 5,
-        "years": 5,
+          "years": 5,
           "tags": [
             "data engineering",
             "machine learning",
@@ -361,7 +361,7 @@
       ]
     },
     {
-      "area": "Algorithms and Statistics",
+      "area": "Algorithms & Stats",
       "id": "algorithms-and-statistics",
       "stack": "insights",
       "items": [
@@ -429,7 +429,7 @@
         {
           "name": "LLM Ops",
           "level": 3,
-        "years": 5,
+          "years": 5,
           "tags": [
             "prompt orchestration",
             "monitoring"
@@ -552,7 +552,7 @@
     {
       "id": "heart-failure-quality-metrics-dashboard",
       "name": "Heart Failure Quality Metrics Dashboard",
-      "context": "AdventHealth \u2013 Epic Clarity / Power BI",
+      "context": "AdventHealth – Epic Clarity / Power BI",
       "technologies": [
         "Epic Clarity",
         "SQL",
@@ -568,7 +568,7 @@
     {
       "id": "o-e-mortality-analysis",
       "name": "Observed-to-Expected Mortality Analysis",
-      "context": "AdventHealth \u2013 Vizient data",
+      "context": "AdventHealth – Vizient data",
       "technologies": [
         "Vizient clinical data",
         "SQL",
@@ -636,18 +636,18 @@
           ]
         },
         {
-        "name": "Python",
-        "level": 5,
-        "years": 5,
+          "name": "Python",
+          "level": 5,
+          "years": 5,
           "tags": [
             "data engineering",
             "automation"
           ]
         },
         {
-        "name": "SQL",
-        "level": 5,
-        "years": 5,
+          "name": "SQL",
+          "level": 5,
+          "years": 5,
           "tags": [
             "PostgreSQL",
             "MySQL",
