@@ -446,6 +446,7 @@
       "location": "Orlando, Florida",
       "start": "Aug 2025",
       "end": "Present",
+      "stack": "warehousing",
       "bullets": [
         "Stand up Azure Data Factory + Synapse pipelines that land Epic Clarity extracts into governed models for quality and operations teams.",
         "Build Power BI and Looker Studio dashboards that surface heart failure and readmission metrics for service line leaders within 24 hours of discharge.",
@@ -460,7 +461,8 @@
         "ELT frameworks",
         "Epic Clarity",
         "SQL"
-      ]
+      ],
+      "stack": "warehousing"
     },
     {
       "id": "business-analyst-ii-adventhealth",
@@ -469,6 +471,7 @@
       "location": "Orlando, Florida",
       "start": "Jan 2025",
       "end": "Aug 2025",
+      "stack": "warehousing",
       "bullets": [
         "Partnered with clinical and operations teams to define data requirements for performance and quality improvement initiatives.",
         "Designed SQL-based reporting pipelines and Power BI dashboards for inpatient care and readmissions metrics.",
@@ -481,7 +484,8 @@
         "Power BI",
         "Enterprise Data Warehouse",
         "Healthcare quality metrics"
-      ]
+      ],
+      "stack": "warehousing"
     },
     {
       "id": "data-analytics-engineer-penske",
@@ -490,6 +494,7 @@
       "location": "Los Angeles, California",
       "start": "Apr 2022",
       "end": "Apr 2024",
+      "stack": "insights",
       "bullets": [
         "Led evaluation of six AI and data vendors, assessing integration, latency, and scalability to guide $5M in platform investment decisions.",
         "Fine-tuned large language models using Python, improving generative quality by 10% based on editorial scoring loops.",
@@ -507,7 +512,8 @@
         "AI vendor evaluation",
         "Subscription analytics",
         "Customer segmentation"
-      ]
+      ],
+      "stack": "insights"
     },
     {
       "id": "independent-data-consultant-btjn",
@@ -516,6 +522,7 @@
       "location": "Houston, Texas",
       "start": "Jan 2020",
       "end": "Apr 2022",
+      "stack": "deployment",
       "bullets": [
         "Implemented two customer data platforms to improve audience segmentation and campaign targeting for 2M+ high-value prospects.",
         "Migrated three legacy systems to GCP, doubling data processing speeds and streamlining analytics workflows.",
@@ -526,7 +533,8 @@
         "Customer data platforms",
         "Marketing automation",
         "ETL and system migration"
-      ]
+      ],
+      "stack": "deployment"
     },
     {
       "id": "research-assistant-ucf",
@@ -535,6 +543,7 @@
       "location": "Orlando, Florida",
       "start": "Jan 2018",
       "end": "Aug 2019",
+      "stack": "insights",
       "bullets": [
         "Designed a rubric for coding international human rights violations using statutes from major global treaties.",
         "Led a five-person research team to develop an open-source MySQL database documenting systemic abuses across global conflict zones.",
@@ -545,7 +554,8 @@
         "Research design",
         "Data coding",
         "Human rights analytics"
-      ]
+      ],
+      "stack": "insights"
     }
   ],
   "projects": [

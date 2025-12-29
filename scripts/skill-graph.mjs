@@ -4,6 +4,7 @@ import process from 'process';
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const resumePath = path.join(__dirname, '../src/data/resume.json');
+const experienceSkillsPath = path.join(__dirname, '../src/data/experience-skills.json');
 const defaultOutputPath = path.join(__dirname, '../public/skill-graph.json');
 
 const args = process.argv.slice(2);
@@ -201,6 +202,20 @@ const buildAreaContext = (area) => {
   return `${area.area}. ${area.category ?? ''}. ${itemText}`;
 };
 
+const buildExperienceContext = (entry, experience) => {
+  const skillNotes = (entry.skills ?? []).map((skill) => `${skill.name} ${skill.summary ?? ''}`).join('; ');
+  const bulletText = (experience?.bullets ?? []).join(' ');
+  return [
+    `Experience: ${entry.title ?? experience?.title ?? ''}`,
+    experience?.company ? `Company: ${experience.company}` : '',
+    experience?.location ? `Location: ${experience.location}` : '',
+    bulletText ? `Bullets: ${bulletText}` : '',
+    skillNotes ? `Skills: ${skillNotes}` : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
+};
+
 const classifyStack = (embedding, fallback = 'insights') => {
   let best = null;
   let bestScore = -Infinity;
@@ -218,34 +233,126 @@ const classifyStack = (embedding, fallback = 'insights') => {
 async function main() {
   const raw = await fs.readFile(resumePath, 'utf-8');
   const resume = JSON.parse(raw);
-  const resumeAreas = resume.skills ?? [];
+  const experiences = resume.experience ?? [];
+  let experienceSkillSets = [];
+  try {
+    const experienceRaw = await fs.readFile(experienceSkillsPath, 'utf-8');
+    experienceSkillSets = JSON.parse(experienceRaw);
+  } catch (error) {
+  experienceSkillSets = [];
+  }
+
+  const stackLookup = new Map();
+  (resume.skills ?? []).forEach((area) => {
+    if (area.stack) stackLookup.set(area.id ?? slugify(area.area), area.stack);
+  });
 
   const taxonomyEmbeddings = await embedTexts(taxonomy.map((entry) => entry.descriptor));
   taxonomy.forEach((entry, idx) => {
     entry.embedding = taxonomyEmbeddings[idx];
   });
 
-  const areaContexts = resumeAreas.map((area) => ({ area, context: buildAreaContext(area) }));
-  const areaEmbeddings = areaContexts.length > 0 ? await embedTexts(areaContexts.map((ctx) => ctx.context)) : [];
+  const baseAreaContexts = (resume.skills ?? []).map((area) => ({
+    meta: {
+      id: area.id ?? slugify(area.area),
+      label: area.area,
+      stack: area.stack,
+      categoryKey: area.categoryId ?? area.id ?? slugify(area.area),
+      categoryLabel: area.category ?? area.area,
+      items: (area.items ?? []).map((item) => ({
+        ...item,
+        badgeLabel: friendlySkillLabel(item.name ?? ''),
+      })),
+    },
+    context: buildAreaContext(area),
+  }));
 
-  const areas = areaContexts.map((ctx, index) => {
-    const embedding = areaEmbeddings[index] ?? [];
-    const manualStack = ctx.area.stack;
+  const experienceMap = new Map(experiences.map((entry) => [entry.id, entry]));
+  const experienceAreaContexts = experienceSkillSets
+    .map((entry) => {
+      if (!entry.skills || entry.skills.length === 0) return null;
+      const exp = experienceMap.get(entry.experienceId);
+      const id = entry.experienceId ? `experience-${entry.experienceId}` : slugify(entry.title ?? 'experience');
+      const labelParts = [entry.title ?? exp?.title ?? 'Experience'];
+      if (exp?.company) labelParts.push(`— ${exp.company}`);
+      const label = labelParts.join(' ');
+      return {
+        meta: {
+          id,
+          label,
+          stack: exp?.stack || stackLookup.get(exp?.stackAreaId) || undefined,
+          categoryKey: id,
+          categoryLabel: entry.title ?? exp?.title ?? 'Experience',
+          items: (entry.skills ?? []).map((skill) => ({
+            name: skill.name,
+            tags: skill.tags ?? [],
+            level: skill.level ?? 4,
+            years: skill.years ?? 3,
+            badgeLabel: friendlySkillLabel(skill.name ?? ''),
+          })),
+        },
+        context: buildExperienceContext(entry, exp),
+      };
+    })
+    .filter(Boolean);
+
+  const baseEmbeddings = baseAreaContexts.length > 0 ? await embedTexts(baseAreaContexts.map((ctx) => ctx.context)) : [];
+
+  const areas = baseAreaContexts.map((ctx, index) => {
+    const embedding = baseEmbeddings[index] ?? [];
+    const manualStack = ctx.meta.stack;
     const stackMeta = manualStack && stackLabels[manualStack]
       ? { stack: manualStack, stackLabel: stackLabels[manualStack] }
       : classifyStack(embedding);
-    const categoryKey = ctx.area.categoryId ?? ctx.area.id ?? slugify(ctx.area.area);
-    const categoryLabel = ctx.area.category ?? ctx.area.area;
     return {
-      id: ctx.area.id ?? slugify(ctx.area.area),
-      label: ctx.area.area,
+      id: ctx.meta.id,
+      label: ctx.meta.label,
       stack: stackMeta.stack,
       stackLabel: stackMeta.stackLabel,
-      categoryKey,
-      categoryLabel,
-      items: ctx.area.items ?? [],
+      categoryKey: ctx.meta.categoryKey,
+      categoryLabel: ctx.meta.categoryLabel,
+      items: ctx.meta.items,
       clusterId: index,
+      embedding,
     };
+  });
+
+  const experienceEmbeddings = experienceAreaContexts.length > 0 ? await embedTexts(experienceAreaContexts.map((ctx) => ctx.context)) : [];
+  experienceAreaContexts.forEach((ctx, idx) => {
+    const embedding = experienceEmbeddings[idx] ?? [];
+    let bestArea = null;
+    let bestScore = -Infinity;
+    areas.forEach((area) => {
+      if (ctx.meta.stack && area.stack !== ctx.meta.stack) return;
+      const score = cosineSimilarity(embedding, area.embedding ?? []);
+      if (score > bestScore) {
+        bestScore = score;
+        bestArea = area;
+      }
+    });
+    if (bestArea) {
+      bestArea.items.push(...ctx.meta.items);
+    } else {
+      const stackMeta = ctx.meta.stack && stackLabels[ctx.meta.stack]
+        ? { stack: ctx.meta.stack, stackLabel: stackLabels[ctx.meta.stack] }
+        : classifyStack(embedding);
+      areas.push({
+        id: ctx.meta.id,
+        label: ctx.meta.label,
+        stack: stackMeta.stack,
+        stackLabel: stackMeta.stackLabel,
+        categoryKey: ctx.meta.categoryKey,
+        categoryLabel: ctx.meta.categoryLabel,
+        items: ctx.meta.items,
+        clusterId: areas.length,
+        embedding,
+      });
+    }
+  });
+
+  areas.forEach((area, idx) => {
+    area.clusterId = idx;
+    delete area.embedding;
   });
 
   const skills = [];
@@ -262,7 +369,7 @@ async function main() {
         stackLabel: area.stackLabel,
         clusterId: area.clusterId,
         name: item.name,
-        badgeLabel: friendlySkillLabel(item.name ?? ''),
+        badgeLabel: item.badgeLabel ?? friendlySkillLabel(item.name ?? ''),
         level: item.level,
         years: item.years,
         tags: item.tags ?? [],

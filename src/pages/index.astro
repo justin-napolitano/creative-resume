@@ -1,6 +1,16 @@
 ---
 import '@/styles/global.css';
-import { experienceNotes, resume, sectionMeta, sectionNotes, siteConfig, siteCopy, skillGraph, utilityLinks } from '@/config';
+import {
+  experienceNotes,
+  experienceSkills,
+  resume,
+  sectionMeta,
+  sectionNotes,
+  siteConfig,
+  siteCopy,
+  skillGraph,
+  utilityLinks,
+} from '@/config';
 
 const header = resume.header;
 type PracticePillar = { id?: string; label?: string; note?: string; icon?: string };
@@ -21,6 +31,37 @@ const iconForPillar = (icon?: string) => {
   return iconMap[key];
 };
 const experiences = resume.experience ?? [];
+type ExperienceEntry = (typeof experiences)[number];
+const experienceSkillMap = new Map((experienceSkills ?? []).map((entry) => [entry.experienceId, entry.skills ?? []]));
+
+const maxExperienceChips = 13;
+const chipsForExperience = (role: ExperienceEntry) => {
+  const generated = experienceSkillMap.get(role.id) ?? [];
+  const baseNames = generated.map((skill) => skill.name).filter(Boolean);
+  const chips: string[] = [];
+  baseNames.forEach((name) => {
+    if (name && !chips.includes(name)) chips.push(name);
+  });
+  const fallback = role.technologies ?? [];
+  fallback.forEach((tech) => {
+    if (!tech || chips.length >= maxExperienceChips) return;
+    if (!chips.includes(tech)) chips.push(tech);
+  });
+  if (chips.length === 0) {
+    return fallback.slice(0, maxExperienceChips);
+  }
+  if (chips.length < maxExperienceChips) {
+    const source = baseNames.length > 0 ? baseNames : fallback;
+    let idx = 0;
+    while (source.length > 0 && chips.length < maxExperienceChips) {
+      const next = source[idx % source.length];
+      if (next) chips.push(next);
+      idx += 1;
+      if (idx > 200) break;
+    }
+  }
+  return chips.slice(0, maxExperienceChips);
+};
 const formatDate = (date?: string) => {
   if (!date) return '';
   const parts = date.split(' ');
@@ -259,11 +300,15 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                       {role.bullets.map((bullet) => <li>{bullet}</li>)}
                     </ul>
                   )}
-                  {role.technologies?.length > 0 && (
-                    <ul class="chip-row">
-                      {role.technologies.map((tech) => <li>{tech}</li>)}
-                    </ul>
-                  )}
+                  {(() => {
+                    const chips = chipsForExperience(role);
+                    if (!chips || chips.length === 0) return null;
+                    return (
+                      <ul class="chip-row">
+                        {chips.map((chip) => <li>{chip}</li>)}
+                      </ul>
+                    );
+                  })()}
                   {(siteConfig.pullQuotes?.[role.title] || experienceNotes[role.title]) && (
                     <aside class="pull-quote" aria-label="Margin note">
                       {siteConfig.pullQuotes?.[role.title] ?? experienceNotes[role.title]}

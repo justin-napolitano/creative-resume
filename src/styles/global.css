@@ -881,6 +881,12 @@ footer a {
   }
 }
 
+@media (min-width: 1024px) {
+  .skill-badges .badge:nth-child(n + 45) {
+    display: none;
+  }
+}
+
 .skill-badges .skill-row > div:first-child {
   flex: 1;
   min-width: 0;
