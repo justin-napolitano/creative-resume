@@ -292,7 +292,7 @@
       ]
     },
     {
-      "area": "BI and Data Viz",
+      "area": "Data Visualization",
       "id": "bi-and-data-viz",
       "stack": "insights",
       "items": [
@@ -306,7 +306,7 @@
           ]
         },
         {
-          "name": "Data Viz Suite",
+          "name": "Data Visualization",
           "level": 4,
           "years": 6,
           "tags": [
