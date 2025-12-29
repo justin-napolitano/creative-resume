@@ -1,0 +1,500 @@
+---
+import fs from 'fs/promises';
+import path from 'path';
+
+const graphPath = path.join(process.cwd(), 'public/skill-graph.json');
+let graphData: any = null;
+try {
+  const raw = await fs.readFile(graphPath, 'utf-8');
+  graphData = JSON.parse(raw);
+} catch (error) {
+  graphData = null;
+}
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Skill Graph</title>
+    <style>
+      body {
+        font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont;
+        background: #f7f4ef;
+        margin: 0;
+        padding: 2rem;
+        color: #0f100f;
+      }
+      h1 {
+        margin-top: 0;
+      }
+      .graph-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 3fr) minmax(260px, 1fr);
+        gap: 1.5rem;
+        align-items: start;
+      }
+      .graph-shell {
+        margin-top: 2rem;
+        border: 1px solid rgba(15, 16, 15, 0.1);
+        border-radius: 16px;
+        background: #fff;
+        padding: 1rem;
+      }
+      .graph-toolbar {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .graph-toolbar button {
+        background: #0f7c66;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.35rem 0.85rem;
+        font-size: 0.85rem;
+        cursor: pointer;
+      }
+      .graph-toolbar button:last-child {
+        background: transparent;
+        border: 1px solid rgba(15, 16, 15, 0.2);
+        color: #0f100f;
+      }
+      #skillGraph {
+        width: 100%;
+        height: 600px;
+        border-radius: 12px;
+        background: radial-gradient(circle at 35% 25%, rgba(15, 124, 102, 0.08), transparent 55%), #faf7f0;
+        position: relative;
+      }
+      .cluster-label {
+        font-size: 0.85rem;
+        fill: rgba(15, 16, 15, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        pointer-events: none;
+      }
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+      .legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+      .legend-swatch {
+        width: 18px;
+        height: 6px;
+        border-radius: 999px;
+      }
+      .empty-state {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        border: 1px dashed rgba(15, 16, 15, 0.3);
+        border-radius: 12px;
+        background: #fff;
+      }
+      .instructions {
+        margin-top: 0.5rem;
+        font-size: 0.95rem;
+        color: rgba(15, 16, 15, 0.7);
+      }
+      .graph-side {
+        margin-top: 2rem;
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid rgba(15, 16, 15, 0.1);
+        padding: 1rem 1.2rem;
+      }
+      .graph-side h2 {
+        margin-top: 0;
+        margin-bottom: 0.3rem;
+      }
+      .cluster-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        margin: 1rem 0;
+      }
+      .cluster-chip {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        border: 1px solid rgba(15, 16, 15, 0.15);
+        border-radius: 999px;
+        padding: 0.25rem 0.75rem;
+        background: #fafbfd;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: background 0.2s ease, border 0.2s ease;
+      }
+      .cluster-chip span {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-flex;
+      }
+      .cluster-chip em {
+        font-style: normal;
+        color: rgba(15, 16, 15, 0.55);
+      }
+      .cluster-chip.is-active {
+        border-color: #0f7c66;
+        background: rgba(15, 124, 102, 0.12);
+      }
+      .skill-detail {
+        border-top: 1px solid rgba(15, 16, 15, 0.1);
+        padding-top: 0.75rem;
+        font-size: 0.9rem;
+      }
+      .detail-skill h3 {
+        margin-bottom: 0.2rem;
+      }
+      .detail-skill dl {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.35rem 1rem;
+        margin: 0.5rem 0 0;
+      }
+      .detail-skill dt {
+        font-weight: 600;
+      }
+      .detail-skill dd {
+        margin: 0;
+      }
+      .tooltip {
+        position: fixed;
+        pointer-events: none;
+        background: rgba(15, 16, 15, 0.92);
+        color: #fff;
+        padding: 0.45rem 0.7rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        letter-spacing: 0.03em;
+        z-index: 50;
+        box-shadow: 0 6px 20px rgba(15, 16, 15, 0.3);
+        opacity: 0;
+        transition: opacity 0.12s ease;
+      }
+      @media (max-width: 900px) {
+        .graph-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Skill Graph</h1>
+    <p class="instructions">
+      {graphData
+        ? 'Scatter plot clusters skills using 2D PCA. Hover or click a skill to inspect it, or focus a cluster from the rail.'
+        : 'Run `npm run skill:graph` to generate public/skill-graph.json before viewing this page.'}
+    </p>
+    {graphData ? (
+      <div class="graph-layout">
+        <div class="graph-shell">
+          <div class="graph-toolbar">
+            <button id="resetView">Reset view</button>
+            <button id="downloadGraph">Download PNG</button>
+          </div>
+          <svg id="skillGraph" role="img" aria-label="Skill clusters" data-graph={JSON.stringify(graphData)}></svg>
+          <div class="legend" id="skillLegend"></div>
+        </div>
+        <aside class="graph-side">
+          <h2>Cluster rail</h2>
+          <p>Select a cluster or click any dot to pin details.</p>
+          <div class="cluster-list" id="clusterList"></div>
+          <div class="skill-detail" id="skillDetail">
+            <strong>Tip:</strong> click a skill to see tags, tenure, and level.
+          </div>
+        </aside>
+      </div>
+    ) : (
+      <div class="empty-state">
+        <strong>No skill graph data found.</strong>
+        <p>Generate it via <code>npm run skill:graph</code> (requires OPENAI_API_KEY) to unlock this view.</p>
+      </div>
+    )}
+    {graphData && (
+      <script type="module">
+        const svg = document.querySelector('#skillGraph');
+        const legendEl = document.querySelector('#skillLegend');
+        const clusterList = document.querySelector('#clusterList');
+        const detailEl = document.querySelector('#skillDetail');
+        const downloadBtn = document.querySelector('#downloadGraph');
+        const resetBtn = document.querySelector('#resetView');
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        document.body.appendChild(tooltip);
+        const graph = JSON.parse(svg.dataset.graph);
+        const colors = [
+          '#0f7c66',
+          '#f17c0f',
+          '#5072f2',
+          '#dd4868',
+          '#8b5cf6',
+          '#0081a7',
+        ];
+
+        const { skills, clusters, ranges } = graph;
+        const xs = skills.map((skill) => skill.coord.x);
+        const ys = skills.map((skill) => skill.coord.y);
+        const minX = ranges?.x?.min ?? Math.min(...xs);
+        const maxX = ranges?.x?.max ?? Math.max(...xs);
+        const minY = ranges?.y?.min ?? Math.min(...ys);
+        const maxY = ranges?.y?.max ?? Math.max(...ys);
+        const padX = (maxX - minX) * 0.1 || 1;
+        const padY = (maxY - minY) * 0.1 || 1;
+
+        const scaleX = (value) => ((value - minX + padX) / (maxX - minX + padX * 2)) * svg.clientWidth;
+        const scaleY = (value) => svg.clientHeight - ((value - minY + padY) / (maxY - minY + padY * 2)) * svg.clientHeight;
+
+        const clusterColors = new Map();
+        clusters.forEach((cluster) => {
+          clusterColors.set(cluster.id, colors[cluster.id % colors.length]);
+        });
+
+        const originX = scaleX(0);
+        const originY = scaleY(0);
+        const axisHorizontal = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        axisHorizontal.setAttribute('x1', '0');
+        axisHorizontal.setAttribute('x2', svg.clientWidth);
+        axisHorizontal.setAttribute('y1', originY);
+        axisHorizontal.setAttribute('y2', originY);
+        axisHorizontal.setAttribute('stroke', 'rgba(15,16,15,0.15)');
+        axisHorizontal.setAttribute('stroke-width', '1');
+        axisHorizontal.setAttribute('stroke-dasharray', '6 6');
+        svg.appendChild(axisHorizontal);
+
+        const axisVertical = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        axisVertical.setAttribute('y1', '0');
+        axisVertical.setAttribute('y2', svg.clientHeight);
+        axisVertical.setAttribute('x1', originX);
+        axisVertical.setAttribute('x2', originX);
+        axisVertical.setAttribute('stroke', 'rgba(15,16,15,0.15)');
+        axisVertical.setAttribute('stroke-width', '1');
+        axisVertical.setAttribute('stroke-dasharray', '6 6');
+        svg.appendChild(axisVertical);
+
+        const axisLabels = [
+          { text: 'Systems ↔ Activation', x: svg.clientWidth - 12, y: originY - 8, anchor: 'end' },
+          { text: 'Research ↔ Delivery', x: originX + 8, y: 22, anchor: 'start', rotate: '-90' },
+        ];
+        axisLabels.forEach((label, idx) => {
+          const axisText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          axisText.setAttribute('x', label.x);
+          axisText.setAttribute('y', label.y);
+          axisText.setAttribute('text-anchor', label.anchor);
+          axisText.setAttribute('fill', 'rgba(15,16,15,0.6)');
+          axisText.setAttribute('font-size', '12');
+          if (label.rotate) axisText.setAttribute('transform', `rotate(${label.rotate} ${label.x} ${label.y})`);
+          axisText.textContent = label.text;
+          svg.appendChild(axisText);
+        });
+
+        function computeHull(points) {
+          if (points.length < 3) return null;
+          const sorted = [...points].sort((a, b) => (a.x === b.x ? a.y - b.y : a.x - b.x));
+          const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+          const lower = [];
+          sorted.forEach((point) => {
+            while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], point) <= 0) {
+              lower.pop();
+            }
+            lower.push(point);
+          });
+          const upper = [];
+          sorted
+            .slice()
+            .reverse()
+            .forEach((point) => {
+              while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], point) <= 0) {
+                upper.pop();
+              }
+              upper.push(point);
+            });
+          upper.pop();
+          lower.pop();
+          return lower.concat(upper);
+        }
+
+        const hullPaths = [];
+        const labelNodes = [];
+        clusters.forEach((cluster) => {
+          const points = skills.filter((skill) => skill.cluster === cluster.id).map((skill) => skill.coord);
+          const hull = computeHull(points);
+          if (!hull || hull.length < 3) return;
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          const d = hull
+            .map((point, idx) => `${idx === 0 ? 'M' : 'L'} ${scaleX(point.x)} ${scaleY(point.y)}`)
+            .join(' ');
+          path.setAttribute('d', `${d} Z`);
+          const color = clusterColors.get(cluster.id);
+          path.setAttribute('fill', color);
+          path.setAttribute('fill-opacity', '0.08');
+          path.setAttribute('stroke', color);
+          path.setAttribute('stroke-opacity', '0.45');
+          path.setAttribute('stroke-width', '1.6');
+          svg.appendChild(path);
+          hullPaths[cluster.id] = path;
+
+          const centroid = hull.reduce(
+            (acc, point) => ({ x: acc.x + point.x, y: acc.y + point.y }),
+            { x: 0, y: 0 }
+          );
+          centroid.x /= hull.length;
+          centroid.y /= hull.length;
+          const labelNode = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          labelNode.textContent = cluster.label || `Cluster ${cluster.id + 1}`;
+          labelNode.setAttribute('x', scaleX(centroid.x));
+          labelNode.setAttribute('y', scaleY(centroid.y));
+          labelNode.setAttribute('text-anchor', 'middle');
+          labelNode.classList.add('cluster-label');
+          svg.appendChild(labelNode);
+          labelNodes[cluster.id] = labelNode;
+        });
+
+        const circleNodes = [];
+        skills.forEach((skill) => {
+          const color = colors[skill.cluster % colors.length];
+          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          circle.setAttribute('cx', scaleX(skill.coord.x));
+          circle.setAttribute('cy', scaleY(skill.coord.y));
+          const radius = 6 + (skill.level ?? 3) * 0.7;
+          circle.setAttribute('r', radius);
+          circle.setAttribute('fill', color);
+          circle.setAttribute('stroke', '#fff');
+          circle.setAttribute('stroke-width', '1.5');
+          circle.setAttribute('opacity', '0.92');
+          circle.dataset.name = skill.name;
+          circle.dataset.area = skill.area;
+          circle.dataset.cluster = skill.cluster;
+          circle.dataset.level = skill.level ?? '';
+          circle.dataset.years = skill.years ?? '';
+          circle.addEventListener('mouseenter', () => {
+            tooltip.style.opacity = '1';
+            tooltip.textContent = `${skill.name} • ${skill.area}`;
+          });
+          circle.addEventListener('mousemove', (event) => {
+            tooltip.style.top = `${event.clientY + 16}px`;
+            tooltip.style.left = `${event.clientX + 16}px`;
+          });
+          circle.addEventListener('mouseleave', () => {
+            tooltip.style.opacity = '0';
+          });
+          circle.addEventListener('click', () => {
+            setActiveSkill(skill);
+          });
+          svg.appendChild(circle);
+          circleNodes.push(circle);
+        });
+
+        clusters.forEach((cluster) => {
+          const color = colors[cluster.id % colors.length];
+          const legendItem = document.createElement('div');
+          legendItem.className = 'legend-item';
+          const swatch = document.createElement('span');
+          swatch.className = 'legend-swatch';
+          swatch.style.background = color;
+          const label = document.createElement('span');
+          label.textContent = cluster.label || `Cluster ${cluster.id + 1}`;
+          legendItem.appendChild(swatch);
+          legendItem.appendChild(label);
+          legendEl.appendChild(legendItem);
+          const item = document.createElement('button');
+          item.className = 'cluster-chip';
+          item.dataset.cluster = cluster.id;
+          item.innerHTML = `<span style="background:${color}"></span>${cluster.label || `Cluster ${cluster.id + 1}`} <em>(${skills.filter((skill) => skill.cluster === cluster.id).length})</em>`;
+          item.addEventListener('click', () => highlightCluster(cluster.id));
+          clusterList.appendChild(item);
+        });
+
+        function highlightCluster(clusterId) {
+          circleNodes.forEach((circle) => {
+            circle.style.opacity = clusterId === undefined || `${clusterId}` === ''
+              ? '0.92'
+              : circle.dataset.cluster == clusterId
+              ? '1'
+              : '0.2';
+          });
+          hullPaths.forEach((path, idx) => {
+            if (!path) return;
+            path.style.opacity = clusterId === undefined ? '1' : idx === clusterId ? '1' : '0.2';
+          });
+          labelNodes.forEach((node, idx) => {
+            if (!node) return;
+            node.style.opacity = clusterId === undefined ? '1' : idx === clusterId ? '1' : '0.2';
+          });
+          document.querySelectorAll('.cluster-chip').forEach((chip) => {
+            chip.classList.toggle('is-active', clusterId !== undefined && chip.dataset.cluster == clusterId);
+          });
+          if (clusterId === undefined) {
+            detailEl.innerHTML = '<strong>Tip:</strong> click a skill to see tags, tenure, and level.';
+          } else {
+            const cluster = clusters.find((item) => item.id === clusterId);
+            const members = skills.filter((skill) => skill.cluster === clusterId);
+            detailEl.innerHTML = `
+              <div class="detail-cluster">
+                <h3>${cluster.label || `Cluster ${cluster.id + 1}`}</h3>
+                <p>${members.length} skills</p>
+                <ul>${members
+                  .slice(0, 6)
+                  .map((skill) => `<li>${skill.name}</li>`)
+                  .join('')}</ul>
+              </div>
+            `;
+          }
+        }
+
+        function setActiveSkill(skill) {
+          detailEl.innerHTML = `
+            <div class="detail-skill">
+              <h3>${skill.name}</h3>
+              <p>${skill.area}</p>
+              <dl>
+                <div><dt>Level</dt><dd>${skill.level ?? '—'}</dd></div>
+                <div><dt>Years</dt><dd>${skill.years ?? '—'}</dd></div>
+                <div><dt>Tags</dt><dd>${(skill.tags ?? []).join(', ') || '—'}</dd></div>
+              </dl>
+            </div>
+          `;
+          highlightCluster(skill.cluster);
+        }
+
+        downloadBtn?.addEventListener('click', () => {
+          const serializer = new XMLSerializer();
+          const svgString = serializer.serializeToString(svg);
+          const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const image = new Image();
+          image.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = svg.clientWidth * 2;
+            canvas.height = svg.clientHeight * 2;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#faf7f0';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+            URL.revokeObjectURL(url);
+            const a = document.createElement('a');
+            a.href = canvas.toDataURL('image/png');
+            a.download = 'skill-graph.png';
+            a.click();
+          };
+          image.src = url;
+        });
+
+        resetBtn?.addEventListener('click', () => {
+          highlightCluster(undefined);
+        });
+      </script>
+    )}
+  </body>
+</html>

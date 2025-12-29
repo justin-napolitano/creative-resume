@@ -1,0 +1,476 @@
+---
+import fs from 'fs/promises';
+import path from 'path';
+
+const graphPath = path.join(process.cwd(), 'public/skill-graph.json');
+let graphData: any = null;
+try {
+  const raw = await fs.readFile(graphPath, 'utf-8');
+  graphData = JSON.parse(raw);
+} catch (error) {
+  graphData = null;
+}
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Skill Graph (Experimental)</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont;
+      }
+      body {
+        margin: 0;
+        background: #f3efe7;
+        color: #0f1111;
+        padding: 2rem clamp(1rem, 5vw, 4rem);
+      }
+      h1 {
+        margin-top: 0;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 3fr) minmax(260px, 1fr);
+        gap: 1.75rem;
+        align-items: start;
+      }
+      canvas {
+        width: 100%;
+        height: min(70vh, 640px);
+        border-radius: 18px;
+        background: radial-gradient(circle at 30% 25%, rgba(15, 124, 102, 0.08), transparent 55%), #faf7f0;
+        border: 1px solid rgba(15, 16, 15, 0.12);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        display: block;
+      }
+      .shell {
+        background: #fff;
+        border-radius: 18px;
+        padding: 1.2rem;
+        border: 1px solid rgba(15, 16, 15, 0.07);
+        position: relative;
+      }
+      .toolbar {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .toolbar button {
+        border-radius: 999px;
+        border: none;
+        padding: 0.4rem 0.9rem;
+        font-size: 0.85rem;
+        cursor: pointer;
+        background: #0f7c66;
+        color: #fff;
+      }
+      .toolbar button.secondary {
+        background: transparent;
+        border: 1px solid rgba(15, 16, 15, 0.2);
+        color: #0f1111;
+      }
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 0.75rem;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+      .legend span::before {
+        content: '';
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: inline-flex;
+        background: currentColor;
+      }
+      aside {
+        background: #fff;
+        border-radius: 18px;
+        border: 1px solid rgba(15, 16, 15, 0.08);
+        padding: 1.25rem;
+      }
+      aside h2 {
+        margin-top: 0;
+        margin-bottom: 0.4rem;
+      }
+      .cluster-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        margin-bottom: 1rem;
+      }
+      .cluster-chip {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.35rem 0.8rem;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 16, 15, 0.2);
+        cursor: pointer;
+        font-size: 0.85rem;
+        background: #f9f8f4;
+      }
+      .cluster-chip span {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+        display: inline-flex;
+      }
+      .cluster-chip.is-active {
+        border-color: #0f7c66;
+        background: rgba(15, 124, 102, 0.12);
+      }
+      .detail {
+        border-top: 1px solid rgba(15, 16, 15, 0.15);
+        padding-top: 1rem;
+        font-size: 0.9rem;
+      }
+      .detail h3 {
+        margin: 0;
+      }
+      .detail dl {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.2rem 0.6rem;
+      }
+      .detail dt {
+        font-weight: 600;
+      }
+      .detail dd {
+        margin: 0;
+      }
+      .tooltip {
+        position: fixed;
+        pointer-events: none;
+        background: rgba(15, 16, 15, 0.95);
+        color: #fff;
+        padding: 0.4rem 0.7rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        letter-spacing: 0.05em;
+        opacity: 0;
+        transition: opacity 0.15s ease;
+        z-index: 50;
+      }
+      @media (max-width: 960px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        canvas {
+          height: 60vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Skill Graph (Bloom playground)</h1>
+    <p>
+      {graphData
+        ? 'Physics-based map of the skills. Drag nodes, pan/zoom the canvas, or pin a cluster from the rail.'
+        : 'Generate public/skill-graph.json via `npm run skill:graph` before visiting this route.'}
+    </p>
+    {graphData ? (
+      <div class="layout">
+        <div class="shell">
+          <div class="toolbar">
+            <button class="secondary" id="downloadGraph">Download PNG</button>
+            <button id="resetGraph">Reset view</button>
+          </div>
+          <canvas id="skillCanvas" data-graph={JSON.stringify(graphData)}></canvas>
+          <div class="legend" id="skillLegend"></div>
+        </div>
+        <aside>
+          <h2>Cluster rail</h2>
+          <p>Select a cluster or click a node to pin it.</p>
+          <div class="cluster-list" id="clusterList"></div>
+          <div class="detail" id="detailPanel">Hover or click a node to see detail.</div>
+        </aside>
+      </div>
+    ) : (
+      <div class="shell">
+        <strong>No data yet.</strong>
+        <p>Run `npm run skill:graph` with OPENAI_API_KEY set, then reload this page.</p>
+      </div>
+    )}
+    {graphData && (
+      <script type="module">
+        const canvas = document.querySelector('#skillCanvas');
+        const ctx = canvas.getContext('2d');
+        const legendEl = document.querySelector('#skillLegend');
+        const clusterList = document.querySelector('#clusterList');
+        const detailPanel = document.querySelector('#detailPanel');
+        const resetBtn = document.querySelector('#resetGraph');
+        const downloadBtn = document.querySelector('#downloadGraph');
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        document.body.appendChild(tooltip);
+        const graph = JSON.parse(canvas.dataset.graph);
+        const colors = ['#0f7c66','#f17c0f','#5072f2','#dd4868','#8b5cf6','#0081a7'];
+        const { skills, clusters, ranges } = graph;
+        const minX = ranges?.x?.min ?? Math.min(...skills.map((skill) => skill.coord.x));
+        const maxX = ranges?.x?.max ?? Math.max(...skills.map((skill) => skill.coord.x));
+        const minY = ranges?.y?.min ?? Math.min(...skills.map((skill) => skill.coord.y));
+        const maxY = ranges?.y?.max ?? Math.max(...skills.map((skill) => skill.coord.y));
+        const center = { x: (minX + maxX) / 2, y: (minY + maxY) / 2 };
+        const hulls = clusters.map((cluster) => {
+          const points = skills.filter((skill) => skill.cluster === cluster.id).map((skill) => ({ ...skill.coord }));
+          if (points.length < 3) return null;
+          const sorted = [...points].sort((a, b) => (a.x === b.x ? a.y - b.y : a.x - b.x));
+          const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+          const lower = [];
+          sorted.forEach((point) => {
+            while (lower.length >= 2 && cross(lower.at(-2), lower.at(-1), point) <= 0) lower.pop();
+            lower.push(point);
+          });
+          const upper = [];
+          sorted.slice().reverse().forEach((point) => {
+            while (upper.length >= 2 && cross(upper.at(-2), upper.at(-1), point) <= 0) upper.pop();
+            upper.push(point);
+          });
+          upper.pop();
+          lower.pop();
+          return lower.concat(upper);
+        });
+
+        const pixelRatio = window.devicePixelRatio || 1;
+        function resizeCanvas() {
+          canvas.width = canvas.clientWidth * pixelRatio;
+          canvas.height = canvas.clientHeight * pixelRatio;
+          ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const baseWidth = (maxX - minX) * 1.2 || 1;
+        const baseHeight = (maxY - minY) * 1.2 || 1;
+        let scale = Math.min(canvas.clientWidth / baseWidth, canvas.clientHeight / baseHeight);
+        let offsetX = canvas.clientWidth / 2;
+        let offsetY = canvas.clientHeight / 2;
+        function toScreen(point) {
+          return {
+            x: offsetX + (point.x - center.x) * scale,
+            y: offsetY - (point.y - center.y) * scale,
+          };
+        }
+        function toWorld(point) {
+          return {
+            x: (point.x - offsetX) / scale + center.x,
+            y: -(point.y - offsetY) / scale + center.y,
+          };
+        }
+
+        const nodes = skills.map((skill) => ({
+          ...skill,
+          base: { ...skill.coord },
+          position: { ...skill.coord },
+        }));
+        const clusterColors = Object.fromEntries(clusters.map((cluster) => [cluster.id, colors[cluster.id % colors.length]]));
+
+        clusters.forEach((cluster) => {
+          const swatch = document.createElement('span');
+          swatch.style.color = clusterColors[cluster.id];
+          swatch.textContent = cluster.label || `Cluster ${cluster.id + 1}`;
+          legendEl.appendChild(swatch);
+          const chip = document.createElement('button');
+          chip.className = 'cluster-chip';
+          chip.dataset.cluster = cluster.id;
+          chip.innerHTML = `<span style="background:${clusterColors[cluster.id]}"></span>${cluster.label || `Cluster ${cluster.id + 1}`} <em>(${skills.filter((skill) => skill.cluster === cluster.id).length})</em>`;
+          chip.addEventListener('click', () => setFocus(cluster.id));
+          clusterList.appendChild(chip);
+        });
+
+        let isPanning = false;
+        let activeNode = null;
+        let lastPointer = null;
+        let focusCluster;
+
+        function drawAxes() {
+          ctx.save();
+          ctx.strokeStyle = 'rgba(15,16,15,0.15)';
+          ctx.setLineDash([6, 6]);
+          const origin = toScreen({ x: 0, y: 0 });
+          ctx.beginPath(); ctx.moveTo(0, origin.y); ctx.lineTo(canvas.clientWidth, origin.y); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(origin.x, 0); ctx.lineTo(origin.x, canvas.clientHeight); ctx.stroke();
+          ctx.restore();
+        }
+
+        function drawHulls() {
+          hulls.forEach((hull, idx) => {
+            if (!hull) return;
+            ctx.save();
+            ctx.beginPath();
+            hull.forEach((point, i) => {
+              const p = toScreen(point);
+              if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+            });
+            ctx.closePath();
+            const active = focusCluster === undefined || focusCluster === idx;
+            ctx.fillStyle = clusterColors[idx];
+            ctx.globalAlpha = active ? 0.1 : 0.03;
+            ctx.fill();
+            ctx.globalAlpha = active ? 0.4 : 0.15;
+            ctx.strokeStyle = clusterColors[idx];
+            ctx.stroke();
+            const centroid = hull.reduce((acc, point) => ({ x: acc.x + point.x, y: acc.y + point.y }), { x: 0, y: 0 });
+            centroid.x /= hull.length; centroid.y /= hull.length;
+            const label = toScreen(centroid);
+            ctx.fillStyle = 'rgba(15,16,15,0.75)';
+            ctx.font = '10px Space Grotesk';
+            ctx.globalAlpha = active ? 1 : 0.2;
+            ctx.textAlign = 'center';
+            ctx.fillText(clusters[idx].label || `Cluster ${idx + 1}`, label.x, label.y);
+            ctx.restore();
+          });
+        }
+
+        function drawNodes() {
+          nodes.forEach((node) => {
+            ctx.save();
+            const screen = toScreen(node.position);
+            const dim = focusCluster !== undefined && node.cluster !== focusCluster;
+            ctx.globalAlpha = dim ? 0.25 : 1;
+            ctx.beginPath();
+            ctx.arc(screen.x, screen.y, 6 + (node.level ?? 3) * 0.7, 0, Math.PI * 2);
+            ctx.fillStyle = clusterColors[node.cluster];
+            ctx.fill();
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            ctx.restore();
+          });
+        }
+
+        function render() {
+          ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+          drawAxes();
+          drawHulls();
+          drawNodes();
+        }
+
+        function tick() {
+          nodes.forEach((node) => {
+            node.position.x += (node.base.x - node.position.x) * 0.05;
+            node.position.y += (node.base.y - node.position.y) * 0.05;
+          });
+          render();
+          requestAnimationFrame(tick);
+        }
+        tick();
+
+        function nodeAt(pointer) {
+          return nodes.find((node) => {
+            const screen = toScreen(node.position);
+            return Math.hypot(screen.x - pointer.x, screen.y - pointer.y) <= 10;
+          });
+        }
+
+        canvas.addEventListener('pointerdown', (event) => {
+          const rect = canvas.getBoundingClientRect();
+          const local = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+          lastPointer = local;
+          const hit = nodeAt(local);
+          if (hit) {
+            activeNode = hit;
+            setDetail(hit);
+            setFocus(hit.cluster);
+            canvas.setPointerCapture(event.pointerId);
+          } else {
+            isPanning = true;
+          }
+        });
+
+        canvas.addEventListener('pointermove', (event) => {
+          const rect = canvas.getBoundingClientRect();
+          const local = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+          const hover = nodeAt(local);
+          if (!activeNode && !isPanning && hover) {
+            tooltip.style.opacity = '1';
+            tooltip.textContent = `${hover.name} • ${hover.area}`;
+            tooltip.style.top = `${event.clientY + 16}px`;
+            tooltip.style.left = `${event.clientX + 16}px`;
+          } else {
+            tooltip.style.opacity = '0';
+          }
+          if (activeNode) {
+            const world = toWorld(local);
+            activeNode.base = { ...world };
+            activeNode.position = { ...world };
+          } else if (isPanning && lastPointer) {
+            offsetX += local.x - lastPointer.x;
+            offsetY += local.y - lastPointer.y;
+          }
+          lastPointer = local;
+        });
+
+        const release = (event) => {
+          if (event && event.pointerId) canvas.releasePointerCapture(event.pointerId);
+          activeNode = null;
+          isPanning = false;
+          lastPointer = null;
+          tooltip.style.opacity = '0';
+        };
+        canvas.addEventListener('pointerup', release);
+        canvas.addEventListener('pointerleave', release);
+
+        canvas.addEventListener('wheel', (event) => {
+          event.preventDefault();
+          const rect = canvas.getBoundingClientRect();
+          const local = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+          const world = toWorld(local);
+          const delta = event.deltaY > 0 ? 0.9 : 1.1;
+          scale = Math.min(Math.max(scale * delta, 0.4), 5);
+          const screenAfter = toScreen(world);
+          offsetX += local.x - screenAfter.x;
+          offsetY += local.y - screenAfter.y;
+        }, { passive: false });
+
+        function setFocus(clusterId) {
+          focusCluster = clusterId;
+          document.querySelectorAll('.cluster-chip').forEach((chip) => chip.classList.toggle('is-active', clusterId !== undefined && chip.dataset.cluster == clusterId));
+        }
+
+        function setDetail(item) {
+          detailPanel.innerHTML = `
+            <h3>${item.name}</h3>
+            <p>${item.area}</p>
+            <dl>
+              <dt>Level</dt><dd>${item.level ?? '—'}</dd>
+              <dt>Years</dt><dd>${item.years ?? '—'}</dd>
+              <dt>Tags</dt><dd>${(item.tags ?? []).join(', ') || '—'}</dd>
+            </dl>
+          `;
+        }
+
+        resetBtn.addEventListener('click', () => {
+          scale = Math.min(canvas.clientWidth / baseWidth, canvas.clientHeight / baseHeight);
+          offsetX = canvas.clientWidth / 2;
+          offsetY = canvas.clientHeight / 2;
+          focusCluster = undefined;
+          document.querySelectorAll('.cluster-chip').forEach((chip) => chip.classList.remove('is-active'));
+          detailPanel.textContent = 'Hover or click a node to see detail.';
+        });
+
+        downloadBtn.addEventListener('click', () => {
+          const image = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.href = image;
+          link.download = 'skill-graph-experimental.png';
+          link.click();
+        });
+      </script>
+    )}
+  </body>
+</html>

@@ -17,9 +17,9 @@
       "icon": "stack"
     },
     {
-      "id": "activation",
-      "label": "Activation",
-      "note": "Dashboards, alerts, exec handoffs",
+      "id": "deployment",
+      "label": "Deployment",
+      "note": "Cloud runbooks, runtime ops, exec handoffs",
       "icon": "handoff"
     },
     {
@@ -611,14 +611,6 @@
       "id": "skill-highlight-warehousing",
       "items": [
         {
-          "name": "Snowflake",
-          "level": 4,
-          "years": 2,
-          "tags": [
-            "cloud data warehouse"
-          ]
-        },
-        {
           "name": "BigQuery",
           "level": 5,
           "years": 5,
@@ -629,12 +621,20 @@
           ]
         },
         {
-          "name": "dbt",
-          "level": 3,
-          "years": 1.5,
+          "name": "Snowflake",
+          "level": 4,
+          "years": 2,
           "tags": [
-            "data modeling",
-            "ELT"
+            "cloud data warehouse"
+          ]
+        },
+        {
+          "name": "Python",
+          "level": 5,
+          "years": 7,
+          "tags": [
+            "data engineering",
+            "automation"
           ]
         },
         {
@@ -645,6 +645,15 @@
             "PostgreSQL",
             "MySQL",
             "ETL"
+          ]
+        },
+        {
+          "name": "dbt",
+          "level": 3,
+          "years": 1.5,
+          "tags": [
+            "data modeling",
+            "ELT"
           ]
         }
       ]
@@ -690,6 +699,15 @@
             "Cloud Run",
             "load balancing"
           ]
+        },
+        {
+          "name": "Microservices",
+          "level": 3,
+          "years": 2,
+          "tags": [
+            "service orchestration",
+            "serverless queues"
+          ]
         }
       ]
     },
@@ -731,6 +749,15 @@
           "tags": [
             "Looker",
             "Power BI"
+          ]
+        },
+        {
+          "name": "Segment & Fivetran",
+          "level": 4,
+          "years": 3,
+          "tags": [
+            "data ingestion",
+            "automation"
           ]
         }
       ]

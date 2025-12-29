@@ -42,10 +42,13 @@ const badgeToneFor = (index: number) => {
   const lightness = Math.min(baseLightness + index * lightnessStep, maxLightness);
   return `hsl(170deg 16% ${lightness}%)`;
 };
-const skillHighlights = (resume.skill_highlights ?? []).map((group) => ({
+const baseHighlights = (resume.skill_highlights ?? []).map((group) => ({
   ...group,
   items: sortBySeniority((group.items ?? []).filter(shouldDisplay)),
 }));
+const capabilityStacks = summary
+  .map((pillar, index) => ({ pillar, stack: baseHighlights[index] }))
+  .filter((entry) => entry.stack);
 const skillAreas = (resume.skills ?? []).map((area) => ({
   ...area,
   items: sortBySeniority((area.items ?? []).filter(shouldDisplay)),
@@ -55,6 +58,17 @@ const flattenedSkills = sortBySeniority(
   skillAreas.flatMap((area) =>
     (area.items ?? []).map((item) => ({ ...item, area: area.area }))
   )
+);
+const topSkillLimit = 10;
+const topSkillNames = new Set(
+  flattenedSkills
+    .map((skill) => ({
+      name: skill.name ?? '',
+      score: (skill.years ?? 0) * 1.2 + (skill.level ?? 0) * 0.8,
+    }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, topSkillLimit)
+    .map((entry) => entry.name)
 );
 const footnoteFor = (id: string) => sectionNotes[id] ?? '';
 const levelLabels: Record<number, string> = {
@@ -113,24 +127,41 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
         <div class="hero__note" role="note">{siteConfig.marginNote}</div>
       </header>
 
-      {summary.length > 0 && (
+      {capabilityStacks.length > 0 && (
         <section class="section" id="summary">
           <span class="section__code" aria-hidden="true">{sectionCode('summary')}</span>
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('summary')}</h2>
             <p class="section__subtitle">{siteCopy.sections.summary.subtitle}</p>
           </div>
-          <ul class="summary-list">
-            {summary.map((pillar) => (
-              <li class="summary-pill">
-                <span class="summary-pill__icon" aria-hidden="true" set:html={iconForPillar(pillar.icon)}></span>
-                <div class="summary-pill__body">
-                  <span class="summary-pill__label">{pillar.label}</span>
-                  {pillar.note && <span class="summary-pill__note">{pillar.note}</span>}
+          <div class="capability-grid">
+            {capabilityStacks.map(({ pillar, stack }) => (
+              <article class="capability-card">
+                <div class="capability-card__head">
+                  <span class="capability-card__icon" aria-hidden="true" set:html={iconForPillar(pillar.icon)}></span>
+                  <p class="capability-card__label">{pillar.label}</p>
                 </div>
-              </li>
+                <ul>
+                  {stack.items?.map((item) => (
+                    <li>
+                      <div class="skill-row">
+                        <div>
+                          <span class="skill-name">{item.name}</span>
+                          <span class="skill-level">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
+                        </div>
+                        <span class="skill-years">{formatYears(item.years ?? 0)}</span>
+                      </div>
+                      <div class="meter meter--dots" role="img" aria-label={`${item.name} — ${item.years} years`}>
+                        {Array.from({ length: highlightCap }).map((_, dotIndex) => (
+                          <span class={`dot${dotIndex < Math.round(Math.min(highlightCap, item.years ?? 0)) ? ' filled' : ''}`}></span>
+                        ))}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </article>
             ))}
-          </ul>
+          </div>
         </section>
       )}
 
@@ -203,81 +234,6 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
         </section>
       )}
 
-      {(skillHighlights.length > 0 || skillAreas.length > 0) && (
-        <section class="section section--skills" id="skills" data-skill-view="badges">
-          <span class="section__code" aria-hidden="true">{sectionCode('skills')}</span>
-          <div class="section__header">
-            <h2 class="section__title">{sectionLabel('skills')}</h2>
-            <p class="section__subtitle">{siteCopy.sections.skills.subtitle}</p>
-          </div>
-          {skillHighlights.length > 0 && (
-            <div class="skill-stage">
-              <div class="skill-stage__header">
-                <p class="skill-stage__eyebrow">{siteCopy.sections.skills.flagship.eyebrow}</p>
-                <p class="skill-stage__support">{siteCopy.sections.skills.flagship.support}</p>
-              </div>
-              <div class="skill-highlights">
-                {skillHighlights.map((group) => (
-                  <article class="skill-card skill-card--dots">
-                    <div class="skill-card__header">
-                      <h4>{group.area}</h4>
-                    </div>
-                    <ul>
-                      {group.items?.map((item) => (
-                        <li>
-                          <div class="skill-row">
-                            <div>
-                              <span class="skill-name">{item.name}</span>
-                              <span class="skill-level skill-level--block">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
-                            </div>
-                            <div class="skill-years-group">
-                              <span class="skill-years">{formatYears(item.years ?? 0)}</span>
-                              <div class="meter meter--dots" role="img" aria-label={`${item.name} — ${item.years} years`}>
-                                {Array.from({ length: highlightCap }).map((_, dotIndex) => (
-                                  <span class={`dot${dotIndex < Math.round(Math.min(highlightCap, item.years ?? 0)) ? ' filled' : ''}`}></span>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </article>
-                ))}
-              </div>
-            </div>
-          )}
-          {skillAreas.length > 0 && (
-            <div class="skill-stage skill-stage--badges">
-              <div class="skill-stage__header skill-stage__header--inline">
-                <p class="skill-stage__eyebrow">{siteCopy.sections.skills.badges.eyebrow}</p>
-                <p class="skill-stage__support">{siteCopy.sections.skills.badges.support}</p>
-              </div>
-              <div class="skill-badges">
-                {flattenedSkills.map((item, index) => (
-                  <div class="badge" style={`--badge-tone:${badgeToneFor(index)}`}>
-                    <div class="skill-row">
-                      <div>
-                        <span class="skill-name">{item.name}</span>
-                        <span class="skill-level skill-level--block">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
-                      </div>
-                      <div class="skill-years-group">
-                        <span class="skill-years">{formatYears(item.years ?? 0)}</span>
-                        <div class="meter meter--dots" role="img" aria-label={`${item.name} — ${item.years} years`}>
-                          {Array.from({ length: highlightCap }).map((_, dotIndex) => (
-                            <span class={`dot${dotIndex < Math.round(Math.min(highlightCap, item.years ?? 0)) ? ' filled' : ''}`}></span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </section>
-      )}
-
       {education.length > 0 && (
         <section class="section" id="education">
           <span class="section__code" aria-hidden="true">{sectionCode('education')}</span>
@@ -314,6 +270,42 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
               </li>
             ))}
           </ul>
+        </section>
+      )}
+
+      {flattenedSkills.length > 0 && (
+        <section class="section section--skills" id="skills" data-skill-view="badges">
+          <span class="section__code" aria-hidden="true">{sectionCode('skills')}</span>
+          <div class="section__header">
+            <h2 class="section__title">{siteCopy.sections.skills.badges.eyebrow}</h2>
+            <p class="section__subtitle">{siteCopy.sections.skills.badges.support}</p>
+          </div>
+          <div class="skill-stage skill-stage--badges">
+            <div class="skill-badges">
+              {flattenedSkills.map((item, index) => {
+                const isTop = topSkillNames.has(item.name ?? '');
+                const badgeClass = `badge${isTop ? '' : ' badge--mobile-hidden'}`;
+                return (
+                  <div class={badgeClass} style={`--badge-tone:${badgeToneFor(index)}`}>
+                    <div class="skill-row">
+                      <div>
+                        <span class="skill-name">{item.name}</span>
+                        <span class="skill-level skill-level--block">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
+                      </div>
+                      <div class="skill-years-group">
+                        <span class="skill-years">{formatYears(item.years ?? 0)}</span>
+                        <div class="meter meter--dots" role="img" aria-label={`${item.name} — ${item.years} years`}>
+                          {Array.from({ length: highlightCap }).map((_, dotIndex) => (
+                            <span class={`dot${dotIndex < Math.round(Math.min(highlightCap, item.years ?? 0)) ? ' filled' : ''}`}></span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </section>
       )}
 

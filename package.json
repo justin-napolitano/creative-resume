@@ -10,7 +10,8 @@
     "astro": "astro",
     "check": "astro check",
     "pdf": "node scripts/fetch-pdf.mjs",
-    "pdf:html": "node scripts/export-pdf.mjs"
+    "pdf:html": "node scripts/export-pdf.mjs",
+    "skill:graph": "node scripts/skill-graph.mjs"
   },
   "dependencies": {
     "astro": "^5.16.5"

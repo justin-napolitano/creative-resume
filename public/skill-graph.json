@@ -1,0 +1,828 @@
+{
+  "generatedAt": "2025-12-29T05:43:14.805Z",
+  "model": "text-embedding-3-small",
+  "clusterCount": 6,
+  "skills": [
+    {
+      "id": "lakehouses:BigQuery",
+      "area": "Lakehouses",
+      "name": "BigQuery",
+      "level": 5,
+      "years": 5,
+      "tags": [
+        "SQL",
+        "columnar storage",
+        "GCP"
+      ],
+      "text": "BigQuery. Area: Lakehouses. Tags: SQL, columnar storage, GCP. Level: 5. Years: 5",
+      "cluster": 1,
+      "coord": {
+        "x": 0.22080471324321696,
+        "y": 0.23425712286852887
+      }
+    },
+    {
+      "id": "lakehouses:Snowflake",
+      "area": "Lakehouses",
+      "name": "Snowflake",
+      "level": 4,
+      "years": 2,
+      "tags": [
+        "cloud data warehouse"
+      ],
+      "text": "Snowflake. Area: Lakehouses. Tags: cloud data warehouse. Level: 4. Years: 2",
+      "cluster": 3,
+      "coord": {
+        "x": 0.12916769113136328,
+        "y": 0.18134901589138322
+      }
+    },
+    {
+      "id": "lakehouses:dbt",
+      "area": "Lakehouses",
+      "name": "dbt",
+      "level": 3,
+      "years": 1.5,
+      "tags": [
+        "data modeling",
+        "ELT"
+      ],
+      "text": "dbt. Area: Lakehouses. Tags: data modeling, ELT. Level: 3. Years: 1.5",
+      "cluster": 2,
+      "coord": {
+        "x": -0.06328935356815048,
+        "y": 0.06738018914217275
+      }
+    },
+    {
+      "id": "activation-systems:CDP Modeling",
+      "area": "Activation Systems",
+      "name": "CDP Modeling",
+      "level": 4,
+      "years": 3,
+      "tags": [
+        "segmentation",
+        "identity resolution"
+      ],
+      "text": "CDP Modeling. Area: Activation Systems. Tags: segmentation, identity resolution. Level: 4. Years: 3",
+      "cluster": 4,
+      "coord": {
+        "x": -0.21706080687873763,
+        "y": -0.3188957352285628
+      }
+    },
+    {
+      "id": "activation-systems:Audience Pipelines",
+      "area": "Activation Systems",
+      "name": "Audience Pipelines",
+      "level": 4,
+      "years": 3,
+      "tags": [
+        "journey triggers",
+        "CRM activation"
+      ],
+      "text": "Audience Pipelines. Area: Activation Systems. Tags: journey triggers, CRM activation. Level: 4. Years: 3",
+      "cluster": 4,
+      "coord": {
+        "x": -0.10837398819082958,
+        "y": -0.29730736255506174
+      }
+    },
+    {
+      "id": "activation-systems:Segment & Fivetran",
+      "area": "Activation Systems",
+      "name": "Segment & Fivetran",
+      "level": 4,
+      "years": 3,
+      "tags": [
+        "data ingestion",
+        "automation"
+      ],
+      "text": "Segment & Fivetran. Area: Activation Systems. Tags: data ingestion, automation. Level: 4. Years: 3",
+      "cluster": 0,
+      "coord": {
+        "x": -0.0166833930930705,
+        "y": -0.08631767911914125
+      }
+    },
+    {
+      "id": "cloud-compute:GCP",
+      "area": "Cloud Compute",
+      "name": "GCP",
+      "level": 5,
+      "years": 4,
+      "tags": [
+        "BigQuery",
+        "Cloud Functions",
+        "GCS"
+      ],
+      "text": "GCP. Area: Cloud Compute. Tags: BigQuery, Cloud Functions, GCS. Level: 5. Years: 4",
+      "cluster": 1,
+      "coord": {
+        "x": 0.38015145848976556,
+        "y": 0.0548872183689934
+      }
+    },
+    {
+      "id": "cloud-compute:Azure",
+      "area": "Cloud Compute",
+      "name": "Azure",
+      "level": 3,
+      "years": 1,
+      "tags": [
+        "data services"
+      ],
+      "text": "Azure. Area: Cloud Compute. Tags: data services. Level: 3. Years: 1",
+      "cluster": 3,
+      "coord": {
+        "x": 0.40310188310653083,
+        "y": 0.030437385637918722
+      }
+    },
+    {
+      "id": "cloud-compute:AWS",
+      "area": "Cloud Compute",
+      "name": "AWS",
+      "level": 2,
+      "years": 0.5,
+      "tags": [
+        "S3",
+        "Lambda"
+      ],
+      "text": "AWS. Area: Cloud Compute. Tags: S3, Lambda. Level: 2. Years: 0.5",
+      "cluster": 3,
+      "coord": {
+        "x": 0.4721342283987189,
+        "y": -0.04128062959038875
+      }
+    },
+    {
+      "id": "cloud-compute:Microservices",
+      "area": "Cloud Compute",
+      "name": "Microservices",
+      "level": 3,
+      "years": 2,
+      "tags": [
+        "serverless",
+        "event-driven"
+      ],
+      "text": "Microservices. Area: Cloud Compute. Tags: serverless, event-driven. Level: 3. Years: 2",
+      "cluster": 3,
+      "coord": {
+        "x": 0.42843513588131354,
+        "y": -0.1439363035059274
+      }
+    },
+    {
+      "id": "cloud-compute:Runtime Platforms",
+      "area": "Cloud Compute",
+      "name": "Runtime Platforms",
+      "level": 4,
+      "years": 4,
+      "tags": [
+        "Compute Engine",
+        "Cloud Run",
+        "load balancing",
+        "reverse proxy"
+      ],
+      "text": "Runtime Platforms. Area: Cloud Compute. Tags: Compute Engine, Cloud Run, load balancing, reverse proxy. Level: 4. Years: 4",
+      "cluster": 1,
+      "coord": {
+        "x": 0.4266442324328042,
+        "y": -0.11122066854594462
+      }
+    },
+    {
+      "id": "data-science-platforms:SQL",
+      "area": "Data Science Platforms",
+      "name": "SQL",
+      "level": 5,
+      "years": 7,
+      "tags": [
+        "PostgreSQL",
+        "MySQL",
+        "analytical SQL"
+      ],
+      "text": "SQL. Area: Data Science Platforms. Tags: PostgreSQL, MySQL, analytical SQL. Level: 5. Years: 7",
+      "cluster": 2,
+      "coord": {
+        "x": -0.01752889091283085,
+        "y": 0.24906824186320228
+      }
+    },
+    {
+      "id": "data-science-platforms:Python",
+      "area": "Data Science Platforms",
+      "name": "Python",
+      "level": 5,
+      "years": 7,
+      "tags": [
+        "data engineering",
+        "machine learning",
+        "automation"
+      ],
+      "text": "Python. Area: Data Science Platforms. Tags: data engineering, machine learning, automation. Level: 5. Years: 7",
+      "cluster": 2,
+      "coord": {
+        "x": 0.023447831068436665,
+        "y": 0.13607541470613557
+      }
+    },
+    {
+      "id": "data-science-platforms:Pandas",
+      "area": "Data Science Platforms",
+      "name": "Pandas",
+      "level": 5,
+      "years": 7,
+      "tags": [
+        "dataframes",
+        "transformations"
+      ],
+      "text": "Pandas. Area: Data Science Platforms. Tags: dataframes, transformations. Level: 5. Years: 7",
+      "cluster": 2,
+      "coord": {
+        "x": -0.07495457952508225,
+        "y": 0.28035387505253356
+      }
+    },
+    {
+      "id": "data-science-platforms:Jupyter",
+      "area": "Data Science Platforms",
+      "name": "Jupyter",
+      "level": 5,
+      "years": 6,
+      "tags": [
+        "prototyping",
+        "analysis notebooks"
+      ],
+      "text": "Jupyter. Area: Data Science Platforms. Tags: prototyping, analysis notebooks. Level: 5. Years: 6",
+      "cluster": 2,
+      "coord": {
+        "x": -0.11149215752543185,
+        "y": 0.20804467754386405
+      }
+    },
+    {
+      "id": "data-science-platforms:Apache Airflow",
+      "area": "Data Science Platforms",
+      "name": "Apache Airflow",
+      "level": 4,
+      "years": 3,
+      "tags": [
+        "orchestration",
+        "scheduling"
+      ],
+      "text": "Apache Airflow. Area: Data Science Platforms. Tags: orchestration, scheduling. Level: 4. Years: 3",
+      "cluster": 2,
+      "coord": {
+        "x": 0.14961229148556654,
+        "y": -0.013024403610412837
+      }
+    },
+    {
+      "id": "data-science-platforms:Terraform",
+      "area": "Data Science Platforms",
+      "name": "Terraform",
+      "level": 3,
+      "years": 2,
+      "tags": [
+        "infrastructure as code",
+        "cloud provisioning"
+      ],
+      "text": "Terraform. Area: Data Science Platforms. Tags: infrastructure as code, cloud provisioning. Level: 3. Years: 2",
+      "cluster": 3,
+      "coord": {
+        "x": 0.2962007218608944,
+        "y": -0.028642652789697853
+      }
+    },
+    {
+      "id": "data-science-platforms:GitHub Actions",
+      "area": "Data Science Platforms",
+      "name": "GitHub Actions",
+      "level": 3,
+      "years": 3,
+      "tags": [
+        "CI/CD",
+        "automation"
+      ],
+      "text": "GitHub Actions. Area: Data Science Platforms. Tags: CI/CD, automation. Level: 3. Years: 3",
+      "cluster": 0,
+      "coord": {
+        "x": 0.19946793584526734,
+        "y": -0.004872112979086707
+      }
+    },
+    {
+      "id": "data-science-platforms:Great Expectations",
+      "area": "Data Science Platforms",
+      "name": "Great Expectations",
+      "level": 3,
+      "years": 2,
+      "tags": [
+        "data quality",
+        "validation"
+      ],
+      "text": "Great Expectations. Area: Data Science Platforms. Tags: data quality, validation. Level: 3. Years: 2",
+      "cluster": 2,
+      "coord": {
+        "x": -0.04135690904404629,
+        "y": 0.11888997085205402
+      }
+    },
+    {
+      "id": "bi-and-data-viz:Excel",
+      "area": "BI and Data Viz",
+      "name": "Excel",
+      "level": 5,
+      "years": 10,
+      "tags": [
+        "Power Query",
+        "dashboarding"
+      ],
+      "text": "Excel. Area: BI and Data Viz. Tags: Power Query, dashboarding. Level: 5. Years: 10",
+      "cluster": 2,
+      "coord": {
+        "x": -0.1811551308800555,
+        "y": 0.4147763839299152
+      }
+    },
+    {
+      "id": "bi-and-data-viz:Data Viz Suite",
+      "area": "BI and Data Viz",
+      "name": "Data Viz Suite",
+      "level": 4,
+      "years": 6,
+      "tags": [
+        "Matplotlib",
+        "Seaborn",
+        "Plotly",
+        "Leaflet"
+      ],
+      "text": "Data Viz Suite. Area: BI and Data Viz. Tags: Matplotlib, Seaborn, Plotly, Leaflet. Level: 4. Years: 6",
+      "cluster": 2,
+      "coord": {
+        "x": -0.23644329676076015,
+        "y": 0.39281368672389294
+      }
+    },
+    {
+      "id": "bi-and-data-viz:Looker",
+      "area": "BI and Data Viz",
+      "name": "Looker",
+      "level": 3,
+      "years": 2,
+      "tags": [
+        "embedded analytics"
+      ],
+      "text": "Looker. Area: BI and Data Viz. Tags: embedded analytics. Level: 3. Years: 2",
+      "cluster": 0,
+      "coord": {
+        "x": -0.17354089463603728,
+        "y": 0.2323395442503532
+      }
+    },
+    {
+      "id": "bi-and-data-viz:Power BI",
+      "area": "BI and Data Viz",
+      "name": "Power BI",
+      "level": 4,
+      "years": 2,
+      "tags": [
+        "DAX",
+        "enterprise BI"
+      ],
+      "text": "Power BI. Area: BI and Data Viz. Tags: DAX, enterprise BI. Level: 4. Years: 2",
+      "cluster": 2,
+      "coord": {
+        "x": -0.1844128023498893,
+        "y": 0.3617489075881211
+      }
+    },
+    {
+      "id": "graph-analysis:NetworkX",
+      "area": "Graph Analysis",
+      "name": "NetworkX",
+      "level": 5,
+      "years": 5,
+      "tags": [
+        "graph algorithms",
+        "network analysis"
+      ],
+      "text": "NetworkX. Area: Graph Analysis. Tags: graph algorithms, network analysis. Level: 5. Years: 5",
+      "cluster": 5,
+      "coord": {
+        "x": -0.3281396389562633,
+        "y": -0.061822801060381335
+      }
+    },
+    {
+      "id": "graph-analysis:Neo4j",
+      "area": "Graph Analysis",
+      "name": "Neo4j",
+      "level": 4,
+      "years": 3,
+      "tags": [
+        "graph databases",
+        "Cypher"
+      ],
+      "text": "Neo4j. Area: Graph Analysis. Tags: graph databases, Cypher. Level: 4. Years: 3",
+      "cluster": 4,
+      "coord": {
+        "x": -0.2645315516910124,
+        "y": -0.012892639590148516
+      }
+    },
+    {
+      "id": "algorithms-and-statistics:Seasonal Forecasts",
+      "area": "Algorithms and Statistics",
+      "name": "Seasonal Forecasts",
+      "level": 4,
+      "years": 3,
+      "tags": [
+        "time series",
+        "demand forecasting"
+      ],
+      "text": "Seasonal Forecasts. Area: Algorithms and Statistics. Tags: time series, demand forecasting. Level: 4. Years: 3",
+      "cluster": 5,
+      "coord": {
+        "x": -0.19910736015053757,
+        "y": -0.05460133945362668
+      }
+    },
+    {
+      "id": "algorithms-and-statistics:Parametric Testing",
+      "area": "Algorithms and Statistics",
+      "name": "Parametric Testing",
+      "level": 4,
+      "years": 4,
+      "tags": [
+        "A/B testing",
+        "hypothesis testing"
+      ],
+      "text": "Parametric Testing. Area: Algorithms and Statistics. Tags: A/B testing, hypothesis testing. Level: 4. Years: 4",
+      "cluster": 5,
+      "coord": {
+        "x": -0.24368040682440412,
+        "y": -0.14620048399920724
+      }
+    },
+    {
+      "id": "algorithms-and-statistics:Topic Modeling",
+      "area": "Algorithms and Statistics",
+      "name": "Topic Modeling",
+      "level": 4,
+      "years": 3,
+      "tags": [
+        "NLP",
+        "LDA"
+      ],
+      "text": "Topic Modeling. Area: Algorithms and Statistics. Tags: NLP, LDA. Level: 4. Years: 3",
+      "cluster": 5,
+      "coord": {
+        "x": -0.26657574243137416,
+        "y": -0.24507982813484155
+      }
+    },
+    {
+      "id": "algorithms-and-statistics:Causal Inference",
+      "area": "Algorithms and Statistics",
+      "name": "Causal Inference",
+      "level": 4,
+      "years": 3,
+      "tags": [
+        "experimentation",
+        "uplift modeling"
+      ],
+      "text": "Causal Inference. Area: Algorithms and Statistics. Tags: experimentation, uplift modeling. Level: 4. Years: 3",
+      "cluster": 5,
+      "coord": {
+        "x": -0.291636395504151,
+        "y": -0.23330742372885754
+      }
+    },
+    {
+      "id": "ai-development:RAG Systems",
+      "area": "AI Development",
+      "name": "RAG Systems",
+      "level": 3,
+      "years": 1,
+      "tags": [
+        "RAG",
+        "LLM applications"
+      ],
+      "text": "RAG Systems. Area: AI Development. Tags: RAG, LLM applications. Level: 3. Years: 1",
+      "cluster": 0,
+      "coord": {
+        "x": -0.03253776542394125,
+        "y": -0.3160034449914135
+      }
+    },
+    {
+      "id": "ai-development:Agentic Models",
+      "area": "AI Development",
+      "name": "Agentic Models",
+      "level": 3,
+      "years": 1,
+      "tags": [
+        "multi-agent systems",
+        "planning"
+      ],
+      "text": "Agentic Models. Area: AI Development. Tags: multi-agent systems, planning. Level: 3. Years: 1",
+      "cluster": 4,
+      "coord": {
+        "x": -0.13583542597707943,
+        "y": -0.48578031204708366
+      }
+    },
+    {
+      "id": "ai-development:LLM Ops",
+      "area": "AI Development",
+      "name": "LLM Ops",
+      "level": 3,
+      "years": 1.5,
+      "tags": [
+        "prompt orchestration",
+        "monitoring"
+      ],
+      "text": "LLM Ops. Area: AI Development. Tags: prompt orchestration, monitoring. Level: 3. Years: 1.5",
+      "cluster": 3,
+      "coord": {
+        "x": 0.05916836737980765,
+        "y": -0.3612358134892867
+      }
+    }
+  ],
+  "clusters": [
+    {
+      "id": 1,
+      "label": "bigquery gcp",
+      "members": [
+        {
+          "id": "lakehouses:BigQuery",
+          "name": "BigQuery",
+          "area": "Lakehouses"
+        },
+        {
+          "id": "cloud-compute:GCP",
+          "name": "GCP",
+          "area": "Cloud Compute"
+        },
+        {
+          "id": "cloud-compute:Runtime Platforms",
+          "name": "Runtime Platforms",
+          "area": "Cloud Compute"
+        }
+      ],
+      "centroidSample": [
+        0.0016739194333333332,
+        0.02693806933333333,
+        0.06853364666666667,
+        0.004913110000000001,
+        0.008952523166666667,
+        -0.027164517666666665,
+        -0.025884383666666667,
+        -0.0077798375
+      ]
+    },
+    {
+      "id": 3,
+      "label": "Warehouse ops",
+      "members": [
+        {
+          "id": "lakehouses:Snowflake",
+          "name": "Snowflake",
+          "area": "Lakehouses"
+        },
+        {
+          "id": "cloud-compute:Azure",
+          "name": "Azure",
+          "area": "Cloud Compute"
+        },
+        {
+          "id": "cloud-compute:AWS",
+          "name": "AWS",
+          "area": "Cloud Compute"
+        },
+        {
+          "id": "cloud-compute:Microservices",
+          "name": "Microservices",
+          "area": "Cloud Compute"
+        },
+        {
+          "id": "data-science-platforms:Terraform",
+          "name": "Terraform",
+          "area": "Data Science Platforms"
+        },
+        {
+          "id": "ai-development:LLM Ops",
+          "name": "LLM Ops",
+          "area": "AI Development"
+        }
+      ],
+      "centroidSample": [
+        -0.008875295516666668,
+        -0.008516999883333333,
+        0.07044898566666667,
+        -0.007213878025000001,
+        0.03375415761666666,
+        -0.0157161949,
+        -0.014489294833333334,
+        0.015605778833333334
+      ]
+    },
+    {
+      "id": 2,
+      "label": "Data modeling",
+      "members": [
+        {
+          "id": "lakehouses:dbt",
+          "name": "dbt",
+          "area": "Lakehouses"
+        },
+        {
+          "id": "data-science-platforms:SQL",
+          "name": "SQL",
+          "area": "Data Science Platforms"
+        },
+        {
+          "id": "data-science-platforms:Python",
+          "name": "Python",
+          "area": "Data Science Platforms"
+        },
+        {
+          "id": "data-science-platforms:Pandas",
+          "name": "Pandas",
+          "area": "Data Science Platforms"
+        },
+        {
+          "id": "data-science-platforms:Jupyter",
+          "name": "Jupyter",
+          "area": "Data Science Platforms"
+        },
+        {
+          "id": "data-science-platforms:Apache Airflow",
+          "name": "Apache Airflow",
+          "area": "Data Science Platforms"
+        },
+        {
+          "id": "data-science-platforms:Great Expectations",
+          "name": "Great Expectations",
+          "area": "Data Science Platforms"
+        },
+        {
+          "id": "bi-and-data-viz:Excel",
+          "name": "Excel",
+          "area": "BI and Data Viz"
+        },
+        {
+          "id": "bi-and-data-viz:Data Viz Suite",
+          "name": "Data Viz Suite",
+          "area": "BI and Data Viz"
+        },
+        {
+          "id": "bi-and-data-viz:Power BI",
+          "name": "Power BI",
+          "area": "BI and Data Viz"
+        }
+      ],
+      "centroidSample": [
+        -0.0279095012,
+        0.00011900335099999959,
+        0.0637670223,
+        -0.007875963914,
+        0.003012213000000001,
+        -0.00954049234,
+        -0.0202781145,
+        0.016841876399999997
+      ]
+    },
+    {
+      "id": 4,
+      "label": "cdp modeling",
+      "members": [
+        {
+          "id": "activation-systems:CDP Modeling",
+          "name": "CDP Modeling",
+          "area": "Activation Systems"
+        },
+        {
+          "id": "activation-systems:Audience Pipelines",
+          "name": "Audience Pipelines",
+          "area": "Activation Systems"
+        },
+        {
+          "id": "graph-analysis:Neo4j",
+          "name": "Neo4j",
+          "area": "Graph Analysis"
+        },
+        {
+          "id": "ai-development:Agentic Models",
+          "name": "Agentic Models",
+          "area": "AI Development"
+        }
+      ],
+      "centroidSample": [
+        -0.01192686125,
+        0.029088653,
+        0.046258453000000005,
+        0.0061525052575,
+        -0.017851563675,
+        -0.0103248956175,
+        0.010389835249999998,
+        0.02169680975
+      ]
+    },
+    {
+      "id": 0,
+      "label": "AI / RAG",
+      "members": [
+        {
+          "id": "activation-systems:Segment & Fivetran",
+          "name": "Segment & Fivetran",
+          "area": "Activation Systems"
+        },
+        {
+          "id": "data-science-platforms:GitHub Actions",
+          "name": "GitHub Actions",
+          "area": "Data Science Platforms"
+        },
+        {
+          "id": "bi-and-data-viz:Looker",
+          "name": "Looker",
+          "area": "BI and Data Viz"
+        },
+        {
+          "id": "ai-development:RAG Systems",
+          "name": "RAG Systems",
+          "area": "AI Development"
+        }
+      ],
+      "centroidSample": [
+        -0.02335774475,
+        0.013464453967500001,
+        0.05375758075,
+        -0.01407995775,
+        0.0032253940850000004,
+        -0.031518322325,
+        -0.008025946499999999,
+        0.01447702325
+      ]
+    },
+    {
+      "id": 5,
+      "label": "Testing",
+      "members": [
+        {
+          "id": "graph-analysis:NetworkX",
+          "name": "NetworkX",
+          "area": "Graph Analysis"
+        },
+        {
+          "id": "algorithms-and-statistics:Seasonal Forecasts",
+          "name": "Seasonal Forecasts",
+          "area": "Algorithms and Statistics"
+        },
+        {
+          "id": "algorithms-and-statistics:Parametric Testing",
+          "name": "Parametric Testing",
+          "area": "Algorithms and Statistics"
+        },
+        {
+          "id": "algorithms-and-statistics:Topic Modeling",
+          "name": "Topic Modeling",
+          "area": "Algorithms and Statistics"
+        },
+        {
+          "id": "algorithms-and-statistics:Causal Inference",
+          "name": "Causal Inference",
+          "area": "Algorithms and Statistics"
+        }
+      ],
+      "centroidSample": [
+        -0.0240353853808,
+        -0.01428761254,
+        0.031023988999999995,
+        -0.009976209400000002,
+        -0.0114885606,
+        -0.014951393440000002,
+        -0.01769866442,
+        0.013762467580000002
+      ]
+    }
+  ],
+  "dimensions": [
+    "pc1",
+    "pc2"
+  ],
+  "ranges": {
+    "x": {
+      "min": -0.3281396389562633,
+      "max": 0.4721342283987189
+    },
+    "y": {
+      "min": -0.48578031204708366,
+      "max": 0.4147763839299152
+    }
+  }
+}
