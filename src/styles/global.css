@@ -362,7 +362,20 @@ section:first-of-type {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.45rem 0.5rem;
+}
+
+.chip-row--mobile {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .chip-row--desktop {
+    display: none;
+  }
+  .chip-row--mobile {
+    display: flex;
+  }
 }
 
 .chip-row li {

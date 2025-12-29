@@ -35,7 +35,7 @@ type ExperienceEntry = (typeof experiences)[number];
 const experienceSkillMap = new Map((experienceSkills ?? []).map((entry) => [entry.experienceId, entry.skills ?? []]));
 
 const maxExperienceChips = 13;
-const chipsForExperience = (role: ExperienceEntry) => {
+const computeExperienceChips = (role: ExperienceEntry) => {
   const generated = experienceSkillMap.get(role.id) ?? [];
   const baseNames = generated.map((skill) => skill.name).filter(Boolean);
   const chips: string[] = [];
@@ -60,8 +60,16 @@ const chipsForExperience = (role: ExperienceEntry) => {
       if (idx > 200) break;
     }
   }
-  return chips.slice(0, maxExperienceChips);
+  return chips;
 };
+
+const trimToRows = (chips: string[], rowSize: number, maxRows: number) => {
+  if (rowSize <= 0 || maxRows <= 0) return [];
+  const limit = Math.min(chips.length, rowSize * maxRows);
+  const full = limit - (limit % rowSize);
+  return full > 0 ? chips.slice(0, full) : [];
+};
+
 const formatDate = (date?: string) => {
   if (!date) return '';
   const parts = date.split(' ');
@@ -79,31 +87,25 @@ type SkillItem = { name?: string; level?: number; years?: number; display?: bool
 type GraphSkill = (typeof skillGraph.skills)[number];
 type GraphCluster = (typeof skillGraph.clusters)[number];
 
-const badgeCharLimit = 'SEGMENT + FIVETRAN'.length;
+const badgeCharLimit = 22;
 const skillBadgeAliases: Record<string, string> = {
-  'Infrastructure as Code': 'Infra + Code',
-  'Serverless Platforms': 'Serverless Ops',
+  'Infrastructure as Code': 'Infrastructure as Code',
+  'Serverless Platforms': 'Serverless Platforms',
   'Algorithms and Statistics': 'Algorithms & Stats',
   'Algorithms & Stats': 'Algorithms & Stats',
-  'Data Science Platforms': 'Data Sci Platforms',
 };
-
-const shortenWord = (word: string = '') => (word.length <= 4 ? word : `${word.slice(0, 4)}.`);
-const fallbackInitials = (words: string[]) =>
-  words
-    .map((word) => (word ? `${word[0].toUpperCase()}.` : ''))
-    .join(' ')
-    .trim();
 
 const friendlySkillLabel = (name: string = '') => {
   if (!name) return name;
   if (skillBadgeAliases[name]) return skillBadgeAliases[name];
   if (name.length <= badgeCharLimit) return name;
   const words = name.split(/\s+/);
-  const shortened = words.map(shortenWord).join(' ');
-  if (shortened.length <= badgeCharLimit) return shortened;
-  const initials = fallbackInitials(words);
-  if (initials.length > 0 && initials.length <= badgeCharLimit) return initials;
+  const trimmed = [...words];
+  while (trimmed.length > 1 && trimmed.join(' ').length > badgeCharLimit) {
+    trimmed.pop();
+  }
+  const phrase = trimmed.join(' ');
+  if (phrase.length > 0 && phrase.length <= badgeCharLimit) return phrase;
   return `${name.slice(0, badgeCharLimit - 1)}…`;
 };
 
@@ -301,12 +303,22 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                     </ul>
                   )}
                   {(() => {
-                    const chips = chipsForExperience(role);
-                    if (!chips || chips.length === 0) return null;
+                    const baseChips = computeExperienceChips(role);
+                    const desktopChips = trimToRows(baseChips, 4, 2);
+                    const mobileChips = trimToRows(baseChips, 2, 2);
                     return (
-                      <ul class="chip-row">
-                        {chips.map((chip) => <li>{chip}</li>)}
-                      </ul>
+                      <>
+                        {desktopChips.length > 0 && (
+                          <ul class="chip-row chip-row--desktop">
+                            {desktopChips.map((chip) => <li>{chip}</li>)}
+                          </ul>
+                        )}
+                        {mobileChips.length > 0 && (
+                          <ul class="chip-row chip-row--mobile">
+                            {mobileChips.map((chip) => <li>{chip}</li>)}
+                          </ul>
+                        )}
+                      </>
                     );
                   })()}
                   {(siteConfig.pullQuotes?.[role.title] || experienceNotes[role.title]) && (
