@@ -14,7 +14,31 @@ const params = Object.fromEntries(
   })
 );
 
-const clusterCount = Number(params.clusters) || 6;
+const stackLabels = {
+  warehousing: 'Warehousing',
+  deployment: 'Deployment',
+  insights: 'Insights',
+  general: 'General',
+};
+
+const taxonomy = [
+  {
+    stack: 'warehousing',
+    label: 'Warehousing',
+    descriptor: 'Lakehouses, ELT frameworks, SQL pipelines, reproducible analytics, and governed data models.',
+  },
+  {
+    stack: 'deployment',
+    label: 'Deployment',
+    descriptor: 'Cloud engineering, runtime platforms, CI/CD, infrastructure as code, and automation tooling.',
+  },
+  {
+    stack: 'insights',
+    label: 'Insights',
+    descriptor: 'Analytics activation, BI platforms, experimentation, graph analysis, AI systems, and human-facing insights.',
+  },
+];
+
 const includeHidden = params.hidden === 'true';
 const model = params.model || 'text-embedding-3-small';
 const outputPath = params.output ? path.resolve(process.cwd(), params.output) : defaultOutputPath;
@@ -23,23 +47,6 @@ const apiKey = process.env.OPENAI_API_KEY;
 if (!apiKey) {
   console.error('Missing OPENAI_API_KEY environment variable.');
   process.exit(1);
-}
-
-function tokenize(text = '') {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, ' ')
-    .split(' ')
-    .filter((token) => token && !['and', 'the', 'of', 'in', 'for'].includes(token));
-}
-
-function l2Distance(a, b) {
-  let sum = 0;
-  for (let i = 0; i < a.length; i += 1) {
-    const diff = a[i] - b[i];
-    sum += diff * diff;
-  }
-  return Math.sqrt(sum);
 }
 
 function meanVector(vectors) {
@@ -51,46 +58,6 @@ function meanVector(vectors) {
     }
   });
   return avg.map((value) => value / vectors.length);
-}
-
-function kmeans(vectors, k, maxIterations = 50) {
-  if (k > vectors.length) {
-    throw new Error('Cluster count cannot exceed number of vectors');
-  }
-  const centroids = [];
-  const usedIndexes = new Set();
-  while (centroids.length < k) {
-    const candidate = Math.floor(Math.random() * vectors.length);
-    if (!usedIndexes.has(candidate)) {
-      usedIndexes.add(candidate);
-      centroids.push([...vectors[candidate]]);
-    }
-  }
-
-  let assignments = new Array(vectors.length).fill(0);
-  for (let iter = 0; iter < maxIterations; iter += 1) {
-    let changed = false;
-    assignments = assignments.map((clusterId, idx) => {
-      const distances = centroids.map((centroid) => l2Distance(vectors[idx], centroid));
-      const nextCluster = distances.indexOf(Math.min(...distances));
-      if (nextCluster !== clusterId) changed = true;
-      return nextCluster;
-    });
-
-    if (!changed) break;
-
-    centroids.forEach((centroid, clusterIdx) => {
-      const members = vectors.filter((_, idx) => assignments[idx] === clusterIdx);
-      if (members.length > 0) {
-        const mean = meanVector(members);
-        for (let i = 0; i < centroid.length; i += 1) {
-          centroid[i] = mean[i];
-        }
-      }
-    });
-  }
-
-  return { assignments, centroids };
 }
 
 function multiplyMatrixVector(matrix, vector) {
@@ -179,60 +146,104 @@ async function embedTexts(texts) {
   return embeddings;
 }
 
-function deriveLabel(skills) {
-  const frequency = new Map();
-  skills.forEach((skill) => {
-    tokenize(skill.name).forEach((token) => {
-      frequency.set(token, (frequency.get(token) ?? 0) + 2);
-    });
-    (skill.tags ?? []).forEach((tag) => {
-      tokenize(tag).forEach((token) => {
-        frequency.set(token, (frequency.get(token) ?? 0) + 1);
-      });
-    });
+const SLUG_REGEX = /[^a-z0-9]+/g;
+const slugify = (value = '') => value.toLowerCase().trim().replace(SLUG_REGEX, '-').replace(/^-+|-+$/g, '') || 'section';
+
+const cosineSimilarity = (a, b) => {
+  let dot = 0;
+  let normA = 0;
+  let normB = 0;
+  for (let i = 0; i < a.length; i += 1) {
+    dot += a[i] * b[i];
+    normA += a[i] * a[i];
+    normB += b[i] * b[i];
+  }
+  if (!normA || !normB) return 0;
+  return dot / (Math.sqrt(normA) * Math.sqrt(normB));
+};
+
+const buildAreaContext = (area) => {
+  const itemText = (area.items ?? [])
+    .map((item) => `${item.name} ${(item.tags ?? []).join(' ')}`)
+    .join('; ');
+  return `${area.area}. ${area.category ?? ''}. ${itemText}`;
+};
+
+const classifyStack = (embedding, fallback = 'insights') => {
+  let best = null;
+  let bestScore = -Infinity;
+  taxonomy.forEach((entry) => {
+    const score = cosineSimilarity(embedding, entry.embedding ?? []);
+    if (score > bestScore) {
+      bestScore = score;
+      best = entry;
+    }
   });
-  const sorted = [...frequency.entries()].sort((a, b) => b[1] - a[1]);
-  const primary = sorted[0]?.[0] ?? 'cluster';
-  const secondary = sorted[1]?.[0];
-  const friendlyMap = {
-    sql: 'SQL systems',
-    data: 'Data modeling',
-    cloud: 'Cloud ops',
-    snowflake: 'Warehouse ops',
-    modeling: 'Modeling',
-    testing: 'Testing',
-    rag: 'AI / RAG',
-    systems: 'Systems',
-    python: 'Python flows',
-  };
-  const friendly = friendlyMap[primary];
-  return friendly || [primary, secondary].filter(Boolean).join(' ');
-}
+  const stack = best?.stack ?? fallback;
+  return { stack, stackLabel: best?.label ?? stackLabels[stack] ?? stack };
+};
 
 async function main() {
   const raw = await fs.readFile(resumePath, 'utf-8');
   const resume = JSON.parse(raw);
+  const resumeAreas = resume.skills ?? [];
+
+  const taxonomyEmbeddings = await embedTexts(taxonomy.map((entry) => entry.descriptor));
+  taxonomy.forEach((entry, idx) => {
+    entry.embedding = taxonomyEmbeddings[idx];
+  });
+
+  const areaContexts = resumeAreas.map((area) => ({ area, context: buildAreaContext(area) }));
+  const areaEmbeddings = areaContexts.length > 0 ? await embedTexts(areaContexts.map((ctx) => ctx.context)) : [];
+
+  const areas = areaContexts.map((ctx, index) => {
+    const embedding = areaEmbeddings[index] ?? [];
+    const manualStack = ctx.area.stack;
+    const stackMeta = manualStack && stackLabels[manualStack]
+      ? { stack: manualStack, stackLabel: stackLabels[manualStack] }
+      : classifyStack(embedding);
+    const categoryKey = ctx.area.categoryId ?? ctx.area.id ?? slugify(ctx.area.area);
+    const categoryLabel = ctx.area.category ?? ctx.area.area;
+    return {
+      id: ctx.area.id ?? slugify(ctx.area.area),
+      label: ctx.area.area,
+      stack: stackMeta.stack,
+      stackLabel: stackMeta.stackLabel,
+      categoryKey,
+      categoryLabel,
+      items: ctx.area.items ?? [],
+      clusterId: index,
+    };
+  });
+
   const skills = [];
-  for (const area of resume.skills ?? []) {
-    for (const item of area.items ?? []) {
-      if (!includeHidden && item.display === false) continue;
+  areas.forEach((area) => {
+    area.items.forEach((item) => {
+      if (!includeHidden && item.display === false) return;
       skills.push({
         id: `${area.id}:${item.name}`,
-        area: area.area,
+        area: area.label,
+        areaId: area.id,
+        category: area.categoryKey,
+        categoryLabel: area.categoryLabel,
+        stack: area.stack,
+        stackLabel: area.stackLabel,
+        clusterId: area.clusterId,
         name: item.name,
         level: item.level,
         years: item.years,
         tags: item.tags ?? [],
-        text: `${item.name}. Area: ${area.area}. Tags: ${(item.tags ?? []).join(', ')}. Level: ${item.level ?? 'n/a'}. Years: ${item.years ?? 'n/a'}`,
+        text: `${item.name}. Area: ${area.label}. Stack: ${area.stackLabel}. Tags: ${(item.tags ?? []).join(', ')}. Level: ${item.level ?? 'n/a'}. Years: ${item.years ?? 'n/a'}`,
       });
-    }
-  }
+    });
+  });
+
   if (skills.length === 0) {
     console.error('No skills found to cluster.');
     process.exit(1);
   }
+
   const embeddings = await embedTexts(skills.map((skill) => skill.text));
-  const { assignments, centroids } = kmeans(embeddings, Math.min(clusterCount, skills.length));
   const coords = project2D(embeddings);
   const xs = coords.map((coord) => coord.x);
   const ys = coords.map((coord) => coord.y);
@@ -241,25 +252,32 @@ async function main() {
   const minY = Math.min(...ys);
   const maxY = Math.max(...ys);
 
-  const clusters = new Map();
-  skills.forEach((skill, idx) => {
-    const clusterId = assignments[idx];
-    if (!clusters.has(clusterId)) clusters.set(clusterId, []);
-    clusters.get(clusterId).push({ ...skill, coord: coords[idx] });
-  });
-
-  const clusterList = [...clusters.entries()].map(([id, members]) => ({
-    id,
-    label: deriveLabel(members),
-    members: members.map((skill) => ({ id: skill.id, name: skill.name, area: skill.area })),
-    centroidSample: centroids[id]?.slice(0, 8) ?? [],
-  }));
-
   const skillPoints = skills.map((skill, idx) => ({
     ...skill,
-    cluster: assignments[idx],
+    cluster: skill.clusterId,
     coord: coords[idx],
   }));
+
+  const clusterList = areas.map((area) => {
+    const members = skillPoints
+      .map((skill, idx) => ({ skill, idx }))
+      .filter(({ skill }) => skill.cluster === area.clusterId);
+    const memberEmbeddings = members.map(({ idx }) => embeddings[idx]);
+    const centroidSample = memberEmbeddings.length > 0 ? meanVector(memberEmbeddings).slice(0, 8) : [];
+    return {
+      id: area.clusterId,
+      key: area.id,
+      label: area.label,
+      category: area.categoryKey,
+      categoryLabel: area.categoryLabel,
+      stack: area.stack,
+      stackLabel: area.stackLabel,
+      members: members.map(({ skill }) => ({ id: skill.id, name: skill.name, area: skill.area })),
+      centroidSample,
+    };
+  });
+
+  const clusterCount = clusterList.length;
 
   await fs.mkdir(path.dirname(outputPath), { recursive: true });
   await fs.writeFile(
@@ -268,7 +286,7 @@ async function main() {
       {
         generatedAt: new Date().toISOString(),
         model,
-        clusterCount: clusterList.length,
+        clusterCount,
         skills: skillPoints,
         clusters: clusterList,
         dimensions: ['pc1', 'pc2'],

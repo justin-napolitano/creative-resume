@@ -1,11 +1,17 @@
 {
-  "generatedAt": "2025-12-29T05:43:14.805Z",
+  "generatedAt": "2025-12-29T20:45:47.315Z",
   "model": "text-embedding-3-small",
-  "clusterCount": 6,
+  "clusterCount": 8,
   "skills": [
     {
       "id": "lakehouses:BigQuery",
       "area": "Lakehouses",
+      "areaId": "lakehouses",
+      "category": "lakehouses",
+      "categoryLabel": "Lakehouses",
+      "stack": "warehousing",
+      "stackLabel": "Warehousing",
+      "clusterId": 0,
       "name": "BigQuery",
       "level": 5,
       "years": 5,
@@ -14,223 +20,300 @@
         "columnar storage",
         "GCP"
       ],
-      "text": "BigQuery. Area: Lakehouses. Tags: SQL, columnar storage, GCP. Level: 5. Years: 5",
-      "cluster": 1,
+      "text": "BigQuery. Area: Lakehouses. Stack: Warehousing. Tags: SQL, columnar storage, GCP. Level: 5. Years: 5",
+      "cluster": 0,
       "coord": {
-        "x": 0.22080471324321696,
-        "y": 0.23425712286852887
+        "x": -0.1580692464065609,
+        "y": -0.20023491682998837
       }
     },
     {
       "id": "lakehouses:Snowflake",
       "area": "Lakehouses",
+      "areaId": "lakehouses",
+      "category": "lakehouses",
+      "categoryLabel": "Lakehouses",
+      "stack": "warehousing",
+      "stackLabel": "Warehousing",
+      "clusterId": 0,
       "name": "Snowflake",
-      "level": 4,
-      "years": 2,
+      "level": 5,
+      "years": 5,
       "tags": [
         "cloud data warehouse"
       ],
-      "text": "Snowflake. Area: Lakehouses. Tags: cloud data warehouse. Level: 4. Years: 2",
-      "cluster": 3,
+      "text": "Snowflake. Area: Lakehouses. Stack: Warehousing. Tags: cloud data warehouse. Level: 5. Years: 5",
+      "cluster": 0,
       "coord": {
-        "x": 0.12916769113136328,
-        "y": 0.18134901589138322
+        "x": -0.15418289220102374,
+        "y": -0.23698746672447885
       }
     },
     {
-      "id": "lakehouses:dbt",
+      "id": "lakehouses:ELT Frameworks",
       "area": "Lakehouses",
-      "name": "dbt",
-      "level": 3,
-      "years": 1.5,
+      "areaId": "lakehouses",
+      "category": "lakehouses",
+      "categoryLabel": "Lakehouses",
+      "stack": "warehousing",
+      "stackLabel": "Warehousing",
+      "clusterId": 0,
+      "name": "ELT Frameworks",
+      "level": 5,
+      "years": 5,
       "tags": [
         "data modeling",
         "ELT"
       ],
-      "text": "dbt. Area: Lakehouses. Tags: data modeling, ELT. Level: 3. Years: 1.5",
-      "cluster": 2,
+      "text": "ELT Frameworks. Area: Lakehouses. Stack: Warehousing. Tags: data modeling, ELT. Level: 5. Years: 5",
+      "cluster": 0,
       "coord": {
-        "x": -0.06328935356815048,
-        "y": 0.06738018914217275
+        "x": -0.10258993471712433,
+        "y": -0.134651325577348
       }
     },
     {
       "id": "activation-systems:CDP Modeling",
       "area": "Activation Systems",
+      "areaId": "activation-systems",
+      "category": "activation-systems",
+      "categoryLabel": "Activation Systems",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 1,
       "name": "CDP Modeling",
-      "level": 4,
-      "years": 3,
+      "level": 5,
+      "years": 5,
       "tags": [
         "segmentation",
         "identity resolution"
       ],
-      "text": "CDP Modeling. Area: Activation Systems. Tags: segmentation, identity resolution. Level: 4. Years: 3",
-      "cluster": 4,
+      "text": "CDP Modeling. Area: Activation Systems. Stack: Insights. Tags: segmentation, identity resolution. Level: 5. Years: 5",
+      "cluster": 1,
       "coord": {
-        "x": -0.21706080687873763,
-        "y": -0.3188957352285628
+        "x": 0.22104991442191105,
+        "y": 0.3168984863905921
       }
     },
     {
       "id": "activation-systems:Audience Pipelines",
       "area": "Activation Systems",
+      "areaId": "activation-systems",
+      "category": "activation-systems",
+      "categoryLabel": "Activation Systems",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 1,
       "name": "Audience Pipelines",
-      "level": 4,
-      "years": 3,
+      "level": 5,
+      "years": 5,
       "tags": [
         "journey triggers",
         "CRM activation"
       ],
-      "text": "Audience Pipelines. Area: Activation Systems. Tags: journey triggers, CRM activation. Level: 4. Years: 3",
-      "cluster": 4,
+      "text": "Audience Pipelines. Area: Activation Systems. Stack: Insights. Tags: journey triggers, CRM activation. Level: 5. Years: 5",
+      "cluster": 1,
       "coord": {
-        "x": -0.10837398819082958,
-        "y": -0.29730736255506174
+        "x": 0.13363111460340985,
+        "y": 0.34427570467636764
       }
     },
     {
       "id": "activation-systems:Segment + Fivetran",
       "area": "Activation Systems",
+      "areaId": "activation-systems",
+      "category": "activation-systems",
+      "categoryLabel": "Activation Systems",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 1,
       "name": "Segment + Fivetran",
-      "level": 4,
-      "years": 3,
+      "level": 5,
+      "years": 5,
       "tags": [
         "data ingestion",
         "automation"
       ],
-      "text": "Segment + Fivetran. Area: Activation Systems. Tags: data ingestion, automation. Level: 4. Years: 3",
-      "cluster": 0,
+      "text": "Segment + Fivetran. Area: Activation Systems. Stack: Insights. Tags: data ingestion, automation. Level: 5. Years: 5",
+      "cluster": 1,
       "coord": {
-        "x": -0.0166833930930705,
-        "y": -0.08631767911914125
+        "x": 0.054353773222784535,
+        "y": 0.1305467268247463
       }
     },
     {
-      "id": "cloud-compute:GCP",
+      "id": "cloud-compute:Cloud Services",
       "area": "Cloud Compute",
-      "name": "GCP",
+      "areaId": "cloud-compute",
+      "category": "cloud-compute",
+      "categoryLabel": "Cloud Compute",
+      "stack": "deployment",
+      "stackLabel": "Deployment",
+      "clusterId": 2,
+      "name": "Cloud Services",
       "level": 5,
-      "years": 4,
+      "years": 5,
       "tags": [
-        "BigQuery",
-        "Cloud Functions",
-        "GCS"
+        "GCP",
+        "Azure",
+        "multi-cloud ops"
       ],
-      "text": "GCP. Area: Cloud Compute. Tags: BigQuery, Cloud Functions, GCS. Level: 5. Years: 4",
-      "cluster": 1,
+      "text": "Cloud Services. Area: Cloud Compute. Stack: Deployment. Tags: GCP, Azure, multi-cloud ops. Level: 5. Years: 5",
+      "cluster": 2,
       "coord": {
-        "x": 0.38015145848976556,
-        "y": 0.0548872183689934
+        "x": -0.42064198457981605,
+        "y": 0.17629891422579136
       }
     },
     {
-      "id": "cloud-compute:Azure",
+      "id": "cloud-compute:Docker",
       "area": "Cloud Compute",
-      "name": "Azure",
-      "level": 3,
-      "years": 1,
+      "areaId": "cloud-compute",
+      "category": "cloud-compute",
+      "categoryLabel": "Cloud Compute",
+      "stack": "deployment",
+      "stackLabel": "Deployment",
+      "clusterId": 2,
+      "name": "Docker",
+      "level": 5,
+      "years": 5,
       "tags": [
-        "data services"
+        "Compose",
+        "containerization"
       ],
-      "text": "Azure. Area: Cloud Compute. Tags: data services. Level: 3. Years: 1",
-      "cluster": 3,
+      "text": "Docker. Area: Cloud Compute. Stack: Deployment. Tags: Compose, containerization. Level: 5. Years: 5",
+      "cluster": 2,
       "coord": {
-        "x": 0.40310188310653083,
-        "y": 0.030437385637918722
+        "x": -0.4361503263177902,
+        "y": 0.1933226844671197
       }
     },
     {
-      "id": "cloud-compute:AWS",
+      "id": "cloud-compute:Serverless Platforms",
       "area": "Cloud Compute",
-      "name": "AWS",
-      "level": 2,
-      "years": 0.5,
+      "areaId": "cloud-compute",
+      "category": "cloud-compute",
+      "categoryLabel": "Cloud Compute",
+      "stack": "deployment",
+      "stackLabel": "Deployment",
+      "clusterId": 2,
+      "name": "Serverless Platforms",
+      "level": 5,
+      "years": 5,
       "tags": [
-        "S3",
-        "Lambda"
-      ],
-      "text": "AWS. Area: Cloud Compute. Tags: S3, Lambda. Level: 2. Years: 0.5",
-      "cluster": 3,
-      "coord": {
-        "x": 0.4721342283987189,
-        "y": -0.04128062959038875
-      }
-    },
-    {
-      "id": "cloud-compute:Microservices",
-      "area": "Cloud Compute",
-      "name": "Microservices",
-      "level": 3,
-      "years": 2,
-      "tags": [
-        "serverless",
-        "event-driven"
-      ],
-      "text": "Microservices. Area: Cloud Compute. Tags: serverless, event-driven. Level: 3. Years: 2",
-      "cluster": 3,
-      "coord": {
-        "x": 0.42843513588131354,
-        "y": -0.1439363035059274
-      }
-    },
-    {
-      "id": "cloud-compute:Runtime Platforms",
-      "area": "Cloud Compute",
-      "name": "Runtime Platforms",
-      "level": 4,
-      "years": 4,
-      "tags": [
-        "Compute Engine",
         "Cloud Run",
-        "load balancing",
-        "reverse proxy"
+        "Cloud Functions"
       ],
-      "text": "Runtime Platforms. Area: Cloud Compute. Tags: Compute Engine, Cloud Run, load balancing, reverse proxy. Level: 4. Years: 4",
-      "cluster": 1,
+      "text": "Serverless Platforms. Area: Cloud Compute. Stack: Deployment. Tags: Cloud Run, Cloud Functions. Level: 5. Years: 5",
+      "cluster": 2,
       "coord": {
-        "x": 0.4266442324328042,
-        "y": -0.11122066854594462
+        "x": -0.4688313533613101,
+        "y": 0.19564464885710914
+      }
+    },
+    {
+      "id": "cloud-compute:CI/CD Systems",
+      "area": "Cloud Compute",
+      "areaId": "cloud-compute",
+      "category": "cloud-compute",
+      "categoryLabel": "Cloud Compute",
+      "stack": "deployment",
+      "stackLabel": "Deployment",
+      "clusterId": 2,
+      "name": "CI/CD Systems",
+      "level": 5,
+      "years": 5,
+      "tags": [
+        "GitHub Actions",
+        "pipeline automation"
+      ],
+      "text": "CI/CD Systems. Area: Cloud Compute. Stack: Deployment. Tags: GitHub Actions, pipeline automation. Level: 5. Years: 5",
+      "cluster": 2,
+      "coord": {
+        "x": -0.4531587686506352,
+        "y": 0.28760735316617553
+      }
+    },
+    {
+      "id": "cloud-compute:Infrastructure as Code",
+      "area": "Cloud Compute",
+      "areaId": "cloud-compute",
+      "category": "cloud-compute",
+      "categoryLabel": "Cloud Compute",
+      "stack": "deployment",
+      "stackLabel": "Deployment",
+      "clusterId": 2,
+      "name": "Infrastructure as Code",
+      "level": 5,
+      "years": 5,
+      "tags": [
+        "Terraform",
+        "runbooks"
+      ],
+      "text": "Infrastructure as Code. Area: Cloud Compute. Stack: Deployment. Tags: Terraform, runbooks. Level: 5. Years: 5",
+      "cluster": 2,
+      "coord": {
+        "x": -0.44744259355847843,
+        "y": 0.24812864935726767
       }
     },
     {
       "id": "data-science-platforms:SQL",
       "area": "Data Science Platforms",
+      "areaId": "data-science-platforms",
+      "category": "data-science-platforms",
+      "categoryLabel": "Data Science Platforms",
+      "stack": "warehousing",
+      "stackLabel": "Warehousing",
+      "clusterId": 3,
       "name": "SQL",
       "level": 5,
-      "years": 7,
+      "years": 5,
       "tags": [
         "PostgreSQL",
         "MySQL",
         "analytical SQL"
       ],
-      "text": "SQL. Area: Data Science Platforms. Tags: PostgreSQL, MySQL, analytical SQL. Level: 5. Years: 7",
-      "cluster": 2,
+      "text": "SQL. Area: Data Science Platforms. Stack: Warehousing. Tags: PostgreSQL, MySQL, analytical SQL. Level: 5. Years: 5",
+      "cluster": 3,
       "coord": {
-        "x": -0.01752889091283085,
-        "y": 0.24906824186320228
+        "x": -0.011266635942047788,
+        "y": -0.32744452735050156
       }
     },
     {
       "id": "data-science-platforms:Python",
       "area": "Data Science Platforms",
+      "areaId": "data-science-platforms",
+      "category": "data-science-platforms",
+      "categoryLabel": "Data Science Platforms",
+      "stack": "warehousing",
+      "stackLabel": "Warehousing",
+      "clusterId": 3,
       "name": "Python",
       "level": 5,
-      "years": 7,
+      "years": 5,
       "tags": [
         "data engineering",
         "machine learning",
         "automation"
       ],
-      "text": "Python. Area: Data Science Platforms. Tags: data engineering, machine learning, automation. Level: 5. Years: 7",
-      "cluster": 2,
+      "text": "Python. Area: Data Science Platforms. Stack: Warehousing. Tags: data engineering, machine learning, automation. Level: 5. Years: 5",
+      "cluster": 3,
       "coord": {
-        "x": 0.023447831068436665,
-        "y": 0.13607541470613557
+        "x": -0.12864045026725762,
+        "y": -0.31608272614781924
       }
     },
     {
       "id": "data-science-platforms:Pandas",
       "area": "Data Science Platforms",
+      "areaId": "data-science-platforms",
+      "category": "data-science-platforms",
+      "categoryLabel": "Data Science Platforms",
+      "stack": "warehousing",
+      "stackLabel": "Warehousing",
+      "clusterId": 3,
       "name": "Pandas",
       "level": 5,
       "years": 7,
@@ -238,16 +321,22 @@
         "dataframes",
         "transformations"
       ],
-      "text": "Pandas. Area: Data Science Platforms. Tags: dataframes, transformations. Level: 5. Years: 7",
-      "cluster": 2,
+      "text": "Pandas. Area: Data Science Platforms. Stack: Warehousing. Tags: dataframes, transformations. Level: 5. Years: 7",
+      "cluster": 3,
       "coord": {
-        "x": -0.07495457952508225,
-        "y": 0.28035387505253356
+        "x": -0.0819369192353182,
+        "y": -0.36556081328123835
       }
     },
     {
       "id": "data-science-platforms:Jupyter",
       "area": "Data Science Platforms",
+      "areaId": "data-science-platforms",
+      "category": "data-science-platforms",
+      "categoryLabel": "Data Science Platforms",
+      "stack": "warehousing",
+      "stackLabel": "Warehousing",
+      "clusterId": 3,
       "name": "Jupyter",
       "level": 5,
       "years": 6,
@@ -255,16 +344,22 @@
         "prototyping",
         "analysis notebooks"
       ],
-      "text": "Jupyter. Area: Data Science Platforms. Tags: prototyping, analysis notebooks. Level: 5. Years: 6",
-      "cluster": 2,
+      "text": "Jupyter. Area: Data Science Platforms. Stack: Warehousing. Tags: prototyping, analysis notebooks. Level: 5. Years: 6",
+      "cluster": 3,
       "coord": {
-        "x": -0.11149215752543185,
-        "y": 0.20804467754386405
+        "x": -0.049442489814834345,
+        "y": -0.29840630745136565
       }
     },
     {
       "id": "data-science-platforms:Apache Airflow",
       "area": "Data Science Platforms",
+      "areaId": "data-science-platforms",
+      "category": "data-science-platforms",
+      "categoryLabel": "Data Science Platforms",
+      "stack": "warehousing",
+      "stackLabel": "Warehousing",
+      "clusterId": 3,
       "name": "Apache Airflow",
       "level": 4,
       "years": 3,
@@ -272,16 +367,22 @@
         "orchestration",
         "scheduling"
       ],
-      "text": "Apache Airflow. Area: Data Science Platforms. Tags: orchestration, scheduling. Level: 4. Years: 3",
-      "cluster": 2,
+      "text": "Apache Airflow. Area: Data Science Platforms. Stack: Warehousing. Tags: orchestration, scheduling. Level: 4. Years: 3",
+      "cluster": 3,
       "coord": {
-        "x": 0.14961229148556654,
-        "y": -0.013024403610412837
+        "x": -0.19465546103253986,
+        "y": -0.18737749803006515
       }
     },
     {
       "id": "data-science-platforms:Terraform",
       "area": "Data Science Platforms",
+      "areaId": "data-science-platforms",
+      "category": "data-science-platforms",
+      "categoryLabel": "Data Science Platforms",
+      "stack": "warehousing",
+      "stackLabel": "Warehousing",
+      "clusterId": 3,
       "name": "Terraform",
       "level": 3,
       "years": 2,
@@ -289,16 +390,22 @@
         "infrastructure as code",
         "cloud provisioning"
       ],
-      "text": "Terraform. Area: Data Science Platforms. Tags: infrastructure as code, cloud provisioning. Level: 3. Years: 2",
+      "text": "Terraform. Area: Data Science Platforms. Stack: Warehousing. Tags: infrastructure as code, cloud provisioning. Level: 3. Years: 2",
       "cluster": 3,
       "coord": {
-        "x": 0.2962007218608944,
-        "y": -0.028642652789697853
+        "x": -0.33534922186680977,
+        "y": -0.10944802812477415
       }
     },
     {
       "id": "data-science-platforms:GitHub Actions",
       "area": "Data Science Platforms",
+      "areaId": "data-science-platforms",
+      "category": "data-science-platforms",
+      "categoryLabel": "Data Science Platforms",
+      "stack": "warehousing",
+      "stackLabel": "Warehousing",
+      "clusterId": 3,
       "name": "GitHub Actions",
       "level": 3,
       "years": 3,
@@ -306,16 +413,22 @@
         "CI/CD",
         "automation"
       ],
-      "text": "GitHub Actions. Area: Data Science Platforms. Tags: CI/CD, automation. Level: 3. Years: 3",
-      "cluster": 0,
+      "text": "GitHub Actions. Area: Data Science Platforms. Stack: Warehousing. Tags: CI/CD, automation. Level: 3. Years: 3",
+      "cluster": 3,
       "coord": {
-        "x": 0.19946793584526734,
-        "y": -0.004872112979086707
+        "x": -0.27116946822170546,
+        "y": -0.1062515202284685
       }
     },
     {
       "id": "data-science-platforms:Great Expectations",
       "area": "Data Science Platforms",
+      "areaId": "data-science-platforms",
+      "category": "data-science-platforms",
+      "categoryLabel": "Data Science Platforms",
+      "stack": "warehousing",
+      "stackLabel": "Warehousing",
+      "clusterId": 3,
       "name": "Great Expectations",
       "level": 3,
       "years": 2,
@@ -323,16 +436,22 @@
         "data quality",
         "validation"
       ],
-      "text": "Great Expectations. Area: Data Science Platforms. Tags: data quality, validation. Level: 3. Years: 2",
-      "cluster": 2,
+      "text": "Great Expectations. Area: Data Science Platforms. Stack: Warehousing. Tags: data quality, validation. Level: 3. Years: 2",
+      "cluster": 3,
       "coord": {
-        "x": -0.04135690904404629,
-        "y": 0.11888997085205402
+        "x": -0.020423069469992915,
+        "y": -0.26866944157218026
       }
     },
     {
       "id": "bi-and-data-viz:Excel",
       "area": "BI and Data Viz",
+      "areaId": "bi-and-data-viz",
+      "category": "bi-and-data-viz",
+      "categoryLabel": "BI and Data Viz",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 4,
       "name": "Excel",
       "level": 5,
       "years": 10,
@@ -340,16 +459,22 @@
         "Power Query",
         "dashboarding"
       ],
-      "text": "Excel. Area: BI and Data Viz. Tags: Power Query, dashboarding. Level: 5. Years: 10",
-      "cluster": 2,
+      "text": "Excel. Area: BI and Data Viz. Stack: Insights. Tags: Power Query, dashboarding. Level: 5. Years: 10",
+      "cluster": 4,
       "coord": {
-        "x": -0.1811551308800555,
-        "y": 0.4147763839299152
+        "x": 0.2609712457531828,
+        "y": -0.22954242562133945
       }
     },
     {
       "id": "bi-and-data-viz:Data Viz Suite",
       "area": "BI and Data Viz",
+      "areaId": "bi-and-data-viz",
+      "category": "bi-and-data-viz",
+      "categoryLabel": "BI and Data Viz",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 4,
       "name": "Data Viz Suite",
       "level": 4,
       "years": 6,
@@ -359,32 +484,44 @@
         "Plotly",
         "Leaflet"
       ],
-      "text": "Data Viz Suite. Area: BI and Data Viz. Tags: Matplotlib, Seaborn, Plotly, Leaflet. Level: 4. Years: 6",
-      "cluster": 2,
+      "text": "Data Viz Suite. Area: BI and Data Viz. Stack: Insights. Tags: Matplotlib, Seaborn, Plotly, Leaflet. Level: 4. Years: 6",
+      "cluster": 4,
       "coord": {
-        "x": -0.23644329676076015,
-        "y": 0.39281368672389294
+        "x": 0.28318023977270884,
+        "y": -0.2365363016318678
       }
     },
     {
       "id": "bi-and-data-viz:Looker",
       "area": "BI and Data Viz",
+      "areaId": "bi-and-data-viz",
+      "category": "bi-and-data-viz",
+      "categoryLabel": "BI and Data Viz",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 4,
       "name": "Looker",
       "level": 3,
       "years": 2,
       "tags": [
         "embedded analytics"
       ],
-      "text": "Looker. Area: BI and Data Viz. Tags: embedded analytics. Level: 3. Years: 2",
-      "cluster": 0,
+      "text": "Looker. Area: BI and Data Viz. Stack: Insights. Tags: embedded analytics. Level: 3. Years: 2",
+      "cluster": 4,
       "coord": {
-        "x": -0.17354089463603728,
-        "y": 0.2323395442503532
+        "x": 0.31364898410845027,
+        "y": -0.09905369290394014
       }
     },
     {
       "id": "bi-and-data-viz:Power BI",
       "area": "BI and Data Viz",
+      "areaId": "bi-and-data-viz",
+      "category": "bi-and-data-viz",
+      "categoryLabel": "BI and Data Viz",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 4,
       "name": "Power BI",
       "level": 4,
       "years": 2,
@@ -392,16 +529,22 @@
         "DAX",
         "enterprise BI"
       ],
-      "text": "Power BI. Area: BI and Data Viz. Tags: DAX, enterprise BI. Level: 4. Years: 2",
-      "cluster": 2,
+      "text": "Power BI. Area: BI and Data Viz. Stack: Insights. Tags: DAX, enterprise BI. Level: 4. Years: 2",
+      "cluster": 4,
       "coord": {
-        "x": -0.1844128023498893,
-        "y": 0.3617489075881211
+        "x": 0.2630139634870106,
+        "y": -0.18664966359349244
       }
     },
     {
       "id": "graph-analysis:NetworkX",
       "area": "Graph Analysis",
+      "areaId": "graph-analysis",
+      "category": "graph-analysis",
+      "categoryLabel": "Graph Analysis",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 5,
       "name": "NetworkX",
       "level": 5,
       "years": 5,
@@ -409,16 +552,22 @@
         "graph algorithms",
         "network analysis"
       ],
-      "text": "NetworkX. Area: Graph Analysis. Tags: graph algorithms, network analysis. Level: 5. Years: 5",
+      "text": "NetworkX. Area: Graph Analysis. Stack: Insights. Tags: graph algorithms, network analysis. Level: 5. Years: 5",
       "cluster": 5,
       "coord": {
-        "x": -0.3281396389562633,
-        "y": -0.061822801060381335
+        "x": 0.33190050976288826,
+        "y": 0.11573011701405445
       }
     },
     {
       "id": "graph-analysis:Neo4j",
       "area": "Graph Analysis",
+      "areaId": "graph-analysis",
+      "category": "graph-analysis",
+      "categoryLabel": "Graph Analysis",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 5,
       "name": "Neo4j",
       "level": 4,
       "years": 3,
@@ -426,16 +575,22 @@
         "graph databases",
         "Cypher"
       ],
-      "text": "Neo4j. Area: Graph Analysis. Tags: graph databases, Cypher. Level: 4. Years: 3",
-      "cluster": 4,
+      "text": "Neo4j. Area: Graph Analysis. Stack: Insights. Tags: graph databases, Cypher. Level: 4. Years: 3",
+      "cluster": 5,
       "coord": {
-        "x": -0.2645315516910124,
-        "y": -0.012892639590148516
+        "x": 0.35113845922205716,
+        "y": 0.058414381316799664
       }
     },
     {
       "id": "algorithms-and-statistics:Seasonal Forecasts",
       "area": "Algorithms and Statistics",
+      "areaId": "algorithms-and-statistics",
+      "category": "algorithms-and-statistics",
+      "categoryLabel": "Algorithms and Statistics",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 6,
       "name": "Seasonal Forecasts",
       "level": 4,
       "years": 3,
@@ -443,16 +598,22 @@
         "time series",
         "demand forecasting"
       ],
-      "text": "Seasonal Forecasts. Area: Algorithms and Statistics. Tags: time series, demand forecasting. Level: 4. Years: 3",
-      "cluster": 5,
+      "text": "Seasonal Forecasts. Area: Algorithms and Statistics. Stack: Insights. Tags: time series, demand forecasting. Level: 4. Years: 3",
+      "cluster": 6,
       "coord": {
-        "x": -0.19910736015053757,
-        "y": -0.05460133945362668
+        "x": 0.23949771296458405,
+        "y": -0.014846292225203015
       }
     },
     {
       "id": "algorithms-and-statistics:Parametric Testing",
       "area": "Algorithms and Statistics",
+      "areaId": "algorithms-and-statistics",
+      "category": "algorithms-and-statistics",
+      "categoryLabel": "Algorithms and Statistics",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 6,
       "name": "Parametric Testing",
       "level": 4,
       "years": 4,
@@ -460,16 +621,22 @@
         "A/B testing",
         "hypothesis testing"
       ],
-      "text": "Parametric Testing. Area: Algorithms and Statistics. Tags: A/B testing, hypothesis testing. Level: 4. Years: 4",
-      "cluster": 5,
+      "text": "Parametric Testing. Area: Algorithms and Statistics. Stack: Insights. Tags: A/B testing, hypothesis testing. Level: 4. Years: 4",
+      "cluster": 6,
       "coord": {
-        "x": -0.24368040682440412,
-        "y": -0.14620048399920724
+        "x": 0.271837974857517,
+        "y": 0.11501849448652653
       }
     },
     {
       "id": "algorithms-and-statistics:Topic Modeling",
       "area": "Algorithms and Statistics",
+      "areaId": "algorithms-and-statistics",
+      "category": "algorithms-and-statistics",
+      "categoryLabel": "Algorithms and Statistics",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 6,
       "name": "Topic Modeling",
       "level": 4,
       "years": 3,
@@ -477,16 +644,22 @@
         "NLP",
         "LDA"
       ],
-      "text": "Topic Modeling. Area: Algorithms and Statistics. Tags: NLP, LDA. Level: 4. Years: 3",
-      "cluster": 5,
+      "text": "Topic Modeling. Area: Algorithms and Statistics. Stack: Insights. Tags: NLP, LDA. Level: 4. Years: 3",
+      "cluster": 6,
       "coord": {
-        "x": -0.26657574243137416,
-        "y": -0.24507982813484155
+        "x": 0.3080742835360698,
+        "y": 0.1435196803505273
       }
     },
     {
       "id": "algorithms-and-statistics:Causal Inference",
       "area": "Algorithms and Statistics",
+      "areaId": "algorithms-and-statistics",
+      "category": "algorithms-and-statistics",
+      "categoryLabel": "Algorithms and Statistics",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 6,
       "name": "Causal Inference",
       "level": 4,
       "years": 3,
@@ -494,16 +667,22 @@
         "experimentation",
         "uplift modeling"
       ],
-      "text": "Causal Inference. Area: Algorithms and Statistics. Tags: experimentation, uplift modeling. Level: 4. Years: 3",
-      "cluster": 5,
+      "text": "Causal Inference. Area: Algorithms and Statistics. Stack: Insights. Tags: experimentation, uplift modeling. Level: 4. Years: 3",
+      "cluster": 6,
       "coord": {
-        "x": -0.291636395504151,
-        "y": -0.23330742372885754
+        "x": 0.3333175764971264,
+        "y": 0.1772038048525666
       }
     },
     {
       "id": "ai-development:RAG Systems",
       "area": "AI Development",
+      "areaId": "ai-development",
+      "category": "ai-development",
+      "categoryLabel": "AI Development",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 7,
       "name": "RAG Systems",
       "level": 3,
       "years": 1,
@@ -511,16 +690,22 @@
         "RAG",
         "LLM applications"
       ],
-      "text": "RAG Systems. Area: AI Development. Tags: RAG, LLM applications. Level: 3. Years: 1",
-      "cluster": 0,
+      "text": "RAG Systems. Area: AI Development. Stack: Insights. Tags: RAG, LLM applications. Level: 3. Years: 1",
+      "cluster": 7,
       "coord": {
-        "x": -0.03253776542394125,
-        "y": -0.3160034449914135
+        "x": 0.12218282148636715,
+        "y": 0.19728211530492976
       }
     },
     {
       "id": "ai-development:Agentic Models",
       "area": "AI Development",
+      "areaId": "ai-development",
+      "category": "ai-development",
+      "categoryLabel": "AI Development",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 7,
       "name": "Agentic Models",
       "level": 3,
       "years": 1,
@@ -528,35 +713,46 @@
         "multi-agent systems",
         "planning"
       ],
-      "text": "Agentic Models. Area: AI Development. Tags: multi-agent systems, planning. Level: 3. Years: 1",
-      "cluster": 4,
+      "text": "Agentic Models. Area: AI Development. Stack: Insights. Tags: multi-agent systems, planning. Level: 3. Years: 1",
+      "cluster": 7,
       "coord": {
-        "x": -0.13583542597707943,
-        "y": -0.48578031204708366
+        "x": 0.17833650184266633,
+        "y": 0.37091982411948543
       }
     },
     {
       "id": "ai-development:LLM Ops",
       "area": "AI Development",
+      "areaId": "ai-development",
+      "category": "ai-development",
+      "categoryLabel": "AI Development",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "clusterId": 7,
       "name": "LLM Ops",
       "level": 3,
-      "years": 1.5,
+      "years": 5,
       "tags": [
         "prompt orchestration",
         "monitoring"
       ],
-      "text": "LLM Ops. Area: AI Development. Tags: prompt orchestration, monitoring. Level: 3. Years: 1.5",
-      "cluster": 3,
+      "text": "LLM Ops. Area: AI Development. Stack: Insights. Tags: prompt orchestration, monitoring. Level: 3. Years: 5",
+      "cluster": 7,
       "coord": {
-        "x": 0.05916836737980765,
-        "y": -0.3612358134892867
+        "x": 0.06781574010451132,
+        "y": 0.24693136188401132
       }
     }
   ],
   "clusters": [
     {
-      "id": 1,
-      "label": "bigquery gcp",
+      "id": 0,
+      "key": "lakehouses",
+      "label": "Lakehouses",
+      "category": "lakehouses",
+      "categoryLabel": "Lakehouses",
+      "stack": "warehousing",
+      "stackLabel": "Warehousing",
       "members": [
         {
           "id": "lakehouses:BigQuery",
@@ -564,82 +760,118 @@
           "area": "Lakehouses"
         },
         {
-          "id": "cloud-compute:GCP",
-          "name": "GCP",
-          "area": "Cloud Compute"
-        },
-        {
-          "id": "cloud-compute:Runtime Platforms",
-          "name": "Runtime Platforms",
-          "area": "Cloud Compute"
-        }
-      ],
-      "centroidSample": [
-        0.0016739194333333332,
-        0.02693806933333333,
-        0.06853364666666667,
-        0.004913110000000001,
-        0.008952523166666667,
-        -0.027164517666666665,
-        -0.025884383666666667,
-        -0.0077798375
-      ]
-    },
-    {
-      "id": 3,
-      "label": "Warehouse ops",
-      "members": [
-        {
           "id": "lakehouses:Snowflake",
           "name": "Snowflake",
           "area": "Lakehouses"
         },
         {
-          "id": "cloud-compute:Azure",
-          "name": "Azure",
-          "area": "Cloud Compute"
-        },
-        {
-          "id": "cloud-compute:AWS",
-          "name": "AWS",
-          "area": "Cloud Compute"
-        },
-        {
-          "id": "cloud-compute:Microservices",
-          "name": "Microservices",
-          "area": "Cloud Compute"
-        },
-        {
-          "id": "data-science-platforms:Terraform",
-          "name": "Terraform",
-          "area": "Data Science Platforms"
-        },
-        {
-          "id": "ai-development:LLM Ops",
-          "name": "LLM Ops",
-          "area": "AI Development"
+          "id": "lakehouses:ELT Frameworks",
+          "name": "ELT Frameworks",
+          "area": "Lakehouses"
         }
       ],
       "centroidSample": [
-        -0.008875295516666668,
-        -0.008516999883333333,
-        0.07044898566666667,
-        -0.007213878025000001,
-        0.03375415761666666,
-        -0.0157161949,
-        -0.014489294833333334,
-        0.015605778833333334
+        -0.014845010200000001,
+        0.005265420533333333,
+        0.060654730999999996,
+        0.007850703,
+        0.015657284666666667,
+        -0.016554574,
+        -0.020882268,
+        -0.011936224
+      ]
+    },
+    {
+      "id": 1,
+      "key": "activation-systems",
+      "label": "Activation Systems",
+      "category": "activation-systems",
+      "categoryLabel": "Activation Systems",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "members": [
+        {
+          "id": "activation-systems:CDP Modeling",
+          "name": "CDP Modeling",
+          "area": "Activation Systems"
+        },
+        {
+          "id": "activation-systems:Audience Pipelines",
+          "name": "Audience Pipelines",
+          "area": "Activation Systems"
+        },
+        {
+          "id": "activation-systems:Segment + Fivetran",
+          "name": "Segment + Fivetran",
+          "area": "Activation Systems"
+        }
+      ],
+      "centroidSample": [
+        -0.006958097766666667,
+        0.022601258000000003,
+        0.027577449000000004,
+        -0.005834593266666667,
+        -0.010420830666666667,
+        -0.013504274399999997,
+        0.002463063235333333,
+        0.038927731666666666
       ]
     },
     {
       "id": 2,
-      "label": "Data modeling",
+      "key": "cloud-compute",
+      "label": "Cloud Compute",
+      "category": "cloud-compute",
+      "categoryLabel": "Cloud Compute",
+      "stack": "deployment",
+      "stackLabel": "Deployment",
       "members": [
         {
-          "id": "lakehouses:dbt",
-          "name": "dbt",
-          "area": "Lakehouses"
+          "id": "cloud-compute:Cloud Services",
+          "name": "Cloud Services",
+          "area": "Cloud Compute"
         },
+        {
+          "id": "cloud-compute:Docker",
+          "name": "Docker",
+          "area": "Cloud Compute"
+        },
+        {
+          "id": "cloud-compute:Serverless Platforms",
+          "name": "Serverless Platforms",
+          "area": "Cloud Compute"
+        },
+        {
+          "id": "cloud-compute:CI/CD Systems",
+          "name": "CI/CD Systems",
+          "area": "Cloud Compute"
+        },
+        {
+          "id": "cloud-compute:Infrastructure as Code",
+          "name": "Infrastructure as Code",
+          "area": "Cloud Compute"
+        }
+      ],
+      "centroidSample": [
+        -0.00962202552,
+        0.009094341052,
+        0.0453648738,
+        -0.008981111492000001,
+        0.0231403106,
+        -0.0299342414,
+        -0.01746740966,
+        0.01718792606
+      ]
+    },
+    {
+      "id": 3,
+      "key": "data-science-platforms",
+      "label": "Data Science Platforms",
+      "category": "data-science-platforms",
+      "categoryLabel": "Data Science Platforms",
+      "stack": "warehousing",
+      "stackLabel": "Warehousing",
+      "members": [
         {
           "id": "data-science-platforms:SQL",
           "name": "SQL",
@@ -666,10 +898,41 @@
           "area": "Data Science Platforms"
         },
         {
+          "id": "data-science-platforms:Terraform",
+          "name": "Terraform",
+          "area": "Data Science Platforms"
+        },
+        {
+          "id": "data-science-platforms:GitHub Actions",
+          "name": "GitHub Actions",
+          "area": "Data Science Platforms"
+        },
+        {
           "id": "data-science-platforms:Great Expectations",
           "name": "Great Expectations",
           "area": "Data Science Platforms"
-        },
+        }
+      ],
+      "centroidSample": [
+        -0.017513351,
+        -0.013045270385,
+        0.062146481875000006,
+        -0.0103273579375,
+        0.030081123125,
+        -0.028035445625000002,
+        -0.01967352225,
+        0.0210552708375
+      ]
+    },
+    {
+      "id": 4,
+      "key": "bi-and-data-viz",
+      "label": "BI and Data Viz",
+      "category": "bi-and-data-viz",
+      "categoryLabel": "BI and Data Viz",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "members": [
         {
           "id": "bi-and-data-viz:Excel",
           "name": "Excel",
@@ -681,103 +944,67 @@
           "area": "BI and Data Viz"
         },
         {
+          "id": "bi-and-data-viz:Looker",
+          "name": "Looker",
+          "area": "BI and Data Viz"
+        },
+        {
           "id": "bi-and-data-viz:Power BI",
           "name": "Power BI",
           "area": "BI and Data Viz"
         }
       ],
       "centroidSample": [
-        -0.0279095012,
-        0.00011900335099999959,
-        0.0637670223,
-        -0.007875963914,
-        0.003012213000000001,
-        -0.00954049234,
-        -0.0202781145,
-        0.016841876399999997
-      ]
-    },
-    {
-      "id": 4,
-      "label": "cdp modeling",
-      "members": [
-        {
-          "id": "activation-systems:CDP Modeling",
-          "name": "CDP Modeling",
-          "area": "Activation Systems"
-        },
-        {
-          "id": "activation-systems:Audience Pipelines",
-          "name": "Audience Pipelines",
-          "area": "Activation Systems"
-        },
-        {
-          "id": "graph-analysis:Neo4j",
-          "name": "Neo4j",
-          "area": "Graph Analysis"
-        },
-        {
-          "id": "ai-development:Agentic Models",
-          "name": "Agentic Models",
-          "area": "AI Development"
-        }
-      ],
-      "centroidSample": [
-        -0.01192686125,
-        0.029088653,
-        0.046258453000000005,
-        0.0061525052575,
-        -0.017851563675,
-        -0.0103248956175,
-        0.010389835249999998,
-        0.02169680975
-      ]
-    },
-    {
-      "id": 0,
-      "label": "AI / RAG",
-      "members": [
-        {
-          "id": "activation-systems:Segment + Fivetran",
-          "name": "Segment + Fivetran",
-          "area": "Activation Systems"
-        },
-        {
-          "id": "data-science-platforms:GitHub Actions",
-          "name": "GitHub Actions",
-          "area": "Data Science Platforms"
-        },
-        {
-          "id": "bi-and-data-viz:Looker",
-          "name": "Looker",
-          "area": "BI and Data Viz"
-        },
-        {
-          "id": "ai-development:RAG Systems",
-          "name": "RAG Systems",
-          "area": "AI Development"
-        }
-      ],
-      "centroidSample": [
-        -0.02335774475,
-        0.013464453967500001,
-        0.05375758075,
-        -0.01407995775,
-        0.0032253940850000004,
-        -0.031518322325,
-        -0.008025946499999999,
-        0.01447702325
+        -0.03595312175,
+        0.00500608705,
+        0.05457373124999999,
+        -0.0046239012500000004,
+        -0.0113167242,
+        -0.013232246,
+        -0.023867322249999996,
+        0.0016192062499999996
       ]
     },
     {
       "id": 5,
-      "label": "Testing",
+      "key": "graph-analysis",
+      "label": "Graph Analysis",
+      "category": "graph-analysis",
+      "categoryLabel": "Graph Analysis",
+      "stack": "insights",
+      "stackLabel": "Insights",
       "members": [
         {
           "id": "graph-analysis:NetworkX",
           "name": "NetworkX",
           "area": "Graph Analysis"
         },
+        {
+          "id": "graph-analysis:Neo4j",
+          "name": "Neo4j",
+          "area": "Graph Analysis"
+        }
+      ],
+      "centroidSample": [
+        -0.0383274905,
+        -0.009040888,
+        0.031114919199999997,
+        -0.0266498604,
+        -0.00627604035,
+        -0.0059106843,
+        -0.0125984785,
+        -0.0032773143500000003
+      ]
+    },
+    {
+      "id": 6,
+      "key": "algorithms-and-statistics",
+      "label": "Algorithms and Statistics",
+      "category": "algorithms-and-statistics",
+      "categoryLabel": "Algorithms and Statistics",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "members": [
         {
           "id": "algorithms-and-statistics:Seasonal Forecasts",
           "name": "Seasonal Forecasts",
@@ -800,14 +1027,50 @@
         }
       ],
       "centroidSample": [
-        -0.0240353853808,
-        -0.01428761254,
-        0.031023988999999995,
-        -0.009976209400000002,
-        -0.0114885606,
-        -0.014951393440000002,
-        -0.01769866442,
-        0.013762467580000002
+        -0.025715494,
+        -0.029903231750000002,
+        0.033930586500000005,
+        -0.004813242549999999,
+        -0.01252329565,
+        -0.01921694575,
+        -0.032902168,
+        0.012677228750000002
+      ]
+    },
+    {
+      "id": 7,
+      "key": "ai-development",
+      "label": "AI Development",
+      "category": "ai-development",
+      "categoryLabel": "AI Development",
+      "stack": "insights",
+      "stackLabel": "Insights",
+      "members": [
+        {
+          "id": "ai-development:RAG Systems",
+          "name": "RAG Systems",
+          "area": "AI Development"
+        },
+        {
+          "id": "ai-development:Agentic Models",
+          "name": "Agentic Models",
+          "area": "AI Development"
+        },
+        {
+          "id": "ai-development:LLM Ops",
+          "name": "LLM Ops",
+          "area": "AI Development"
+        }
+      ],
+      "centroidSample": [
+        -0.013156130666666667,
+        -0.003639601666666667,
+        0.04577660633333333,
+        -0.00026709816666666805,
+        -0.0038669321666666666,
+        -0.025842443333333336,
+        -0.0051859347666666665,
+        0.011054524566666668
       ]
     }
   ],
@@ -817,12 +1080,12 @@
   ],
   "ranges": {
     "x": {
-      "min": -0.3281396389562633,
-      "max": 0.4721342283987189
+      "min": -0.4688313533613101,
+      "max": 0.35113845922205716
     },
     "y": {
-      "min": -0.48578031204708366,
-      "max": 0.4147763839299152
+      "min": -0.36556081328123835,
+      "max": 0.37091982411948543
     }
   }
 }

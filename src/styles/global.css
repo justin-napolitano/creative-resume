@@ -472,7 +472,22 @@ section:first-of-type {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.78rem;
+  color: var(--ink);
 }
+
+.skill-badges .skill-name {
+  color: var(--accent);
+}
+
+.skill-area-label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-top: 0.1rem;
+}
+
 
 .skill-level {
   font-size: 0.75rem;
@@ -842,15 +857,17 @@ footer a {
   padding: 0.5rem 0.8rem;
   font-size: 0.85rem;
   background: #fff;
-  --badge-tone: var(--badge-tone, var(--ink));
-  color: var(--badge-tone);
-  transition: color 0.2s ease;
+  color: var(--ink);
 }
 
 .skill-badges .badge span {
   font-size: 0.74rem;
   color: inherit;
   letter-spacing: 0.05em;
+}
+
+.skill-badges .badge .skill-name {
+  color: var(--accent);
 }
 
 .skill-badges .badge.badge--mobile-hidden {

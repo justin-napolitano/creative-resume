@@ -1,6 +1,6 @@
 ---
 import '@/styles/global.css';
-import { experienceNotes, resume, sectionMeta, sectionNotes, siteConfig, siteCopy, utilityLinks } from '@/config';
+import { experienceNotes, resume, sectionMeta, sectionNotes, siteConfig, siteCopy, skillGraph, utilityLinks } from '@/config';
 
 const header = resume.header;
 type PracticePillar = { id?: string; label?: string; note?: string; icon?: string };
@@ -35,10 +35,11 @@ const education = resume.education ?? [];
 const publications = resume.publications ?? [];
 const highlightCap = 5;
 type SkillItem = { name?: string; level?: number; years?: number; display?: boolean };
-const shouldDisplay = (item?: SkillItem) => (item?.display ?? true);
+type GraphSkill = (typeof skillGraph.skills)[number];
+type GraphCluster = (typeof skillGraph.clusters)[number];
 const normalize = (value?: number) => (typeof value === 'number' && !Number.isNaN(value) ? value : Number(value ?? 0));
 const tenureValue = (value?: number) => Math.min(normalize(value), highlightCap);
-const sortBySeniority = <T extends SkillItem>(items: T[] = []) =>
+const sortBySeniority = <T extends { name?: string; years?: number }>(items: T[] = []) =>
   [...items].sort((a, b) => {
     const yearDiff = tenureValue(b.years) - tenureValue(a.years);
     if (yearDiff !== 0) return yearDiff;
@@ -51,21 +52,48 @@ const badgeToneFor = (index: number) => {
   const lightness = Math.min(baseLightness + index * lightnessStep, maxLightness);
   return `hsl(170deg 16% ${lightness}%)`;
 };
-const baseHighlights = (resume.skill_highlights ?? []).map((group) => ({
-  ...group,
-  items: sortBySeniority((group.items ?? []).filter(shouldDisplay)),
-}));
+const graphSkills: GraphSkill[] = (skillGraph?.skills ?? []) as GraphSkill[];
+const graphClusters: GraphCluster[] = (skillGraph?.clusters ?? []) as GraphCluster[];
+const stackOrder = summary.map((pillar) => pillar.id ?? '');
+
+const skillsByStack = new Map<string, GraphSkill[]>();
+stackOrder.forEach((id) => skillsByStack.set(id, []));
+graphSkills.forEach((skill) => {
+  const stackId = skill.stack ?? 'insights';
+  if (!skillsByStack.has(stackId)) skillsByStack.set(stackId, []);
+  skillsByStack.get(stackId)?.push(skill);
+});
+
 const capabilityStacks = summary
-  .map((pillar, index) => ({ pillar, stack: baseHighlights[index] }))
-  .filter((entry) => entry.stack);
-const skillAreas = (resume.skills ?? []).map((area) => ({
-  ...area,
-  items: sortBySeniority((area.items ?? []).filter(shouldDisplay)),
-}));
+  .map((pillar) => {
+    const items = sortBySeniority([...(skillsByStack.get(pillar.id ?? '') ?? [])]).slice(0, highlightCap);
+    return { pillar, items };
+  })
+  .filter((entry) => entry.items.length > 0);
+
+const clusterSortKey = (cluster: { stack?: string; label?: string }) => {
+  const stackIdx = stackOrder.indexOf(cluster.stack ?? '');
+  return `${stackIdx === -1 ? 999 : stackIdx}-${cluster.label ?? ''}`;
+};
+
+const skillAreas = graphClusters
+  .map((cluster) => {
+    const items = sortBySeniority(graphSkills.filter((skill) => skill.cluster === cluster.id));
+    return {
+      id: cluster.key ?? `cluster-${cluster.id}`,
+      stack: cluster.stack,
+      stackLabel: cluster.stackLabel,
+      label: cluster.label ?? cluster.key ?? `Cluster ${cluster.id + 1}`,
+      items,
+    };
+  })
+  .filter((area) => area.items.length > 0)
+  .sort((a, b) => (clusterSortKey(a) < clusterSortKey(b) ? -1 : clusterSortKey(a) > clusterSortKey(b) ? 1 : 0));
+
 const formatYears = (years: number = 0) => (years > highlightCap ? `${highlightCap}+ yrs` : `${years} yrs`);
 const flattenedSkills = sortBySeniority(
   skillAreas.flatMap((area) =>
-    (area.items ?? []).map((item) => ({ ...item, area: area.area }))
+    area.items.map((item) => ({ ...item, area: area.label, stack: area.stack, category: area.id }))
   )
 );
 const topSkillLimit = 10;
@@ -87,6 +115,8 @@ const levelLabels: Record<number, string> = {
   2: 'Associate',
   1: 'Foundational',
 };
+
+const areaLabels = new Map(skillAreas.map((area) => [area.id, area.label] as const));
 
 const sectionCode = (id: string) => sectionMeta.find((meta) => meta.id === id)?.code ?? '';
 const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?.label ?? '';
@@ -144,19 +174,19 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
             <p class="section__subtitle">{siteCopy.sections.summary.subtitle}</p>
           </div>
           <div class="capability-grid">
-            {capabilityStacks.map(({ pillar, stack }) => (
+            {capabilityStacks.map(({ pillar, items }) => (
               <article class="capability-card">
                 <div class="capability-card__head">
                   <span class="capability-card__icon" aria-hidden="true" set:html={iconForPillar(pillar.icon)}></span>
                   <p class="capability-card__label">{pillar.label}</p>
                 </div>
                 <ul>
-                  {stack.items?.map((item) => (
+                  {items.map((item) => (
                     <li>
                       <div class="skill-row">
                         <div>
                           <span class="skill-name">{item.name}</span>
-                          <span class="skill-level">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
+                          {/* Level hidden for tighter layout */}
                         </div>
                         <span class="skill-years">{formatYears(item.years ?? 0)}</span>
                       </div>
@@ -298,12 +328,14 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
               {flattenedSkills.map((item, index) => {
                 const isTop = topSkillNames.has(item.name ?? '');
                 const badgeClass = `badge${isTop ? '' : ' badge--mobile-hidden'}`;
+                const categoryLabel = areaLabels.get(item.category ?? '') ?? '';
                 return (
                   <div class={badgeClass} style={`--badge-tone:${badgeToneFor(index)}`}>
                     <div class="skill-row">
                       <div>
+                        {categoryLabel && <span class="skill-area-label">{categoryLabel}</span>}
                         <span class="skill-name">{item.name}</span>
-                        <span class="skill-level skill-level--block">{levelLabels[item.level ?? 0] ?? `Level ${item.level}`}</span>
+                        {/* Level hidden for tighter layout */}
                       </div>
                       <div class="skill-years-group">
                         <span class="skill-years">{formatYears(item.years ?? 0)}</span>
