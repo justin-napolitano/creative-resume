@@ -141,10 +141,28 @@ graphSkills.forEach((skill) => {
   skillsByStack.get(stackId)?.push(skill);
 });
 
+const capabilityHighlights: Record<string, string[]> = {
+  warehousing: ['BigQuery', 'ELT Frameworks', 'Jupyter', 'Pandas', 'Python'],
+  deployment: ['CI/CD Systems', 'Cloud Services', 'Docker', 'Infrastructure as Code', 'Serverless Platforms'],
+  insights: ['Audience Pipelines', 'CDP Modeling', 'Data Visualization', 'Excel', 'LLM Ops'],
+};
+
 const capabilityStacks = summary
   .map((pillar) => {
-    const rawItems = sortBySeniority([...(skillsByStack.get(pillar.id ?? '') ?? [])]);
-    const items = rawItems.slice(0, highlightCap);
+    const stackId = pillar.id ?? '';
+    const available = sortBySeniority([...(skillsByStack.get(stackId) ?? [])]);
+    const highlightNames = capabilityHighlights[stackId]?.map((name) => name.toLowerCase()) ?? [];
+    const used = new Set<string>();
+    const skillKey = (skill: GraphSkill) => (skill.id ?? skill.name ?? '').toLowerCase();
+    const curated = highlightNames
+      .map((target) => {
+        const match = available.find((skill) => (skill.name ?? '').toLowerCase() === target);
+        if (match) used.add(skillKey(match));
+        return match;
+      })
+      .filter((skill): skill is GraphSkill => Boolean(skill));
+    const fallback = available.filter((skill) => !used.has(skillKey(skill)));
+    const items = [...curated, ...fallback].slice(0, highlightCap);
     return { pillar, items };
   })
   .filter((entry) => entry.items.length > 0);
@@ -168,7 +186,7 @@ const skillAreas = graphClusters
   .filter((area) => area.items.length > 0)
   .sort((a, b) => (clusterSortKey(a) < clusterSortKey(b) ? -1 : clusterSortKey(a) > clusterSortKey(b) ? 1 : 0));
 
-const formatYears = (years: number = 0) => (years > highlightCap ? `${highlightCap}+ yrs` : `${years} yrs`);
+const formatYears = (years: number = 0) => (years >= highlightCap ? `${highlightCap}+ yrs` : `${years} yrs`);
 const flattenedSkills = sortBySeniority(
   skillAreas.flatMap((area) =>
     area.items.map((item) => ({ ...item, area: area.label, stack: area.stack, category: area.id }))
