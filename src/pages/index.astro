@@ -310,10 +310,6 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
           <div class="experience-grid">
             {experiences.map((role) => (
               <article class="experience-item">
-                <div class="experience-dates">
-                  <div>{role.start}</div>
-                  <div>{role.end}</div>
-                </div>
                 <div class="experience-body">
                   <h3>{role.title}</h3>
                   <div class="meta">{role.company} • {role.location}</div>
@@ -340,6 +336,10 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                       {siteConfig.pullQuotes?.[role.title] ?? experienceNotes[role.title]}
                     </aside>
                   )}
+                </div>
+                <div class="experience-dates">
+                  <div>{role.start}</div>
+                  <div>{role.end}</div>
                 </div>
               </article>
             ))}
@@ -386,13 +386,13 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
           <div class="experience-grid">
             {education.map((entry) => (
               <article class="experience-item">
-                <div class="experience-dates">
-                  <div>{formatDate(entry.graduation_date)}</div>
-                </div>
                 <div class="experience-body">
                   <h3>{entry.degree}</h3>
                   <div class="meta">{entry.institution}</div>
                   {entry.notes && <p>{entry.notes}</p>}
+                </div>
+                <div class="experience-dates">
+                  <div>{formatDate(entry.graduation_date)}</div>
                 </div>
               </article>
             ))}
