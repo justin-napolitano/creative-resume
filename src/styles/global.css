@@ -747,8 +747,8 @@ footer a {
   .section--skills {
     margin-left: 0;
     margin-right: 0;
-    padding-left: clamp(1.5rem, 4vw, 3rem);
-    padding-right: clamp(1.5rem, 4vw, 3rem);
+    padding-left: 0;
+    padding-right: 0;
   }
 
 }
