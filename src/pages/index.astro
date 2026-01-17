@@ -237,6 +237,14 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
     <meta name="twitter:title" content={siteConfig.siteTitle} />
     <meta name="twitter:description" content={siteConfig.siteDescription} />
     <meta name="twitter:image" content={ogImage} />
+    {/* Google tag (gtag.js) */}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CE254XPM83"></script>
+    <script is:inline>
+      {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-CE254XPM83');`}
+    </script>
     <meta name="theme-color" content="#0f7c66" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
   </head>
