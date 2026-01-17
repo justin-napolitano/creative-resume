@@ -261,6 +261,10 @@ section:first-of-type {
   margin-bottom: 1.8rem;
 }
 
+.section--tail {
+  padding-bottom: 0;
+}
+
 .capability-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -862,10 +866,6 @@ footer a {
   margin-top: 2.75rem;
   padding-top: 1.25rem;
 }
-.section--skills.section--skills--tail {
-  border-bottom: none;
-  padding-bottom: 0;
-}
 .section--skills {
   text-align: left;
 }
@@ -939,8 +939,4 @@ footer a {
 .skill-badges .badge .skill-years,
 .skill-badges .badge .skill-level--block {
   opacity: 0.7;
-}
-.section--skills.section--skills--tail {
-  border-bottom: none !important;
-  padding-bottom: 0;
 }

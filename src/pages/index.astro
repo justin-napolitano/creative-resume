@@ -400,28 +400,8 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
         </section>
       )}
 
-      {publications.length > 0 && (
-        <section class="section" id="publications">
-          <span class="section__code" aria-hidden="true">{sectionCode('publications')}</span>
-          <div class="section__header">
-            <h2 class="section__title">{sectionLabel('publications')}</h2>
-          </div>
-          <ul class="publications-list">
-            {publications.map((pub) => (
-              <li class="publication">
-                <h4>{pub.title}</h4>
-                <div class="meta">{pub.venue} • {pub.year}</div>
-                {pub.url && (
-                  <a href={pub.url} target="_blank" rel="noopener noreferrer">Read the paper</a>
-                )}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
       {flattenedSkills.length > 0 && (
-        <section class="section section--skills section--skills--tail" id="skills" data-skill-view="badges">
+        <section class="section section--skills" id="skills" data-skill-view="badges">
           <span class="section__code" aria-hidden="true">{sectionCode('skills')}</span>
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('skills')}</h2>
@@ -455,6 +435,26 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
               })}
             </div>
           </div>
+        </section>
+      )}
+
+      {publications.length > 0 && (
+        <section class="section section--tail" id="publications">
+          <span class="section__code" aria-hidden="true">{sectionCode('publications')}</span>
+          <div class="section__header">
+            <h2 class="section__title">{sectionLabel('publications')}</h2>
+          </div>
+          <ul class="publications-list">
+            {publications.map((pub) => (
+              <li class="publication">
+                <h4>{pub.title}</h4>
+                <div class="meta">{pub.venue} • {pub.year}</div>
+                {pub.url && (
+                  <a href={pub.url} target="_blank" rel="noopener noreferrer">Read the paper</a>
+                )}
+              </li>
+            ))}
+          </ul>
         </section>
       )}
 
