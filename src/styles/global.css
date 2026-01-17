@@ -324,8 +324,9 @@ section:first-of-type {
 
 .experience-item {
   display: grid;
-  grid-template-columns: minmax(120px, 180px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(120px, 180px);
   gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: start;
 }
 
 .experience-dates {
@@ -333,6 +334,11 @@ section:first-of-type {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-mute);
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  align-items: flex-end;
 }
 
 .experience-body h3 {
@@ -727,6 +733,12 @@ footer a {
 
   .experience-item {
     grid-template-columns: 1fr;
+  }
+
+  .experience-dates {
+    text-align: left;
+    align-items: flex-start;
+    margin-top: 0.5rem;
   }
 
   .section--skills {
