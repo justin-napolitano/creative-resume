@@ -1,17 +1,14 @@
-<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="64" height="64" rx="14" fill="url(#bg)" />
-  <path
-    d="M46 16h-7v19.5c0 6.6-3.1 9.7-8.7 9.7-4 0-6.6-1.4-9.6-4.4l-4.4 4.6C21.7 50.8 26.2 54 34.3 54c8.8 0 11.7-5.4 11.7-13.4V16z"
-    fill="#F3F1EB"
-  />
-  <path
-    d="M18 16h7l13 17.4V16h7v32h-7L25 30.2V48h-7V16z"
-    fill="#00C084"
-  />
-  <defs>
-    <linearGradient id="bg" x1="8" y1="6" x2="58" y2="58" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0F100F" />
-      <stop offset="1" stop-color="#104534" />
-    </linearGradient>
-  </defs>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="14" fill="#0F7C66" />
+  <text
+    x="50%"
+    y="52%"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="'Space Grotesk', 'Arial', sans-serif"
+    font-size="30"
+    font-weight="600"
+    letter-spacing="0.1em"
+    fill="#FDFBF7"
+  >:)</text>
 </svg>

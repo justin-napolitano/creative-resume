@@ -49,8 +49,8 @@ export const sectionMeta = [
   { id: 'summary', code: 'CA.01', label: 'Capabilities' },
   { id: 'experience', code: 'EX.02', label: 'Experience' },
   { id: 'education', code: 'ED.03', label: 'Education' },
-  { id: 'publications', code: 'PU.04', label: 'Publication' },
-  { id: 'skills', code: 'ST.05', label: 'Systems + Tools' },
+  { id: 'skills', code: 'ST.04', label: 'Systems + Tools' },
+  { id: 'publications', code: 'PU.05', label: 'Publication' },
   { id: 'work', code: 'SW.03', label: 'Selected work' },
 ] as const;
 
