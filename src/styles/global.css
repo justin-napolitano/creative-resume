@@ -36,6 +36,20 @@ body {
   font-family: inherit;
 }
 
+body[data-chrome-mobile='true']::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(env(safe-area-inset-top, 0px) + clamp(24px, 8vw, 52px));
+  background: radial-gradient(circle at 50% 20%, rgba(253, 251, 247, 0.38), transparent 60%),
+    linear-gradient(180deg, rgba(15, 124, 102, 0.85), rgba(15, 124, 102, 0));
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(0.5px);
+}
+
 [hidden] {
   display: none !important;
 }
