@@ -12,7 +12,8 @@
     "pdf": "node scripts/fetch-pdf.mjs",
     "pdf:html": "node scripts/export-pdf.mjs",
     "skill:graph": "node scripts/skill-graph.mjs",
-    "experience:skills": "node scripts/generate-experience-skills.mjs"
+    "experience:skills": "node scripts/generate-experience-skills.mjs",
+    "favicons": "node scripts/generate-favicons.mjs"
   },
   "dependencies": {
     "astro": "^5.16.5"
