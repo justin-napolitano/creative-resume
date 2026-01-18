@@ -31,7 +31,7 @@ type SiteConfig = {
 };
 
 export const siteConfig: SiteConfig = {
-  siteTitle: `${resume.header.name} — Editorial Resume`,
+  siteTitle: `Resume — ${resume.header.name}`,
   siteDescription:
     'Systems-led data engineer who turns healthcare and media operations into legible analytics for creative leadership.',
   siteUrl: 'https://resume.jnap.me',
