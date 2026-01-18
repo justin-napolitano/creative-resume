@@ -1,0 +1,20 @@
+{
+  "name": "Justin Napolitano — Systems Resume",
+  "short_name": "Justin Resume",
+  "description": "Systems-led data engineer who turns healthcare and media operations into legible analytics for creative leadership.",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#0f7c66",
+  "background_color": "#f7f4ef",
+  "display": "standalone"
+}
