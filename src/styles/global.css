@@ -36,6 +36,10 @@ body {
   font-family: inherit;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 body::after {
   content: '';
   position: fixed;
@@ -939,4 +943,63 @@ footer a {
 .skill-badges .badge .skill-years,
 .skill-badges .badge .skill-level--block {
   opacity: 0.7;
+}
+
+.consent-banner {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: min(520px, calc(100% - 2rem));
+  padding: 1.1rem 1.25rem;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 38px rgba(15, 16, 15, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  font-size: 0.95rem;
+  pointer-events: auto;
+}
+
+.consent-banner p {
+  margin: 0;
+  color: var(--ink);
+}
+
+.consent-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.consent-banner__actions button {
+  border-radius: 999px;
+  padding: 0.65rem 1.4rem;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
+}
+
+.consent-banner__actions button.secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+@media (max-width: 720px) {
+  .consent-banner {
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(520px, calc(100% - 1.5rem));
+    padding: 1rem;
+  }
 }
