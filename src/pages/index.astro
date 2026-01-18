@@ -635,12 +635,6 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
           });
         }
 
-        const ua = navigator.userAgent || '';
-        const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(ua);
-        const isChrome = /Chrome|CriOS|CrMo/i.test(ua) && !/Edg|OPR|Brave|FxiOS/i.test(ua);
-        if (isMobile && isChrome) {
-          document.body?.setAttribute('data-chrome-mobile', 'true');
-        }
       })();
     </script>
     <script is:inline set:html={consentScript}></script>
