@@ -1,0 +1,112 @@
+{
+  "fields": {
+    "completion_pr": {
+      "data_type": "text",
+      "field_id": "pending:completion_pr"
+    },
+    "dependency_summary": {
+      "data_type": "text",
+      "field_id": "pending:dependency_summary"
+    },
+    "finalization_state": {
+      "data_type": "single_select",
+      "field_id": "pending:finalization_state",
+      "options": {
+        "merged_to_main": "pending:finalization_state:merged_to_main",
+        "not_finalized": "pending:finalization_state:not_finalized"
+      }
+    },
+    "gating_class": {
+      "data_type": "single_select",
+      "field_id": "pending:gating_class",
+      "options": {
+        "auto_runnable": "pending:gating_class:auto_runnable",
+        "decision_gated": "pending:gating_class:decision_gated",
+        "review_gated": "pending:gating_class:review_gated"
+      }
+    },
+    "goal_area": {
+      "data_type": "single_select",
+      "field_id": "pending:goal_area",
+      "options": {
+        "governance": "pending:goal_area:governance",
+        "integration": "pending:goal_area:integration",
+        "orchestrator-runtime": "pending:goal_area:orchestrator-runtime",
+        "provider-sync": "pending:goal_area:provider-sync",
+        "runtime-governance": "pending:goal_area:runtime-governance"
+      }
+    },
+    "human_review_state": {
+      "data_type": "single_select",
+      "field_id": "pending:human_review_state",
+      "options": {
+        "in_review": "pending:human_review_state:in_review",
+        "merged": "pending:human_review_state:merged",
+        "not_requested": "pending:human_review_state:not_requested",
+        "ready_for_review": "pending:human_review_state:ready_for_review"
+      }
+    },
+    "implementation_branch": {
+      "data_type": "text",
+      "field_id": "pending:implementation_branch"
+    },
+    "merge_readiness": {
+      "data_type": "single_select",
+      "field_id": "pending:merge_readiness",
+      "options": {
+        "blocked": "pending:merge_readiness:blocked",
+        "local_only": "pending:merge_readiness:local_only",
+        "ready": "pending:merge_readiness:ready"
+      }
+    },
+    "node_id": {
+      "data_type": "text",
+      "field_id": "pending:node_id"
+    },
+    "pr_url": {
+      "data_type": "text",
+      "field_id": "pending:pr_url"
+    },
+    "smoke_status": {
+      "data_type": "single_select",
+      "field_id": "pending:smoke_status",
+      "options": {
+        "failed": "pending:smoke_status:failed",
+        "passed": "pending:smoke_status:passed",
+        "pending": "pending:smoke_status:pending"
+      }
+    },
+    "status": {
+      "data_type": "single_select",
+      "field_id": "pending:status",
+      "options": {
+        "blocked": "pending:status:blocked",
+        "completed": "pending:status:completed",
+        "decision_gated": "pending:status:decision_gated",
+        "ready": "pending:status:ready",
+        "review_gated": "pending:status:review_gated"
+      },
+      "provider_managed": true
+    },
+    "target_execplan_id": {
+      "data_type": "text",
+      "field_id": "pending:target_execplan_id"
+    },
+    "title": {
+      "data_type": "title",
+      "field_id": "builtin:title"
+    },
+    "validation_status": {
+      "data_type": "single_select",
+      "field_id": "pending:validation_status",
+      "options": {
+        "failed": "pending:validation_status:failed",
+        "passed": "pending:validation_status:passed",
+        "pending": "pending:validation_status:pending"
+      }
+    }
+  },
+  "item_ids_by_node_id": {},
+  "output_path": "/Users/justin/repos/creative-resume/artifacts/provider-sync/github-projects-field-map.json",
+  "project_id": "pending:project_id"
+}

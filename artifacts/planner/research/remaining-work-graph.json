@@ -1,0 +1,51 @@
+{
+  "last_updated": "2026-05-05T00:00:00Z",
+  "nodes": [
+    {
+      "goal_area": "product",
+      "initiative_branch": "initiative/resume-suite-maintenance",
+      "node_id": "initiative-resume-suite-maintenance",
+      "status": "in_progress",
+      "title": "JNAP Resume maintenance",
+      "type": "initiative"
+    },
+    {
+      "completion_ref": "bootstrap:repo-initialized",
+      "goal_area": "governance",
+      "implementation_branch": "impl-execplan/20260505-creative-resume-bootstrap-governed-project-codex-01-execplan-codex-01-20260505",
+      "initiative_branch": "initiative/resume-suite-maintenance",
+      "integration_mode": "via_initiative",
+      "node_id": "rwg-001",
+      "parent_initiative_node": "initiative-resume-suite-maintenance",
+      "status": "completed",
+      "target_execplan_id": "20260505-creative-resume-bootstrap-governed-project-codex-01-execplan",
+      "title": "Bootstrap governed project skeleton",
+      "type": "execplan"
+    },
+    {
+      "goal_area": "product",
+      "implementation_branch": "impl-execplan/20260505-creative-resume-resume-data-contract-codex-01-execplan-codex-01-20260505",
+      "initiative_branch": "initiative/resume-suite-maintenance",
+      "integration_mode": "via_initiative",
+      "node_id": "rwg-002",
+      "parent_initiative_node": "initiative-resume-suite-maintenance",
+      "status": "decision_gated",
+      "target_execplan_id": "20260505-creative-resume-resume-data-contract-codex-01-execplan",
+      "title": "Define resume data authority, export checks, and publish workflow",
+      "type": "execplan"
+    },
+    {
+      "goal_area": "product",
+      "implementation_branch": "impl-execplan/20260505-creative-resume-resume-job-application-workflow-codex-01-execplan-codex-01-20260505",
+      "initiative_branch": "initiative/resume-suite-maintenance",
+      "integration_mode": "via_initiative",
+      "node_id": "rwg-003",
+      "parent_initiative_node": "initiative-resume-suite-maintenance",
+      "status": "decision_gated",
+      "target_execplan_id": "20260505-creative-resume-resume-job-application-workflow-codex-01-execplan",
+      "title": "Plan resume update flow for job-application targeting",
+      "type": "execplan"
+    }
+  ],
+  "version": 1
+}
