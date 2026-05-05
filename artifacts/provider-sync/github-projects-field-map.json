@@ -1,0 +1,109 @@
+{
+  "fields": {
+    "completion_pr": {
+      "data_type": "text",
+      "field_id": "PVTF_lAHOA02wdc4BWx3-zhSDXA8"
+    },
+    "dependency_summary": {
+      "data_type": "text",
+      "field_id": "PVTF_lAHOA02wdc4BWx3-zhSDXB4"
+    },
+    "finalization_state": {
+      "data_type": "single_select",
+      "field_id": "PVTSSF_lAHOA02wdc4BWx3-zhSDXD4",
+      "options": {
+        "merged_to_main": "cea94003",
+        "not_finalized": "a5a38095"
+      }
+    },
+    "gating_class": {
+      "data_type": "single_select",
+      "field_id": "PVTSSF_lAHOA02wdc4BWx3-zhSDXA0",
+      "options": {
+        "auto_runnable": "d642b328",
+        "decision_gated": "4d8c0c51",
+        "review_gated": "6ca30b51"
+      }
+    },
+    "goal_area": {
+      "data_type": "single_select",
+      "field_id": "PVTSSF_lAHOA02wdc4BWx3-zhSDXB0",
+      "options": {
+        "governance": "18ba1a85",
+        "integration": "982bc09a",
+        "orchestrator-runtime": "37729066",
+        "provider-sync": "47a21032",
+        "runtime-governance": "ad07a78d"
+      }
+    },
+    "human_review_state": {
+      "data_type": "single_select",
+      "field_id": "PVTSSF_lAHOA02wdc4BWx3-zhSDXCw",
+      "options": {
+        "in_review": "828cf569",
+        "merged": "edc59223",
+        "not_requested": "266b06e6",
+        "ready_for_review": "1e3a332e"
+      }
+    },
+    "implementation_branch": {
+      "data_type": "text",
+      "field_id": "PVTF_lAHOA02wdc4BWx3-zhSDXA4"
+    },
+    "merge_readiness": {
+      "data_type": "single_select",
+      "field_id": "PVTSSF_lAHOA02wdc4BWx3-zhSDXDc",
+      "options": {
+        "blocked": "57175725",
+        "local_only": "1bb1a0ba",
+        "ready": "15847afd"
+      }
+    },
+    "node_id": {
+      "data_type": "text",
+      "field_id": "PVTF_lAHOA02wdc4BWx3-zhSDW_w"
+    },
+    "pr_url": {
+      "data_type": "text",
+      "field_id": "PVTF_lAHOA02wdc4BWx3-zhSDXC0"
+    },
+    "smoke_status": {
+      "data_type": "single_select",
+      "field_id": "PVTSSF_lAHOA02wdc4BWx3-zhSDXC8",
+      "options": {
+        "failed": "04678731",
+        "passed": "016d7853",
+        "pending": "76d7320e"
+      }
+    },
+    "status": {
+      "data_type": "single_select",
+      "field_id": "PVTSSF_lAHOA02wdc4BWx3-zhSDW-s",
+      "options": {
+        "Done": "98236657",
+        "In Progress": "47fc9ee4",
+        "Todo": "f75ad846"
+      },
+      "provider_managed": true
+    },
+    "target_execplan_id": {
+      "data_type": "text",
+      "field_id": "PVTF_lAHOA02wdc4BWx3-zhSDXAw"
+    },
+    "title": {
+      "data_type": "title",
+      "field_id": "builtin:title"
+    },
+    "validation_status": {
+      "data_type": "single_select",
+      "field_id": "PVTSSF_lAHOA02wdc4BWx3-zhSDXC4",
+      "options": {
+        "failed": "553e7d86",
+        "passed": "320fc180",
+        "pending": "a85916ac"
+      }
+    }
+  },
+  "item_ids_by_node_id": {},
+  "project_id": "PVT_kwHOA02wdc4BWx3-"
+}
