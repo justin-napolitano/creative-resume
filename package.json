@@ -11,6 +11,10 @@
     "check": "astro check",
     "pdf": "node scripts/fetch-pdf.mjs",
     "pdf:html": "node scripts/export-pdf.mjs",
+    "career:status": "node scripts/career-content-api.mjs status",
+    "career:profile": "node scripts/career-content-api.mjs profile",
+    "career:sync-preview": "node scripts/career-content-api.mjs sync-preview",
+    "career:tailor-preview": "node scripts/career-content-api.mjs tailor-preview",
     "skill:graph": "node scripts/skill-graph.mjs",
     "experience:skills": "node scripts/generate-experience-skills.mjs",
     "favicons": "node scripts/generate-favicons.mjs"
