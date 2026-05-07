@@ -5,6 +5,13 @@ import process from 'node:process';
 const repoRoot = path.resolve(new URL('..', import.meta.url).pathname);
 const resumePath = path.join(repoRoot, 'src/data/resume.json');
 const authorityPath = path.join(repoRoot, 'src/data/content-authority.json');
+const jobWorkflowPath = path.join(repoRoot, 'src/data/job-application-workflow.json');
+const artifactRefs = [
+  'src/data/resume.json',
+  'src/data/content-authority.json',
+  'src/data/job-application-workflow.json',
+  'scripts/career-content-api.mjs',
+];
 
 const args = process.argv.slice(2);
 const command = args.find((arg) => !arg.startsWith('--')) ?? 'status';
@@ -46,11 +53,7 @@ function envelope(commandName, payload = {}, options = {}) {
     repo_id: 'creative-resume',
     command: commandName,
     blockers,
-    artifacts: [
-      'src/data/resume.json',
-      'src/data/content-authority.json',
-      'scripts/career-content-api.mjs',
-    ],
+    artifacts: artifactRefs,
     next_actions: options.next_actions ?? [],
     ...payload,
   };
@@ -162,11 +165,15 @@ function topMatches(tokens, atoms, limit) {
 }
 
 async function loadContent() {
-  const [resume, authority] = await Promise.all([readJson(resumePath), readJson(authorityPath)]);
-  return { resume, authority };
+  const [resume, authority, jobWorkflow] = await Promise.all([
+    readJson(resumePath),
+    readJson(authorityPath),
+    readJson(jobWorkflowPath),
+  ]);
+  return { resume, authority, jobWorkflow };
 }
 
-function statusPayload(resume, authority) {
+function statusPayload(resume, authority, jobWorkflow) {
   const blockers = validateAuthority(authority, resume);
   return envelope(
     'status',
@@ -180,6 +187,12 @@ function statusPayload(resume, authority) {
       public_identity: publicIdentity(resume),
       counts: counts(resume),
       sync_targets: authority.sync_targets ?? [],
+      job_application_workflow: {
+        source_path: 'src/data/job-application-workflow.json',
+        version: jobWorkflow.version ?? '',
+        stage_count: (jobWorkflow.stages ?? []).length,
+        automation_boundary: jobWorkflow.automation_boundary ?? {},
+      },
     },
     {
       blockers,
@@ -241,6 +254,23 @@ function syncPreviewPayload(resume, authority) {
   return envelope('sync-preview', { target, projections: selected }, { blockers });
 }
 
+function jobWorkflowPayload(jobWorkflow) {
+  return envelope(
+    'job-workflow',
+    {
+      workflow: jobWorkflow,
+    },
+    {
+      next_actions: [
+        {
+          action: 'implement_job_intake_contract',
+          reason: 'workflow_contract_ready',
+        },
+      ],
+    },
+  );
+}
+
 async function readJobText() {
   if (params['job-file']) return fs.readFile(path.resolve(process.cwd(), params['job-file']), 'utf8');
   return params['job-text'] ?? '';
@@ -278,12 +308,13 @@ async function tailorPreviewPayload(resume) {
 }
 
 async function main() {
-  const { resume, authority } = await loadContent();
+  const { resume, authority, jobWorkflow } = await loadContent();
   let result;
-  if (command === 'status') result = statusPayload(resume, authority);
+  if (command === 'status') result = statusPayload(resume, authority, jobWorkflow);
   else if (command === 'profile') result = profilePayload(resume);
   else if (command === 'sync-preview') result = syncPreviewPayload(resume, authority);
   else if (command === 'tailor-preview') result = await tailorPreviewPayload(resume);
+  else if (command === 'job-workflow') result = jobWorkflowPayload(jobWorkflow);
   else result = envelope(command, {}, { blockers: [`unknown_command:${command}`] });
   console.log(JSON.stringify(result, null, 2));
   process.exitCode = result.ok ? 0 : 1;

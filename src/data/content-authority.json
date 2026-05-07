@@ -74,7 +74,8 @@
       "status",
       "profile",
       "sync-preview",
-      "tailor-preview"
+      "tailor-preview",
+      "job-workflow"
     ]
   },
   "rules": [

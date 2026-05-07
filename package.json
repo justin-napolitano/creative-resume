@@ -15,6 +15,7 @@
     "career:profile": "node scripts/career-content-api.mjs profile",
     "career:sync-preview": "node scripts/career-content-api.mjs sync-preview",
     "career:tailor-preview": "node scripts/career-content-api.mjs tailor-preview",
+    "career:job-workflow": "node scripts/career-content-api.mjs job-workflow",
     "skill:graph": "node scripts/skill-graph.mjs",
     "experience:skills": "node scripts/generate-experience-skills.mjs",
     "favicons": "node scripts/generate-favicons.mjs"
