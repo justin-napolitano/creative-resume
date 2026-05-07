@@ -19,15 +19,16 @@ Canonical source: `artifacts/planner/research/remaining-work-graph.json`
    - completion ref: `merged:pr-23`
 
 2. `20260505-creative-resume-resume-job-application-workflow-codex-01-execplan`
-   - status: `ready`
+   - status: `completed`
    - node: `rwg-003`
    - goal: plan resume update flow for job-application targeting
    - implementation branch: `impl-execplan/20260505-creative-resume-resume-job-application-workflow-codex-01-execplan-codex-01-20260505`
+   - completion ref: `merged:pr-24`
 
 ## Mirror Metadata
 
-- canonical_last_graph_action_id: `rwg-action-20260507-002-promote_ready-rwg-003`
-- canonical_ready_order: `20260505-creative-resume-resume-job-application-workflow-codex-01-execplan`
+- canonical_last_graph_action_id: `rwg-action-20260507-003-complete-rwg-003`
+- canonical_ready_order: ``
 - projection_authority: `projection_only`
 
 ## Queue Discipline

@@ -18,10 +18,8 @@
   "queue_projection": {
     "path": "docs/queued-execplans.md",
     "projection_authority": "projection_only",
-    "last_reconciled_action_id": "rwg-action-20260507-002-promote_ready-rwg-003",
-    "ready_execplan_ids": [
-      "20260505-creative-resume-resume-job-application-workflow-codex-01-execplan"
-    ]
+    "last_reconciled_action_id": "rwg-action-20260507-003-complete-rwg-003",
+    "ready_execplan_ids": []
   },
   "graph_actions": [
     {
@@ -38,6 +36,14 @@
       "node_id": "rwg-003",
       "rationale": "rwg-002 is completed and this branch adds the canonical ExecPlan plus job-application workflow contract for the next slice",
       "evidence_ref": "branch:impl-execplan/20260505-creative-resume-resume-job-application-workflow-codex-01-execplan-codex-01-20260505",
+      "queue_reconciled": true
+    },
+    {
+      "action_id": "rwg-action-20260507-003-complete-rwg-003",
+      "action": "complete",
+      "node_id": "rwg-003",
+      "rationale": "20260505-creative-resume-resume-job-application-workflow-codex-01-execplan merged to initiative/resume-suite-maintenance and is now canonical completed state",
+      "evidence_ref": "merged:pr-24",
       "queue_reconciled": true
     }
   ],
@@ -117,8 +123,8 @@
     {
       "node_id": "rwg-003",
       "title": "Plan resume update flow for job-application targeting",
-      "status": "ready",
-      "status_reason": "canonical ExecPlan and implementation branch are present for the job-application workflow planning slice",
+      "status": "completed",
+      "status_reason": "",
       "gating_class": "auto_runnable",
       "goal_area": "product",
       "conflict_domains": [
@@ -138,17 +144,17 @@
       ],
       "ordering": {
         "queue_position": 1,
-        "ready_order": 1,
-        "source_action_id": "rwg-action-20260507-002-promote_ready-rwg-003",
+        "source_action_id": "rwg-action-20260507-003-complete-rwg-003",
         "tie_breaker": "20260505-creative-resume-resume-job-application-workflow-codex-01-execplan"
       },
       "action_state": {
-        "last_action_id": "rwg-action-20260507-002-promote_ready-rwg-003",
-        "last_action": "promote_ready",
+        "last_action_id": "rwg-action-20260507-003-complete-rwg-003",
+        "last_action": "complete",
         "action_required": false,
         "reorder_requires_human": false,
         "reorder_blockers": []
-      }
+      },
+      "completion_ref": "merged:pr-24"
     }
   ],
   "edges": [
