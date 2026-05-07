@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-05T00:00:00Z",
+  "last_updated": "2026-05-07T00:00:00Z",
   "nodes": [
     {
       "goal_area": "product",
@@ -29,7 +29,8 @@
       "integration_mode": "via_initiative",
       "node_id": "rwg-002",
       "parent_initiative_node": "initiative-resume-suite-maintenance",
-      "status": "decision_gated",
+      "status": "ready",
+      "status_reason": "implementation branch and ExecPlan created for the first repo-local content authority and JSON API surface",
       "target_execplan_id": "20260505-creative-resume-resume-data-contract-codex-01-execplan",
       "title": "Define resume data authority, export checks, and publish workflow",
       "type": "execplan"
