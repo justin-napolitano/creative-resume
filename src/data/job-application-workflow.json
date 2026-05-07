@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "repo_id": "creative-resume",
+  "suite_id": "jnap-career-suite",
+  "workflow_id": "resume-job-application-workflow",
+  "title": "Resume Job Application Workflow",
+  "authority_refs": [
+    "src/data/resume.json",
+    "src/data/content-authority.json"
+  ],
+  "automation_boundary": {
+    "application_submission_enabled": false,
+    "human_review_required": true,
+    "invent_claims_allowed": false,
+    "private_field_export_requires_approval": true
+  },
+  "inputs": [
+    {
+      "id": "job_posting",
+      "required": true,
+      "fields": [
+        "source_url",
+        "source_id",
+        "company",
+        "title",
+        "location",
+        "employment_type",
+        "description_text",
+        "captured_at"
+      ]
+    },
+    {
+      "id": "candidate_profile",
+      "required": true,
+      "source": "src/data/resume.json"
+    }
+  ],
+  "outputs": [
+    {
+      "id": "fit_report",
+      "description": "Machine-readable role fit summary with matched skills, gaps, and evidence refs."
+    },
+    {
+      "id": "resume_selection_plan",
+      "description": "Ordered content references selected from existing resume facts only."
+    },
+    {
+      "id": "review_packet",
+      "description": "Human-reviewable packet before PDF generation or application use."
+    }
+  ],
+  "stages": [
+    {
+      "id": "job_intake",
+      "status": "planned",
+      "purpose": "Normalize a job posting into stable fields and source evidence.",
+      "agent_allowed": true,
+      "side_effects_allowed": false,
+      "required_evidence": [
+        "source_url or source_id",
+        "description_text"
+      ],
+      "next_execplan": "future:resume-job-intake-contract"
+    },
+    {
+      "id": "fit_scoring",
+      "status": "planned",
+      "purpose": "Score the posting against canonical skills, projects, and experience.",
+      "agent_allowed": true,
+      "side_effects_allowed": false,
+      "required_evidence": [
+        "career:tailor-preview output",
+        "matched content refs",
+        "missing requirement refs"
+      ],
+      "next_execplan": "future:resume-fit-scoring"
+    },
+    {
+      "id": "resume_selection",
+      "status": "planned",
+      "purpose": "Create a short resume plan from existing facts without rewriting claims.",
+      "agent_allowed": true,
+      "side_effects_allowed": false,
+      "required_evidence": [
+        "selected experience ids",
+        "selected skill names",
+        "selected project ids",
+        "excluded content rationale"
+      ],
+      "next_execplan": "future:resume-selection-plan"
+    },
+    {
+      "id": "review_packet",
+      "status": "planned",
+      "purpose": "Prepare a human-reviewable packet before export.",
+      "agent_allowed": true,
+      "side_effects_allowed": false,
+      "required_evidence": [
+        "fit_report",
+        "resume_selection_plan",
+        "risk_flags"
+      ],
+      "next_execplan": "future:resume-review-packet"
+    },
+    {
+      "id": "pdf_export",
+      "status": "planned",
+      "purpose": "Generate a tailored PDF only after review approval.",
+      "agent_allowed": true,
+      "side_effects_allowed": true,
+      "approval_required": true,
+      "required_evidence": [
+        "review approval",
+        "selection plan version",
+        "generated artifact path"
+      ],
+      "next_execplan": "future:resume-pdf-export-worker"
+    },
+    {
+      "id": "application_submission",
+      "status": "deferred",
+      "purpose": "Submit applications only after a separate governance policy exists.",
+      "agent_allowed": false,
+      "side_effects_allowed": false,
+      "approval_required": true,
+      "required_evidence": [
+        "destination allowlist",
+        "identity-use policy",
+        "human approval record"
+      ],
+      "next_execplan": "future:application-submission-governance"
+    }
+  ],
+  "agent_protocol": {
+    "transport": "repo_local_json_cli",
+    "read_commands": [
+      "npm run career:status",
+      "npm run career:profile",
+      "npm run career:job-workflow",
+      "npm run career:tailor-preview -- --job-text='...'"
+    ],
+    "write_commands": [],
+    "future_api_routes": [
+      "GET /career/profile",
+      "GET /career/job-workflow",
+      "POST /career/job-postings/normalize",
+      "POST /career/fit-report",
+      "POST /career/resume-selection-plan",
+      "POST /career/review-packets"
+    ]
+  },
+  "risk_flags": [
+    {
+      "id": "missing_source_url",
+      "severity": "medium",
+      "action": "require source id before packet generation"
+    },
+    {
+      "id": "unmatched_required_skill",
+      "severity": "medium",
+      "action": "show gap instead of inventing experience"
+    },
+    {
+      "id": "private_contact_export",
+      "severity": "high",
+      "action": "require explicit approval before exporting private fields"
+    },
+    {
+      "id": "submission_side_effect",
+      "severity": "high",
+      "action": "block until application submission governance exists"
+    }
+  ]
+}

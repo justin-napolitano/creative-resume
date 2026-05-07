@@ -18,8 +18,10 @@
   "queue_projection": {
     "path": "docs/queued-execplans.md",
     "projection_authority": "projection_only",
-    "last_reconciled_action_id": "rwg-action-20260507-001-complete-rwg-002",
-    "ready_execplan_ids": []
+    "last_reconciled_action_id": "rwg-action-20260507-002-promote_ready-rwg-003",
+    "ready_execplan_ids": [
+      "20260505-creative-resume-resume-job-application-workflow-codex-01-execplan"
+    ]
   },
   "graph_actions": [
     {
@@ -28,6 +30,14 @@
       "node_id": "rwg-002",
       "rationale": "20260505-creative-resume-resume-data-contract-codex-01-execplan merged to initiative/resume-suite-maintenance and is now canonical completed state",
       "evidence_ref": "merged:pr-23",
+      "queue_reconciled": true
+    },
+    {
+      "action_id": "rwg-action-20260507-002-promote_ready-rwg-003",
+      "action": "promote_ready",
+      "node_id": "rwg-003",
+      "rationale": "rwg-002 is completed and this branch adds the canonical ExecPlan plus job-application workflow contract for the next slice",
+      "evidence_ref": "branch:impl-execplan/20260505-creative-resume-resume-job-application-workflow-codex-01-execplan-codex-01-20260505",
       "queue_reconciled": true
     }
   ],
@@ -107,9 +117,9 @@
     {
       "node_id": "rwg-003",
       "title": "Plan resume update flow for job-application targeting",
-      "status": "decision_gated",
-      "status_reason": "next slice needs a canonical ExecPlan and human-reviewed automation boundaries before execution",
-      "gating_class": "decision_gated",
+      "status": "ready",
+      "status_reason": "canonical ExecPlan and implementation branch are present for the job-application workflow planning slice",
+      "gating_class": "auto_runnable",
       "goal_area": "product",
       "conflict_domains": [
         "career-content-api",
@@ -123,11 +133,21 @@
       "integration_mode": "via_initiative",
       "expected_artifacts": [
         ".agent/execplans/20260505-creative-resume-resume-job-application-workflow-codex-01-execplan.md",
-        "docs/resume-job-application-workflow.md"
+        "docs/resume-job-application-workflow.md",
+        "src/data/job-application-workflow.json"
       ],
       "ordering": {
         "queue_position": 1,
+        "ready_order": 1,
+        "source_action_id": "rwg-action-20260507-002-promote_ready-rwg-003",
         "tie_breaker": "20260505-creative-resume-resume-job-application-workflow-codex-01-execplan"
+      },
+      "action_state": {
+        "last_action_id": "rwg-action-20260507-002-promote_ready-rwg-003",
+        "last_action": "promote_ready",
+        "action_required": false,
+        "reorder_requires_human": false,
+        "reorder_blockers": []
       }
     }
   ],
