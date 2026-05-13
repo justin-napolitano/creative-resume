@@ -377,11 +377,12 @@ section:first-of-type {
 }
 
 .chip-row li {
-  border: 1px solid var(--accent);
+  border: 1px solid var(--line-strong);
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
   font-size: 0.78rem;
   letter-spacing: 0.04em;
+  color: var(--accent);
 }
 
 .pull-quote {
