@@ -1,51 +1,172 @@
 {
-  "last_updated": "2026-05-05T00:00:00Z",
-  "nodes": [
+  "graph_id": "creative-resume-remaining-work-graph-20260505",
+  "created_at": "2026-05-05T00:00:00Z",
+  "last_updated": "2026-05-07T00:00:00Z",
+  "version": 1,
+  "ordering_policy": {
+    "ready_statuses": [
+      "ready"
+    ],
+    "ready_sort_fields": [
+      "ready_order",
+      "tie_breaker",
+      "node_id"
+    ],
+    "reorder_requires_explicit_action": true,
+    "board_projection_authority": "projection_only"
+  },
+  "queue_projection": {
+    "path": "docs/queued-execplans.md",
+    "projection_authority": "projection_only",
+    "last_reconciled_action_id": "rwg-action-20260507-003-complete-rwg-003",
+    "ready_execplan_ids": []
+  },
+  "graph_actions": [
     {
-      "goal_area": "product",
-      "initiative_branch": "initiative/resume-suite-maintenance",
-      "node_id": "initiative-resume-suite-maintenance",
-      "status": "in_progress",
-      "title": "JNAP Resume maintenance",
-      "type": "initiative"
-    },
-    {
-      "completion_ref": "bootstrap:repo-initialized",
-      "goal_area": "governance",
-      "implementation_branch": "impl-execplan/20260505-creative-resume-bootstrap-governed-project-codex-01-execplan-codex-01-20260505",
-      "initiative_branch": "initiative/resume-suite-maintenance",
-      "integration_mode": "via_initiative",
-      "node_id": "rwg-001",
-      "parent_initiative_node": "initiative-resume-suite-maintenance",
-      "status": "completed",
-      "target_execplan_id": "20260505-creative-resume-bootstrap-governed-project-codex-01-execplan",
-      "title": "Bootstrap governed project skeleton",
-      "type": "execplan"
-    },
-    {
-      "goal_area": "product",
-      "implementation_branch": "impl-execplan/20260505-creative-resume-resume-data-contract-codex-01-execplan-codex-01-20260505",
-      "initiative_branch": "initiative/resume-suite-maintenance",
-      "integration_mode": "via_initiative",
+      "action_id": "rwg-action-20260507-001-complete-rwg-002",
+      "action": "complete",
       "node_id": "rwg-002",
-      "parent_initiative_node": "initiative-resume-suite-maintenance",
-      "status": "decision_gated",
-      "target_execplan_id": "20260505-creative-resume-resume-data-contract-codex-01-execplan",
-      "title": "Define resume data authority, export checks, and publish workflow",
-      "type": "execplan"
+      "rationale": "20260505-creative-resume-resume-data-contract-codex-01-execplan merged to initiative/resume-suite-maintenance and is now canonical completed state",
+      "evidence_ref": "merged:pr-23",
+      "queue_reconciled": true
     },
     {
-      "goal_area": "product",
-      "implementation_branch": "impl-execplan/20260505-creative-resume-resume-job-application-workflow-codex-01-execplan-codex-01-20260505",
-      "initiative_branch": "initiative/resume-suite-maintenance",
-      "integration_mode": "via_initiative",
+      "action_id": "rwg-action-20260507-002-promote_ready-rwg-003",
+      "action": "promote_ready",
       "node_id": "rwg-003",
-      "parent_initiative_node": "initiative-resume-suite-maintenance",
-      "status": "decision_gated",
-      "target_execplan_id": "20260505-creative-resume-resume-job-application-workflow-codex-01-execplan",
-      "title": "Plan resume update flow for job-application targeting",
-      "type": "execplan"
+      "rationale": "rwg-002 is completed and this branch adds the canonical ExecPlan plus job-application workflow contract for the next slice",
+      "evidence_ref": "branch:impl-execplan/20260505-creative-resume-resume-job-application-workflow-codex-01-execplan-codex-01-20260505",
+      "queue_reconciled": true
+    },
+    {
+      "action_id": "rwg-action-20260507-003-complete-rwg-003",
+      "action": "complete",
+      "node_id": "rwg-003",
+      "rationale": "20260505-creative-resume-resume-job-application-workflow-codex-01-execplan merged to initiative/resume-suite-maintenance and is now canonical completed state",
+      "evidence_ref": "merged:pr-24",
+      "queue_reconciled": true
     }
   ],
-  "version": 1
+  "nodes": [
+    {
+      "node_id": "initiative-resume-suite-maintenance",
+      "title": "JNAP Resume maintenance",
+      "status": "decision_gated",
+      "status_reason": "initiative container; execution occurs through child ExecPlan slices",
+      "gating_class": "decision_gated",
+      "goal_area": "reference",
+      "conflict_domains": [],
+      "target_execplan_id": "",
+      "node_kind": "initiative",
+      "initiative_branch": "initiative/resume-suite-maintenance",
+      "ordering": {}
+    },
+    {
+      "node_id": "rwg-001",
+      "title": "Bootstrap governed project skeleton",
+      "status": "completed",
+      "gating_class": "auto_runnable",
+      "goal_area": "governance",
+      "conflict_domains": [
+        "managed-repo-bootstrap"
+      ],
+      "target_execplan_id": "20260505-creative-resume-bootstrap-governed-project-codex-01-execplan",
+      "node_kind": "execplan_slice",
+      "implementation_branch": "impl-execplan/20260505-creative-resume-bootstrap-governed-project-codex-01-execplan-codex-01-20260505",
+      "initiative_branch": "initiative/resume-suite-maintenance",
+      "parent_initiative_node": "initiative-resume-suite-maintenance",
+      "integration_mode": "via_initiative",
+      "completion_ref": "bootstrap:repo-initialized",
+      "expected_artifacts": [
+        ".agent/execplans",
+        "artifacts/planner/research/remaining-work-graph.json",
+        "artifacts/provider-sync/github-projects-field-map.json",
+        "docs/queued-execplans.md",
+        "spec/workflow.yaml"
+      ],
+      "ordering": {}
+    },
+    {
+      "node_id": "rwg-002",
+      "title": "Define resume data authority, export checks, and publish workflow",
+      "status": "completed",
+      "status_reason": "",
+      "gating_class": "auto_runnable",
+      "goal_area": "product",
+      "conflict_domains": [
+        "career-content-api",
+        "resume-data"
+      ],
+      "target_execplan_id": "20260505-creative-resume-resume-data-contract-codex-01-execplan",
+      "node_kind": "execplan_slice",
+      "implementation_branch": "impl-execplan/20260505-creative-resume-resume-data-contract-codex-01-execplan-codex-01-20260505",
+      "initiative_branch": "initiative/resume-suite-maintenance",
+      "parent_initiative_node": "initiative-resume-suite-maintenance",
+      "integration_mode": "via_initiative",
+      "completion_ref": "merged:pr-23",
+      "expected_artifacts": [
+        "docs/career-content-authority.md",
+        "scripts/career-content-api.mjs",
+        "src/data/content-authority.json"
+      ],
+      "ordering": {
+        "source_action_id": "rwg-action-20260507-001-complete-rwg-002"
+      },
+      "action_state": {
+        "last_action_id": "rwg-action-20260507-001-complete-rwg-002",
+        "last_action": "complete",
+        "action_required": false,
+        "reorder_requires_human": false,
+        "reorder_blockers": []
+      }
+    },
+    {
+      "node_id": "rwg-003",
+      "title": "Plan resume update flow for job-application targeting",
+      "status": "completed",
+      "status_reason": "",
+      "gating_class": "auto_runnable",
+      "goal_area": "product",
+      "conflict_domains": [
+        "career-content-api",
+        "resume-job-targeting"
+      ],
+      "target_execplan_id": "20260505-creative-resume-resume-job-application-workflow-codex-01-execplan",
+      "node_kind": "execplan_slice",
+      "implementation_branch": "impl-execplan/20260505-creative-resume-resume-job-application-workflow-codex-01-execplan-codex-01-20260505",
+      "initiative_branch": "initiative/resume-suite-maintenance",
+      "parent_initiative_node": "initiative-resume-suite-maintenance",
+      "integration_mode": "via_initiative",
+      "expected_artifacts": [
+        ".agent/execplans/20260505-creative-resume-resume-job-application-workflow-codex-01-execplan.md",
+        "docs/resume-job-application-workflow.md",
+        "src/data/job-application-workflow.json"
+      ],
+      "ordering": {
+        "queue_position": 1,
+        "source_action_id": "rwg-action-20260507-003-complete-rwg-003",
+        "tie_breaker": "20260505-creative-resume-resume-job-application-workflow-codex-01-execplan"
+      },
+      "action_state": {
+        "last_action_id": "rwg-action-20260507-003-complete-rwg-003",
+        "last_action": "complete",
+        "action_required": false,
+        "reorder_requires_human": false,
+        "reorder_blockers": []
+      },
+      "completion_ref": "merged:pr-24"
+    }
+  ],
+  "edges": [
+    {
+      "from": "rwg-002",
+      "to": "rwg-001",
+      "relation": "depends_on"
+    },
+    {
+      "from": "rwg-003",
+      "to": "rwg-002",
+      "relation": "depends_on"
+    }
+  ]
 }

@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "repo_id": "creative-resume",
+  "suite_id": "jnap-career-suite",
+  "source_path": "src/data/resume.json",
+  "owner_target": "resume",
+  "authority": {
+    "role": "central career content authority",
+    "status": "initial_repo_local_store",
+    "notes": [
+      "src/data/resume.json is the first canonical store for shared public career facts.",
+      "Future database or service storage should preserve this schema contract first."
+    ]
+  },
+  "public_fields": [
+    "header.name",
+    "header.location",
+    "header.email",
+    "header.github",
+    "header.github_url",
+    "header.linkedin",
+    "header.linkedin_url",
+    "summary",
+    "education",
+    "skills",
+    "experience",
+    "projects",
+    "publications",
+    "skill_highlights"
+  ],
+  "private_fields": [
+    "header.phone"
+  ],
+  "canonical_entities": [
+    "identity",
+    "contact_channels",
+    "locations",
+    "professional_summary",
+    "roles",
+    "employers",
+    "projects",
+    "skills",
+    "education",
+    "publications",
+    "portfolio_links",
+    "evidence_refs"
+  ],
+  "sync_targets": [
+    {
+      "target_id": "resume",
+      "mode": "source",
+      "outputs": ["public_resume_site", "pdf_resume", "cv_export", "content_api"]
+    },
+    {
+      "target_id": "docs",
+      "mode": "projection",
+      "outputs": ["evidence_catalog", "project_case_studies", "long_form_cv_context"]
+    },
+    {
+      "target_id": "hire",
+      "mode": "projection",
+      "outputs": ["hiring_landing_page_copy", "proof_points", "contact_prompts"]
+    },
+    {
+      "target_id": "link",
+      "mode": "projection",
+      "outputs": ["suite_navigation", "public_identity", "route_health"]
+    }
+  ],
+  "api_surface": {
+    "transport": "repo_local_json_cli",
+    "entrypoint": "scripts/career-content-api.mjs",
+    "commands": [
+      "status",
+      "profile",
+      "sync-preview",
+      "tailor-preview",
+      "job-workflow"
+    ]
+  },
+  "rules": [
+    "Commands must emit machine-readable JSON envelopes.",
+    "Tailored resume previews must select from existing content only.",
+    "Generated PDFs require human review before application submission.",
+    "Application submission is out of scope for this authority bootstrap."
+  ]
+}

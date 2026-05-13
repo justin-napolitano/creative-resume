@@ -352,7 +352,6 @@ const levelLabels: Record<number, string> = {
 
 const areaLabels = new Map(skillAreas.map((area) => [area.id, area.label] as const));
 
-const sectionCode = (id: string) => sectionMeta.find((meta) => meta.id === id)?.code ?? '';
 const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?.label ?? '';
 ---
 <!DOCTYPE html>
@@ -418,10 +417,8 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
 
       {capabilityStacks.length > 0 && (
         <section class="section" id="summary">
-          <span class="section__code" aria-hidden="true">{sectionCode('summary')}</span>
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('summary')}</h2>
-            <p class="section__subtitle">{siteCopy.sections.summary.subtitle}</p>
           </div>
           <div class="capability-grid">
             {capabilityStacks.map(({ pillar, items }) => (
@@ -456,10 +453,8 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
 
       {experiences.length > 0 && (
         <section class="section" id="experience">
-          <span class="section__code" aria-hidden="true">{sectionCode('experience')}</span>
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('experience')}</h2>
-            <p class="section__subtitle">{siteCopy.sections.experience.subtitle}</p>
           </div>
           <div class="experience-grid">
             {experiences.map((role) => (
@@ -486,7 +481,7 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                     );
                   })()}
                   {(siteConfig.pullQuotes?.[role.title] || experienceNotes[role.title]) && (
-                    <aside class="pull-quote" aria-label="Margin note">
+                    <aside class="pull-quote" data-surface-id="experience.pull_quotes" hidden aria-hidden="true">
                       {siteConfig.pullQuotes?.[role.title] ?? experienceNotes[role.title]}
                     </aside>
                   )}
@@ -503,10 +498,8 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
 
       {projects.length > 0 && (
         <section class="section section--projects section--projects--hidden" id="work" aria-hidden="true">
-          <span class="section__code" aria-hidden="true">{sectionCode('work')}</span>
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('work')}</h2>
-            <p class="section__subtitle">{siteCopy.sections.work.subtitle}</p>
           </div>
           <div class="projects-grid">
             {projects.map((project) => (
@@ -533,7 +526,6 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
 
       {education.length > 0 && (
         <section class="section" id="education">
-          <span class="section__code" aria-hidden="true">{sectionCode('education')}</span>
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('education')}</h2>
           </div>
@@ -556,10 +548,8 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
 
       {flattenedSkills.length > 0 && (
         <section class="section section--skills" id="skills" data-skill-view="badges">
-          <span class="section__code" aria-hidden="true">{sectionCode('skills')}</span>
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('skills')}</h2>
-            <p class="section__subtitle">{siteCopy.sections.skills.badges.support}</p>
           </div>
           <div class="skill-stage skill-stage--badges">
             <div class="skill-badges">
@@ -594,7 +584,6 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
 
       {publications.length > 0 && (
         <section class="section section--tail" id="publications">
-          <span class="section__code" aria-hidden="true">{sectionCode('publications')}</span>
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('publications')}</h2>
           </div>

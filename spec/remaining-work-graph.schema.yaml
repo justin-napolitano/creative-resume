@@ -1,0 +1,215 @@
+version: 1
+title: "Remaining Work Graph Schema"
+type: object
+required:
+  - graph_id
+  - created_at
+  - ordering_policy
+  - queue_projection
+  - graph_actions
+  - nodes
+  - edges
+properties:
+  graph_id:
+    type: string
+  created_at:
+    type: string
+  ordering_policy:
+    type: object
+    required:
+      - ready_statuses
+      - ready_sort_fields
+      - reorder_requires_explicit_action
+      - board_projection_authority
+    properties:
+      ready_statuses:
+        type: array
+        items:
+          type: string
+      ready_sort_fields:
+        type: array
+        items:
+          type: string
+      reorder_requires_explicit_action:
+        type: boolean
+      board_projection_authority:
+        enum: ["projection_only"]
+  queue_projection:
+    type: object
+    required:
+      - path
+      - projection_authority
+      - last_reconciled_action_id
+      - ready_execplan_ids
+    properties:
+      path:
+        type: string
+      projection_authority:
+        enum: ["projection_only"]
+      last_reconciled_action_id:
+        type: string
+      ready_execplan_ids:
+        type: array
+        items:
+          type: string
+  graph_actions:
+    type: array
+    items:
+      type: object
+      required:
+        - action_id
+        - action
+        - node_id
+        - rationale
+      properties:
+        action_id:
+          type: string
+        action:
+          enum: ["promote_ready", "block", "unblock", "complete", "reorder", "activate"]
+        node_id:
+          type: string
+        rationale:
+          type: string
+        evidence_ref:
+          type: string
+        queue_reconciled:
+          type: boolean
+        occurred_at:
+          type: string
+        actor_id:
+          type: string
+        event_id:
+          type: string
+        event_type:
+          type: string
+        initiative_id:
+          type: string
+        contract_id:
+          type: string
+        worker_id:
+          type: string
+        trace_id:
+          type: string
+        caused_by_event_id:
+          type: string
+        artifact_refs:
+          type: array
+          items:
+            type: string
+  nodes:
+    type: array
+    items:
+      type: object
+      required:
+        - node_id
+        - title
+        - status
+        - gating_class
+        - conflict_domains
+        - target_execplan_id
+      properties:
+        node_id:
+          type: string
+        title:
+          type: string
+        status:
+          enum: ["ready", "blocked", "review_gated", "decision_gated", "completed"]
+        status_reason:
+          type: string
+        gating_class:
+          enum: ["auto_runnable", "review_gated", "decision_gated"]
+        conflict_domains:
+          type: array
+          items:
+            type: string
+        target_execplan_id:
+          type: string
+        goal_area:
+          type: string
+        implementation_branch:
+          type: string
+        initiative_branch:
+          type: string
+        parent_initiative_node:
+          type: string
+        integration_mode:
+          enum: ["via_initiative", "direct_to_main_hotfix", "direct_to_main_patch"]
+        node_kind:
+          enum: ["initiative", "execplan_slice", "artifact", "queue_item"]
+        active_worker_contract_id:
+          type: string
+        last_run_id:
+          type: string
+        last_trace_id:
+          type: string
+        last_problem_ref:
+          type: string
+        last_validation_ref:
+          type: string
+        preferred_executor:
+          type: string
+        allowed_executors:
+          type: array
+          items:
+            type: string
+        availability_target_ref:
+          type: string
+        availability_status:
+          enum: ["not_required", "pending", "active"]
+        availability_ref:
+          type: string
+        expected_artifacts:
+          type: array
+          items:
+            type: string
+        completion_ref:
+          type: string
+        ordering:
+          type: object
+          required:
+            - queue_position
+            - tie_breaker
+          properties:
+            queue_position:
+              type: integer
+            ready_order:
+              type: integer
+            tie_breaker:
+              type: string
+            source_action_id:
+              type: string
+        action_state:
+          type: object
+          required:
+            - last_action_id
+            - last_action
+            - action_required
+            - reorder_requires_human
+          properties:
+            last_action_id:
+              type: string
+            last_action:
+              enum: ["promote_ready", "block", "unblock", "complete", "reorder", "activate"]
+            action_required:
+              type: boolean
+            reorder_requires_human:
+              type: boolean
+            reorder_blockers:
+              type: array
+              items:
+                type: string
+  edges:
+    type: array
+    items:
+      type: object
+      required:
+        - from
+        - to
+        - relation
+      properties:
+        from:
+          type: string
+        to:
+          type: string
+        relation:
+          enum: ["depends_on", "conflicts_with", "informed_by", "gated_by"]

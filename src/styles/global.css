@@ -223,16 +223,6 @@ section:first-of-type {
   border-top: 1px solid var(--line);
 }
 
-.section__code {
-  position: absolute;
-  top: 12px;
-  left: 0;
-  font-size: 0.72rem;
-  letter-spacing: 0.5em;
-  text-transform: uppercase;
-  color: var(--code);
-}
-
 .section__header {
   margin-bottom: 32px;
 }
@@ -242,12 +232,6 @@ section:first-of-type {
   font-size: 1.5rem;
   font-family: 'Fraunces', 'Georgia', serif;
   font-variation-settings: 'opsz' 60, 'wght' 550;
-}
-
-.section__subtitle {
-  margin: 0.3rem 0 0;
-  color: var(--ink-soft);
-  max-width: 64ch;
 }
 
 .section-note {
@@ -398,6 +382,7 @@ section:first-of-type {
   border-radius: 999px;
   font-size: 0.78rem;
   letter-spacing: 0.04em;
+  color: var(--accent);
 }
 
 .pull-quote {
@@ -733,12 +718,6 @@ footer a {
     margin-bottom: 1rem;
   }
 
-  .section__code {
-    position: static;
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
   .experience-item {
     display: flex;
     flex-direction: column;
@@ -874,8 +853,7 @@ footer a {
   text-align: left;
 }
 .section--skills .section__header,
-.section--skills .section__title,
-.section--skills .section__subtitle {
+.section--skills .section__title {
   text-align: left;
 }
 .skill-highlights {
