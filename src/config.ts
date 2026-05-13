@@ -67,7 +67,7 @@ export const experienceNotes: Record<string, string> = {
   'Data Engineer': 'Azure Data Factory + Synapse landed Epic Clarity extracts into one CFO-ready source within 24 hours.',
   'Business Analyst II': 'SQL + Power BI pipelines kept readmission and heart failure metrics aligned across clinical teams.',
   'Data + Analytics Engineer': 'LLM + CDP stack stitched across Rolling Stone, Billboard, WWD for exec-ready insights.',
-  'Independent Data Consultant': 'Implemented CDPs and GCP migrations targeting 2M+ high-value prospects.',
+  'Analytics Engineering Consultant': 'Implemented CDPs and GCP migrations targeting 2M+ high-value prospects.',
   'Research Assistant': 'Open MySQL human-rights database shared with the International Criminal Court.',
 };
 
