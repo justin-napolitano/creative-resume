@@ -481,7 +481,7 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
                     );
                   })()}
                   {(siteConfig.pullQuotes?.[role.title] || experienceNotes[role.title]) && (
-                    <aside class="pull-quote" aria-label="Margin note">
+                    <aside class="pull-quote" data-surface-id="experience.pull_quotes" hidden aria-hidden="true">
                       {siteConfig.pullQuotes?.[role.title] ?? experienceNotes[role.title]}
                     </aside>
                   )}
