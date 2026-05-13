@@ -377,7 +377,7 @@ section:first-of-type {
 }
 
 .chip-row li {
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--accent);
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
   font-size: 0.78rem;
