@@ -8,6 +8,7 @@ const resumePath = path.join(repoRoot, 'src/data/resume.json');
 const authorityPath = path.join(repoRoot, 'src/data/content-authority.json');
 const jobWorkflowPath = path.join(repoRoot, 'src/data/job-application-workflow.json');
 const resumeFormatPath = path.join(repoRoot, 'src/data/resume-format.json');
+const targetedPacketDir = path.join(repoRoot, 'artifacts/resume/targeted-packets');
 const artifactRefs = [
   'src/data/resume.json',
   'src/data/content-authority.json',
@@ -15,6 +16,8 @@ const artifactRefs = [
   'src/data/resume-format.json',
   'scripts/career-content-api.mjs',
   'docs/resume-job-targeting-command-surface.md',
+  'docs/resume-reviewed-export-worker.md',
+  'artifacts/resume/targeted-packets/.gitkeep',
 ];
 
 const args = process.argv.slice(2);
@@ -32,6 +35,7 @@ const commandAliases = new Map([
   ['career.fit-report', 'fit-report'],
   ['career.resume-selection-plan', 'selection-plan'],
   ['career.review-packet', 'review-packet'],
+  ['career.reviewed-export', 'reviewed-export'],
   ['resume.format.status', 'format-status'],
   ['resume.format.validate-source', 'format-validate-source'],
   ['resume.format.validate-export', 'format-validate-export'],
@@ -272,6 +276,7 @@ function validateAuthority(authority, resume, resumeFormat) {
     'fit-report',
     'selection-plan',
     'review-packet',
+    'reviewed-export',
   ]) {
     if (!commandSet.has(requiredCommand)) blockers.push(`missing_api_command:${requiredCommand}`);
   }
@@ -1057,6 +1062,159 @@ async function reviewPacketPayload(resume) {
   );
 }
 
+function approvedParam(value) {
+  return ['1', 'approved', 'true', 'yes'].includes(String(value ?? '').trim().toLowerCase());
+}
+
+function reviewPacketFromInput(value) {
+  if (!value || typeof value !== 'object') return null;
+  if (value.review_packet && typeof value.review_packet === 'object') return value.review_packet;
+  if (value.normalized_job && value.fit_report && value.selection_plan) return value;
+  return null;
+}
+
+async function readReviewPacketInput(resume) {
+  if (params['review-packet']) {
+    return {
+      source: 'review_packet_file',
+      value: await readJson(path.resolve(process.cwd(), params['review-packet'])),
+    };
+  }
+  if (params['review-packet-json']) {
+    return {
+      source: 'review_packet_json',
+      value: JSON.parse(params['review-packet-json']),
+    };
+  }
+  if (params['job-text'] || params['job-file'] || params['job-json']) {
+    return {
+      source: 'generated_from_job_input',
+      value: await reviewPacketPayload(resume),
+    };
+  }
+  return null;
+}
+
+function resolveOutputPath(reviewPacket) {
+  if (params.output) return path.resolve(process.cwd(), params.output);
+  const sourceJobId = reviewPacket?.selection_plan?.source_job_id ?? reviewPacket?.normalized_job?.source_id ?? 'unknown-job';
+  return path.join(targetedPacketDir, `${slugify(sourceJobId)}-reviewed.json`);
+}
+
+function repoDisplayPath(filePath) {
+  const resolved = path.resolve(filePath);
+  const relative = path.relative(repoRoot, resolved);
+  return relative.startsWith('..') || path.isAbsolute(relative) ? resolved : relative;
+}
+
+async function reviewedExportPayload(resume) {
+  const input = await readReviewPacketInput(resume);
+  const blockers = [];
+  const warnings = [];
+  if (!input) blockers.push('review_packet_required');
+
+  const sourceEnvelopeBlockers = Array.isArray(input?.value?.blockers) ? input.value.blockers : [];
+  if (sourceEnvelopeBlockers.length > 0) blockers.push(...sourceEnvelopeBlockers.map((item) => `review_packet_blocked:${item}`));
+
+  const reviewPacket = reviewPacketFromInput(input?.value);
+  if (!reviewPacket) blockers.push('review_packet_shape_invalid');
+
+  const selectedFactIds = reviewPacket ? [...collectFactIds(reviewPacket.selection_plan ?? reviewPacket)].sort() : [];
+  if (reviewPacket && selectedFactIds.length === 0) blockers.push('review_packet_source_fact_ids_required');
+  const audit = auditSelectedFactIds(resume, selectedFactIds);
+  blockers.push(...audit.blockers);
+  if (reviewPacket?.claim_audit?.claim_state && reviewPacket.claim_audit.claim_state !== 'source_backed') {
+    blockers.push(`review_packet_claim_state_not_source_backed:${reviewPacket.claim_audit.claim_state}`);
+  }
+  if (reviewPacket?.output_policy?.application_submission_enabled === true) {
+    blockers.push('review_packet_submission_enabled');
+  }
+  if (reviewPacket?.selection_plan?.application_submission_enabled === true) {
+    blockers.push('selection_plan_submission_enabled');
+  }
+  const approved = approvedParam(params.approved ?? params['approval-state']);
+  const approvedBy = String(params['approved-by'] ?? '').trim();
+  if (!approved) blockers.push('human_approval_required');
+  if (!approvedBy) blockers.push('approved_by_required');
+
+  const outputPath = resolveOutputPath(reviewPacket);
+  const shouldWrite = approvedParam(params.write);
+  const generatedAt = params['generated-at'] ?? new Date().toISOString();
+  const artifact = reviewPacket
+    ? {
+        version: 1,
+        artifact_type: 'targeted_job_application_reviewed_packet',
+        source_repo: 'creative-resume',
+        source_job_id: reviewPacket.selection_plan?.source_job_id ?? reviewPacket.normalized_job?.source_id ?? '',
+        output_profile: 'targeted_job_application',
+        generated_at: generatedAt,
+        approval: {
+          state: approved ? 'approved' : 'missing',
+          approved_by: approvedBy,
+          approved_at: params['approved-at'] ?? generatedAt,
+          note: params['approval-note'] ?? '',
+        },
+        review_source: input?.source ?? '',
+        review_packet: reviewPacket,
+        claim_audit: {
+          selected_fact_ids: audit.selected_fact_ids,
+          selected_fact_count: audit.selected_fact_count,
+          unknown_fact_ids: audit.unknown_fact_ids,
+          private_fact_ids: audit.private_fact_ids,
+          claim_state: blockers.some((item) => item.startsWith('unknown_source_fact_id:') || item.startsWith('private_source_fact_selected:'))
+            ? 'needs_review'
+            : audit.claim_state,
+        },
+        export_policy: {
+          pdf_generated: false,
+          application_submission_enabled: false,
+          invention_allowed: false,
+          source_fact_ids_required: true,
+          human_review_required: true,
+        },
+      }
+    : null;
+
+  let artifactWritten = false;
+  if (!shouldWrite) warnings.push('dry_run_no_artifact_written');
+  if (shouldWrite && blockers.length === 0 && artifact) {
+    await fs.mkdir(path.dirname(outputPath), { recursive: true });
+    await fs.writeFile(outputPath, `${JSON.stringify(artifact, null, 2)}\n`, 'utf8');
+    artifactWritten = true;
+  }
+
+  return envelope(
+    'reviewed-export',
+    {
+      review_source: input?.source ?? '',
+      artifact_path: repoDisplayPath(outputPath),
+      artifact_written: artifactWritten,
+      reviewed_artifact: shouldWrite ? null : artifact,
+      claim_audit: artifact?.claim_audit ?? {
+        selected_fact_ids: audit.selected_fact_ids,
+        selected_fact_count: audit.selected_fact_count,
+        unknown_fact_ids: audit.unknown_fact_ids,
+        private_fact_ids: audit.private_fact_ids,
+        claim_state: audit.claim_state,
+      },
+      output_policy: {
+        pdf_generated: false,
+        application_submission_enabled: false,
+        human_review_required: true,
+      },
+    },
+    {
+      blockers,
+      warnings,
+      next_actions: blockers.length
+        ? [{ action: 'repair_or_approve_review_packet', reason: 'reviewed_export_blocked' }]
+        : artifactWritten
+          ? [{ action: 'handoff_to_future_pdf_export_worker', reason: 'reviewed_packet_exported' }]
+          : [{ action: 'rerun_with_write_true', reason: 'reviewed_export_dry_run_ready' }],
+    },
+  );
+}
+
 async function tailorPreviewPayload(resume) {
   const { normalized_job: normalizedJob, ranked_content: rankedContent, blockers, warnings } = await fitReportData(resume);
   return envelope(
@@ -1100,6 +1258,7 @@ async function main() {
   else if (normalizedCommand === 'fit-report') result = await fitReportPayload(resume);
   else if (normalizedCommand === 'selection-plan') result = await selectionPlanPayload(resume);
   else if (normalizedCommand === 'review-packet') result = await reviewPacketPayload(resume);
+  else if (normalizedCommand === 'reviewed-export') result = await reviewedExportPayload(resume);
   else if (normalizedCommand === 'format-status') result = formatStatusPayload(resume, authority, resumeFormat);
   else if (normalizedCommand === 'format-validate-source') result = validateSourcePayload(resume, authority, resumeFormat);
   else if (normalizedCommand === 'format-validate-export') result = await validateExportPayload(resume, authority, resumeFormat);

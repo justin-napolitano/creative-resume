@@ -82,7 +82,7 @@
       "id": "targeted_job_application",
       "purpose": "Human-reviewed role-specific packet generated from canonical facts and a job posting.",
       "preferred_extension": "json",
-      "artifact_path": "",
+      "artifact_path": "artifacts/resume/targeted-packets",
       "structure": "selected_from_profile",
       "standard_headings_required": true,
       "layout_objects_allowed": false,
@@ -91,7 +91,8 @@
         "source_fact_ids_present",
         "excluded_topics_respected",
         "claim_audit",
-        "human_review_required"
+        "human_review_required",
+        "reviewed_export_approval"
       ],
       "implementation_state": "available"
     }

@@ -20,6 +20,7 @@
     "career:fit-report": "node scripts/career-content-api.mjs fit-report",
     "career:selection-plan": "node scripts/career-content-api.mjs selection-plan",
     "career:review-packet": "node scripts/career-content-api.mjs review-packet",
+    "career:reviewed-export": "node scripts/career-content-api.mjs reviewed-export",
     "resume.format.status": "node scripts/career-content-api.mjs resume.format.status",
     "resume.format.validate-source": "node scripts/career-content-api.mjs resume.format.validate-source",
     "resume.format.validate-export": "node scripts/career-content-api.mjs resume.format.validate-export",

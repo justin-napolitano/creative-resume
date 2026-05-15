@@ -82,6 +82,7 @@
       "fit-report",
       "selection-plan",
       "review-packet",
+      "reviewed-export",
       "format-status",
       "format-validate-source",
       "format-validate-export",
@@ -116,6 +117,7 @@
     "Tailored resume previews must include source_fact_ids so claims can be audited.",
     "Job-targeting commands must keep job intake, fit scoring, selection planning, and review packets side-effect free.",
     "Review packets must include claim-audit state before any export worker can use them.",
+    "Reviewed export commands must require explicit human approval before writing targeted application artifacts.",
     "Generated PDFs require human review before application submission.",
     "Application submission is out of scope for this authority bootstrap."
   ]
