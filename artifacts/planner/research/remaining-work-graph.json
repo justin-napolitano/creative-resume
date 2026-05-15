@@ -18,10 +18,8 @@
   "queue_projection": {
     "path": "docs/queued-execplans.md",
     "projection_authority": "projection_only",
-    "last_reconciled_action_id": "rwg-action-20260514-003-promote_ready-rwg-004",
-    "ready_execplan_ids": [
-      "20260514-creative-resume-content-authority-format-implementation-codex-01-execplan"
-    ]
+    "last_reconciled_action_id": "rwg-action-20260515-001-complete-rwg-004",
+    "ready_execplan_ids": []
   },
   "graph_actions": [
     {
@@ -70,6 +68,14 @@
       "node_id": "rwg-004",
       "rationale": "implementation branch is ready to validate platform-compatible resume format commands",
       "evidence_ref": "branch:impl-execplan/jnap-resume-content-authority-format-implementation",
+      "queue_reconciled": true
+    },
+    {
+      "action_id": "rwg-action-20260515-001-complete-rwg-004",
+      "action": "complete",
+      "node_id": "rwg-004",
+      "rationale": "20260514-creative-resume-content-authority-format-implementation-codex-01-execplan merged to initiative/resume-suite-maintenance and is now canonical completed state",
+      "evidence_ref": "merged:pr-27",
       "queue_reconciled": true
     }
   ],
@@ -185,7 +191,7 @@
     {
       "node_id": "rwg-004",
       "title": "Implement resume format command surface",
-      "status": "ready",
+      "status": "completed",
       "status_reason": "",
       "gating_class": "auto_runnable",
       "goal_area": "product",
@@ -212,17 +218,17 @@
       ],
       "ordering": {
         "queue_position": 3,
-        "ready_order": 1,
-        "source_action_id": "rwg-action-20260514-003-promote_ready-rwg-004",
+        "source_action_id": "rwg-action-20260515-001-complete-rwg-004",
         "tie_breaker": "20260514-creative-resume-content-authority-format-implementation-codex-01-execplan"
       },
       "action_state": {
-        "last_action_id": "rwg-action-20260514-003-promote_ready-rwg-004",
-        "last_action": "promote_ready",
+        "last_action_id": "rwg-action-20260515-001-complete-rwg-004",
+        "last_action": "complete",
         "action_required": false,
         "reorder_requires_human": false,
         "reorder_blockers": []
-      }
+      },
+      "completion_ref": "merged:pr-27"
     }
   ],
   "edges": [
