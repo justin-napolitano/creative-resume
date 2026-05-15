@@ -10,6 +10,7 @@ npm run career:job-normalize -- --job-text="..."
 npm run career:fit-report -- --job-text="..."
 npm run career:selection-plan -- --job-text="..."
 npm run career:review-packet -- --job-text="..."
+npm run career:reviewed-export -- --review-packet=packet.json --approved=true --approved-by="..." --write=true
 ```
 
 ## Operating Boundary
@@ -36,10 +37,14 @@ This repo must not submit applications automatically in this slice. Submission r
    Prepare a human-reviewable packet with the fit report, selected content, exclusions, and risk flags.
    Available through `npm run career:review-packet`.
 
-5. `pdf_export`
+5. `reviewed_packet_export`
+   Write an approved JSON artifact for later PDF/export workers.
+   Available through `npm run career:reviewed-export`.
+
+6. `pdf_export`
    Generate a tailored PDF only after review approval.
 
-6. `application_submission`
+7. `application_submission`
    Deferred. This remains blocked until a separate application submission governance slice exists.
 
 ## Agent Contract
@@ -57,7 +62,11 @@ Agents should call:
 - `npm run resume.format.validate-source`
 - `npm run resume.format.claim-audit -- --targeted-packet-json='{"source_fact_ids":["identity.name"]}'`
 
-All commands return JSON envelopes and are side-effect free. The review packet is a handoff artifact for humans and later export workers; it is not approval to generate a tailored PDF or submit an application.
+Agents may call this write command only with explicit approval evidence:
+
+- `npm run career:reviewed-export -- --review-packet=packet.json --approved=true --approved-by="..." --write=true`
+
+Read commands return JSON envelopes and are side-effect free. `career:reviewed-export` is the first write command and must remain approval-gated. The reviewed export artifact is a handoff artifact for humans and later PDF workers; it is not approval to submit an application.
 
 Tailored packets must carry `source_fact_ids` from the ranked content returned by `tailor-preview`. Missing IDs, unknown IDs, or private IDs are claim-audit blockers.
 
@@ -66,7 +75,7 @@ Tailored packets must carry `source_fact_ids` from the ranked content returned b
 The next implementation slices should be:
 
 1. `future:resume-pdf-export-worker`
-   Produce tailored PDFs from approved selection plans.
+   Produce tailored PDFs from reviewed JSON artifacts.
 
 2. `future:application-submission-governance`
    Define policy before any application submission worker exists.

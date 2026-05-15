@@ -41,4 +41,12 @@ Profiles live in `src/data/resume-format.json`.
 - `targeted_job_application`: JSON selection packet profile, available now
 - `ats_docx`: planned fallback profile, not exported yet
 
+Reviewed targeted packet artifacts are written by:
+
+```bash
+npm run career:reviewed-export -- --review-packet=packet.json --approved=true --approved-by="..." --write=true
+```
+
+The default artifact directory is `artifacts/resume/targeted-packets/`. Generated JSON files there are ignored by Git.
+
 `ats_docx` intentionally reports as planned instead of blocked. The profile is part of the contract so agents know it exists, but this slice does not create a DOCX renderer.
