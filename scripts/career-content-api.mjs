@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import crypto from 'node:crypto';
 import path from 'node:path';
 import process from 'node:process';
 
@@ -13,6 +14,7 @@ const artifactRefs = [
   'src/data/job-application-workflow.json',
   'src/data/resume-format.json',
   'scripts/career-content-api.mjs',
+  'docs/resume-job-targeting-command-surface.md',
 ];
 
 const args = process.argv.slice(2);
@@ -26,6 +28,10 @@ const params = Object.fromEntries(
     }),
 );
 const commandAliases = new Map([
+  ['career.job.normalize', 'job-normalize'],
+  ['career.fit-report', 'fit-report'],
+  ['career.resume-selection-plan', 'selection-plan'],
+  ['career.review-packet', 'review-packet'],
   ['resume.format.status', 'format-status'],
   ['resume.format.validate-source', 'format-validate-source'],
   ['resume.format.validate-export', 'format-validate-export'],
@@ -39,14 +45,36 @@ const stopWords = new Set([
   'and',
   'are',
   'as',
+  'candidate',
+  'company',
+  'experience',
   'for',
   'in',
+  'into',
+  'is',
+  'it',
   'of',
   'on',
   'or',
+  'preferred',
+  'qualification',
+  'qualifications',
+  'required',
+  'requirements',
+  'requiring',
+  'responsibilities',
+  'role',
+  'senior',
+  'team',
   'the',
   'to',
+  'that',
+  'this',
+  'through',
+  'using',
+  'will',
   'with',
+  'work',
 ]);
 
 async function readJson(filePath) {
@@ -235,7 +263,16 @@ function validateAuthority(authority, resume, resumeFormat) {
     }
   }
   const commandSet = new Set(authority.api_surface?.commands ?? []);
-  for (const requiredCommand of ['format-status', 'format-validate-source', 'format-validate-export', 'format-claim-audit']) {
+  for (const requiredCommand of [
+    'format-status',
+    'format-validate-source',
+    'format-validate-export',
+    'format-claim-audit',
+    'job-normalize',
+    'fit-report',
+    'selection-plan',
+    'review-packet',
+  ]) {
     if (!commandSet.has(requiredCommand)) blockers.push(`missing_api_command:${requiredCommand}`);
   }
   const experienceIds = new Set();
@@ -265,7 +302,8 @@ function tokenize(value) {
     .toLowerCase()
     .replace(/[^a-z0-9+#.]+/g, ' ')
     .split(/\s+/)
-    .filter((token) => token.length > 2 && !stopWords.has(token));
+    .map((token) => token.replace(/^\.+|\.+$/g, ''))
+    .filter((token) => token.length > 1 && !stopWords.has(token));
 }
 
 function scoreText(tokens, value) {
@@ -321,12 +359,128 @@ function projectAtoms(resume) {
   }));
 }
 
+function summaryAtoms(resume) {
+  return (resume.summary ?? []).map((item) => ({
+    source_fact_id: `summary.${item.id ?? slugify(item.label)}`,
+    source_fact_ids: [`summary.${item.id ?? slugify(item.label)}`],
+    id: item.id ?? slugify(item.label),
+    label: item.label,
+    note: item.note,
+    text: [item.label, item.note].filter(Boolean).join(' '),
+  }));
+}
+
 function topMatches(tokens, atoms, limit) {
   return atoms
     .map((atom) => ({ ...atom, score: scoreText(tokens, atom.text) }))
     .filter((atom) => atom.score > 0)
     .sort((a, b) => b.score - a.score || String(a.name ?? a.title ?? a.id).localeCompare(String(b.name ?? b.title ?? b.id)))
     .slice(0, limit);
+}
+
+function stripSearchText(item) {
+  const { text, ...publicItem } = item;
+  return publicItem;
+}
+
+function uniqueValues(values) {
+  return [...new Set(values.filter(Boolean))];
+}
+
+function sourceFactIdsFrom(items) {
+  return uniqueValues(
+    items.flatMap((item) => {
+      if (Array.isArray(item.source_fact_ids)) return item.source_fact_ids;
+      if (item.source_fact_id) return [item.source_fact_id];
+      return [];
+    }),
+  );
+}
+
+function hashId(prefix, value) {
+  const digest = crypto.createHash('sha256').update(String(value ?? '')).digest('hex').slice(0, 12);
+  return `${prefix}-${digest}`;
+}
+
+function topKeywords(value, limit = 30) {
+  const countsByToken = tokenize(value).reduce((acc, token) => {
+    acc.set(token, (acc.get(token) ?? 0) + 1);
+    return acc;
+  }, new Map());
+  return [...countsByToken.entries()]
+    .sort(([leftToken, leftCount], [rightToken, rightCount]) => rightCount - leftCount || leftToken.localeCompare(rightToken))
+    .slice(0, limit)
+    .map(([token]) => token);
+}
+
+function termPresent(term, text, tokens) {
+  const termTokens = tokenize(term);
+  if (termTokens.length === 0) return false;
+  if (String(text ?? '').toLowerCase().includes(String(term ?? '').toLowerCase())) return true;
+  const tokenSet = new Set(tokens);
+  return termTokens.every((token) => tokenSet.has(token));
+}
+
+function knownRequirementTerms(resume) {
+  return skillAtoms(resume).flatMap((atom) =>
+    uniqueValues([atom.name, atom.area, atom.stack, ...(atom.tags ?? [])]).map((term) => ({
+      term,
+      source_fact_ids: atom.source_fact_ids,
+      source_fact_id: atom.source_fact_id,
+      area: atom.area,
+      skill: atom.name,
+    })),
+  );
+}
+
+function detectKnownRequirements(resume, jobText) {
+  const tokens = tokenize(jobText);
+  const lowerText = String(jobText ?? '').toLowerCase();
+  const seen = new Set();
+  return knownRequirementTerms(resume)
+    .filter((item) => termPresent(item.term, lowerText, tokens))
+    .filter((item) => {
+      const key = item.term.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .sort((a, b) => a.term.localeCompare(b.term));
+}
+
+function allResumeSearchText(resume) {
+  return [
+    ...summaryAtoms(resume),
+    ...skillAtoms(resume),
+    ...experienceAtoms(resume),
+    ...projectAtoms(resume),
+  ]
+    .map((item) => item.text)
+    .join(' ');
+}
+
+function gapKeywords(resume, keywords, limit = 8) {
+  const resumeTextTokens = new Set(tokenize(allResumeSearchText(resume)));
+  return keywords
+    .filter((keyword) => !resumeTextTokens.has(keyword))
+    .filter((keyword) => !['candidate', 'company', 'experience', 'preferred', 'qualifications', 'required', 'requirements', 'responsibilities', 'role', 'senior', 'team', 'years'].includes(keyword))
+    .slice(0, limit)
+    .map((keyword) => ({
+      id: `gap.${slugify(keyword)}`,
+      keyword,
+      severity: 'medium',
+      action: 'show_as_gap_without_inventing_claim',
+    }));
+}
+
+function identityFactIds() {
+  return [
+    'identity.name',
+    'identity.location',
+    'identity.email',
+    'identity.github_url',
+    'identity.linkedin_url',
+  ];
 }
 
 async function loadContent() {
@@ -434,8 +588,8 @@ function jobWorkflowPayload(jobWorkflow) {
     {
       next_actions: [
         {
-          action: 'implement_job_intake_contract',
-          reason: 'workflow_contract_ready',
+          action: 'call_job_normalize',
+          reason: 'job_targeting_commands_available',
         },
       ],
     },
@@ -587,25 +741,41 @@ async function readTargetedPacket() {
   return null;
 }
 
+function auditSelectedFactIds(resume, selectedFactIds) {
+  const { byId } = sourceFactIndex(resume);
+  const sortedFactIds = [...new Set(selectedFactIds)].sort();
+  const unknownFactIds = sortedFactIds.filter((id) => !byId.has(id));
+  const privateFactIds = sortedFactIds.filter((id) => byId.get(id)?.visibility === 'private');
+  const blockers = [
+    ...unknownFactIds.map((id) => `unknown_source_fact_id:${id}`),
+    ...privateFactIds.map((id) => `private_source_fact_selected:${id}`),
+  ];
+  return {
+    selected_fact_ids: sortedFactIds,
+    selected_fact_count: sortedFactIds.length,
+    unknown_fact_ids: unknownFactIds,
+    private_fact_ids: privateFactIds,
+    claim_state: blockers.length ? 'needs_review' : 'source_backed',
+    blockers,
+  };
+}
+
 async function claimAuditPayload(resume) {
   const packet = await readTargetedPacket();
   const blockers = [];
   if (!packet) blockers.push('targeted_packet_required');
-  const { byId } = sourceFactIndex(resume);
   const selectedFactIds = [...collectFactIds(packet)].sort();
   if (packet && selectedFactIds.length === 0) blockers.push('targeted_packet_source_fact_ids_required');
-  const unknownFactIds = selectedFactIds.filter((id) => !byId.has(id));
-  blockers.push(...unknownFactIds.map((id) => `unknown_source_fact_id:${id}`));
-  const privateFactIds = selectedFactIds.filter((id) => byId.get(id)?.visibility === 'private');
-  blockers.push(...privateFactIds.map((id) => `private_source_fact_selected:${id}`));
+  const audit = auditSelectedFactIds(resume, selectedFactIds);
+  blockers.push(...audit.blockers);
   return envelope(
     'format-claim-audit',
     {
-      selected_fact_ids: selectedFactIds,
-      selected_fact_count: selectedFactIds.length,
-      unknown_fact_ids: unknownFactIds,
-      private_fact_ids: privateFactIds,
-      claim_state: blockers.length ? 'needs_review' : 'source_backed',
+      selected_fact_ids: audit.selected_fact_ids,
+      selected_fact_count: audit.selected_fact_count,
+      unknown_fact_ids: audit.unknown_fact_ids,
+      private_fact_ids: audit.private_fact_ids,
+      claim_state: blockers.length ? 'needs_review' : audit.claim_state,
     },
     {
       blockers,
@@ -616,26 +786,290 @@ async function claimAuditPayload(resume) {
   );
 }
 
-async function readJobText() {
-  if (params['job-file']) return fs.readFile(path.resolve(process.cwd(), params['job-file']), 'utf8');
-  return params['job-text'] ?? '';
+async function readJobInput() {
+  let input = {};
+  if (params['job-json']) {
+    input = JSON.parse(params['job-json']);
+  } else if (params['job-file']) {
+    const raw = await fs.readFile(path.resolve(process.cwd(), params['job-file']), 'utf8');
+    try {
+      input = JSON.parse(raw);
+    } catch {
+      input = { description_text: raw };
+    }
+  }
+  return {
+    ...input,
+    source_url: params['source-url'] ?? input.source_url,
+    source_id: params['source-id'] ?? input.source_id,
+    company: params.company ?? input.company,
+    title: params.title ?? input.title,
+    location: params.location ?? input.location,
+    employment_type: params['employment-type'] ?? input.employment_type,
+    description_text: params['job-text'] ?? params['description-text'] ?? input.description_text ?? '',
+    captured_at: params['captured-at'] ?? input.captured_at,
+  };
+}
+
+async function normalizeJobPostingData(resume) {
+  const input = await readJobInput();
+  const descriptionText = String(input.description_text ?? '').trim();
+  const keywords = topKeywords(descriptionText, 30);
+  const knownRequirements = detectKnownRequirements(resume, descriptionText);
+  const sourceSeed = [input.source_url, input.source_id, input.company, input.title, descriptionText].filter(Boolean).join('\n');
+  const blockers = descriptionText ? [] : ['job_text_required'];
+  const warnings = [];
+  if (!input.source_url) warnings.push('missing_source_url');
+  if (!input.company) warnings.push('missing_company');
+  if (!input.title) warnings.push('missing_title');
+  if (!input.captured_at) warnings.push('missing_captured_at');
+  return {
+    normalized_job: {
+      source_url: input.source_url ?? '',
+      source_id: input.source_id ?? hashId('job', sourceSeed || 'empty-job-posting'),
+      company: input.company ?? '',
+      title: input.title ?? '',
+      location: input.location ?? '',
+      employment_type: input.employment_type ?? '',
+      description_text: descriptionText,
+      captured_at: input.captured_at ?? null,
+      token_count: keywords.length,
+      keywords,
+      required_skills: knownRequirements.slice(0, 20).map((item) => item.term),
+      preferred_skills: [],
+      detected_requirements: knownRequirements.slice(0, 20),
+    },
+    blockers,
+    warnings,
+  };
+}
+
+async function normalizeJobPostingPayload(resume) {
+  const { normalized_job: normalizedJob, blockers, warnings } = await normalizeJobPostingData(resume);
+  return envelope(
+    'job-normalize',
+    { normalized_job: normalizedJob },
+    {
+      blockers,
+      warnings,
+      next_actions: blockers.length
+        ? [{ action: 'provide_job_text', reason: 'job_normalize_needs_posting_text' }]
+        : [{ action: 'call_fit_report', reason: 'normalized_job_ready' }],
+    },
+  );
+}
+
+async function fitReportData(resume) {
+  const { normalized_job: normalizedJob, blockers, warnings } = await normalizeJobPostingData(resume);
+  const tokens = normalizedJob.keywords;
+  const rankedContent = {
+    summary: topMatches(tokens, summaryAtoms(resume), 3).map(stripSearchText),
+    skills: topMatches(tokens, skillAtoms(resume), 12).map(stripSearchText),
+    experience: topMatches(tokens, experienceAtoms(resume), 4).map(stripSearchText),
+    projects: topMatches(tokens, projectAtoms(resume), 4).map(stripSearchText),
+  };
+  const resumeTokens = new Set(tokenize(allResumeSearchText(resume)));
+  const matchedKeywordCount = tokens.filter((token) => resumeTokens.has(token)).length;
+  const coverageDenominator = Math.max(1, Math.min(tokens.length, 30));
+  const keywordCoverage = Number((matchedKeywordCount / coverageDenominator).toFixed(2));
+  const contentScore = Math.min(
+    35,
+    rankedContent.summary.length * 2 +
+      rankedContent.skills.length * 2 +
+      rankedContent.experience.length * 5 +
+      rankedContent.projects.length * 4,
+  );
+  const fitScore = Math.min(100, Math.round(keywordCoverage * 65 + contentScore));
+  const gaps = gapKeywords(resume, tokens);
+  return {
+    normalized_job: normalizedJob,
+    ranked_content: rankedContent,
+    fit_report: {
+      source_job_id: normalizedJob.source_id,
+      fit_score: fitScore,
+      keyword_coverage: keywordCoverage,
+      matched_keyword_count: matchedKeywordCount,
+      matched_requirements: normalizedJob.detected_requirements,
+      gaps,
+      source_fact_ids: sourceFactIdsFrom([
+        ...rankedContent.summary,
+        ...rankedContent.skills,
+        ...rankedContent.experience,
+        ...rankedContent.projects,
+      ]),
+    },
+    blockers,
+    warnings,
+  };
+}
+
+async function fitReportPayload(resume) {
+  const { normalized_job: normalizedJob, ranked_content: rankedContent, fit_report: fitReport, blockers, warnings } =
+    await fitReportData(resume);
+  return envelope(
+    'fit-report',
+    {
+      normalized_job: normalizedJob,
+      fit_report: fitReport,
+      ranked_content: rankedContent,
+    },
+    {
+      blockers,
+      warnings,
+      next_actions: blockers.length
+        ? [{ action: 'provide_job_text', reason: 'fit_report_needs_job_posting' }]
+        : [{ action: 'call_selection_plan', reason: 'fit_report_ready' }],
+    },
+  );
+}
+
+async function selectionPlanData(resume) {
+  const { normalized_job: normalizedJob, ranked_content: rankedContent, fit_report: fitReport, blockers, warnings } =
+    await fitReportData(resume);
+  const summarySelection = rankedContent.summary.length ? rankedContent.summary.slice(0, 2) : summaryAtoms(resume).slice(0, 2).map(stripSearchText);
+  const skillSelection = rankedContent.skills.slice(0, 8);
+  const experienceSelection = rankedContent.experience.slice(0, 3);
+  const projectSelection = rankedContent.projects.slice(0, 2);
+  const sections = [
+    {
+      id: 'identity',
+      title: 'Identity',
+      purpose: 'Always include public identity and contact channels.',
+      selected_fact_ids: identityFactIds(),
+    },
+    {
+      id: 'summary',
+      title: 'Summary',
+      purpose: 'Use existing summary notes that overlap with the posting.',
+      selected_items: summarySelection,
+      selected_fact_ids: sourceFactIdsFrom(summarySelection),
+    },
+    {
+      id: 'skills',
+      title: 'Skills',
+      purpose: 'Prioritize source-backed skills with job keyword overlap.',
+      selected_items: skillSelection,
+      selected_fact_ids: sourceFactIdsFrom(skillSelection),
+    },
+    {
+      id: 'experience',
+      title: 'Experience',
+      purpose: 'Prioritize roles with strongest evidence overlap.',
+      selected_items: experienceSelection,
+      selected_fact_ids: sourceFactIdsFrom(experienceSelection),
+    },
+    {
+      id: 'projects',
+      title: 'Projects',
+      purpose: 'Include project evidence only when it supports the posting.',
+      selected_items: projectSelection,
+      selected_fact_ids: sourceFactIdsFrom(projectSelection),
+    },
+  ];
+  const selectedFactIds = sourceFactIdsFrom(sections.map((section) => ({ source_fact_ids: section.selected_fact_ids })));
+  return {
+    normalized_job: normalizedJob,
+    fit_report: fitReport,
+    selection_plan: {
+      id: `selection-${normalizedJob.source_id}`,
+      source_job_id: normalizedJob.source_id,
+      output_profile: 'targeted_job_application',
+      human_review_required: true,
+      pdf_generated: false,
+      application_submission_enabled: false,
+      invention_allowed: false,
+      source_fact_ids_required: true,
+      sections,
+      selected_fact_ids: selectedFactIds,
+      exclusion_summary: {
+        skills_unselected: Math.max(0, skillAtoms(resume).length - skillSelection.length),
+        experience_unselected: Math.max(0, experienceAtoms(resume).length - experienceSelection.length),
+        projects_unselected: Math.max(0, projectAtoms(resume).length - projectSelection.length),
+      },
+    },
+    blockers,
+    warnings,
+  };
+}
+
+async function selectionPlanPayload(resume) {
+  const { normalized_job: normalizedJob, fit_report: fitReport, selection_plan: selectionPlan, blockers, warnings } =
+    await selectionPlanData(resume);
+  return envelope(
+    'selection-plan',
+    {
+      normalized_job: normalizedJob,
+      fit_report: fitReport,
+      selection_plan: selectionPlan,
+    },
+    {
+      blockers,
+      warnings,
+      next_actions: blockers.length
+        ? [{ action: 'provide_job_text', reason: 'selection_plan_needs_job_posting' }]
+        : [{ action: 'call_review_packet', reason: 'selection_plan_ready' }],
+    },
+  );
+}
+
+async function reviewPacketPayload(resume) {
+  const { normalized_job: normalizedJob, fit_report: fitReport, selection_plan: selectionPlan, blockers, warnings } =
+    await selectionPlanData(resume);
+  const audit = auditSelectedFactIds(resume, selectionPlan.selected_fact_ids);
+  const reviewBlockers = [...blockers, ...audit.blockers];
+  const riskFlags = [];
+  if (!normalizedJob.source_url) riskFlags.push({ id: 'missing_source_url', severity: 'medium', action: 'confirm source before external use' });
+  if (fitReport.gaps.length > 0) {
+    riskFlags.push({ id: 'unmatched_required_skill', severity: 'medium', action: 'keep gaps visible instead of inventing claims' });
+  }
+  if (fitReport.fit_score < 35) riskFlags.push({ id: 'low_fit_score', severity: 'medium', action: 'human should confirm whether to proceed' });
+  if (audit.blockers.length > 0) riskFlags.push({ id: 'claim_audit_blocked', severity: 'high', action: 'repair selection plan before export' });
+  return envelope(
+    'review-packet',
+    {
+      review_packet: {
+        normalized_job: normalizedJob,
+        fit_report: fitReport,
+        selection_plan: selectionPlan,
+        claim_audit: {
+          selected_fact_ids: audit.selected_fact_ids,
+          selected_fact_count: audit.selected_fact_count,
+          unknown_fact_ids: audit.unknown_fact_ids,
+          private_fact_ids: audit.private_fact_ids,
+          claim_state: audit.claim_state,
+        },
+        risk_flags: riskFlags,
+        output_policy: {
+          pdf_generated: false,
+          human_review_required: true,
+          application_submission_enabled: false,
+          invention_allowed: false,
+        },
+      },
+    },
+    {
+      blockers: reviewBlockers,
+      warnings,
+      next_actions: reviewBlockers.length
+        ? [{ action: 'repair_review_packet', reason: 'review_packet_blocked' }]
+        : [{ action: 'human_review_required', reason: 'review_packet_source_backed' }],
+    },
+  );
 }
 
 async function tailorPreviewPayload(resume) {
-  const jobText = await readJobText();
-  const blockers = jobText.trim() ? [] : ['job_text_required'];
-  const tokens = [...new Set(tokenize(jobText))];
+  const { normalized_job: normalizedJob, ranked_content: rankedContent, blockers, warnings } = await fitReportData(resume);
   return envelope(
     'tailor-preview',
     {
       normalized_job: {
-        token_count: tokens.length,
-        keywords: tokens.slice(0, 30),
+        token_count: normalizedJob.token_count,
+        keywords: normalizedJob.keywords,
       },
       ranked_content: {
-        skills: topMatches(tokens, skillAtoms(resume), 12).map(({ text, ...item }) => item),
-        experience: topMatches(tokens, experienceAtoms(resume), 4).map(({ text, ...item }) => item),
-        projects: topMatches(tokens, projectAtoms(resume), 4).map(({ text, ...item }) => item),
+        skills: rankedContent.skills,
+        experience: rankedContent.experience,
+        projects: rankedContent.projects,
       },
       output_policy: {
         pdf_generated: false,
@@ -646,6 +1080,7 @@ async function tailorPreviewPayload(resume) {
     },
     {
       blockers,
+      warnings,
       next_actions: blockers.length
         ? [{ action: 'provide_job_text', reason: 'tailor_preview_needs_job_posting' }]
         : [{ action: 'review_resume_selection', reason: 'tailor_preview_ready' }],
@@ -661,6 +1096,10 @@ async function main() {
   else if (normalizedCommand === 'sync-preview') result = syncPreviewPayload(resume, authority);
   else if (normalizedCommand === 'tailor-preview') result = await tailorPreviewPayload(resume);
   else if (normalizedCommand === 'job-workflow') result = jobWorkflowPayload(jobWorkflow);
+  else if (normalizedCommand === 'job-normalize') result = await normalizeJobPostingPayload(resume);
+  else if (normalizedCommand === 'fit-report') result = await fitReportPayload(resume);
+  else if (normalizedCommand === 'selection-plan') result = await selectionPlanPayload(resume);
+  else if (normalizedCommand === 'review-packet') result = await reviewPacketPayload(resume);
   else if (normalizedCommand === 'format-status') result = formatStatusPayload(resume, authority, resumeFormat);
   else if (normalizedCommand === 'format-validate-source') result = validateSourcePayload(resume, authority, resumeFormat);
   else if (normalizedCommand === 'format-validate-export') result = await validateExportPayload(resume, authority, resumeFormat);

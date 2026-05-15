@@ -1,7 +1,7 @@
 {
   "graph_id": "creative-resume-remaining-work-graph-20260505",
   "created_at": "2026-05-05T00:00:00Z",
-  "last_updated": "2026-05-14T00:00:00Z",
+  "last_updated": "2026-05-15T00:00:00Z",
   "version": 1,
   "ordering_policy": {
     "ready_statuses": [
@@ -18,8 +18,10 @@
   "queue_projection": {
     "path": "docs/queued-execplans.md",
     "projection_authority": "projection_only",
-    "last_reconciled_action_id": "rwg-action-20260515-001-complete-rwg-004",
-    "ready_execplan_ids": []
+    "last_reconciled_action_id": "rwg-action-20260515-004-promote_ready-rwg-005",
+    "ready_execplan_ids": [
+      "20260515-creative-resume-job-targeting-selection-codex-01-execplan"
+    ]
   },
   "graph_actions": [
     {
@@ -76,6 +78,30 @@
       "node_id": "rwg-004",
       "rationale": "20260514-creative-resume-content-authority-format-implementation-codex-01-execplan merged to initiative/resume-suite-maintenance and is now canonical completed state",
       "evidence_ref": "merged:pr-27",
+      "queue_reconciled": true
+    },
+    {
+      "action_id": "rwg-action-20260515-002-register-rwg-005",
+      "action": "block",
+      "node_id": "rwg-005",
+      "rationale": "node registered deterministically from ExecPlan graph_registration metadata",
+      "evidence_ref": ".agent/execplans/20260515-creative-resume-job-targeting-selection-codex-01-execplan.md",
+      "queue_reconciled": true
+    },
+    {
+      "action_id": "rwg-action-20260515-003-unblock-rwg-005",
+      "action": "unblock",
+      "node_id": "rwg-005",
+      "rationale": "rwg-004 is complete and the target repo can now implement job-targeted source-backed selection commands",
+      "evidence_ref": "branch:initiative/resume-suite-maintenance",
+      "queue_reconciled": true
+    },
+    {
+      "action_id": "rwg-action-20260515-004-promote_ready-rwg-005",
+      "action": "promote_ready",
+      "node_id": "rwg-005",
+      "rationale": "implementation branch is ready to validate job normalize, fit report, selection plan, and review packet commands",
+      "evidence_ref": "branch:impl-execplan/resume-job-targeting-selection-plan",
       "queue_reconciled": true
     }
   ],
@@ -229,6 +255,50 @@
         "reorder_blockers": []
       },
       "completion_ref": "merged:pr-27"
+    },
+    {
+      "node_id": "rwg-005",
+      "title": "Implement source-backed job targeting commands",
+      "status": "ready",
+      "status_reason": "",
+      "gating_class": "auto_runnable",
+      "goal_area": "product",
+      "conflict_domains": [
+        "career-content-api",
+        "resume-format",
+        "resume-job-targeting"
+      ],
+      "target_execplan_id": "20260515-creative-resume-job-targeting-selection-codex-01-execplan",
+      "node_kind": "execplan_slice",
+      "implementation_branch": "impl-execplan/resume-job-targeting-selection-plan",
+      "initiative_branch": "initiative/resume-suite-maintenance",
+      "parent_initiative_node": "initiative-resume-suite-maintenance",
+      "integration_mode": "via_initiative",
+      "expected_artifacts": [
+        ".agent/execplans/20260515-creative-resume-job-targeting-selection-codex-01-execplan.md",
+        "artifacts/planner/research/remaining-work-graph.json",
+        "docs/career-content-authority.md",
+        "docs/queued-execplans.md",
+        "docs/resume-job-application-workflow.md",
+        "docs/resume-job-targeting-command-surface.md",
+        "package.json",
+        "scripts/career-content-api.mjs",
+        "src/data/content-authority.json",
+        "src/data/job-application-workflow.json"
+      ],
+      "ordering": {
+        "queue_position": 4,
+        "ready_order": 1,
+        "source_action_id": "rwg-action-20260515-004-promote_ready-rwg-005",
+        "tie_breaker": "20260515-creative-resume-job-targeting-selection-codex-01-execplan"
+      },
+      "action_state": {
+        "last_action_id": "rwg-action-20260515-004-promote_ready-rwg-005",
+        "last_action": "promote_ready",
+        "action_required": false,
+        "reorder_requires_human": false,
+        "reorder_blockers": []
+      }
     }
   ],
   "edges": [
@@ -245,6 +315,11 @@
     {
       "from": "rwg-004",
       "to": "rwg-003",
+      "relation": "depends_on"
+    },
+    {
+      "from": "rwg-005",
+      "to": "rwg-004",
       "relation": "depends_on"
     }
   ]

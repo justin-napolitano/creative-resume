@@ -78,6 +78,10 @@
       "sync-preview",
       "tailor-preview",
       "job-workflow",
+      "job-normalize",
+      "fit-report",
+      "selection-plan",
+      "review-packet",
       "format-status",
       "format-validate-source",
       "format-validate-export",
@@ -110,6 +114,8 @@
     "Commands must emit machine-readable JSON envelopes.",
     "Tailored resume previews must select from existing content only.",
     "Tailored resume previews must include source_fact_ids so claims can be audited.",
+    "Job-targeting commands must keep job intake, fit scoring, selection planning, and review packets side-effect free.",
+    "Review packets must include claim-audit state before any export worker can use them.",
     "Generated PDFs require human review before application submission.",
     "Application submission is out of scope for this authority bootstrap."
   ]
