@@ -30,6 +30,10 @@ Supported commands:
 - `profile`: returns the public profile and high-level resume inventory
 - `sync-preview --target=all`: previews deterministic downstream payloads for `resume`, `docs`, `hire`, and `link`
 - `tailor-preview --job-text="..."`: ranks existing skills, experience, and projects against a job posting without generating a PDF or inventing facts
+- `job-normalize --job-text="..."`: normalizes a posting into deterministic job fields, keywords, and detected requirement terms
+- `fit-report --job-text="..."`: scores job overlap against canonical resume facts and exposes gaps
+- `selection-plan --job-text="..."`: creates a source-backed section plan for `targeted_job_application`
+- `review-packet --job-text="..."`: bundles normalized job data, fit report, selection plan, claim audit, and risk flags
 - `format-status`: returns output profiles, source-fact counts, and format contract pointers
 - `format-validate-source`: validates canonical resume content and source fact IDs
 - `format-validate-export --profile=web_resume`: validates one output profile against current source and artifacts
@@ -45,11 +49,12 @@ The current publish path remains:
 4. run `npm run resume.format.status`
 5. run `npm run resume.format.validate-source`
 6. run `npm run resume.format.validate-export -- --profile=web_resume`
-7. run `npm run check`
-8. run `npm run build`
-9. run `npm run pdf` when a refreshed PDF is needed
+7. run `npm run career:review-packet -- --job-text="..."` before any targeted application use
+8. run `npm run check`
+9. run `npm run build`
+10. run `npm run pdf` when a refreshed PDF is needed
 
-Tailored resume PDF generation should be added after the content authority has stable validation and after the worker can produce a human-reviewable selection plan.
+Tailored resume PDF generation should consume a reviewed `review-packet` after the selection plan and claim audit pass.
 
 ## Application Automation Boundary
 
