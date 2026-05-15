@@ -1,3 +1,5 @@
 .env
 env
 
+artifacts/resume/targeted-packets/*.json
+!artifacts/resume/targeted-packets/.gitkeep
