@@ -18,10 +18,8 @@
   "queue_projection": {
     "path": "docs/queued-execplans.md",
     "projection_authority": "projection_only",
-    "last_reconciled_action_id": "rwg-action-20260515-004-promote_ready-rwg-005",
-    "ready_execplan_ids": [
-      "20260515-creative-resume-job-targeting-selection-codex-01-execplan"
-    ]
+    "last_reconciled_action_id": "rwg-action-20260515-005-complete-rwg-005",
+    "ready_execplan_ids": []
   },
   "graph_actions": [
     {
@@ -102,6 +100,14 @@
       "node_id": "rwg-005",
       "rationale": "implementation branch is ready to validate job normalize, fit report, selection plan, and review packet commands",
       "evidence_ref": "branch:impl-execplan/resume-job-targeting-selection-plan",
+      "queue_reconciled": true
+    },
+    {
+      "action_id": "rwg-action-20260515-005-complete-rwg-005",
+      "action": "complete",
+      "node_id": "rwg-005",
+      "rationale": "20260515-creative-resume-job-targeting-selection-codex-01-execplan merged to initiative/resume-suite-maintenance and is now canonical completed state",
+      "evidence_ref": "merged:pr-29",
       "queue_reconciled": true
     }
   ],
@@ -259,7 +265,7 @@
     {
       "node_id": "rwg-005",
       "title": "Implement source-backed job targeting commands",
-      "status": "ready",
+      "status": "completed",
       "status_reason": "",
       "gating_class": "auto_runnable",
       "goal_area": "product",
@@ -288,17 +294,17 @@
       ],
       "ordering": {
         "queue_position": 4,
-        "ready_order": 1,
-        "source_action_id": "rwg-action-20260515-004-promote_ready-rwg-005",
+        "source_action_id": "rwg-action-20260515-005-complete-rwg-005",
         "tie_breaker": "20260515-creative-resume-job-targeting-selection-codex-01-execplan"
       },
       "action_state": {
-        "last_action_id": "rwg-action-20260515-004-promote_ready-rwg-005",
-        "last_action": "promote_ready",
+        "last_action_id": "rwg-action-20260515-005-complete-rwg-005",
+        "last_action": "complete",
         "action_required": false,
         "reorder_requires_human": false,
         "reorder_blockers": []
-      }
+      },
+      "completion_ref": "merged:pr-29"
     }
   ],
   "edges": [

@@ -33,16 +33,17 @@ Canonical source: `artifacts/planner/research/remaining-work-graph.json`
    - completion ref: `merged:pr-27`
 
 4. `20260515-creative-resume-job-targeting-selection-codex-01-execplan`
-   - status: `ready`
+   - status: `completed`
    - node: `rwg-005`
    - goal: implement source-backed job targeting commands
    - implementation branch: `impl-execplan/resume-job-targeting-selection-plan`
    - depends on: `rwg-004`
+   - completion ref: `merged:pr-29`
 
 ## Mirror Metadata
 
-- canonical_last_graph_action_id: `rwg-action-20260515-004-promote_ready-rwg-005`
-- canonical_ready_order: `20260515-creative-resume-job-targeting-selection-codex-01-execplan`
+- canonical_last_graph_action_id: `rwg-action-20260515-005-complete-rwg-005`
+- canonical_ready_order: ``
 - projection_authority: `projection_only`
 
 ## Queue Discipline
