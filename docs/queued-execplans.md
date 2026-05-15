@@ -25,9 +25,24 @@ Canonical source: `artifacts/planner/research/remaining-work-graph.json`
    - implementation branch: `impl-execplan/20260505-creative-resume-resume-job-application-workflow-codex-01-execplan-codex-01-20260505`
    - completion ref: `merged:pr-24`
 
+3. `20260514-creative-resume-content-authority-format-implementation-codex-01-execplan`
+   - status: `completed`
+   - node: `rwg-004`
+   - goal: implement platform-compatible resume format command surface
+   - implementation branch: `impl-execplan/jnap-resume-content-authority-format-implementation`
+   - completion ref: `merged:pr-27`
+
+4. `20260515-creative-resume-job-targeting-selection-codex-01-execplan`
+   - status: `completed`
+   - node: `rwg-005`
+   - goal: implement source-backed job targeting commands
+   - implementation branch: `impl-execplan/resume-job-targeting-selection-plan`
+   - depends on: `rwg-004`
+   - completion ref: `merged:pr-29`
+
 ## Mirror Metadata
 
-- canonical_last_graph_action_id: `rwg-action-20260507-003-complete-rwg-003`
+- canonical_last_graph_action_id: `rwg-action-20260515-005-complete-rwg-005`
 - canonical_ready_order: ``
 - projection_authority: `projection_only`
 
