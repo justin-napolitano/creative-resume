@@ -38,7 +38,7 @@
   "outputs": [
     {
       "id": "fit_report",
-      "description": "Machine-readable role fit summary with matched skills, gaps, and evidence refs."
+      "description": "Machine-readable role fit summary with matched skills, gaps, score, and evidence refs."
     },
     {
       "id": "resume_selection_plan",
@@ -52,7 +52,7 @@
   "stages": [
     {
       "id": "job_intake",
-      "status": "planned",
+      "status": "available",
       "purpose": "Normalize a job posting into stable fields and source evidence.",
       "agent_allowed": true,
       "side_effects_allowed": false,
@@ -60,11 +60,12 @@
         "source_url or source_id",
         "description_text"
       ],
-      "next_execplan": "future:resume-job-intake-contract"
+      "command": "npm run career:job-normalize -- --job-text='...'",
+      "next_execplan": "implemented:20260515-creative-resume-job-targeting-selection-codex-01-execplan"
     },
     {
       "id": "fit_scoring",
-      "status": "planned",
+      "status": "available",
       "purpose": "Score the posting against canonical skills, projects, and experience.",
       "agent_allowed": true,
       "side_effects_allowed": false,
@@ -73,11 +74,12 @@
         "matched content refs",
         "missing requirement refs"
       ],
-      "next_execplan": "future:resume-fit-scoring"
+      "command": "npm run career:fit-report -- --job-text='...'",
+      "next_execplan": "implemented:20260515-creative-resume-job-targeting-selection-codex-01-execplan"
     },
     {
       "id": "resume_selection",
-      "status": "planned",
+      "status": "available",
       "purpose": "Create a short resume plan from existing facts without rewriting claims.",
       "agent_allowed": true,
       "side_effects_allowed": false,
@@ -87,11 +89,12 @@
         "selected project ids",
         "excluded content rationale"
       ],
-      "next_execplan": "future:resume-selection-plan"
+      "command": "npm run career:selection-plan -- --job-text='...'",
+      "next_execplan": "implemented:20260515-creative-resume-job-targeting-selection-codex-01-execplan"
     },
     {
       "id": "review_packet",
-      "status": "planned",
+      "status": "available",
       "purpose": "Prepare a human-reviewable packet before export.",
       "agent_allowed": true,
       "side_effects_allowed": false,
@@ -100,7 +103,8 @@
         "resume_selection_plan",
         "risk_flags"
       ],
-      "next_execplan": "future:resume-review-packet"
+      "command": "npm run career:review-packet -- --job-text='...'",
+      "next_execplan": "implemented:20260515-creative-resume-job-targeting-selection-codex-01-execplan"
     },
     {
       "id": "pdf_export",
@@ -137,7 +141,11 @@
       "npm run career:status",
       "npm run career:profile",
       "npm run career:job-workflow",
-      "npm run career:tailor-preview -- --job-text='...'"
+      "npm run career:tailor-preview -- --job-text='...'",
+      "npm run career:job-normalize -- --job-text='...'",
+      "npm run career:fit-report -- --job-text='...'",
+      "npm run career:selection-plan -- --job-text='...'",
+      "npm run career:review-packet -- --job-text='...'"
     ],
     "write_commands": [],
     "future_api_routes": [
