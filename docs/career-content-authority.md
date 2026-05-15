@@ -34,6 +34,7 @@ Supported commands:
 - `fit-report --job-text="..."`: scores job overlap against canonical resume facts and exposes gaps
 - `selection-plan --job-text="..."`: creates a source-backed section plan for `targeted_job_application`
 - `review-packet --job-text="..."`: bundles normalized job data, fit report, selection plan, claim audit, and risk flags
+- `reviewed-export --review-packet=packet.json --approved=true --approved-by="..." --write=true`: writes an approved targeted application JSON artifact
 - `format-status`: returns output profiles, source-fact counts, and format contract pointers
 - `format-validate-source`: validates canonical resume content and source fact IDs
 - `format-validate-export --profile=web_resume`: validates one output profile against current source and artifacts
@@ -50,9 +51,10 @@ The current publish path remains:
 5. run `npm run resume.format.validate-source`
 6. run `npm run resume.format.validate-export -- --profile=web_resume`
 7. run `npm run career:review-packet -- --job-text="..."` before any targeted application use
-8. run `npm run check`
-9. run `npm run build`
-10. run `npm run pdf` when a refreshed PDF is needed
+8. run `npm run career:reviewed-export -- --review-packet=packet.json --approved=true --approved-by="..." --write=true` after human review
+9. run `npm run check`
+10. run `npm run build`
+11. run `npm run pdf` when a refreshed PDF is needed
 
 Tailored resume PDF generation should consume a reviewed `review-packet` after the selection plan and claim audit pass.
 

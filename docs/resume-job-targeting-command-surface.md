@@ -38,6 +38,9 @@ Every command emits the standard envelope:
 4. `review-packet`
    Runs the selection through the same source-fact boundary as `resume.format.claim-audit`, then returns risk flags and the review policy.
 
+5. `reviewed-export`
+   Writes an approved targeted application JSON artifact. This is the first write command and requires explicit human approval.
+
 ## Input Modes
 
 Text input:
@@ -81,6 +84,7 @@ Allowed:
 - show evidence-backed matches and gaps
 - select existing fact IDs
 - prepare a review packet for a human
+- write a reviewed packet only when `--approved=true`, `--approved-by`, and `--write=true` are present
 
 Blocked:
 
@@ -89,4 +93,4 @@ Blocked:
 - generating a tailored PDF without approval
 - submitting applications
 
-The next durable step is a reviewed export worker that consumes `review-packet` output after approval.
+The reviewed export artifact is the durable handoff for future PDF workers.
