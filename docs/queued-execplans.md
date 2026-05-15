@@ -40,10 +40,17 @@ Canonical source: `artifacts/planner/research/remaining-work-graph.json`
    - depends on: `rwg-004`
    - completion ref: `merged:pr-29`
 
+5. `20260515-creative-resume-reviewed-export-worker-codex-01-execplan`
+   - status: `ready`
+   - node: `rwg-006`
+   - goal: implement reviewed targeted export worker
+   - implementation branch: `impl-execplan/resume-reviewed-export-worker`
+   - depends on: `rwg-005`
+
 ## Mirror Metadata
 
-- canonical_last_graph_action_id: `rwg-action-20260515-005-complete-rwg-005`
-- canonical_ready_order: ``
+- canonical_last_graph_action_id: `rwg-action-20260515-008-promote_ready-rwg-006`
+- canonical_ready_order: `20260515-creative-resume-reviewed-export-worker-codex-01-execplan`
 - projection_authority: `projection_only`
 
 ## Queue Discipline
