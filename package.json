@@ -16,6 +16,10 @@
     "career:sync-preview": "node scripts/career-content-api.mjs sync-preview",
     "career:tailor-preview": "node scripts/career-content-api.mjs tailor-preview",
     "career:job-workflow": "node scripts/career-content-api.mjs job-workflow",
+    "resume.format.status": "node scripts/career-content-api.mjs resume.format.status",
+    "resume.format.validate-source": "node scripts/career-content-api.mjs resume.format.validate-source",
+    "resume.format.validate-export": "node scripts/career-content-api.mjs resume.format.validate-export",
+    "resume.format.claim-audit": "node scripts/career-content-api.mjs resume.format.claim-audit",
     "skill:graph": "node scripts/skill-graph.mjs",
     "experience:skills": "node scripts/generate-experience-skills.mjs",
     "favicons": "node scripts/generate-favicons.mjs"

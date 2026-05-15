@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "contract_id": "resume-format-contract",
+  "suite_id": "jnap-career-suite",
+  "source_contract": {
+    "platform_repo": "/Users/justin/repos/codex_platform",
+    "contract_path": "plugins/jnap-career-suite/contracts/resume-format-contract.yaml",
+    "research_path": "plugins/jnap-career-suite/artifacts/resume/resume-format-research.json"
+  },
+  "source_path": "src/data/resume.json",
+  "authority_path": "src/data/content-authority.json",
+  "output_profiles": [
+    {
+      "id": "ats_docx",
+      "purpose": "Editable and parser-friendly upload fallback.",
+      "preferred_extension": "docx",
+      "artifact_path": "",
+      "structure": "single_column_text_first",
+      "standard_headings_required": true,
+      "layout_objects_allowed": false,
+      "validation_gates": [
+        "contact_parse",
+        "standard_heading_parse",
+        "date_parse",
+        "text_extractable",
+        "no_layout_objects",
+        "claim_audit"
+      ],
+      "implementation_state": "planned"
+    },
+    {
+      "id": "ats_pdf",
+      "purpose": "Stable upload format when a system accepts PDF.",
+      "preferred_extension": "pdf",
+      "artifact_path": "public/resume.pdf",
+      "structure": "single_column_text_first",
+      "standard_headings_required": true,
+      "layout_objects_allowed": false,
+      "validation_gates": [
+        "pdf_text_extractable",
+        "contact_parse",
+        "standard_heading_parse",
+        "date_parse",
+        "claim_audit"
+      ],
+      "implementation_state": "available"
+    },
+    {
+      "id": "human_pdf",
+      "purpose": "Readable referral, recruiter, and direct-share resume.",
+      "preferred_extension": "pdf",
+      "artifact_path": "public/resume.pdf",
+      "structure": "conservative_hierarchy",
+      "standard_headings_required": true,
+      "layout_objects_allowed": false,
+      "validation_gates": [
+        "skim_review",
+        "print_readability",
+        "no_generic_pitch_language",
+        "claim_audit"
+      ],
+      "implementation_state": "available"
+    },
+    {
+      "id": "web_resume",
+      "purpose": "Public resume site with proof links, richer context, and navigation.",
+      "preferred_extension": "html",
+      "artifact_path": "src/pages/index.astro",
+      "structure": "responsive_web",
+      "standard_headings_required": false,
+      "layout_objects_allowed": true,
+      "validation_gates": [
+        "canonical_content_sync",
+        "public_privacy_gate",
+        "route_health",
+        "accessibility_baseline",
+        "no_private_notes"
+      ],
+      "implementation_state": "available"
+    },
+    {
+      "id": "targeted_job_application",
+      "purpose": "Human-reviewed role-specific packet generated from canonical facts and a job posting.",
+      "preferred_extension": "json",
+      "artifact_path": "",
+      "structure": "selected_from_profile",
+      "standard_headings_required": true,
+      "layout_objects_allowed": false,
+      "validation_gates": [
+        "job_posting_normalized",
+        "source_fact_ids_present",
+        "excluded_topics_respected",
+        "claim_audit",
+        "human_review_required"
+      ],
+      "implementation_state": "available"
+    }
+  ],
+  "standard_sections": [
+    "summary",
+    "skills",
+    "experience",
+    "projects",
+    "education",
+    "certifications"
+  ],
+  "private_field_policy": {
+    "default_public": false,
+    "blocked_in_public_exports": [
+      "header.phone"
+    ]
+  },
+  "claim_audit": {
+    "required_for_targeted_packets": true,
+    "accepted_fact_id_prefixes": [
+      "identity.",
+      "summary.",
+      "skill.",
+      "experience.",
+      "project.",
+      "education.",
+      "publication."
+    ],
+    "uncertain_claim_state": "needs_review"
+  }
+}

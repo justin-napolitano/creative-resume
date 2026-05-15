@@ -9,6 +9,7 @@
     "status": "initial_repo_local_store",
     "notes": [
       "src/data/resume.json is the first canonical store for shared public career facts.",
+      "src/data/resume-format.json maps the platform resume-format contract into target-local output profiles and validation gates.",
       "Future database or service storage should preserve this schema contract first."
     ]
   },
@@ -41,6 +42,7 @@
     "projects",
     "skills",
     "education",
+    "certifications",
     "publications",
     "portfolio_links",
     "evidence_refs"
@@ -49,7 +51,7 @@
     {
       "target_id": "resume",
       "mode": "source",
-      "outputs": ["public_resume_site", "pdf_resume", "cv_export", "content_api"]
+      "outputs": ["public_resume_site", "pdf_resume", "cv_export", "content_api", "format_api"]
     },
     {
       "target_id": "docs",
@@ -75,12 +77,39 @@
       "profile",
       "sync-preview",
       "tailor-preview",
-      "job-workflow"
+      "job-workflow",
+      "format-status",
+      "format-validate-source",
+      "format-validate-export",
+      "format-claim-audit"
+    ]
+  },
+  "format_contract": {
+    "path": "src/data/resume-format.json",
+    "platform_contract_path": "/Users/justin/repos/codex_platform/plugins/jnap-career-suite/contracts/resume-format-contract.yaml",
+    "commands": [
+      {
+        "id": "resume.format.status",
+        "cli": "npm run resume.format.status"
+      },
+      {
+        "id": "resume.format.validate-source",
+        "cli": "npm run resume.format.validate-source"
+      },
+      {
+        "id": "resume.format.validate-export",
+        "cli": "npm run resume.format.validate-export -- --profile=web_resume"
+      },
+      {
+        "id": "resume.format.claim-audit",
+        "cli": "npm run resume.format.claim-audit -- --targeted-packet-json='{\"source_fact_ids\":[\"identity.name\"]}'"
+      }
     ]
   },
   "rules": [
     "Commands must emit machine-readable JSON envelopes.",
     "Tailored resume previews must select from existing content only.",
+    "Tailored resume previews must include source_fact_ids so claims can be audited.",
     "Generated PDFs require human review before application submission.",
     "Application submission is out of scope for this authority bootstrap."
   ]

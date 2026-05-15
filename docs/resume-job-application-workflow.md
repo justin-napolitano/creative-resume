@@ -42,8 +42,12 @@ Agents should call:
 - `npm run career:profile`
 - `npm run career:job-workflow`
 - `npm run career:tailor-preview -- --job-text="..."`
+- `npm run resume.format.validate-source`
+- `npm run resume.format.claim-audit -- --targeted-packet-json='{"source_fact_ids":["identity.name"]}'`
 
 All commands return JSON envelopes and are side-effect free. Future write-style commands should produce artifacts only after the workflow contract exposes approval gates and expected artifact paths.
+
+Tailored packets must carry `source_fact_ids` from the ranked content returned by `tailor-preview`. Missing IDs, unknown IDs, or private IDs are claim-audit blockers.
 
 ## Future ExecPlan Sequence
 
