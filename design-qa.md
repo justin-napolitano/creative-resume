@@ -15,3 +15,14 @@ Print review: compact print-only spacing and static Arial/Georgia fallbacks pres
 Evidence: implementation-evidence/browser-qa/2026-10-22T18-57-29-961Z and implementation-evidence/resume-final contain captures, keyboard/DOM checks, supplementary interactions, PDF hashes and extracted text. All screen changes since capture are print-only. The canonical complete public record is six pages; the distinct legacy record is five pages.
 
 P3 follow-up: a shorter targeted PDF would require explicit source selection. No facts were removed to compress this visual rollout, and no ATS certification is claimed.
+
+
+## Green refinement: current acceptance
+
+final result: passed
+
+Compared the approved 08 reference and actual desktop/320px mobile captures again, applying the user's explicit green-color override to the earlier slate palette. Layout and typography remain as previously approved. Shared accents: forest #356349, hover #244b36, sage #e2ecdf, secondary #4e6550 and fine rule #cfd9c8. Body remains ink/paper. Existing role/capability labels and secondary copy receive the emphasis; no facts or arbitrary words were inserted.
+
+Actual 1440/768/390/320 captures have no horizontal overflow and no JS errors. Real mouse hover, keyboard focus and native selected-name states are captured separately in implementation-evidence/green-resumes, including legacy dark mode. Focus outline is 2px forest. Contrast: forest/paper 6.09:1, secondary/paper 5.60:1, dark green/sage 8.10:1; dark-mode pale green/ink 9.62:1 and pale hover/dark sage 8.21:1. No P0/P1/P2 visual findings remain. The existing legacy theme control stays in place.
+
+Both PDFs were regenerated from their own public DOM on unused ports 4664/4665. Native PDFKit text extraction confirms all19 source experience bullets, correct contact privacy and unchanged page counts; direct CoreGraphics page5 inspected for text continuity and clipping. Canonical export now rejects occupied loopback ports before launch and checks preview child/source identity. An occupied4384 check rejected with EADDRINUSE and preserved the PDF bytes; the earlier4384 attempt was discarded. No production deployment is part of this change.
