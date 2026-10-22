@@ -5,7 +5,7 @@ Astro single-page resume that reframes the `resume-site/` content into an editor
 ## Stack
 - [Astro 5](https://astro.build) static output (Vercel friendly)
 - TypeScript + module aliasing for cleaner imports
-- PDF kept in sync by downloading the latest build from the LaTeX repo
+- PDF rendered from the canonical public web resume
 - Single CSS system in `src/styles/global.css` with embedded print + motion rules
 - Systems section has layout + view toggles (grid vs. column stack for highlights; accordion/table/badges/tabs/timeline for the catalog).
 
@@ -30,7 +30,7 @@ npm run skill:graph -- --clusters=6   # generate skill clusters via OpenAI embed
 ```bash
 make pdf
 ```
-This runs `npm run pdf`, which simply downloads the latest LaTeX-built PDF from `https://github.com/justin-napolitano/data-strategist-resume` (override via `RESUME_PDF_URL`) and saves it to `public/resume.pdf`. The legacy HTML/Playwright export still exists behind `npm run pdf:html` if you ever want to capture the web layout instead.
+This runs `npm run pdf`: build the canonical JSON-backed page, then print its actual public DOM through `scripts/export-pdf.mjs` to `public/resume.pdf`. This preserves the web contact privacy rules and current career facts. `npm run pdf:html` exports an already-built page. Do not replace this artifact with the separate LaTeX/pit resume: its facts and phone policy differ. The old fetch script is retained for historical reference and is not the default export path.
 
 ## Deploying to Vercel
 1. Push to GitHub and import the repo in Vercel.

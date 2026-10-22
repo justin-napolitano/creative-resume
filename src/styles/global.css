@@ -1037,3 +1037,53 @@ a { overflow-wrap: anywhere; }
   h1 { font-size: 20pt; }
   a::after { overflow-wrap: anywhere; }
 }
+
+/* Print the complete public DOM with stable selectable text and page breaks. */
+@media print {
+ body { font:10.5pt/1.4 Arial,Helvetica,sans-serif; }
+ h1 { font-family:Georgia,'Times New Roman',serif; margin:0 0 6pt; }
+ .hero { display:block; padding-bottom:10pt; }
+ .hero__eyebrow { margin:0 0 4pt; }
+ .hero__thesis { font-size:10.5pt; margin:0 0 10pt; max-width:none; }
+ .hero__details { font-size:9pt; }
+ .utility-block { margin:0 12pt 4pt 0; }
+ .utility-block dt,.utility-block dd { font-size:9pt; }
+ .section,section:first-of-type { margin-top:14pt; padding-top:10pt; }
+ .section__header { margin-bottom:8pt; }
+ .section__title { font-size:13pt; }
+ .experience-grid { gap:14pt; }
+ .experience-item { display:block; }
+ .experience-body h3 { font-size:11pt; }
+ .experience-dates { font-size:9pt; margin-top:3pt; text-align:left; align-items:flex-start; }
+ .experience-body ul { margin-top:5pt; }
+ .experience-body li { margin-bottom:3pt; }
+ .capability-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:14pt; }
+ .capability-card { padding:6pt 0; gap:6pt; }
+ .capability-card__label { font-size:10pt; }
+ .capability-card ul { gap:4pt; }
+ .capability-card li { break-inside:avoid; }
+ .skill-name,.skill-years,.skill-level,.skill-area-label { font-size:8.5pt; }
+ .skill-row { gap:5pt; }
+ .meter,.dot-row { display:none; }
+ .chip-row li { font-size:8pt; padding:2pt 4pt; }
+ /* Linear public skill text keeps the export simple and readable. */
+ .skill-badges { display:block; }
+ .skill-badges .badge,.skill-badges .badge.badge--mobile-hidden,.skill-badges .badge:nth-child(n+45) {
+  display:block; width:100%; min-width:0; padding:3pt 0; margin:0;
+  border:0; border-top:0.5pt solid var(--line); break-inside:avoid;
+ }
+ .skill-badges .skill-row,.skill-badges .skill-row > div:first-child,.skill-badges .skill-years-group,
+ .skill-badges .badge .skill-area-label,.skill-badges .badge .skill-name { display:inline; }
+ .skill-badges .badge .skill-name,.skill-badges .badge .skill-years { font-size:9pt; }
+ .skill-badges .badge .skill-name,.skill-badges .badge .skill-area-label {
+  letter-spacing:normal; color:var(--ink); white-space:normal; overflow:visible; overflow-wrap:anywhere;
+ }
+ .skill-badges .badge .skill-area-label { font-size:8pt; }
+ .skill-badges .badge .skill-area-label::after { content:': '; }
+ .skill-badges .badge .skill-years { margin-left:8pt; }
+ .education-list,.publications-list { gap:8pt; }
+ .publication h4,.education-item h4 { font-size:10.5pt; }
+ .meta,.publication .meta { font-size:9.5pt; }
+ a::after { font-size:8pt; }
+ footer { margin-top:16pt; font-size:9pt; }
+}

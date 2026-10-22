@@ -6,6 +6,11 @@ created: "2026-10-22T00:00:00Z"
 status: draft
 base_branch: "initiative/resume-suite-maintenance"
 changes:
+  - "scripts/export-pdf.mjs"
+  - "public/resume.pdf"
+  - "package.json"
+  - "README.md"
+  - "docs/pdf-export-evidence.md"
   - "src/styles/global.css"
   - "src/pages/index.astro"
   - "docs/branding-2026-10-22.md"
@@ -74,3 +79,7 @@ Revert focused presentation commit; no migration, runtime service, dependency, c
 ## Artifacts and Notes
 
 Plan registration wrote rwg-006 and queue, then failed board_action_api_invalid in event logging; pending coordinator reconciliation. Browser QA unavailable until authorized browser fallback. No finalization asserted.
+
+## Canonical export follow-up
+
+User approved Chromium fallback. Re-export public/resume.pdf from actual built DOM/JSON, preserve private phone flags, use print-only static font fallback and stable linear skill text for selectable PDF output. Default npm pdf now builds and exports local public source instead of fetching conflicting pit facts. Validate all experience bullets and public/private contacts, native page rendering, responsive/key/zoom/theme/consent behavior. No career-source edits or human finalization asserted.
