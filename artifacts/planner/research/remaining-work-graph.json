@@ -18,8 +18,10 @@
   "queue_projection": {
     "path": "docs/queued-execplans.md",
     "projection_authority": "projection_only",
-    "last_reconciled_action_id": "rwg-action-20261022-register-rwg-006",
-    "ready_execplan_ids": []
+    "last_reconciled_action_id": "rwg-action-20261022-002-promote_ready-rwg-006",
+    "ready_execplan_ids": [
+      "20261022-unified-brand"
+    ]
   },
   "graph_actions": [
     {
@@ -116,6 +118,22 @@
       "node_id": "rwg-006",
       "rationale": "node registered deterministically from ExecPlan graph_registration metadata",
       "evidence_ref": "/Users/justin/repos/brand-review/swarm/creative-resume/.agent/execplans/20261022-unified-brand.md",
+      "queue_reconciled": true
+    },
+    {
+      "action_id": "rwg-action-20261022-001-unblock-rwg-006",
+      "action": "unblock",
+      "node_id": "rwg-006",
+      "rationale": "initiative_execplan_authorized derived deterministically from canonical branch and ExecPlan evidence",
+      "evidence_ref": "branch:initiative/resume-suite-maintenance",
+      "queue_reconciled": true
+    },
+    {
+      "action_id": "rwg-action-20261022-002-promote_ready-rwg-006",
+      "action": "promote_ready",
+      "node_id": "rwg-006",
+      "rationale": "implementation_branch_publish derived deterministically from canonical branch and ExecPlan evidence",
+      "evidence_ref": "branch:origin/impl-execplan/unified-brand-2026-10-22",
       "queue_reconciled": true
     }
   ],
@@ -317,9 +335,9 @@
     {
       "node_id": "rwg-006",
       "title": "Apply approved Index Simplified resume presentation",
-      "status": "decision_gated",
-      "status_reason": "registered from ExecPlan metadata; authoritative ExecPlan required before execution",
-      "gating_class": "decision_gated",
+      "status": "ready",
+      "status_reason": "",
+      "gating_class": "auto_runnable",
       "conflict_domains": [
         "resume-presentation"
       ],
@@ -338,11 +356,12 @@
       "ordering": {
         "queue_position": 5,
         "tie_breaker": "20261022-unified-brand",
-        "source_action_id": "rwg-action-20261022-register-rwg-006"
+        "source_action_id": "rwg-action-20261022-002-promote_ready-rwg-006",
+        "ready_order": 1
       },
       "action_state": {
-        "last_action_id": "rwg-action-20261022-register-rwg-006",
-        "last_action": "block",
+        "last_action_id": "rwg-action-20261022-002-promote_ready-rwg-006",
+        "last_action": "promote_ready",
         "action_required": false,
         "reorder_requires_human": false,
         "reorder_blockers": []

@@ -41,15 +41,14 @@ Canonical source: `artifacts/planner/research/remaining-work-graph.json`
    - completion ref: `merged:pr-29`
 
 5. `20261022-unified-brand`
-   - status: `decision_gated`
+   - status: `ready`
    - goal: Apply approved Index Simplified resume presentation
    - implementation branch: `impl-execplan/unified-brand-2026-10-22`
-   - gate: `authoritative ExecPlan required before execution`
 
 ## Mirror Metadata
 
-- canonical_last_graph_action_id: `rwg-action-20261022-register-rwg-006`
-- canonical_ready_order: ``
+- canonical_last_graph_action_id: `rwg-action-20261022-002-promote_ready-rwg-006`
+- canonical_ready_order: `20261022-unified-brand`
 - projection_authority: `projection_only`
 
 ## Queue Discipline
