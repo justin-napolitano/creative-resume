@@ -10,11 +10,11 @@ html {
   --bg: #f4f0e8;
   --upper-bg: #f4f0e8;
   --ink: #25251f;
-  --ink-soft: #60615c;
-  --ink-mute: #60615c;
-  --accent: #4f6073;
-  --accent-soft: #e5e2dc;
-  --line: #cbc8bf;
+  --ink-soft: #4e6550;
+  --ink-mute: #4e6550;
+  --accent: #356349;
+  --accent-soft: #e2ecdf;
+  --line: #cfd9c8;
   --line-strong: rgba(15, 16, 15, 0.22);
   --rail: #f0ede6;
   --code: #8b8375;
@@ -1086,4 +1086,17 @@ a { overflow-wrap: anywhere; }
  .meta,.publication .meta { font-size:9.5pt; }
  a::after { font-size:8pt; }
  footer { margin-top:16pt; font-size:9pt; }
+}
+
+/* User-approved green accent refinement, 2026-10-22. Keep body copy ink. */
+@media screen {
+  ::selection { background:#e2ecdf; color:#244b36; }
+  .site-nav a:hover,.site-nav a:focus-visible,.site-title:hover,
+  .utility-block a:hover,.publication a:hover { color:#244b36; background:#e2ecdf; }
+  a:active { color:#244b36; }
+  :focus-visible { outline-color:#356349; }
+  .cta:hover,.cta:focus-visible { background:#e2ecdf; color:#244b36; border-color:#356349; }
+  .cta.primary { background:#356349; color:#f4f0e8; border-color:#356349; }
+  .cta.primary:hover,.cta.primary:focus-visible { background:#244b36; color:#f4f0e8; }
+  .experience-body h3,.capability-card__label { color:#356349; }
 }

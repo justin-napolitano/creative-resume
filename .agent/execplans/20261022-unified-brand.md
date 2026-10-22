@@ -83,3 +83,8 @@ Plan registration wrote rwg-006 and queue, then failed board_action_api_invalid 
 ## Canonical export follow-up
 
 User approved Chromium fallback. Re-export public/resume.pdf from actual built DOM/JSON, preserve private phone flags, use print-only static font fallback and stable linear skill text for selectable PDF output. Default npm pdf now builds and exports local public source instead of fetching conflicting pit facts. Validate all experience bullets and public/private contacts, native page rendering, responsive/key/zoom/theme/consent behavior. No career-source edits or human finalization asserted.
+
+
+## Current user override: restrained green accent
+
+2026-10-22: user explicitly requested the resume hover/selection green across the two resumes, list site and Selected Projects only, replacing grey/slate secondary text accents. This overrides the earlier slate color direction, while the approved 08 reference still governs layout, scale and text-only titles. Use #356349 green, #244b36 deeper interaction green, #e2ecdf sage highlighting, #4e6550 secondary text and #cfd9c8 fine rules on paper. Legacy dark mode uses #b8d4b3 / #d5e8cf on ink and #314333 highlight. Preserve ink body copy, warm paper, neutral structural rules, all facts/contact flags/URLs and existing interactions. Capture desktop/mobile plus real hover/focus/native selection, regenerate each PDF from its own DOM, and hold deployment until coordinator reviews PNGs. No dependencies, security controls or data authority change.
