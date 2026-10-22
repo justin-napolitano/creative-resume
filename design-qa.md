@@ -26,3 +26,14 @@ Compared the approved 08 reference and actual desktop/320px mobile captures agai
 Actual 1440/768/390/320 captures have no horizontal overflow and no JS errors. Real mouse hover, keyboard focus and native selected-name states are captured separately in implementation-evidence/green-resumes, including legacy dark mode. Focus outline is 2px forest. Contrast: forest/paper 6.09:1, secondary/paper 5.60:1, dark green/sage 8.10:1; dark-mode pale green/ink 9.62:1 and pale hover/dark sage 8.21:1. No P0/P1/P2 visual findings remain. The existing legacy theme control stays in place.
 
 Both PDFs were regenerated from their own public DOM on unused ports 4664/4665. Native PDFKit text extraction confirms all19 source experience bullets, correct contact privacy and unchanged page counts; direct CoreGraphics page5 inspected for text continuity and clipping. Canonical export now rejects occupied loopback ports before launch and checks preview child/source identity. An occupied4384 check rejected with EADDRINUSE and preserved the PDF bytes; the earlier4384 attempt was discarded. No production deployment is part of this change.
+
+
+## Readability refinement: current acceptance
+
+final result: passed
+
+Compared actual public before1440/390 PNGs in implementation-evidence/readability-before with actual after1440/320/mobile captures in readability-resumes/after, retaining the approved08 hierarchy and applying the latest user override. Warm white #FCFBF8, deep ink #202820 longcopy,16px body/26.4px line-height,28px serifname and firmer1px #A8B8A1 rules preserve the layout while improving reading contrast. Green remains on links, short role/date/skill labels and interaction states. Ink/warmwhite contrast14.64:1; forest/warmwhite6.69:1. Legacy dark mode retains nearwhite longcopy and pale green labels. No P0/P1/P2 visual findings remain.
+
+Actual320/390/768/1440 captures have no horizontal overflow or JS errors. Hover/focus/native selection remain visible; CSSzoom2 at1440 remains within document width. Normal wheel scrolling succeeds. Computed html canvas forest#356349, body nearwhite#FCFBF8 with min-height100svh, overscroll-behavior:auto and overflow-y:visible; theme-color is forest. No fake scrolling or scroll blocking added. Headless Chromium does not establish Safari elastic-bounce appearance; that specific native behavior remains unverified.
+
+Own-DOM PDFs retain6/5pages, all19 experience bullets per source, hidden private phones and legacy hidden email. Native PDFKit extraction and direct CoreGraphics page5 inspected; monochrome print remains readable. No career JSON, privacy flag, URL or functional-control edits. Deploy only after coordinator PNG review.
