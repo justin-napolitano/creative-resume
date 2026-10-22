@@ -387,6 +387,14 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
   </head>
   <body data-print-masthead={`${header.name} — systems dossier`}>
     <main>
+      <div class="site-header">
+        <a class="site-title" href="/">Resume</a>
+        <nav class="site-nav" aria-label="Resume navigation">
+          <a href="#experience">Experience</a>
+          <a href="/skill-graph">Skill graph</a>
+          <a href={siteConfig.pdfPath} download>Download PDF</a>
+        </nav>
+      </div>
       <header class="hero">
         <div>
           <p class="hero__eyebrow">{header.location}</p>
