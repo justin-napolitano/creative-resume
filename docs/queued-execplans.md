@@ -40,10 +40,15 @@ Canonical source: `artifacts/planner/research/remaining-work-graph.json`
    - depends on: `rwg-004`
    - completion ref: `merged:pr-29`
 
+5. `20261022-unified-brand`
+   - status: `ready`
+   - goal: Apply approved Index Simplified resume presentation
+   - implementation branch: `impl-execplan/unified-brand-2026-10-22`
+
 ## Mirror Metadata
 
-- canonical_last_graph_action_id: `rwg-action-20260515-005-complete-rwg-005`
-- canonical_ready_order: ``
+- canonical_last_graph_action_id: `rwg-action-20261022-002-promote_ready-rwg-006`
+- canonical_ready_order: `20261022-unified-brand`
 - projection_authority: `projection_only`
 
 ## Queue Discipline

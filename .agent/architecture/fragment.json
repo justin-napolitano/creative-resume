@@ -1,0 +1,69 @@
+{
+  "authority": "repo_local_execution",
+  "board_title": "JNAP Resume Execution Board",
+  "edges": [
+    {
+      "authority": "repo_local_execution",
+      "from": "repo.creative-resume",
+      "status": "active",
+      "to": "contract.creative-resume.workflow",
+      "type": "owns"
+    },
+    {
+      "authority": "repo_local_execution",
+      "from": "repo.creative-resume",
+      "status": "active",
+      "to": "data.creative-resume.remaining_work_graph",
+      "type": "owns"
+    },
+    {
+      "authority": "repo_local_execution",
+      "from": "repo.creative-resume",
+      "status": "planned",
+      "to": "contract.creative-resume.repo_local_nodes",
+      "type": "owns"
+    }
+  ],
+  "fragment_id": "fragment.creative-resume",
+  "generated_by": "bootstrap-managed-repo",
+  "nodes": [
+    {
+      "authority": "repo_local_execution",
+      "id": "repo.creative-resume",
+      "name": "creative-resume",
+      "repo": "creative-resume",
+      "status": "active",
+      "type": "repo"
+    },
+    {
+      "artifact_ref": "spec/workflow.yaml",
+      "authority": "repo_local_execution",
+      "id": "contract.creative-resume.workflow",
+      "name": "creative-resume Workflow Contract",
+      "repo": "creative-resume",
+      "status": "active",
+      "type": "contract"
+    },
+    {
+      "artifact_ref": "artifacts/planner/research/remaining-work-graph.json",
+      "authority": "repo_local_execution",
+      "id": "data.creative-resume.remaining_work_graph",
+      "name": "creative-resume Remaining Work Graph",
+      "repo": "creative-resume",
+      "status": "active",
+      "type": "data_object"
+    },
+    {
+      "artifact_ref": ".agent/nodes/",
+      "authority": "repo_local_execution",
+      "id": "contract.creative-resume.repo_local_nodes",
+      "name": "creative-resume Repo-Local Nodes",
+      "repo": "creative-resume",
+      "status": "planned",
+      "type": "contract"
+    }
+  ],
+  "repo": "creative-resume",
+  "target_id": "resume",
+  "version": 1
+}
