@@ -7,14 +7,14 @@ html {
 
 :root {
   color-scheme: light;
-  --bg: #f4f0e8;
-  --upper-bg: #f4f0e8;
-  --ink: #25251f;
-  --ink-soft: #4e6550;
-  --ink-mute: #4e6550;
+  --bg: #fcfbf8;
+  --upper-bg: #fcfbf8;
+  --ink: #202820;
+  --ink-soft: #202820;
+  --ink-mute: #202820;
   --accent: #356349;
   --accent-soft: #e2ecdf;
-  --line: #cfd9c8;
+  --line: #a8b8a1;
   --line-strong: rgba(15, 16, 15, 0.22);
   --rail: #f0ede6;
   --code: #8b8375;
@@ -1099,4 +1099,18 @@ a { overflow-wrap: anywhere; }
   .cta.primary { background:#356349; color:#f4f0e8; border-color:#356349; }
   .cta.primary:hover,.cta.primary:focus-visible { background:#244b36; color:#f4f0e8; }
   .experience-body h3,.capability-card__label { color:#356349; }
+}
+
+/* Readability refinement: native root canvas, no synthetic scroll handling. */
+@media screen {
+ html { background:#356349; }
+ body { min-height:100svh; background:#fcfbf8; color:#202820; font-size:16px; line-height:1.65; }
+ .hero__thesis,.experience-body p,.experience-body li,.section-note,.publication p { color:#202820; line-height:1.65; }
+ .hero__eyebrow,.utility-block dt,.experience-dates,.skill-area-label { color:#356349; }
+ .site-nav a { color:#356349; }
+ .site-title { color:#202820; }
+}
+
+@media print {
+ :root { --ink:#202820; --ink-soft:#202820; --ink-mute:#202820; --accent:#202820; --accent-soft:white; --line:#cbc8bf; }
 }

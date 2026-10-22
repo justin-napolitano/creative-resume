@@ -88,3 +88,8 @@ User approved Chromium fallback. Re-export public/resume.pdf from actual built D
 ## Current user override: restrained green accent
 
 2026-10-22: user explicitly requested the resume hover/selection green across the two resumes, list site and Selected Projects only, replacing grey/slate secondary text accents. This overrides the earlier slate color direction, while the approved 08 reference still governs layout, scale and text-only titles. Use #356349 green, #244b36 deeper interaction green, #e2ecdf sage highlighting, #4e6550 secondary text and #cfd9c8 fine rules on paper. Legacy dark mode uses #b8d4b3 / #d5e8cf on ink and #314333 highlight. Preserve ink body copy, warm paper, neutral structural rules, all facts/contact flags/URLs and existing interactions. Capture desktop/mobile plus real hover/focus/native selection, regenerate each PDF from its own DOM, and hold deployment until coordinator reviews PNGs. No dependencies, security controls or data authority change.
+
+
+## Current readability override
+
+User approved warm white #FCFBF8, deeper ink #202820 for long descriptions, 16px body with approximately1.6 line-height, green restricted to links/short labels/active/highlight states and firmer thin rules. Preserve layout, facts, privacy and accessible legacy dark mode. Native html canvas and theme-color use forest #356349; body is a near-white min-height100svh surface (dark surface in legacy dark mode). No fake scroll listeners or scroll blocking. Capture actual before/after and computed scroll styles; Chromium cannot establish Safari elastic-bounce behavior. Re-export both own-DOM PDFs and validate19 bullets/private contacts. Hold deployment for coordinator PNG review.
