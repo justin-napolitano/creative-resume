@@ -1,16 +1,16 @@
 {
   "hero": {
-    "role": "Analytics Engineer",
-    "focus": "Full-stack data ops from ingestion to insights",
-    "thesis": "Data engineer turning Epic Clarity, Vizient, and media ops into decision kits execs and creative leads can act on.",
+    "role": "Product Engineer",
+    "focus": "Enterprise software",
+    "thesis": "Building enterprise software that helps teams discover, understand, and use their data.",
     "marginNote": "Systems-first. Healthcare-grade follow-through."
   },
   "sections": {
     "summary": {
-      "subtitle": "I turn enterprise data systems into action kits leaders can run with immediately."
+      "subtitle": "Internal products, distributed services, and data platforms."
     },
     "experience": {
-      "subtitle": "Recent tours leading hospital analytics, editorial data programs, and independent platform builds."
+      "subtitle": "Product engineering, healthcare analytics, and data platforms."
     },
     "work": {
       "subtitle": "Reference dossiers for the systems partners bring up most often."

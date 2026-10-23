@@ -1,111 +1,47 @@
 [
   {
     "experienceId": "data-engineer-adventhealth",
-    "title": "Data Engineer",
+    "title": "Product Engineer",
     "company": "AdventHealth",
     "skills": [
       {
-        "name": "Epic Clarity intake",
-        "summary": "Land Clarity extracts into governed Azure zones.",
+        "name": "Go",
+        "summary": "Develop backend services in Go.",
         "tags": [
-          "Epic",
-          "Ingestion"
+          "Go",
+          "Services"
         ]
       },
       {
-        "name": "Synapse orchestration",
-        "summary": "Manage ELT staging through Synapse pipelines.",
+        "name": "Kubernetes",
+        "summary": "Deploy and manage application workloads on Kubernetes.",
         "tags": [
-          "Synapse",
-          "ELT"
+          "Kubernetes",
+          "Deployment"
         ]
       },
       {
-        "name": "Power BI care dashboards",
-        "summary": "Ship inpatient readmission scorecards in Power BI.",
+        "name": "Azure Service Bus",
+        "summary": "Connect services through Azure Service Bus queues.",
         "tags": [
-          "Power BI",
-          "Care metrics"
+          "Azure Service Bus",
+          "Queues"
         ]
       },
       {
-        "name": "Looker Studio automation",
-        "summary": "Publish exec-ready Looker Studio narratives for service leaders.",
+        "name": "Backend Services",
+        "summary": "Build services for an internal replacement for Collibra.",
         "tags": [
-          "Looker Studio",
-          "Automation"
+          "Backend Services",
+          "Go"
         ]
       },
       {
-        "name": "Heart failure metrics",
-        "summary": "Model HF indicators refreshed within 24 hours of discharge.",
+        "name": "Asynchronous Processing",
+        "summary": "Process work asynchronously using service queues.",
         "tags": [
-          "HF",
-          "Quality"
-        ]
-      },
-      {
-        "name": "Vizient benchmarking",
-        "summary": "Blend Vizient feeds to monitor variance and cost pressure.",
-        "tags": [
-          "Vizient",
-          "Benchmarking"
-        ]
-      },
-      {
-        "name": "ELT governance",
-        "summary": "Harden ELT frameworks across EDW and Vizient sources.",
-        "tags": [
-          "ELT",
-          "Governance"
-        ]
-      },
-      {
-        "name": "SQL transformation ops",
-        "summary": "Optimize SQL layers powering CFO/CMO briefings.",
-        "tags": [
-          "SQL",
-          "Optimization"
-        ]
-      },
-      {
-        "name": "Alert automation",
-        "summary": "Trigger readmission alerts off pipeline events.",
-        "tags": [
-          "Automation",
-          "Alerts"
-        ]
-      },
-      {
-        "name": "Cardiology analytics",
-        "summary": "Partner with cardiology to deliver service-line dashboards.",
-        "tags": [
-          "Cardiology",
-          "Analytics"
-        ]
-      },
-      {
-        "name": "Nursing data partnership",
-        "summary": "Co-develop nursing runbooks and data products.",
-        "tags": [
-          "Nursing",
-          "Collab"
-        ]
-      },
-      {
-        "name": "Discharge latency monitoring",
-        "summary": "Track discharge turnaround across the network.",
-        "tags": [
-          "Operations",
-          "Latency"
-        ]
-      },
-      {
-        "name": "Azure landing zones",
-        "summary": "Manage landing zones for clinical feed intake.",
-        "tags": [
-          "Azure",
-          "Landing"
+          "Asynchronous Processing",
+          "Queues"
         ]
       }
     ]
