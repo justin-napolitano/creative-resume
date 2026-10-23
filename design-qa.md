@@ -37,3 +37,13 @@ Compared actual public before1440/390 PNGs in implementation-evidence/readabilit
 Actual320/390/768/1440 captures have no horizontal overflow or JS errors. Hover/focus/native selection remain visible; CSSzoom2 at1440 remains within document width. Normal wheel scrolling succeeds. Computed html canvas forest#356349, body nearwhite#FCFBF8 with min-height100svh, overscroll-behavior:auto and overflow-y:visible; theme-color is forest. No fake scrolling or scroll blocking added. Headless Chromium does not establish Safari elastic-bounce appearance; that specific native behavior remains unverified.
 
 Own-DOM PDFs retain6/5pages, all19 experience bullets per source, hidden private phones and legacy hidden email. Native PDFKit extraction and direct CoreGraphics page5 inspected; monochrome print remains readable. No career JSON, privacy flag, URL or functional-control edits. Deploy only after coordinator PNG review.
+## Approved Product Engineer content update
+
+User approved headline Product Engineer and summary “Building enterprise software that helps teams discover, understand, and use their data.” Current AdventHealth bullets describe the Collibra replacement, backend services in Go, Kubernetes workloads and asynchronous processing through Azure Service Bus. Current skills are Go, Kubernetes, Azure Service Bus, Backend Services and Asynchronous Processing. Publish current role as Present; no start date or promotion timeline was supplied. Other role facts and contact visibility are preserved.
+
+Build passes. Canonical Astro check reports zero errors/warnings and six existing hints; canonical source/export format validators pass. Chromium at 320/390/1440px reports no errors or horizontal overflow. Desktop role and mobile screenshots were visually inspected. Canonical chip rendering now keeps five unique skills instead of repeating names or dropping partial rows. Legacy dark mode remains functional. Native PDFKit extraction confirms all 18 experience bullets in each PDF, approved summary present, private phone absent, and each site's existing email visibility retained. Native first-page PDF renders were inspected. PDFs are six pages canonical and four pages legacy; no one-page or ATS claim.
+
+Evidence: docs/product-engineer-qa/ and coordinator /Users/justin/repos/brand-review/resume-update/evidence/. No runtime service, dependencies, auth, privacy flags, domain or credential configuration changes.
+
+final result: passed
+

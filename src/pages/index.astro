@@ -50,24 +50,12 @@ const computeExperienceChips = (role: ExperienceEntry) => {
   if (chips.length === 0) {
     return fallback.slice(0, maxExperienceChips);
   }
-  if (chips.length < maxExperienceChips) {
-    const source = baseNames.length > 0 ? baseNames : fallback;
-    let idx = 0;
-    while (source.length > 0 && chips.length < maxExperienceChips) {
-      const next = source[idx % source.length];
-      if (next) chips.push(next);
-      idx += 1;
-      if (idx > 200) break;
-    }
-  }
   return chips;
 };
 
 const trimToRows = (chips: string[], rowSize: number, maxRows: number) => {
   if (rowSize <= 0 || maxRows <= 0) return [];
-  const limit = Math.min(chips.length, rowSize * maxRows);
-  const full = limit - (limit % rowSize);
-  return full > 0 ? chips.slice(0, full) : [];
+  return chips.slice(0, rowSize * maxRows);
 };
 
 const formatDate = (date?: string) => {
@@ -559,6 +547,7 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
           <div class="section__header">
             <h2 class="section__title">{sectionLabel('skills')}</h2>
           </div>
+          <p class="section-note"><strong>Current focus:</strong> {experiences.find((role) => role.end === 'Present')?.technologies.join(' · ')}</p>
           <div class="skill-stage skill-stage--badges">
             <div class="skill-badges">
               {flattenedSkills.map((item, index) => {

@@ -33,13 +33,14 @@ type SiteConfig = {
 export const siteConfig: SiteConfig = {
   siteTitle: `Resume — ${resume.header.name}`,
   siteDescription:
-    'Systems-led data engineer who turns healthcare and media operations into legible analytics for creative leadership.',
+    'Product engineer building enterprise software that helps teams discover, understand, and use their data.',
   siteUrl: 'https://resume.jnap.me',
   heroThesis: siteCopy.hero.thesis,
   marginNote: siteCopy.hero.marginNote,
   bookCallUrl: 'https://cal.com/justin-napolitano-gvu3p3/intro',
   pdfPath: '/resume.pdf',
   pullQuotes: {
+    'Product Engineer': 'Building enterprise software that helps teams discover, understand, and use their data.',
     'Data Engineer': 'Epic Clarity → Vizient → CFO briefings, harmonized inside 24h.',
     'Analytics Engineer': 'LLM + CDP stack stitched across Rolling Stone, Billboard, WWD.',
   },
@@ -64,6 +65,7 @@ export const sectionNotes: Record<string, string> = {
 };
 
 export const experienceNotes: Record<string, string> = {
+  'Product Engineer': 'Building enterprise software that helps teams discover, understand, and use their data.',
   'Data Engineer': 'Azure Data Factory + Synapse landed Epic Clarity extracts into one CFO-ready source within 24 hours.',
   'Business Analyst II': 'SQL + Power BI pipelines kept readmission and heart failure metrics aligned across clinical teams.',
   'Analytics Engineer': 'LLM + CDP stack stitched across Rolling Stone, Billboard, WWD for exec-ready insights.',
