@@ -1,3 +1,4 @@
+@import './brand-colors.css';
 @font-face { font-family: 'Inter'; src: url('/fonts/Inter-Variable.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
 @font-face { font-family: 'Source Serif 4'; src: url('/fonts/SourceSerif4-Variable.ttf') format('truetype'); font-weight: 200 900; font-display: swap; }
 
@@ -1113,35 +1114,4 @@ a { overflow-wrap: anywhere; }
 
 @media print {
  :root { --ink:#202820; --ink-soft:#202820; --ink-mute:#202820; --accent:#202820; --accent-soft:white; --line:#cbc8bf; }
-}
-
-/* Shared approved palette: midpoint-red text accents, green native scroll canvas. */
-@media screen {
-  :root, :root[data-theme], :root[data-brand-theme] {
-    --brand-accent: #d01527;
-    --brand-text-accent: var(--brand-accent);
-    --brand-highlight: #fff0f2;
-    --brand-canvas: #356349;
-    --brand-page: #fcfbf8;
-    --accent: var(--brand-accent);
-    --accent-hover: var(--brand-accent);
-    --accent-strong: var(--brand-accent);
-    --accent-soft: var(--brand-highlight);
-    --accent-2: var(--brand-accent);
-    --accent-3: var(--brand-accent);
-    --text-link: var(--brand-text-accent);
-  }
-  html, body { background: var(--brand-canvas) !important; overscroll-behavior: auto; }
-  .brand-site-surface { width:100%; min-height:100svh; background:var(--brand-page); display:flow-root; }
-  ::selection { background:var(--brand-highlight); color:var(--brand-accent); }
-  mark { background:var(--brand-highlight); color:var(--brand-accent); }
-  a:where(:not(.button):not(.button-link):not(.cta):not(.button-primary):not(.button-secondary):not([class*="bg-"])):hover,
-  nav a:hover, nav a[aria-current="page"] { color:var(--brand-text-accent); text-decoration-color:var(--brand-accent); }
-  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
-    outline:2px solid var(--brand-accent); outline-offset:4px;
-  }
-  .button-primary:hover, .cta.primary:hover, .button-link:not(.secondary):hover {
-    background:var(--brand-accent); border-color:var(--brand-accent); color:var(--brand-page);
-  }
-  .filter-pill-active { color:var(--brand-accent); background:var(--brand-highlight); border-color:var(--brand-accent); }
 }

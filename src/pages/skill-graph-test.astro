@@ -1,6 +1,7 @@
 ---
 import fs from 'fs/promises';
 import path from 'path';
+import '../styles/brand-colors.css';
 
 const graphPath = path.join(process.cwd(), 'public/skill-graph.json');
 let graphData: any = null;
@@ -33,7 +34,7 @@ try {
         margin: 0;
         background: #f3efe7;
         color: #0f1111;
-        padding: 2rem clamp(1rem, 5vw, 4rem);
+        padding: 0;
       }
       h1 {
         margin-top: 0;
@@ -72,7 +73,7 @@ try {
         padding: 0.4rem 0.9rem;
         font-size: 0.85rem;
         cursor: pointer;
-        background: #0f7c66;
+        background: var(--brand-accent);
         color: #fff;
       }
       .toolbar button.secondary {
@@ -137,7 +138,7 @@ try {
         display: inline-flex;
       }
       .cluster-chip.is-active {
-        border-color: #0f7c66;
+        border-color: var(--brand-accent);
         background: rgba(15, 124, 102, 0.12);
       }
       .detail {
@@ -182,7 +183,7 @@ try {
       }
     </style>
   </head>
-  <body>
+  <body class="skill-graph-page skill-graph-page--experimental">
     <div class="brand-site-surface">
     <h1>Skill Graph (Bloom playground)</h1>
     <p>

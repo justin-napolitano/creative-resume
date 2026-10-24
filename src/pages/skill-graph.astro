@@ -1,6 +1,7 @@
 ---
 import fs from 'fs/promises';
 import path from 'path';
+import '../styles/brand-colors.css';
 
 const graphPath = path.join(process.cwd(), 'public/skill-graph.json');
 let graphData: any = null;
@@ -29,7 +30,7 @@ try {
         font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont;
         background: #f7f4ef;
         margin: 0;
-        padding: 2rem;
+        padding: 0;
         color: #0f100f;
       }
       h1 {
@@ -55,7 +56,7 @@ try {
         margin-bottom: 0.5rem;
       }
       .graph-toolbar button {
-        background: #0f7c66;
+        background: var(--brand-accent);
         color: #fff;
         border: none;
         border-radius: 8px;
@@ -170,7 +171,7 @@ try {
         color: rgba(15, 16, 15, 0.55);
       }
       .cluster-chip.is-active {
-        border-color: #0f7c66;
+        border-color: var(--brand-accent);
         background: rgba(15, 124, 102, 0.12);
       }
       .skill-detail {
@@ -214,7 +215,7 @@ try {
       }
     </style>
   </head>
-  <body>
+  <body class="skill-graph-page">
     <div class="brand-site-surface">
     <h1>Skill Graph</h1>
     <p class="instructions">
