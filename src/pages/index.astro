@@ -374,6 +374,7 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
     <link rel="manifest" href="/site.webmanifest" />
   </head>
   <body data-print-masthead={`${header.name} — systems dossier`}>
+    <div class="brand-site-surface">
     <main>
       <div class="site-header">
         <a class="site-title" href="/">Resume</a>
@@ -633,5 +634,6 @@ const sectionLabel = (id: string) => sectionMeta.find((meta) => meta.id === id)?
       })();
     </script>
     <script is:inline set:html={consentScript}></script>
+      </div>
   </body>
 </html>

@@ -12,8 +12,8 @@ html {
   --ink: #202820;
   --ink-soft: #202820;
   --ink-mute: #202820;
-  --accent: #356349;
-  --accent-soft: #e2ecdf;
+  --accent: #d01527;
+  --accent-soft: #fff0f2;
   --line: #a8b8a1;
   --line-strong: rgba(15, 16, 15, 0.22);
   --rail: #f0ede6;
@@ -1090,15 +1090,15 @@ a { overflow-wrap: anywhere; }
 
 /* User-approved green accent refinement, 2026-10-22. Keep body copy ink. */
 @media screen {
-  ::selection { background:#e2ecdf; color:#244b36; }
+  ::selection { background:#fff0f2; color:#d01527; }
   .site-nav a:hover,.site-nav a:focus-visible,.site-title:hover,
-  .utility-block a:hover,.publication a:hover { color:#244b36; background:#e2ecdf; }
-  a:active { color:#244b36; }
-  :focus-visible { outline-color:#356349; }
-  .cta:hover,.cta:focus-visible { background:#e2ecdf; color:#244b36; border-color:#356349; }
-  .cta.primary { background:#356349; color:#f4f0e8; border-color:#356349; }
-  .cta.primary:hover,.cta.primary:focus-visible { background:#244b36; color:#f4f0e8; }
-  .experience-body h3,.capability-card__label { color:#356349; }
+  .utility-block a:hover,.publication a:hover { color:#d01527; background:#fff0f2; }
+  a:active { color:#d01527; }
+  :focus-visible { outline-color:#d01527; }
+  .cta:hover,.cta:focus-visible { background:#fff0f2; color:#d01527; border-color:#d01527; }
+  .cta.primary { background:#d01527; color:#f4f0e8; border-color:#d01527; }
+  .cta.primary:hover,.cta.primary:focus-visible { background:#d01527; color:#f4f0e8; }
+  .experience-body h3,.capability-card__label { color:#d01527; }
 }
 
 /* Readability refinement: native root canvas, no synthetic scroll handling. */
@@ -1106,11 +1106,42 @@ a { overflow-wrap: anywhere; }
  html { background:#356349; }
  body { min-height:100svh; background:#fcfbf8; color:#202820; font-size:16px; line-height:1.65; }
  .hero__thesis,.experience-body p,.experience-body li,.section-note,.publication p { color:#202820; line-height:1.65; }
- .hero__eyebrow,.utility-block dt,.experience-dates,.skill-area-label { color:#356349; }
- .site-nav a { color:#356349; }
+ .hero__eyebrow,.utility-block dt,.experience-dates,.skill-area-label { color:#d01527; }
+ .site-nav a { color:#d01527; }
  .site-title { color:#202820; }
 }
 
 @media print {
  :root { --ink:#202820; --ink-soft:#202820; --ink-mute:#202820; --accent:#202820; --accent-soft:white; --line:#cbc8bf; }
+}
+
+/* Shared approved palette: midpoint-red text accents, green native scroll canvas. */
+@media screen {
+  :root, :root[data-theme], :root[data-brand-theme] {
+    --brand-accent: #d01527;
+    --brand-text-accent: var(--brand-accent);
+    --brand-highlight: #fff0f2;
+    --brand-canvas: #356349;
+    --brand-page: #fcfbf8;
+    --accent: var(--brand-accent);
+    --accent-hover: var(--brand-accent);
+    --accent-strong: var(--brand-accent);
+    --accent-soft: var(--brand-highlight);
+    --accent-2: var(--brand-accent);
+    --accent-3: var(--brand-accent);
+    --text-link: var(--brand-text-accent);
+  }
+  html, body { background: var(--brand-canvas) !important; overscroll-behavior: auto; }
+  .brand-site-surface { width:100%; min-height:100svh; background:var(--brand-page); display:flow-root; }
+  ::selection { background:var(--brand-highlight); color:var(--brand-accent); }
+  mark { background:var(--brand-highlight); color:var(--brand-accent); }
+  a:where(:not(.button):not(.button-link):not(.cta):not(.button-primary):not(.button-secondary):not([class*="bg-"])):hover,
+  nav a:hover, nav a[aria-current="page"] { color:var(--brand-text-accent); text-decoration-color:var(--brand-accent); }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+    outline:2px solid var(--brand-accent); outline-offset:4px;
+  }
+  .button-primary:hover, .cta.primary:hover, .button-link:not(.secondary):hover {
+    background:var(--brand-accent); border-color:var(--brand-accent); color:var(--brand-page);
+  }
+  .filter-pill-active { color:var(--brand-accent); background:var(--brand-highlight); border-color:var(--brand-accent); }
 }
