@@ -1,0 +1,38 @@
+/* Shared approved palette: midpoint-red text accents, green native scroll canvas. */
+@media screen {
+  :root, :root[data-theme], :root[data-brand-theme] {
+    --brand-accent: #d01527;
+    --brand-text-accent: var(--brand-accent);
+    --brand-highlight: #fff0f2;
+    --brand-canvas: #356349;
+    --brand-page: #fcfbf8;
+    --accent: var(--brand-accent);
+    --accent-hover: var(--brand-accent);
+    --accent-strong: var(--brand-accent);
+    --accent-soft: var(--brand-highlight);
+    --accent-2: var(--brand-accent);
+    --accent-3: var(--brand-accent);
+    --text-link: var(--brand-text-accent);
+  }
+  html, body { background: var(--brand-canvas) !important; overscroll-behavior: auto; }
+  .brand-site-surface { width:100%; min-height:100svh; background:var(--brand-page); display:flow-root; }
+  ::selection { background:var(--brand-highlight); color:var(--brand-accent); }
+  mark { background:var(--brand-highlight); color:var(--brand-accent); }
+  a:where(:not(.button):not(.button-link):not(.cta):not(.button-primary):not(.button-secondary):not([class*="bg-"])):hover,
+  nav a:hover, nav a[aria-current="page"] { color:var(--brand-text-accent); text-decoration-color:var(--brand-accent); }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+    outline:2px solid var(--brand-accent); outline-offset:4px;
+  }
+  .button-primary:hover, .cta.primary:hover, .button-link:not(.secondary):hover {
+    background:var(--brand-accent); border-color:var(--brand-accent); color:var(--brand-page);
+  }
+  .filter-pill-active { color:var(--brand-accent); background:var(--brand-highlight); border-color:var(--brand-accent); }
+}
+
+@media screen {
+  body.skill-graph-page { padding:0; }
+  .skill-graph-page > .brand-site-surface { box-sizing:border-box; padding:2rem; }
+  .skill-graph-page--experimental > .brand-site-surface { padding:2rem clamp(1rem,5vw,4rem); }
+  .skill-graph-page .toolbar button:not(.secondary) { background:var(--brand-accent); color:#fcfbf8; }
+  .skill-graph-page .cluster-chip.is-active { border-color:var(--brand-accent); background:var(--brand-highlight); }
+}

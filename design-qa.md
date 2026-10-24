@@ -58,3 +58,8 @@ Apply midpoint red (#d01527) to text accents, hover/focus/selection states, keep
 The production build/static checks pass using the repository lockfile. Browser checks at 320, 390, and 1440 pixels verify palette tokens, green root/body canvas, paper surface without exposed green bands, selection color, and no page overflow or runtime exceptions. Screenshots were inspected. Existing dark modes also pass. The news reader includes narrow-screen wrapping for article controls/text found during this review; hiring CTA text retains sufficient contrast on red.
 
 Local build/browser evidence is retained outside this repo in the rollout directory. Production status and screenshots are recorded after release; this local QA result does not assert production has already changed.
+
+
+### Skill-graph route follow-up
+
+The standalone skill-graph pages did not import the résumé stylesheet. Extract the screen-only palette into brand-colors.css and import it from the résumé stylesheet and both graph documents. Preserve graph layout/data and categorical node colors, keep body padding inside the paper surface, and use red for graph UI controls. Verify the main résumé and both graph routes before publishing.
